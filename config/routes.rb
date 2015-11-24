@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root "landing#index"
   resources "landing", only: [:index]
-  resources "report-design", only: [:index], :controller => :report_design, :as => :report_design
+  resource "report-design", :controller => :report_design, :as => :report_design
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
