@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/alphagov/govuk_frontend_toolkit_gem.git
+  revision: e1965df859a65d8ef2b7d901bfa3cdac120dfb69
+  submodules: true
+  specs:
+    govuk_frontend_toolkit (4.5.0)
+      rails (>= 3.1.0)
+      sass (>= 3.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -37,8 +46,14 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     arel (6.0.3)
+    autoprefixer-rails (6.0.3)
+      execjs
+      json
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-sass (3.3.5.1)
+      autoprefixer-rails (>= 5.0.0.1)
+      sass (>= 3.3.0)
     builder (3.2.2)
     byebug (8.2.0)
     debug_inspector (0.0.2)
@@ -80,6 +95,8 @@ GEM
     multi_json (1.11.2)
     nokogiri (1.6.6.4)
       mini_portile (~> 0.6.0)
+    quiet_assets (1.1.0)
+      railties (>= 3.1, < 5.0)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -156,10 +173,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap-sass
   byebug
+  govuk_frontend_toolkit!
   haml-rails
   jbuilder (~> 2.0)
   jquery-rails
+  quiet_assets
   rails (= 4.2.5)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
