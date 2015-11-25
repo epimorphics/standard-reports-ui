@@ -11,4 +11,8 @@ class StepSelectReport < Step
       Struct::StepValue.new( "Banded prices", :banded ),
     ]
   end
+
+  def traverse( workflow )
+    simple_traverse( workflow, :select_geography_type )
+  end
 end

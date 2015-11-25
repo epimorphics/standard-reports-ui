@@ -8,6 +8,6 @@ feature "can commence report design process" do
     page.must_have_css( ".container input#rt_avgPrice" )
     page.must_have_css( ".container input#rt_banded" )
     page.must_have_css( ".container input.button[type=submit]")
-    page.must_have_css( ".container .select_report")
+    page.must_have_css( ".container .select-report")
   end
 end
