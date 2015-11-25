@@ -27,6 +27,9 @@ group :development, :test do
 
   # Use Unicorn as the app server
   gem 'unicorn'
+
+  gem 'minitest-spec-rails'
+  gem 'minitest-reporters'
 end
 
 group :development do
