@@ -5,7 +5,8 @@ class Workflow
 
   STEP_CLASSES = [
     StepSelectReport,
-    StepSelectGeographyType
+    StepSelectGeographyType,
+    StepSelectAggregationType
   ]
 
   def initialize( params )
@@ -33,6 +34,10 @@ class Workflow
   def traverse_to( step_name )
     raise "unknown step #{step_name}" unless next_step = step( step_name )
     next_step.traverse( self )
+  end
+
+  def set_state( state_name, value )
+    @state[state_name.to_sym] = value
   end
 
   private
