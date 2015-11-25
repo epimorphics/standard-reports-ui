@@ -14,6 +14,10 @@ class Workflow
   end
 
   def initial_step
-    STEPS.first
+    steps.first
+  end
+
+  def steps
+    STEPS
   end
 end
