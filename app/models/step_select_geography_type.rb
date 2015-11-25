@@ -1,8 +1,10 @@
 # Workflow step of selecting a geograpy type
 
 class StepSelectGeographyType < Step
+  ENGLAND_AND_WALES = "EW"
+
   def initialize
-    super( :select_geography_type, :gt, :radio )
+    super( :select_geography_type, :areaType, :radio )
   end
 
   def values
@@ -16,6 +18,18 @@ class StepSelectGeographyType < Step
   end
 
   def traverse( workflow )
-    self
+    case
+    when workflow.has_state?( param_name, "country" )
+      traverse_area_type_country( workflow )
+    else
+      self
+    end
+  end
+
+  private
+
+  def traverse_area_type_country( workflow )
+    workflow.set_state( :area, ENGLAND_AND_WALES )
+    :select_aggregation_type
   end
 end
