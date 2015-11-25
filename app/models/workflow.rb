@@ -38,7 +38,10 @@ class Workflow
   private
 
   def set_current_state( params )
-    @state = params.dup
+    @state = Hash.new
+    params.each do |key, value|
+      @state[key.to_sym] = value
+    end
   end
 
   def build_workflow_tree

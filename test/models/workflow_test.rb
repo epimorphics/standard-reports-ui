@@ -25,4 +25,11 @@ class WorkflowTest < ActiveSupport::TestCase
     report_type_selected_workflow.has_state?( :rtzzz ).must_equal false
     report_type_selected_workflow.has_state?( :rt, :avgPricezzz ).must_equal false
   end
+
+  it 'should not care if the state is initialized with string keys' do
+    workflow = Workflow.new( "foo" => "bar", :bill => "ben" )
+    workflow.has_state?( :foo ).must_equal true
+    workflow.has_state?( :bill ).must_equal true
+    workflow.has_state?( "foo" ).must_equal false
+  end
 end
