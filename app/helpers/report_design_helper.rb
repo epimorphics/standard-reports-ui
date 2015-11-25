@@ -1,6 +1,6 @@
 module ReportDesignHelper
   def workflow_step_form( workflow )
-    form_tag( {controller: :report_design, action: :show}, method: "post" ) do
+    form_tag( {controller: :report_design, action: :show}, method: "get" ) do
       concat layout_workflow_form( workflow )
       concat layout_submit_button
     end
@@ -36,6 +36,6 @@ module ReportDesignHelper
   end
 
   def layout_submit_button
-    submit_tag( "Next", class: "button" )
+    submit_tag( "Next", class: "button", name: nil )
   end
 end
