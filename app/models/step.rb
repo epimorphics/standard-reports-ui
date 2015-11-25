@@ -3,11 +3,12 @@
 Struct.new( "StepValue", :label, :value )
 
 class Step
-  attr_reader :name, :param_name
+  attr_reader :name, :param_name, :layout
 
-  def initialize( name, param_name )
+  def initialize( name, param_name, layout )
     @name = name
     @param_name = param_name
+    @layout = layout
   end
 
   def completed?( params )
