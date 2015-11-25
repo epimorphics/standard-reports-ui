@@ -7,7 +7,7 @@ class StepSelectReport < Step
 
   def values
     [
-      Struct::StepValue.new( "Average prices and volumes", :byPrice ),
+      Struct::StepValue.new( "Average prices and volumes", :avgPrice ),
       Struct::StepValue.new( "Banded prices", :banded ),
     ]
   end
