@@ -12,4 +12,10 @@ class WorkflowTest < ActiveSupport::TestCase
   it 'should choose the select report step if the workflow is just started' do
     empty_workflow.current_step.name.must_equal :select_report
   end
+
+  let( :report_type_selected_workflow ) {Workflow.new( rt: :avgPrice )}
+
+  it 'should choose the select geography step if the report has been chosen' do
+    report_type_selected_workflow.current_step.name.must_equal :select_geography_type
+  end
 end

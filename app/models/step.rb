@@ -14,4 +14,8 @@ class Step
   def completed?( params )
     params.has_key?( param_name )
   end
+
+  def incomplete?( params )
+    !completed?( params )
+  end
 end

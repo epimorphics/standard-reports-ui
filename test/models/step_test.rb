@@ -19,9 +19,11 @@ class StepTest < ActiveSupport::TestCase
 
   it 'should not report as completed if the param is missing' do
     step.completed?( {} ).must_equal false
+    step.incomplete?( {} ).must_equal true
   end
 
   it 'should report as completed if the param is present' do
     step.completed?( {test_param: "abc"} ).must_equal true
+    step.incomplete?( {test_param: "abc"} ).must_equal false
   end
 end
