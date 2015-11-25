@@ -29,7 +29,9 @@ group :development, :test do
   gem 'unicorn'
 
   gem 'minitest-spec-rails'
+  gem 'minitest-rails-capybara'
   gem 'minitest-reporters'
+  gem 'capybara_minitest_spec'
 end
 
 group :development do
