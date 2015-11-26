@@ -1,7 +1,7 @@
 # Model encapsulating the report-generation workflow
 
 class Workflow
-  attr_reader :params, :initial_step, :state
+  attr_reader :params, :initial_step
 
   STEP_CLASSES = [
     StepSelectReport,
@@ -27,7 +27,7 @@ class Workflow
   end
 
   def has_state?( name, value = nil )
-    v = state[name]
+    v = state( name )
     value ? (value == v) : !!v
   end
 
@@ -40,12 +40,16 @@ class Workflow
     @state[state_name.to_sym] = value
   end
 
+  def state( state_name )
+    @state[state_name.to_sym]
+  end
+
   private
 
   def set_current_state( params )
     @state = Hash.new
     params.each do |key, value|
-      @state[key.to_sym] = value
+      set_state( key, value )
     end
   end
 
