@@ -5,5 +5,5 @@ else
   worker_processes 1
 end
 
-timeout 30
+timeout 300
 listen 3000
