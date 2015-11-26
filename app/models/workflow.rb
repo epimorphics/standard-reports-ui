@@ -6,7 +6,8 @@ class Workflow
   STEP_CLASSES = [
     StepSelectReport,
     StepSelectGeographyType,
-    StepSelectAggregationType
+    StepSelectAggregationType,
+    StepSelectDates
   ]
 
   def initialize( params )
@@ -42,6 +43,19 @@ class Workflow
 
   def state( state_name )
     @state[state_name.to_sym]
+  end
+
+  def form_action( controller = :report_design, action = :show )
+    c = {controller: controller, action: action}
+  end
+
+  def each_state( ignore = nil, &block )
+    steps.values.each do |step|
+      unless (state_name = step.param_name) == ignore
+        v = state( state_name )
+        block.yield( state_name, v ) if v
+      end
+    end
   end
 
   private
