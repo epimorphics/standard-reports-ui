@@ -30,6 +30,6 @@ class StepSelectGeographyType < Step
 
   def traverse_area_type_country( workflow )
     workflow.set_state( :area, ENGLAND_AND_WALES )
-    :select_aggregation_type
+    workflow.traverse_to( :select_aggregation_type )
   end
 end

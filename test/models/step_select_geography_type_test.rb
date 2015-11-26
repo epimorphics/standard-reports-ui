@@ -30,7 +30,7 @@ class StepSelectGeographyTypeTest < ActiveSupport::TestCase
   it 'should select aggregation-type as the next step if country is selected' do
     workflow = Workflow.new( areaType: "country" )
     successor = step.traverse( workflow )
-    successor.must_equal :select_aggregation_type
+    successor.name.must_equal :select_aggregation_type
   end
 
   it 'should select select the default area of EW if area type country is selected' do
