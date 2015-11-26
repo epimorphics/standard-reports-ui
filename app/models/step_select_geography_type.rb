@@ -7,7 +7,7 @@ class StepSelectGeographyType < Step
     super( :select_geography_type, :areaType, :radio )
   end
 
-  def values
+  def values( workflow = nil )
     [
       Struct::StepValue.new( "All of England and Wales", :country ),
       Struct::StepValue.new( "Region", :region ),

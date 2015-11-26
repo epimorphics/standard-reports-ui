@@ -11,14 +11,14 @@ module ReportDesignHelper
       step = workflow.current_step
       case step.layout
       when :radio
-        layout_workflow_radio_buttons( step )
+        layout_workflow_radio_buttons( workflow, step )
       end
     end
   end
 
-  def layout_workflow_radio_buttons( step )
+  def layout_workflow_radio_buttons( workflow, step )
     content_tag( :ul, class: "list-unstyled" ) do
-      step.values.each do |value|
+      step.values( workflow ).each do |value|
         concat(
           content_tag( :li ) do
             radio_button_option( step, value )

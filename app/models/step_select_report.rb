@@ -5,7 +5,7 @@ class StepSelectReport < Step
     super( :select_report, :rt, :radio )
   end
 
-  def values
+  def values( workflow = nil )
     [
       Struct::StepValue.new( "Average prices and volumes", :avgPrice ),
       Struct::StepValue.new( "Banded prices", :banded ),
