@@ -7,7 +7,8 @@ class Workflow
     StepSelectReport,
     StepSelectGeographyType,
     StepSelectAggregationType,
-    StepSelectDates
+    StepSelectDates,
+    StepSelectOptions
   ]
 
   def initialize( params )
