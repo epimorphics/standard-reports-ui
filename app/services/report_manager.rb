@@ -7,7 +7,12 @@ class ReportManager
     if config
       @url = config[:url]
       @api = config[:api]
-      start_requests( config[:params] ) if config[:params]
+
+      if params = config[:params]
+        @requested_format = params[:format]
+        @requested_format = @requested_format.to_sym if @requested_format
+        start_requests( params )
+      end
     end
   end
 
@@ -23,6 +28,12 @@ class ReportManager
     @latest_month_spec ||= api.get( url + "latest-month-available", {accept: "text/plain"} )
   end
 
+  attr_reader :requested_format
+
+  def requests
+    @requests
+  end
+
   private
 
   def url
@@ -36,7 +47,8 @@ class ReportManager
   def start_requests( params )
     psets = create_params_sets( params )
     @requests = psets.map do |pset|
-      start_request( pset )
+      req_spec = ReportSpecification.new( pset, self )
+      start_request( req_spec )
     end
   end
 
@@ -61,10 +73,9 @@ class ReportManager
     separated
   end
 
-  def start_request( pset )
-    @requests = pset.map do |request_params|
-      post_json( "#{url}/report-request", request_params )
-    end
+  def start_request( req_spec )
+    json = api.post_json( "#{url}report-request", req_spec.to_hash )
+    ReportStatus.new( json )
   end
 
 end
