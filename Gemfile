@@ -35,6 +35,7 @@ group :development, :test do
   gem 'minitest-rails-capybara'
   gem 'minitest-reporters'
   gem 'capybara_minitest_spec'
+  gem 'mocha'
 end
 
 group :development do
