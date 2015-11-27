@@ -1,0 +1,7 @@
+.download-report
+  %h1 The report files you requested:
+
+  %ol.numbered
+    - @report_manager.requests.each do |request|
+      = render_report_request( request, @report_manager.requested_format )
+
