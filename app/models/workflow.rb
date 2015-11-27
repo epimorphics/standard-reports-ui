@@ -52,16 +52,17 @@ class Workflow
   end
 
   def each_state( ignore = nil, &block )
-    steps.values.each do |step|
-      unless (state_name = step.param_name) == ignore
-        v = state( state_name )
-        block.yield( state_name, v ) if v
+    @state.each do |key, value|
+      unless key == ignore
+        block.yield( key, value )
       end
     end
   end
 
   def summarise_selection( state_name, state_value )
-    step_with_param( state_name ).summarise( state_value )
+    if (step = step_with_param( state_name ))
+      step.summarise( state_value )
+    end
   end
 
   private
