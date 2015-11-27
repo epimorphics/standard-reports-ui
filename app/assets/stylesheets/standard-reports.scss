@@ -271,4 +271,6 @@ $lr-green-nav-darkened: darken( $lr-green-nav, 20% );
   -webkit-backface-visibility: hidden;
 }
 
-
+ol.numbered {
+  list-style: decimal inside;
+}
