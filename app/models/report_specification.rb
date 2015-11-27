@@ -2,8 +2,8 @@
 
 class ReportSpecification
   def initialize( params, report_manager )
-    @params = params
-    normalize_period( report_manager ) if params[:period]
+    @params = HashWithIndifferentAccess.new( params )
+    normalize_period( report_manager ) if @params[:period]
   end
 
   def to_hash
