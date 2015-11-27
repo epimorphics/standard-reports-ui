@@ -5,7 +5,7 @@
   %p
     The report options you have selected are:
 
-  %ul.list-unstyled
+  %ul.list-unstyled.options-summary
     - @workflow.each_state do |state_key, value|
       %li
         = @workflow.summarise_selection( state_key, value )
