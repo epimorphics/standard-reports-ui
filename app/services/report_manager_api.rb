@@ -3,8 +3,7 @@
 class ReportManagerApi
   # Get parsed JSON from the given URL
   def get_json( http_url, options )
-    response = get_from_api( http_url, options )
-    parse_json( response.body )
+    parse_json( get( http_url, options ) )
   end
 
   def post_json( http_url, options, json = nil )
@@ -12,7 +11,16 @@ class ReportManagerApi
     if ok?( response )
       load_status_report( response )
     else
-      throw "API POST failed: #{response.status} '#{response.body}'"
+      throw "API POST to '#{http_url}' failed: #{response.status} '#{response.body}'"
+    end
+  end
+
+  def get( http_url, options = {} )
+    response = get_from_api( http_url, options )
+    if ok?( response )
+      response.body
+    else
+      throw "API GET from '#{http_url}' failed #{response.status} '#{response.body}'"
     end
   end
 
@@ -22,7 +30,11 @@ class ReportManagerApi
     conn = set_connection_timeout( create_http_connection( http_url ) )
 
     response = conn.get do |req|
-      req.headers['Accept'] = "application/json"
+      if accept = options.delete( :accept )
+        req.headers['Accept'] = accept
+      else
+        req.headers['Accept'] = "application/json"
+      end
       req.params.merge! options
     end
 
