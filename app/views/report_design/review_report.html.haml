@@ -1,0 +1,28 @@
+.review-report
+  %h1
+    Summary
+
+  %p
+    The report options you have selected are:
+
+  %ul.list-unstyled
+    - @workflow.each_state do |state_key, value|
+      %li
+        = @workflow.summarise_selection( state_key, value )
+
+  = form_tag( @workflow.form_action( :download_report, :show ), method: "get" ) do
+    = layout_existing_values( @workflow )
+
+    %h2 Report file format
+
+    %ul.list-unstyled
+      %li
+        %label
+          %input{ type: :radio, name: :format, value: :excel, checked: true }
+          Microsoft Excel format
+      %li
+        %label
+          %input{ type: :radio, name: :format, value: :csv }
+          Comma-separated values
+
+    = submit_tag( "Generate report", class: "button", name: nil )
