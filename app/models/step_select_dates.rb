@@ -22,6 +22,10 @@ class StepSelectDates < Step
     simple_traverse( workflow, :select_options )
   end
 
+  def summarise( state_value )
+    "Selected dates: #{state_value}"
+  end
+
   private
 
   def year_values

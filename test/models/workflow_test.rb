@@ -57,4 +57,9 @@ class WorkflowTest < ActiveSupport::TestCase
     end
     acc.must_equal ["rt--avgPrice"]
   end
+
+  it 'should be able to summarise a state value in a readable form' do
+    report_type_selected_workflow.summarise_selection( :rt, "avgPrice" ).must_equal "Report type is: average prices and volumes"
+  end
+
 end

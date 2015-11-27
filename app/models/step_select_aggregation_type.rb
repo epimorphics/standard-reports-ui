@@ -37,4 +37,13 @@ class StepSelectAggregationType < Step
   def traverse( workflow )
     simple_traverse( workflow, :select_dates )
   end
+
+  def summarise( state_value )
+    if state_value.to_sym == :none
+      "Do not aggregate data"
+    else
+      "Aggregate data by #{state_value}"
+    end
+  end
+
 end

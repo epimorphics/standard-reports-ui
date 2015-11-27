@@ -26,6 +26,10 @@ class StepSelectGeographyType < Step
     end
   end
 
+  def summarise( state_value )
+    "Geography type is #{state_value}"
+  end
+
   private
 
   def traverse_area_type_country( workflow )

@@ -8,7 +8,8 @@ class Workflow
     StepSelectGeographyType,
     StepSelectAggregationType,
     StepSelectDates,
-    StepSelectOptions
+    StepSelectOptions,
+    StepReviewReport
   ]
 
   def initialize( params )
@@ -59,6 +60,10 @@ class Workflow
     end
   end
 
+  def summarise_selection( state_name, state_value )
+    step_with_param( state_name ).summarise( state_value )
+  end
+
   private
 
   def set_current_state( params )
@@ -82,5 +87,9 @@ class Workflow
 
   def save_step( step )
     steps[step.name] = step
+  end
+
+  def step_with_param( state_name )
+    steps.values.find {|step| step.param_name == state_name}
   end
 end
