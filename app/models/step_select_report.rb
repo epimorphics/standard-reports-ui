@@ -2,7 +2,7 @@
 
 class StepSelectReport < Step
   def initialize
-    super( :select_report, :rt, :radio )
+    super( :select_report, :report, :radio )
   end
 
   def values( workflow = nil )
