@@ -21,6 +21,8 @@ class StepSelectGeographyType < Step
     case
     when workflow.has_state?( param_name, "country" )
       traverse_area_type_country( workflow )
+    when workflow.has_state?( param_name, "region" )
+      traverse_area_type_region( workflow )
     else
       self
     end
@@ -35,5 +37,9 @@ class StepSelectGeographyType < Step
   def traverse_area_type_country( workflow )
     workflow.set_state( :area, ENGLAND_AND_WALES )
     workflow.traverse_to( :select_aggregation_type )
+  end
+
+  def traverse_area_type_region( workflow )
+    workflow.traverse_to( :select_region )
   end
 end
