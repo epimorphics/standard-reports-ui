@@ -3,7 +3,7 @@
 Struct.new( "StepValue", :label, :value )
 
 class Step
-  attr_reader :name, :param_name, :layout
+  attr_reader :name, :param_name, :layout, :flash
 
   def initialize( name, param_name, layout )
     @name = name
@@ -27,5 +27,10 @@ class Step
     else
       self
     end
+  end
+
+  def set_flash( message )
+    @flash = message
+    self
   end
 end

@@ -1,18 +1,22 @@
 module ReportDesignHelper
   def workflow_step_form( workflow )
+    step = workflow.current_step
+
     form_tag( workflow.form_action, method: "get" ) do
       concat layout_existing_values( workflow )
-      concat layout_workflow_form( workflow )
+      concat layout_flash( step )
+      concat layout_workflow_form( workflow, step )
       concat layout_submit_button
     end
   end
 
-  def layout_workflow_form( workflow )
+  def layout_workflow_form( workflow, step )
     capture do
-      step = workflow.current_step
       case step.layout
       when :radio
         layout_workflow_radio_buttons( workflow, step )
+      when :textinput
+        layout_textinput( workflow, step )
       end
     end
   end
@@ -47,6 +51,25 @@ module ReportDesignHelper
         concat check_box_tag( :"#{id}[]", value.value, false, id: nil )
       end
       concat value.label
+    end
+  end
+
+  def layout_textinput( workflow, step )
+    content_tag( :div ) do
+      content_tag( :label ) do
+        concat( "County or unitary authority name" )
+        concat( text_field_tag( step.param_name, "", id: nil) )
+      end
+    end
+  end
+
+  def layout_flash( step )
+    capture do
+      if step.flash
+        content_tag( :p, nil, {class: "bg-warning flash warning"} ) do
+          step.flash
+        end
+      end
     end
   end
 
