@@ -10,7 +10,7 @@ class StepSelectReportTest < ActiveSupport::TestCase
   end
 
   it 'should have a parameter' do
-    step.param_name.must_equal :rt
+    step.param_name.must_equal :report
   end
 
   it 'should have a layout' do

@@ -2,7 +2,7 @@ require "test_helper"
 
 feature "show geography type selection" do
   scenario "visit the workflow step page" do
-    visit report_design_path( {rt: :avgPrice} )
+    visit report_design_path( {report: :avgPrice} )
     page.must_have_css( ".container h1" )
     page.must_have_css( ".container form[method=get]" )
     page.must_have_css( ".container .select-geography-type" )

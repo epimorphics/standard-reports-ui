@@ -13,17 +13,17 @@ class WorkflowTest < ActiveSupport::TestCase
     empty_workflow.current_step.name.must_equal :select_report
   end
 
-  let( :report_type_selected_workflow ) {Workflow.new( rt: :avgPrice )}
+  let( :report_type_selected_workflow ) {Workflow.new( report: :avgPrice )}
 
   it 'should choose the select geography step if the report has been chosen' do
     report_type_selected_workflow.current_step.name.must_equal :select_geography_type
   end
 
   it 'should allow state values to be queried' do
-    report_type_selected_workflow.has_state?( :rt ).must_equal true
-    report_type_selected_workflow.has_state?( :rt, :avgPrice ).must_equal true
-    report_type_selected_workflow.has_state?( :rtzzz ).must_equal false
-    report_type_selected_workflow.has_state?( :rt, :avgPricezzz ).must_equal false
+    report_type_selected_workflow.has_state?( :report ).must_equal true
+    report_type_selected_workflow.has_state?( :report, :avgPrice ).must_equal true
+    report_type_selected_workflow.has_state?( :reportzzz ).must_equal false
+    report_type_selected_workflow.has_state?( :report, :avgPricezzz ).must_equal false
   end
 
   it 'should allow state values to be set' do
@@ -40,7 +40,7 @@ class WorkflowTest < ActiveSupport::TestCase
   end
 
   it 'should allow state values to be read' do
-    report_type_selected_workflow.state( :rt ).must_equal :avgPrice
+    report_type_selected_workflow.state( :report ).must_equal :avgPrice
   end
 
   it 'should not care if the state is initialized with string keys' do
@@ -55,11 +55,11 @@ class WorkflowTest < ActiveSupport::TestCase
     report_type_selected_workflow.each_state do |s,v|
       acc << "#{s}--#{v}"
     end
-    acc.must_equal ["rt--avgPrice"]
+    acc.must_equal ["report--avgPrice"]
   end
 
   it 'should be able to summarise a state value in a readable form' do
-    report_type_selected_workflow.summarise_selection( :rt, "avgPrice" ).must_equal "Report type is: average prices and volumes"
+    report_type_selected_workflow.summarise_selection( :report, "avgPrice" ).must_equal "Report type is: average prices and volumes"
   end
 
 end

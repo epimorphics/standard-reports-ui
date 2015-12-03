@@ -5,8 +5,8 @@ feature "can commence report design process" do
     visit report_design_path
     page.must_have_css( ".container h1" )
     page.must_have_css( ".container form[method=get]" )
-    page.must_have_css( ".container input#rt_avgPrice" )
-    page.must_have_css( ".container input#rt_banded" )
+    page.must_have_css( ".container input#report_avgPrice" )
+    page.must_have_css( ".container input#report_banded" )
     page.must_have_css( ".container input.button[type=submit]")
     page.must_have_css( ".container .select-report")
   end
