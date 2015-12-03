@@ -14,6 +14,10 @@ class StepSelectCounty < StepSelectCountyOrDistrict
     NAMES
   end
 
+  def input_label
+    "County or unitary authority name"
+  end
+
   NAMES = [
     "BATH AND NORTH EAST SOMERSET",
     "BEDFORD",

@@ -57,7 +57,7 @@ module ReportDesignHelper
   def layout_textinput( workflow, step )
     content_tag( :div ) do
       content_tag( :label ) do
-        concat( "County or unitary authority name" )
+        concat( step.input_label )
         concat( text_field_tag( step.param_name, "", id: nil) )
       end
     end

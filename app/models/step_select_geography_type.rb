@@ -25,6 +25,8 @@ class StepSelectGeographyType < Step
       traverse_area_type_region( workflow )
     when workflow.has_state?( param_name, "county" )
       traverse_area_type_county( workflow )
+    when workflow.has_state?( param_name, "district" )
+      traverse_area_type_district( workflow )
     else
       self
     end
@@ -47,5 +49,9 @@ class StepSelectGeographyType < Step
 
   def traverse_area_type_county( workflow )
     workflow.traverse_to( :select_county )
+  end
+
+  def traverse_area_type_district( workflow )
+    workflow.traverse_to( :select_district )
   end
 end
