@@ -1,43 +1,17 @@
 # Workflow step of selecting a county
 
-class StepSelectCounty < Step
+class StepSelectCounty < StepSelectCountyOrDistrict
 
   def initialize
-    super( :select_county, :area, :textinput )
+    super( :select_county, :area )
   end
 
-  def values( workflow = nil )
-    NAMES.map do |county_name|
-      Struct::StepValue.new( county_name.split.map(&:capitalize).join(' '), county_name )
-    end
+  def subtype
+    "county"
   end
 
-  def traverse( workflow )
-    value = workflow.state( param_name )
-    if value
-      validate_with( workflow, value )
-    else
-      self
-    end
-  end
-
-  def validate_with( workflow, value )
-    validated_value = validate( value )
-    if validated_value
-      workflow.set_state( param_name, validated_value )
-      workflow.traverse_to( :select_aggregation_type )
-    else
-      set_flash( "Sorry, county '#{value}' was not recognised" )
-    end
-  end
-
-  def summarise( state_value )
-    "Region is #{state_value}"
-  end
-
-  def validate( value )
-    normalized_value = value.upcase
-    NAMES.include?( normalized_value ) && normalized_value
+  def names
+    NAMES
   end
 
   NAMES = [
