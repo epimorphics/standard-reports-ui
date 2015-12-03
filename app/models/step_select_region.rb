@@ -1,18 +1,6 @@
 # Workflow step of selecting a region
 
 class StepSelectRegion < Step
-  NAMES = [
-    "EAST ANGLIA",
-    "EAST MIDLANDS",
-    "GREATER LONDON",
-    "NORTH",
-    "NORTH WEST",
-    "SOUTH EAST",
-    "SOUTH WEST",
-    "WALES",
-    "WEST MIDLANDS",
-    "YORKS AND HUMBER"
-  ]
 
   def initialize
     super( :select_region, :area, :radio )
@@ -32,5 +20,17 @@ class StepSelectRegion < Step
     "Region is #{state_value}"
   end
 
+  NAMES = [
+    "EAST ANGLIA",
+    "EAST MIDLANDS",
+    "GREATER LONDON",
+    "NORTH",
+    "NORTH WEST",
+    "SOUTH EAST",
+    "SOUTH WEST",
+    "WALES",
+    "WEST MIDLANDS",
+    "YORKS AND HUMBER"
+  ]
 
 end
