@@ -18,7 +18,4 @@ class StepSelectPostcodeArea < StepSelectPostcode
     "Enter postcode area:"
   end
 
-  def successor_step
-    :select_aggregation_type
-  end
 end
