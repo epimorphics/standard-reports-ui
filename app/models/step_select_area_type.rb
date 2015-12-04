@@ -1,7 +1,6 @@
 # Workflow step of selecting a geograpy type
 
 class StepSelectAreaType < Step
-  ENGLAND_AND_WALES = "EW"
 
   def initialize
     super( :select_area_type, :areaType, :radio )
@@ -20,11 +19,7 @@ class StepSelectAreaType < Step
   end
 
   def traverse( workflow )
-    area_type = workflow.state( param_name )
-    case
-    when area_type == "country"
-      traverse_area_type_country( workflow )
-    when area_type
+    if area_type = workflow.state( param_name )
       workflow.traverse_to( :"select_#{area_type.underscore}" )
     else
       self
@@ -33,13 +28,6 @@ class StepSelectAreaType < Step
 
   def summarise( state_value, connector = "is " )
     "area type #{connector}#{state_value}"
-  end
-
-  private
-
-  def traverse_area_type_country( workflow )
-    workflow.set_state( :area, ENGLAND_AND_WALES )
-    workflow.traverse_to( :select_aggregation_type )
   end
 
 end
