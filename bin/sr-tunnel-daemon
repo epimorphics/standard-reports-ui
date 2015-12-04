@@ -1,0 +1,11 @@
+#!/bin/bash
+
+while true; do
+  ssh_running=`ps -fC ssh | grep 'lr-data-staging'`
+  if [[ "${ssh_running:-null}" = null ]];then
+    echo "Starting ssh tunnel"
+    ssh -f lr-data-staging-b -L 3030:ec2-54-246-79-255.eu-west-1.compute.amazonaws.com:3030 -N
+  fi
+  sleep 5
+done
+
