@@ -32,8 +32,11 @@ class StepSelectPostcode < Step
   end
 
   def summarise( state_value )
-    "#{subtype.capitalize} is #{state_value}"
+    "#{subtype} is #{state_value}"
   end
 
+  def successor_step
+    :select_aggregation_type
+  end
 
 end
