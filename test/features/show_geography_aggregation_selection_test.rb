@@ -1,6 +1,6 @@
 require "test_helper"
 
-feature "show geography aggregation selection" do
+feature "show area aggregation selection" do
   scenario "visit the workflow step page for country level report" do
     visit report_design_path( {report: :avgPrice, areaType: "country"} )
     page.must_have_css( ".container h1" )

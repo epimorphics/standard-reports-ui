@@ -15,8 +15,8 @@ class WorkflowTest < ActiveSupport::TestCase
 
   let( :report_type_selected_workflow ) {Workflow.new( report: :avgPrice )}
 
-  it 'should choose the select geography step if the report has been chosen' do
-    report_type_selected_workflow.current_step.name.must_equal :select_geography_type
+  it 'should choose the select area step if the report has been chosen' do
+    report_type_selected_workflow.current_step.name.must_equal :select_area_type
   end
 
   it 'should allow state values to be queried' do

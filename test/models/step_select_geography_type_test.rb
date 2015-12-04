@@ -1,13 +1,13 @@
-# Unit tests on the StepSelectGeographyType class
+# Unit tests on the StepSelectAreaType class
 
 require 'test_helper'
 
-class StepSelectGeographyTypeTest < ActiveSupport::TestCase
-  let( :step ) {StepSelectGeographyType.new}
+class StepSelectAreaTypeTest < ActiveSupport::TestCase
+  let( :step ) {StepSelectAreaType.new}
   let( :workflow_empty_state ) {Workflow.new( {} )}
 
   it 'should have a name' do
-    step.name.must_equal :select_geography_type
+    step.name.must_equal :select_area_type
   end
 
   it 'should have a parameter' do
@@ -24,7 +24,7 @@ class StepSelectGeographyTypeTest < ActiveSupport::TestCase
 
   it 'should select itself in the traverse step if not yet complete' do
     successor = step.traverse( workflow_empty_state )
-    successor.name.must_equal :select_geography_type
+    successor.name.must_equal :select_area_type
   end
 
   it 'should select aggregation-type as the next step if country is selected' do

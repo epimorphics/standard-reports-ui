@@ -1,10 +1,10 @@
 # Workflow step of selecting a geograpy type
 
-class StepSelectGeographyType < Step
+class StepSelectAreaType < Step
   ENGLAND_AND_WALES = "EW"
 
   def initialize
-    super( :select_geography_type, :areaType, :radio )
+    super( :select_area_type, :areaType, :radio )
   end
 
   def values( workflow = nil )
@@ -32,7 +32,7 @@ class StepSelectGeographyType < Step
   end
 
   def summarise( state_value, connector = "is " )
-    "geography type #{connector}#{state_value}"
+    "area type #{connector}#{state_value}"
   end
 
   private

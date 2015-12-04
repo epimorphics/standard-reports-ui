@@ -13,7 +13,7 @@ class StepSelectReport < Step
   end
 
   def traverse( workflow )
-    simple_traverse( workflow, :select_geography_type )
+    simple_traverse( workflow, :select_area_type )
   end
 
   def summarise( state_value, connector = "is " )
