@@ -12,7 +12,8 @@ class Workflow
     StepReviewReport,
     StepSelectRegion,
     StepSelectCounty,
-    StepSelectDistrict
+    StepSelectDistrict,
+    StepSelectPostcodeArea
   ]
 
   def initialize( params )

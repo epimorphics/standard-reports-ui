@@ -5,7 +5,7 @@ class StepSelectAggregationType < Step
   AGGREGATE_BY_COUNTY = Struct::StepValue.new( "County, Unitary Authority", :county )
   AGGREGATE_BY_DISTRICT = Struct::StepValue.new( "District or London Borough", :district )
   AGGREGATE_BY_PC_AREA = Struct::StepValue.new( "Postcode area", :pcArea )
-  AGGREGATE_BY_PC_SECTOR = Struct::StepValue.new( "Postcode region", :pcSector )
+  AGGREGATE_BY_PC_SECTOR = Struct::StepValue.new( "Postcode sector", :pcSector )
   AGGREGATE_BY_PC_DISTRICT = Struct::StepValue.new( "Postcode district", :pcDistrict )
   AGGREGATE_BY_NONE = Struct::StepValue.new( "Don't aggregate, just show the total", :none )
 
@@ -30,6 +30,9 @@ class StepSelectAggregationType < Step
     when "county"
       [AGGREGATE_BY_DISTRICT,
        AGGREGATE_BY_PC_AREA, AGGREGATE_BY_PC_DISTRICT, AGGREGATE_BY_PC_SECTOR,
+       AGGREGATE_BY_NONE]
+    when "pcArea"
+      [AGGREGATE_BY_PC_DISTRICT, AGGREGATE_BY_PC_SECTOR,
        AGGREGATE_BY_NONE]
     end
   end
