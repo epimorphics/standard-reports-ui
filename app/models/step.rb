@@ -33,4 +33,16 @@ class Step
     @flash = message
     self
   end
+
+  def value( workflow )
+    workflow.state( param_name )
+  end
+
+  def summarise_current_value( workflow, connector = "" )
+    if v = value( workflow )
+      summarise( v, connector )
+    else
+      "unassigned"
+    end
+  end
 end
