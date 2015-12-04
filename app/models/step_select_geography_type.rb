@@ -13,20 +13,19 @@ class StepSelectGeographyType < Step
       Struct::StepValue.new( "Region", :region ),
       Struct::StepValue.new( "County, Unitary Authority or Greater London", :county ),
       Struct::StepValue.new( "District or London Borough", :district ),
-      Struct::StepValue.new( "Partial post-code", :postcode )
+      Struct::StepValue.new( "Post-code area", :pcArea ),
+      Struct::StepValue.new( "Post-code district", :pcDistrict ),
+      Struct::StepValue.new( "Post-code sector", :pcSector )
     ]
   end
 
   def traverse( workflow )
+    area_type = workflow.state( param_name )
     case
-    when workflow.has_state?( param_name, "country" )
+    when area_type == "country"
       traverse_area_type_country( workflow )
-    when workflow.has_state?( param_name, "region" )
-      traverse_area_type_region( workflow )
-    when workflow.has_state?( param_name, "county" )
-      traverse_area_type_county( workflow )
-    when workflow.has_state?( param_name, "district" )
-      traverse_area_type_district( workflow )
+    when area_type
+      workflow.traverse_to( :"select_#{area_type.underscore}" )
     else
       self
     end
@@ -43,15 +42,4 @@ class StepSelectGeographyType < Step
     workflow.traverse_to( :select_aggregation_type )
   end
 
-  def traverse_area_type_region( workflow )
-    workflow.traverse_to( :select_region )
-  end
-
-  def traverse_area_type_county( workflow )
-    workflow.traverse_to( :select_county )
-  end
-
-  def traverse_area_type_district( workflow )
-    workflow.traverse_to( :select_district )
-  end
 end

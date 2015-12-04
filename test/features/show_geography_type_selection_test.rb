@@ -8,7 +8,7 @@ feature "show geography type selection" do
     page.must_have_css( ".container .select-geography-type" )
     page.must_have_css( ".container input.button[type=submit]")
 
-    %i{ country region county district postcode }.each do |area_type|
+    %i{ country region county district pcArea pcDistrict pcSector }.each do |area_type|
       page.must_have_css( ".container input[type=radio][value=#{area_type}]")
     end
   end
