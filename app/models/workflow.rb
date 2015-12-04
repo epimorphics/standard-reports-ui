@@ -14,7 +14,8 @@ class Workflow
     StepSelectCounty,
     StepSelectDistrict,
     StepSelectPostcodeArea,
-    StepSelectPostcodeDistrict
+    StepSelectPostcodeDistrict,
+    StepSelectPostcodeSector
   ]
 
   def initialize( params )

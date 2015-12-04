@@ -11,14 +11,14 @@ class StepSelectPostcodeSector < StepSelectPostcode
   end
 
   def validation_pattern
-    /\A[A-Z][A-Z]?\Z/
+    /\A[A-Z][A-Z]?[0-9][0-9]?[A-Z]? [0-9]\Z/
   end
 
   def input_label
-    "Enter postcode area:"
+    "Enter postcode sector:"
   end
 
   def successor_step
-    :select_aggregation_type
+    :select_dates
   end
 end
