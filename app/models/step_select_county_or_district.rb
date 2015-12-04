@@ -25,7 +25,7 @@ class StepSelectCountyOrDistrict < Step
     validated_value = validate( value )
     if validated_value
       workflow.set_state( param_name, validated_value )
-      workflow.traverse_to( :select_aggregation_type )
+      workflow.traverse_to( successor_step )
     else
       set_flash( "Sorry, #{subtype} '#{value}' was not recognised" )
     end
@@ -38,6 +38,10 @@ class StepSelectCountyOrDistrict < Step
   def validate( value )
     normalized_value = value.upcase
     names.include?( normalized_value ) && normalized_value
+  end
+
+  def successor_step
+    :select_aggregation_type
   end
 
 

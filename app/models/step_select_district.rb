@@ -18,6 +18,10 @@ class StepSelectDistrict < StepSelectCountyOrDistrict
     "District or local authority name"
   end
 
+  def successor_step
+    :select_dates
+  end
+
   NAMES = [
     "ADUR",
     "ALLERDALE",
