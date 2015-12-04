@@ -31,8 +31,8 @@ class StepSelectPostcode < Step
     normalized_value =~ validation_pattern && normalized_value
   end
 
-  def summarise( state_value )
-    "#{subtype} is #{state_value}"
+  def summarise( state_value, connector = "is " )
+    "#{subtype} #{connector}#{state_value}"
   end
 
   def successor_step

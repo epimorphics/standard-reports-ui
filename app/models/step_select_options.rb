@@ -18,7 +18,7 @@ class StepSelectOptions < Step
     simple_traverse( workflow, :review_report )
   end
 
-  def summarise( state_value )
-    "Include old or new properties? #{state_value}"
+  def summarise( state_value, connector = "is " )
+    "age of property #{connector}#{state_value}"
   end
 end

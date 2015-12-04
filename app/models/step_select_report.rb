@@ -16,11 +16,14 @@ class StepSelectReport < Step
     simple_traverse( workflow, :select_geography_type )
   end
 
-  def summarise( state_value )
-    if state_value.to_sym == :avgPrice
-      "Report type is: average prices and volumes"
+  def summarise( state_value, connector = "is " )
+    case state_value.to_sym
+    when :avgPrice
+      "report type #{connector}average prices and volumes"
+    when :banded
+      "report type #{connector}banded prices"
     else
-      "Report type is: banded prices"
+      "unknown report type!"
     end
   end
 

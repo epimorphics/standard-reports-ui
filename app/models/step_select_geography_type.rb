@@ -31,8 +31,8 @@ class StepSelectGeographyType < Step
     end
   end
 
-  def summarise( state_value )
-    "Geography type is #{state_value}"
+  def summarise( state_value, connector = "is " )
+    "geography type #{connector}#{state_value}"
   end
 
   private

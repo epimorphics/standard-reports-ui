@@ -16,8 +16,8 @@ class StepSelectRegion < Step
     simple_traverse( workflow, :select_aggregation_type )
   end
 
-  def summarise( state_value )
-    "Region is #{state_value}"
+  def summarise( state_value, connector = "is " )
+    "region #{connector}#{state_value}"
   end
 
   NAMES = [

@@ -22,8 +22,13 @@ class StepSelectDates < Step
     simple_traverse( workflow, :select_options )
   end
 
-  def summarise( state_value )
-    "Selected dates: #{state_value}"
+  def summarise( state_value, connector = "are " )
+    case state_value.to_sym
+    when :ytd
+      "dates #{connector}year to date"
+    else
+      "selected dates #{connector}#{state_value}"
+    end
   end
 
   private

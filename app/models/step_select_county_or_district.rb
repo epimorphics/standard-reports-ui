@@ -31,8 +31,8 @@ class StepSelectCountyOrDistrict < Step
     end
   end
 
-  def summarise( state_value )
-    "#{subtype.capitalize} is #{state_value}"
+  def summarise( state_value, connector = "is " )
+    "#{subtype.capitalize} #{connector}#{state_value}"
   end
 
   def validate( value )

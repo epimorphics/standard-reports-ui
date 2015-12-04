@@ -46,9 +46,9 @@ class StepSelectAggregationType < Step
 
   def summarise( state_value )
     if state_value.to_sym == :none
-      "Do not aggregate data"
+      "do not aggregate data"
     else
-      "Aggregate data by #{state_value}"
+      "aggregate data by #{state_value}"
     end
   end
 
