@@ -88,4 +88,10 @@ module ReportDesignHelper
       end
     end
   end
+
+  def selected_area_summary( workflow )
+    workflow
+      .prior_step
+      .summarise_current_value( workflow )
+  end
 end
