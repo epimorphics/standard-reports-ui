@@ -1,11 +1,12 @@
 # Model encapsulating the report-generation workflow
 
 class Workflow
-  attr_reader :params, :initial_step
+  attr_reader :params, :step_history
 
   STEP_CLASSES = [
     StepSelectReport,
     StepSelectAreaType,
+    StepSelectCountry,
     StepSelectAggregationType,
     StepSelectDates,
     StepSelectOptions,
@@ -21,10 +22,19 @@ class Workflow
   def initialize( params )
     set_current_state( params )
     build_workflow_tree
+    traverse_workflow
+  end
+
+  def initial_step
+    step_history.first
+  end
+
+  def prior_step
+    step_history[-2]
   end
 
   def current_step
-    initial_step.traverse( self )
+    step_history.last
   end
 
   def steps
@@ -42,6 +52,7 @@ class Workflow
 
   def traverse_to( step_name )
     raise "unknown step #{step_name}" unless next_step = step( step_name )
+    @step_history << next_step
     next_step.traverse( self )
   end
 
@@ -93,10 +104,14 @@ class Workflow
   end
 
   def set_initial_step( step )
-    @initial_step ||= step
+    @step_history ||= [step]
   end
 
   def save_step( step )
     steps[step.name] = step
+  end
+
+  def traverse_workflow
+    initial_step.traverse( self )
   end
 end

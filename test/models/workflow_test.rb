@@ -62,4 +62,17 @@ class WorkflowTest < ActiveSupport::TestCase
     report_type_selected_workflow.summarise_selection( :report, "avgPrice" ).must_equal "report type is average prices and volumes"
   end
 
+  it 'should intialise the workflow history' do
+    workflow = Workflow.new( Hash.new )
+    workflow.initial_step.name.must_equal :select_report
+    workflow.step_history.length.must_equal 1
+  end
+
+  it 'should build the workflow history' do
+    workflow = Workflow.new( report: "avgPrice" )
+    workflow.current_step
+    workflow.step_history.length.must_equal 2
+    workflow.prior_step.name.must_equal :select_report
+  end
+
 end
