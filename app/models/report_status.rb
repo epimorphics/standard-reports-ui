@@ -32,7 +32,7 @@ class ReportStatus
   end
 
   def in_progress?
-    status = "InProgress"
+    status == "InProgress"
   end
 
   def position
