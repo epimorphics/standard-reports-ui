@@ -35,6 +35,10 @@ class StepSelectDates < Step
     end
   end
 
+  def multivalued?
+    true
+  end
+
   private
 
   def year_values
