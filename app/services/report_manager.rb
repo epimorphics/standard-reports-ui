@@ -60,10 +60,12 @@ class ReportManager
 
     params.each do |k,v|
       separated_ = []
+      k_na = non_array_key( k )
+
       separated.each do |h|
         (v.is_a?( Array ) ? v : [v]).each do |vv|
           h_copy = h.dup
-          h_copy[k] = vv
+          h_copy[k_na] = vv
           separated_ << h_copy
         end
       end
@@ -71,6 +73,10 @@ class ReportManager
     end
 
     separated
+  end
+
+  def non_array_key( k )
+    k.to_s.gsub( "[]", "" ).to_sym
   end
 
   def start_request( req_spec )

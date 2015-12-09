@@ -22,33 +22,33 @@ module ReportDesignHelper
   end
 
   def layout_workflow_radio_buttons( workflow, step )
-    layout_values_as_toggle_buttons_list( step.param_name, step.values( workflow ), true )
+    layout_values_as_toggle_buttons_list( step, step.values( workflow ), true )
   end
 
-  def layout_values_as_toggle_buttons_list( id, values, radio )
+  def layout_values_as_toggle_buttons_list( step, values, radio )
     content_tag( :ul, class: "list-unstyled" ) do
-      layout_values_as_toggle_buttons( id, values, radio )
+      layout_values_as_toggle_buttons( step, values, radio )
     end
   end
 
-  def layout_values_as_toggle_buttons( id, values, radio )
+  def layout_values_as_toggle_buttons( step, values, radio )
     capture do
       values.each do |value|
         concat(
           content_tag( :li ) do
-            toggle_button_option( id, value, radio )
+            toggle_button_option( step, value, radio )
           end
         )
       end
     end
   end
 
-  def toggle_button_option( id, value, radio )
+  def toggle_button_option( step, value, radio )
     content_tag( :label ) do
       if radio
-        concat radio_button_tag( id, value.value )
+        concat radio_button_tag( step.form_param, value.value )
       else
-        concat check_box_tag( :"#{id}[]", value.value, false, id: nil )
+        concat check_box_tag( step.form_param, value.value, false, id: nil )
       end
       concat value.label
     end
@@ -81,9 +81,9 @@ module ReportDesignHelper
     ignore_current_state = workflow.current_step.param_name
 
     capture do
-      workflow.each_state( ignore_current_state ) do |state_name, state_value|
+      workflow.each_state( ignore_current_state ) do |state_name, state_value, param_name|
         concat(
-          hidden_field_tag( state_name, state_value )
+          hidden_field_tag( param_name, state_value )
         )
       end
     end

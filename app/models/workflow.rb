@@ -69,10 +69,17 @@ class Workflow
   end
 
   def each_state( ignore = nil, &block )
-    @state.each do |key, value|
-      unless key == ignore
-        block.yield( key, value )
-      end
+    @state.each do |key, values|
+      each_state_value( key, values, &block ) unless key == ignore
+    end
+  end
+
+  def each_state_value( key, values, &block )
+    multi = values.is_a?( Array )
+    param_name = multi ? "#{key}[]" : key.to_s
+
+    (multi ? values : [values]).each do |value|
+      block.yield( key, value, param_name )
     end
   end
 

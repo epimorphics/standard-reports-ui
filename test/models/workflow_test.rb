@@ -58,6 +58,19 @@ class WorkflowTest < ActiveSupport::TestCase
     acc.must_equal ["report--avgPrice"]
   end
 
+  it 'should support the iteration over states with multi-values' do
+    acc = []
+    workflow = Workflow.new( report: :avgPrice, period: ["latest_m", "latest_q"] )
+
+    workflow.each_state do |s,v,p|
+      acc << "#{p}--#{v}"
+    end
+
+    acc.must_include "report--avgPrice"
+    acc.must_include "period[]--latest_m"
+    acc.must_include "period[]--latest_q"
+  end
+
   it 'should be able to summarise a state value in a readable form' do
     report_type_selected_workflow.summarise_selection( :report, "avgPrice" ).must_equal "report type is average prices and volumes"
   end

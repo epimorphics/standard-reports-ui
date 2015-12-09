@@ -45,4 +45,12 @@ class Step
       "unassigned"
     end
   end
+
+  def multivalued?
+    false
+  end
+
+  def form_param
+    "#{param_name}#{'[]' if multivalued?}"
+  end
 end
