@@ -26,6 +26,10 @@ class StepSelectDates < Step
     case state_value.to_sym
     when :ytd
       "dates #{connector}year to date"
+    when :latest_q
+      "dates #{connector}latest quarter for which data is available"
+    when :latest_m
+      "dates #{connector}latest month for which data is available"
     else
       "selected dates #{connector}#{state_value}"
     end
