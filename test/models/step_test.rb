@@ -18,12 +18,14 @@ class StepTest < ActiveSupport::TestCase
   end
 
   it 'should not report as completed if the param is missing' do
-    step.completed?( {} ).must_equal false
-    step.incomplete?( {} ).must_equal true
+    w = Workflow.new( {} )
+    step.completed?( w ).must_equal false
+    step.incomplete?( w ).must_equal true
   end
 
   it 'should report as completed if the param is present' do
-    step.completed?( {test_param: "abc"} ).must_equal true
-    step.incomplete?( {test_param: "abc"} ).must_equal false
+    w = Workflow.new( {test_param: "foo"} )
+    step.completed?( w ).must_equal true
+    step.incomplete?( w ).must_equal false
   end
 end

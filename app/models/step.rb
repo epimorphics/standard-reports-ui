@@ -11,12 +11,12 @@ class Step
     @layout = layout
   end
 
-  def completed?( params )
-    params.has_key?( param_name )
+  def completed?( workflow )
+    workflow.has_state?( param_name )
   end
 
-  def incomplete?( params )
-    !completed?( params )
+  def incomplete?( workflow )
+    !completed?( workflow )
   end
 
   # Simple traversal requires only that the parameter for this
