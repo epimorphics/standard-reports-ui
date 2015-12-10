@@ -1,7 +1,7 @@
 # Workflow step of selecting a country
 # This is a degerate case because we don't let the user choose!
 
-class StepSelectCountry < Step
+class StepSelectCountry < StepSelectArea
   ENGLAND_AND_WALES = "EW"
 
   def initialize

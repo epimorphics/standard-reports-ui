@@ -1,6 +1,6 @@
 # Workflow step of selecting a region
 
-class StepSelectRegion < Step
+class StepSelectRegion < StepSelectArea
 
   def initialize
     super( :select_region, :area, :radio )

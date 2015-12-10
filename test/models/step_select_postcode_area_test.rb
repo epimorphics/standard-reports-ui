@@ -36,4 +36,8 @@ class StepSelectPostcodeAreaTest < ActiveSupport::TestCase
     step.flash.must_match /Sorry/
   end
 
+  it "should have a generic name" do
+    step.generic_name.must_equal "select area"
+  end
+
 end

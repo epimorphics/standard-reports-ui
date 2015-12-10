@@ -33,4 +33,8 @@ class StepRegionTest < ActiveSupport::TestCase
     successor.name.must_equal :select_aggregation_type
   end
 
+  it "should have a generic name" do
+    step.generic_name.must_equal "select area"
+  end
+
 end

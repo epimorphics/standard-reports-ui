@@ -38,4 +38,8 @@ class StepSelectAreaTypeTest < ActiveSupport::TestCase
     successor = step.traverse( workflow )
     workflow.has_state?( :area, "EW" ).must_equal true
   end
+
+  it "should have a generic name" do
+    step.generic_name.must_equal "select area type"
+  end
 end

@@ -39,6 +39,10 @@ class StepSelectDates < Step
     true
   end
 
+  def generic_name
+    "select dates"
+  end
+
   private
 
   def year_values

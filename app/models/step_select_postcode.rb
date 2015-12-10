@@ -1,6 +1,6 @@
 # Super-class for common elements of picking a postcode
 
-class StepSelectPostcode < Step
+class StepSelectPostcode < StepSelectArea
 
   def initialize( param )
     super( param, :area, :textinput )

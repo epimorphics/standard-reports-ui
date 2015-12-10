@@ -30,4 +30,7 @@ class StepSelectAreaType < Step
     "area type #{connector}#{state_value}"
   end
 
+  def generic_name
+    "select area type"
+  end
 end

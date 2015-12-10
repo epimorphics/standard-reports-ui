@@ -12,4 +12,8 @@ class StepReviewReport < Step
   def traverse( workflow )
     self
   end
+
+  def generic_name
+    "review"
+  end
 end

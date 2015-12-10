@@ -20,4 +20,8 @@ class StepSelectReportTest < ActiveSupport::TestCase
   it 'should have at least two values' do
     step.values.length.must_be :>=, 2
   end
+
+  it "should have a generic name" do
+    step.generic_name.must_equal "select report type"
+  end
 end

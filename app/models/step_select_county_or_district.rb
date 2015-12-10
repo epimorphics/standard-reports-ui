@@ -1,6 +1,6 @@
 # Workflow step of selecting a county
 
-class StepSelectCountyOrDistrict < Step
+class StepSelectCountyOrDistrict < StepSelectArea
 
   def initialize( step_name, param_name)
     super( step_name, param_name, :textinput )

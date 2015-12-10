@@ -21,4 +21,8 @@ class StepSelectOptions < Step
   def summarise( state_value, connector = "is " )
     "age of property #{connector}#{state_value}"
   end
+
+  def generic_name
+    "options"
+  end
 end

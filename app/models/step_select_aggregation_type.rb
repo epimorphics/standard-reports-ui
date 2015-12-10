@@ -52,4 +52,7 @@ class StepSelectAggregationType < Step
     end
   end
 
+  def generic_name
+    "select aggregation"
+  end
 end

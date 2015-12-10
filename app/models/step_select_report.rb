@@ -27,5 +27,8 @@ class StepSelectReport < Step
     end
   end
 
+  def generic_name
+    "select report type"
+  end
 
 end
