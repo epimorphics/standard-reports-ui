@@ -7,17 +7,21 @@ class Workflow
     StepSelectReport,
     StepSelectAreaType,
     StepSelectCountry,
-    StepSelectAggregationType,
-    StepSelectDates,
-    StepSelectOptions,
-    StepReviewReport,
     StepSelectRegion,
     StepSelectCounty,
     StepSelectDistrict,
     StepSelectPostcodeArea,
     StepSelectPostcodeDistrict,
-    StepSelectPostcodeSector
+    StepSelectPostcodeSector,
+    StepSelectAggregationType,
+    StepSelectDates,
+    StepSelectOptions,
+    StepReviewReport
   ]
+
+  STEP_SEQUENCE = STEP_CLASSES
+    .map( &:new )
+    .uniq &:param_name
 
   def initialize( params )
     set_current_state( params )
