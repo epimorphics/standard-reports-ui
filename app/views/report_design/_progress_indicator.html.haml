@@ -1,0 +1,7 @@
+%ul.list-inline.workflow-summary
+  - Workflow::STEP_SEQUENCE.each_with_index do |step, i|
+    %li.step
+      = step_separator( i )
+      = step_number( i, step, workflow )
+      %span.step-link
+        = step_link( step, workflow )

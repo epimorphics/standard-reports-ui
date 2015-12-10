@@ -23,6 +23,7 @@ gem 'govuk_frontend_toolkit', github: "alphagov/govuk_frontend_toolkit_gem", :su
 gem 'faraday'
 gem 'faraday_middleware'
 gem 'yajl-ruby', require: 'yajl'
+gem 'font-awesome-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -73,6 +73,8 @@ GEM
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.10.0)
       faraday (>= 0.7.4, < 0.10)
+    font-awesome-rails (4.4.0.0)
+      railties (>= 3.2, < 5.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     haml (4.0.7)
@@ -222,6 +224,7 @@ DEPENDENCIES
   capybara_minitest_spec
   faraday
   faraday_middleware
+  font-awesome-rails
   govuk_frontend_toolkit!
   haml-rails
   jbuilder (~> 2.0)

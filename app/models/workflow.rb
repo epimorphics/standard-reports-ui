@@ -72,14 +72,18 @@ class Workflow
     c = {controller: controller, action: action}
   end
 
+  def params
+    @params ||= @state.select {|k,v| whitelist_key( k )}
+  end
+
   def each_state( ignore = nil, &block )
-    @state.each do |key, values|
-      each_state_value( key, values, &block ) if whitelist_key( key, ignore )
+    params.each do |key, values|
+      each_state_value( key, values, &block ) unless key == ignore
     end
   end
 
-  def whitelist_key( key, ignore )
-    step_with_param( key ) && key != ignore
+  def whitelist_key( key )
+    step_with_param( key )
   end
 
   def each_state_value( key, values, &block )

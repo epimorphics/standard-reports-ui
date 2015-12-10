@@ -1,4 +1,6 @@
 .select-aggregation-type
+  = render partial: "progress_indicator", locals: {workflow: @workflow}
+
   %h1
     How do you want to group the data within '#{selected_area_summary( @workflow )}'?
 
