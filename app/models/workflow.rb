@@ -70,8 +70,12 @@ class Workflow
 
   def each_state( ignore = nil, &block )
     @state.each do |key, values|
-      each_state_value( key, values, &block ) unless key == ignore
+      each_state_value( key, values, &block ) if whitelist_key( key, ignore )
     end
+  end
+
+  def whitelist_key( key, ignore )
+    step_with_param( key ) && key != ignore
   end
 
   def each_state_value( key, values, &block )
