@@ -95,46 +95,4 @@ module ReportDesignHelper
       .summarise_current_value( workflow )
   end
 
-  def step_completion_class
-  end
-
-  def step_separator( step_index )
-    "&raquo".html_safe unless step_index == 0
-  end
-
-  def step_number( step_index, step, workflow )
-    content_tag( :span, {class: "step-number"}) do
-      if step.completed?( workflow )
-        step_number_completed
-      else
-        step_number_ongoing( step_index )
-      end
-    end
-  end
-
-  def step_number_completed
-    # tag( "i", {class: ["fa", "fa-checkmark"]}, false )
-    "<i class='fa fa-check'></i>".html_safe
-  end
-
-  def step_number_ongoing( step_index )
-    (step_index + 1 ).to_s
-  end
-
-  def step_link( step, workflow )
-    if step.completed?( workflow )
-      step_link_active( step )
-    else
-      step_link_inactive( step )
-    end
-  end
-
-  def step_link_active( step )
-    link_to( step.generic_name, params, {class: "active"} )
-  end
-
-  def step_link_inactive( step )
-    content_tag( :span, step.generic_name, {class: "inactive"} )
-  end
-
 end

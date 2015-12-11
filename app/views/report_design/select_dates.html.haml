@@ -2,9 +2,9 @@
 - values = step.values( @workflow )
 
 .select-dates
-  = render partial: "progress_indicator", locals: {workflow: @workflow}
 
   %h1
+    = render partial: "progress_indicator", locals: {workflow: @workflow}
     Which time period should the report cover?
 
   %p

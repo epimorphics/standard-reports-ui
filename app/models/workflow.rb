@@ -105,6 +105,11 @@ class Workflow
     steps.values.find {|step| step.param_name == state_name}
   end
 
+  def step_progress_summary
+    step_no = STEP_SEQUENCE.find_index {|s| s.incomplete?( self )}
+    "Step #{step_no + 1} of #{STEP_SEQUENCE.length}"
+  end
+
   private
 
   def set_current_state( params )
