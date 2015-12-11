@@ -19,7 +19,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'haml-rails'
 gem 'jquery-rails'
 gem 'bootstrap-sass'
-gem 'govuk_frontend_toolkit', github: "alphagov/govuk_frontend_toolkit_gem", :submodules => true
+gem 'govuk_frontend_toolkit', github: "alphagov/govuk_frontend_toolkit_gem", submodules: true
+gem 'govuk_elements_rails', github: "ministryofjustice/govuk_elements_rails", submodules: true
+
 gem 'faraday'
 gem 'faraday_middleware'
 gem 'yajl-ruby', require: 'yajl'
