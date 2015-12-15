@@ -114,17 +114,17 @@ module ReportDesignHelper
     capture do
       concat prompted_row(
         ->(){ content_tag( :span, "year", {class: "prompt"} ) },
-        ->(){ labelled_check_box( step.param_name, year, year.to_s )}
+        ->(){ labelled_check_box( "#{step.param_name}[]", year, year.to_s )}
       )
     end
   end
 
   def layout_quarters( step, year )
-    layout_quarters_or_months( step.quarters_for( year ), "quarters", step.param_name )
+    layout_quarters_or_months( step.quarters_for( year ), "quarters", "#{step.param_name}[]" )
   end
 
   def layout_months( step, year )
-    layout_quarters_or_months( step.months_for( year ), "months", step.param_name )
+    layout_quarters_or_months( step.months_for( year ), "months", "#{step.param_name}[]" )
   end
 
   def layout_quarters_or_months( mqs, prompt, param_name )
