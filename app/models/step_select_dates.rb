@@ -11,11 +11,23 @@ class StepSelectDates < Step
   end
 
   def values( workflow )
-    {years: year_values,
-     quarters: quarter_values,
-     months: month_values,
-     latest: latest_values
-    }
+    {latest: latest_values}
+  end
+
+  def months_for( year )
+    period_values( year,
+      scale: 1,
+      value_fn: ->( m, y ){ "%04d-%02d" % [y, m] },
+      label_fn: ->( m, y ){ I18n.t("date.abbr_month_names")[m] }
+    )
+  end
+
+  def quarters_for( year )
+    period_values( year,
+      scale: 3,
+      value_fn: ->( q, y ){ "#{y}-Q#{q}" },
+      label_fn: ->( q, y ){ "Q#{q}" }
+    )
   end
 
   def traverse( workflow )
@@ -43,18 +55,26 @@ class StepSelectDates < Step
     "select dates"
   end
 
+  def each_hidden_year
+    delta = Time.now.year - EARLIEST_YEAR
+    (2..delta).each do |d|
+      yield d
+    end
+  end
+
   private
 
   def year_values
     (EARLIEST_YEAR .. latest_year).to_a
   end
 
-  def quarter_values
-    []
-  end
-
-  def month_values
-    []
+  def period_values( year, m_or_q )
+    latest_m = (year == latest_year) ? report_manager_service.latest_month : 12
+    latest_mq = (latest_m / m_or_q[:scale]).to_i
+    (1..latest_mq).map do |mq|
+      Struct::StepValue.new( m_or_q[:label_fn].call( mq, year ),
+                             m_or_q[:value_fn].call( mq, year ) )
+    end
   end
 
   def latest_year

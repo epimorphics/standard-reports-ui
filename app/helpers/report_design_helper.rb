@@ -95,4 +95,74 @@ module ReportDesignHelper
       .summarise_current_value( workflow )
   end
 
+  def layout_custom_dates( delta, step )
+    year = Time.now.year - delta
+    content_tag( :div, class: "row") do
+      concat( content_tag( :div, class: "col-sm-12 col-md-1") do
+        content_tag( :h3, year.to_s )
+      end )
+      concat( content_tag( :div, class: "col-sm-12 col-md-11") do
+        concat( layout_all_year( step, year ) )
+        concat( layout_quarters( step, year ) )
+        concat( layout_months( step, year ) )
+      end )
+
+    end
+  end
+
+  def layout_all_year( step, year )
+    capture do
+      concat prompted_row(
+        ->(){ content_tag( :span, "year", {class: "prompt"} ) },
+        ->(){ labelled_check_box( step.param_name, year, year.to_s )}
+      )
+    end
+  end
+
+  def layout_quarters( step, year )
+    layout_quarters_or_months( step.quarters_for( year ), "quarters", step.param_name )
+  end
+
+  def layout_months( step, year )
+    layout_quarters_or_months( step.months_for( year ), "months", step.param_name )
+  end
+
+  def layout_quarters_or_months( mqs, prompt, param_name )
+    capture do
+      concat prompted_row(
+        ->(){ content_tag( :span, prompt, {class: "prompt"} ) },
+        ->(){
+          content_tag( :ul, {class: "list-inline"} ) do
+            mqs.each do |q|
+              concat( labelled_check_box_li( param_name, q.value, q.label ))
+            end
+          end
+        }
+      )
+    end
+  end
+
+  def prompted_row( prompt_block, main_block )
+    capture do
+      concat( content_tag( :div, {class: "col-sm-12 col-md-2"} ) do
+        prompt_block.call
+      end )
+      concat( content_tag( :div, {class: "col-sm-12 col-md-10"} ) do
+        main_block.call
+      end)
+    end
+  end
+
+  def labelled_check_box_li( param_name, value, label )
+    content_tag( :li ) do
+      labelled_check_box( param_name, value, label )
+    end
+  end
+
+  def labelled_check_box( param_name, value, label )
+    content_tag( :label ) do
+      concat check_box_tag( param_name, value )
+      concat label
+    end
+  end
 end

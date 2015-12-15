@@ -24,9 +24,17 @@
 
     = layout_values_as_toggle_buttons_list( step, values[:latest], false )
 
-    %h2 Select custom dates
+    %h2 Choose specific dates
 
-    %p
-      %em In development ...
+    = layout_custom_dates( 0, step )
+    = layout_custom_dates( 1, step )
+
+    %details
+      %summary
+        %span.summary
+          More dates
+      %div.panel
+        - step.each_hidden_year do |delta|
+          = layout_custom_dates( delta, step )
 
     = layout_submit_button

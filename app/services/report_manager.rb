@@ -24,6 +24,10 @@ class ReportManager
     latest_month_spec.split( "-" ).first.to_i
   end
 
+  def latest_quarter
+    (latest_month / 3).to_i
+  end
+
   def latest_month_spec
     @latest_month_spec ||= api.get( url + "latest-month-available", {accept: "text/plain"} )
   end
