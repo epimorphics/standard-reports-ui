@@ -18,7 +18,7 @@ class StepSelectDates < Step
     period_values( year,
       scale: 1,
       value_fn: ->( m, y ){ "%04d-%02d" % [y, m] },
-      label_fn: ->( m, y ){ I18n.t("date.abbr_month_names")[m] }
+      label_fn: ->( m, y ){ "#{I18n.t("date.abbr_month_names")[m]} #{y}" }
     )
   end
 
@@ -26,7 +26,7 @@ class StepSelectDates < Step
     period_values( year,
       scale: 3,
       value_fn: ->( q, y ){ "#{y}-Q#{q}" },
-      label_fn: ->( q, y ){ "Q#{q}" }
+      label_fn: ->( q, y ){ "Q#{q} #{y}" }
     )
   end
 

@@ -111,10 +111,11 @@ module ReportDesignHelper
   end
 
   def layout_all_year( step, year )
+    all_year = (year == Time.now.year) ? "to date" : "all year"
     capture do
       concat prompted_row(
         ->(){ content_tag( :span, "year", {class: "prompt"} ) },
-        ->(){ labelled_check_box( "#{step.param_name}[]", year, year.to_s )}
+        ->(){ labelled_check_box( "#{step.param_name}[]", year, "#{year} #{all_year}" )}
       )
     end
   end
