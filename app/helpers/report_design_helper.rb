@@ -114,7 +114,6 @@ module ReportDesignHelper
     all_year = (year == Time.now.year) ? "to date" : "all year"
     capture do
       concat prompted_row(
-        ->(){ content_tag( :span, "year", {class: "prompt"} ) },
         ->(){ labelled_check_box( "#{step.param_name}[]", year, "#{year} #{all_year}" )}
       )
     end
@@ -131,7 +130,6 @@ module ReportDesignHelper
   def layout_quarters_or_months( mqs, prompt, param_name )
     capture do
       concat prompted_row(
-        ->(){ content_tag( :span, prompt, {class: "prompt"} ) },
         ->(){
           content_tag( :ul, {class: "list-inline"} ) do
             mqs.each do |q|
@@ -143,14 +141,11 @@ module ReportDesignHelper
     end
   end
 
-  def prompted_row( prompt_block, main_block )
+  def prompted_row( main_block )
     capture do
-      concat( content_tag( :div, {class: "col-sm-12 col-md-2"} ) do
-        prompt_block.call
-      end )
-      concat( content_tag( :div, {class: "col-sm-12 col-md-10"} ) do
+      content_tag( :div, {class: "col-sm-12 col-md-10"} ) do
         main_block.call
-      end)
+      end
     end
   end
 
