@@ -12,3 +12,5 @@
 !/log/.keep
 /tmp
 .byebug_history
+C:\\nppdf32Log\\debuglog.txt
+test/query_test.rb
