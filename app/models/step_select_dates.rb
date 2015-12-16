@@ -3,7 +3,11 @@
 class StepSelectDates < Step
   attr_reader :report_manager_service
 
+  # The earliest year for which we have data
   EARLIEST_YEAR = 1995
+
+  # The number of selectable years the step shows by default
+  YEARS_SHOWN_BY_DEFAULT = 2
 
   def initialize( report_manager_service = ReportManager.new )
     super( :select_dates, :period, :dates )
@@ -55,9 +59,10 @@ class StepSelectDates < Step
     "select dates"
   end
 
-  def each_hidden_year
+  def each_year( hidden_only = true )
+    start_delta = hidden_only ? YEARS_SHOWN_BY_DEFAULT : 0
     delta = Time.now.year - EARLIEST_YEAR
-    (2..delta).each do |d|
+    (start_delta..delta).each do |d|
       yield d
     end
   end

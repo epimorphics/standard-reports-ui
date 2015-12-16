@@ -1,6 +1,9 @@
 # Unit tests on ReportSpecification
+require "models/mock_report_manager"
 
 class ReportSpecificationTest < ActiveSupport::TestCase
+  include MockReportManager
+
   it "should record parameters correctly" do
     rs = ReportSpecification.new( {a: 1, b: 2}, nil )
     rs.to_hash()[:a].must_equal 1
@@ -44,11 +47,4 @@ class ReportSpecificationTest < ActiveSupport::TestCase
 
   end
 
-  def mock_report_manager( m, y )
-    rm = mock('report_manager')
-    rm.stubs(:latest_month).returns(m)
-    rm.stubs(:latest_year).returns(y)
-    rm.stubs(:latest_month_spec).returns( "#{y}-%02d" % m )
-    rm
-  end
 end

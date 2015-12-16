@@ -34,7 +34,7 @@
         %span.summary
           More dates
       %div.panel
-        - step.each_hidden_year do |delta|
-          = layout_custom_dates( delta, step )
+        - step.each_year( true ) do |years_ago|
+          = layout_custom_dates( years_ago, step )
 
     = layout_submit_button
