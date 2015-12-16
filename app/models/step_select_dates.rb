@@ -38,17 +38,8 @@ class StepSelectDates < Step
     simple_traverse( workflow, :select_options )
   end
 
-  def summarise( state_value, connector = "are " )
-    case state_value.to_sym
-    when :ytd
-      "dates #{connector}year to date"
-    when :latest_q
-      "dates #{connector}latest quarter for which data is available"
-    when :latest_m
-      "dates #{connector}latest month for which data is available"
-    else
-      "selected dates #{connector}#{state_value}"
-    end
+  def summarise( state_values, connector = "are " )
+    "dates #{connector}#{state_values.map( &summarise_value ).join( ", " )}"
   end
 
   def multivalued?
@@ -92,6 +83,21 @@ class StepSelectDates < Step
       Struct::StepValue.new( "Latest quarter for which data is available", :latest_q ),
       Struct::StepValue.new( "Latest month for which data is available", :latest_m )
     ]
+  end
+
+  def summarise_value
+    Proc.new {|state_value|
+      case state_value.to_sym
+      when :ytd
+        "year to date"
+      when :latest_q
+        "latest quarter for which data is available"
+      when :latest_m
+        "latest month for which data is available"
+      else
+        state_value
+      end
+    }
   end
 
 end

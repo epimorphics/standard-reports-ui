@@ -1,6 +1,8 @@
 # Model encapsulating the report-generation workflow
 
 class Workflow
+  extend Forwardable
+
   attr_reader :params, :step_history
 
   STEP_CLASSES = [
@@ -75,6 +77,8 @@ class Workflow
   def params
     @params ||= @state.select {|k,v| whitelist_key( k )}
   end
+
+  def_delegator :params, :each, :each_state_key
 
   def each_state_ignoring( ignore = nil, &block )
     params.each do |key, values|
