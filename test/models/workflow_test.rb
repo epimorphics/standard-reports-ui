@@ -52,7 +52,7 @@ class WorkflowTest < ActiveSupport::TestCase
 
   it 'should support iteration over state values' do
     acc = []
-    report_type_selected_workflow.each_state do |s,v|
+    report_type_selected_workflow.each_state_ignoring( nil ) do |s,v|
       acc << "#{s}--#{v}"
     end
     acc.must_equal ["report--avgPrice"]
@@ -62,7 +62,7 @@ class WorkflowTest < ActiveSupport::TestCase
     acc = []
     workflow = Workflow.new( report: :avgPrice, period: ["latest_m", "latest_q"] )
 
-    workflow.each_state do |s,v,p|
+    workflow.each_state_ignoring( nil ) do |s,v,p|
       acc << "#{p}--#{v}"
     end
 

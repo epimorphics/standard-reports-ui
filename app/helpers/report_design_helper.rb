@@ -78,10 +78,10 @@ module ReportDesignHelper
   end
 
   def layout_existing_values( workflow )
-    ignore_current_state = workflow.current_step.param_name
+    current_param = workflow.current_step.param_name
 
     capture do
-      workflow.each_state( ignore_current_state ) do |state_name, state_value, param_name|
+      workflow.each_state_ignoring( current_param ) do |state_name, state_value, param_name|
         concat(
           hidden_field_tag( param_name, state_value )
         )

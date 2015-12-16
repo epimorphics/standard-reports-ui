@@ -76,7 +76,7 @@ class Workflow
     @params ||= @state.select {|k,v| whitelist_key( k )}
   end
 
-  def each_state( ignore = nil, &block )
+  def each_state_ignoring( ignore = nil, &block )
     params.each do |key, values|
       each_state_value( key, values, &block ) unless key == ignore
     end
@@ -84,15 +84,6 @@ class Workflow
 
   def whitelist_key( key )
     step_with_param( key )
-  end
-
-  def each_state_value( key, values, &block )
-    multi = values.is_a?( Array )
-    param_name = multi ? "#{key}[]" : key.to_s
-
-    (multi ? values : [values]).each do |value|
-      block.yield( key, value, param_name )
-    end
   end
 
   def summarise_selection( state_name, state_value )
@@ -111,6 +102,15 @@ class Workflow
   end
 
   private
+
+  def each_state_value( key, values, &block )
+    multi = values.is_a?( Array )
+    param_name = multi ? "#{key}[]" : key.to_s
+
+    (multi ? values : [values]).each do |value|
+      block.yield( key, value, param_name )
+    end
+  end
 
   def set_current_state( params )
     @state = Hash.new
