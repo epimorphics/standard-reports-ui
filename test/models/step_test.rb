@@ -28,4 +28,9 @@ class StepTest < ActiveSupport::TestCase
     step.completed?( w ).must_equal true
     step.incomplete?( w ).must_equal false
   end
+
+  it 'should answer generically that a step provides its param name' do
+    step.provides?( :test_param, nil ).must_equal true
+    step.provides?( :test_paramXX, nil ).must_equal false
+  end
 end

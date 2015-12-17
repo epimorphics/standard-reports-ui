@@ -16,4 +16,9 @@ class StepSelectCountry < StepSelectArea
   def summarise( value, connector = "is ")
     "country #{connector}England and Wales"
   end
+
+  def subtype
+    "country"
+  end
+  alias :subtype_label :subtype
 end

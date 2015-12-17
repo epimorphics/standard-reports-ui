@@ -22,7 +22,7 @@ class StepSelectPostcode < StepSelectArea
       workflow.set_state( param_name, validated_value )
       workflow.traverse_to( successor_step )
     else
-      set_flash( "Sorry, '#{value}' does not appear to be a valid value for a #{subtype}." )
+      set_flash( "Sorry, '#{value}' does not appear to be a valid value for a #{subtype_label}." )
     end
   end
 
@@ -32,7 +32,7 @@ class StepSelectPostcode < StepSelectArea
   end
 
   def summarise( state_value, connector = "is " )
-    "#{subtype} #{connector}#{state_value}"
+    "#{subtype_label} #{connector}#{state_value}"
   end
 
   def successor_step

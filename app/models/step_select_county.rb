@@ -9,6 +9,7 @@ class StepSelectCounty < StepSelectCountyOrDistrict
   def subtype
     "county"
   end
+  alias :subtype_label :subtype
 
   def names
     NAMES

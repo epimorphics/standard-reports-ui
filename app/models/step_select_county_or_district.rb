@@ -27,12 +27,12 @@ class StepSelectCountyOrDistrict < StepSelectArea
       workflow.set_state( param_name, validated_value )
       workflow.traverse_to( successor_step )
     else
-      set_flash( "Sorry, #{subtype} '#{value}' was not recognised" )
+      set_flash( "Sorry, #{subtype_label} '#{value}' was not recognised" )
     end
   end
 
   def summarise( state_value, connector = "is " )
-    "#{subtype.capitalize} #{connector}#{state_value}"
+    "#{subtype_label.capitalize} #{connector}#{state_value}"
   end
 
   def validate( value )

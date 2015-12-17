@@ -40,4 +40,12 @@ class StepSelectPostcodeSectorTest < ActiveSupport::TestCase
     step.generic_name.must_equal "select area"
   end
 
+  it 'should answer that the step provides the param name if the area type is pcSector' do
+    w = Workflow.new( areaType: "pcSector" )
+    step.provides?( :area, w ).must_equal true
+
+    w = Workflow.new( areaType: "district" )
+    step.provides?( :area, w ).must_equal false
+  end
+
 end

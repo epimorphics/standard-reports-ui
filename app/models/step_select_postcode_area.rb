@@ -6,8 +6,12 @@ class StepSelectPostcodeArea < StepSelectPostcode
     super( :select_pc_area )
   end
 
-  def subtype
+  def subtype_label
     "postcode area"
+  end
+
+  def subtype
+    "pcArea"
   end
 
   def validation_pattern

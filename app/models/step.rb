@@ -53,4 +53,8 @@ class Step
   def form_param
     "#{param_name}#{'[]' if multivalued?}"
   end
+
+  def provides?( state_name, workflow )
+    param_name == state_name
+  end
 end

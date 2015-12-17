@@ -88,4 +88,10 @@ class WorkflowTest < ActiveSupport::TestCase
     workflow.prior_step.name.must_equal :select_report
   end
 
+  it 'should correctly summarise county selections' do
+    workflow = Workflow.new( areaType: "county", area: "DEVON" )
+
+    workflow.summarise_selection( :area, "DEVON" ).must_equal "County is DEVON"
+  end
+
 end

@@ -20,6 +20,11 @@ class StepSelectRegion < StepSelectArea
     "region #{connector}#{state_value}"
   end
 
+  def subtype
+    "region"
+  end
+  alias :subtype_label :subtype
+
   NAMES = [
     "EAST ANGLIA",
     "EAST MIDLANDS",

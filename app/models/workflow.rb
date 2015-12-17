@@ -97,7 +97,7 @@ class Workflow
   end
 
   def step_with_param( state_name )
-    steps.values.find {|step| step.param_name == state_name}
+    steps.values.find {|step| step.provides?( state_name, self )}
   end
 
   def step_progress_summary
