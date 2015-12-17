@@ -14,7 +14,7 @@ class StepSelectCountyOrDistrict < StepSelectArea
 
   def traverse( workflow )
     value = workflow.state( param_name )
-    if value
+    if value && !stop?( workflow )
       validate_with( workflow, value )
     else
       self

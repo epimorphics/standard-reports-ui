@@ -22,7 +22,7 @@ class Step
   # Simple traversal requires only that the parameter for this
   # step has some value
   def simple_traverse( workflow, following_state )
-    if workflow.has_state?( param_name )
+    if workflow.has_state?( param_name ) && !stop?( workflow )
       workflow.traverse_to( following_state )
     else
       self
@@ -56,5 +56,9 @@ class Step
 
   def provides?( state_name, workflow )
     param_name == state_name
+  end
+
+  def stop?( workflow )
+    workflow.has_state?( :stop, param_name.to_s )
   end
 end

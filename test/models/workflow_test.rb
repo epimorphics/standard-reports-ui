@@ -94,4 +94,25 @@ class WorkflowTest < ActiveSupport::TestCase
     workflow.summarise_selection( :area, "DEVON" ).must_equal "County is DEVON"
   end
 
+  it 'should traverse to the first step with an empty state' do
+    workflow = Workflow.new( {} )
+    step = StepSelectReport.new
+    step_to = step.traverse( workflow )
+    step_to.name.must_equal :select_report
+  end
+
+  it 'should traverse to the appropriate step with a partial state' do
+    workflow = Workflow.new( {report: "avgPrices", areaType: "county"} )
+    step = StepSelectReport.new
+    step_to = step.traverse( workflow )
+    step_to.name.must_equal :select_county
+  end
+
+  it 'should stop at a step if given a stop parameter in the workflow' do
+    workflow = Workflow.new( {report: "avgPrices", areaType: "county", stop: "areaType"} )
+    step = StepSelectReport.new
+    step_to = step.traverse( workflow )
+    step_to.name.must_equal :select_area_type
+  end
+
 end
