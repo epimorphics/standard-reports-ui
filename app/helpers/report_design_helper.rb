@@ -174,8 +174,13 @@ module ReportDesignHelper
   def review_selection( workflow, state_key, value )
     if (step = workflow.step_with_param( state_key ))
       concat( content_tag( :li ) do
-        step.summarise( value ).html_safe
+        concat step.summarise( value ).html_safe
+        concat show_change_link( workflow, state_key )
       end)
     end
+  end
+
+  def show_change_link( workflow, state_key )
+    link_to( "change&hellip;".html_safe, workflow.params.merge( {stop: state_key } ), {class: "change-option copy-14"})
   end
 end
