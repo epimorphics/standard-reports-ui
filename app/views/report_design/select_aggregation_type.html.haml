@@ -2,7 +2,7 @@
 
   %h1
     = render partial: "progress_indicator", locals: {workflow: @workflow}
-    How do you want to group the data within '#{selected_area_summary( @workflow )}'?
+    How do you want to group the data within '#{selected_area_summary( @workflow ).html_safe}'?
 
   %p
     Within the region you've selected, house price data can be aggregated
