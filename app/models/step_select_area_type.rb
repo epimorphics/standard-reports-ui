@@ -27,7 +27,8 @@ class StepSelectAreaType < Step
   end
 
   def summarise( state_value, connector = "is " )
-    "area type #{connector}#{state_value}"
+    "<span class='summary-key'>area type #{connector}</span>" +
+    "<span class='summary-value'>#{state_value}</span>"
   end
 
   def generic_name

@@ -72,7 +72,7 @@ class WorkflowTest < ActiveSupport::TestCase
   end
 
   it 'should be able to summarise a state value in a readable form' do
-    report_type_selected_workflow.summarise_selection( :report, "avgPrice" ).must_equal "report type is average prices and volumes"
+    report_type_selected_workflow.summarise_selection( :report, "avgPrice" ).must_match /report type.*average prices and volumes/
   end
 
   it 'should intialise the workflow history' do
@@ -91,7 +91,7 @@ class WorkflowTest < ActiveSupport::TestCase
   it 'should correctly summarise county selections' do
     workflow = Workflow.new( areaType: "county", area: "DEVON" )
 
-    workflow.summarise_selection( :area, "DEVON" ).must_equal "County is DEVON"
+    workflow.summarise_selection( :area, "DEVON" ).must_match /County.*is.*DEVON/
   end
 
   it 'should traverse to the first step with an empty state' do

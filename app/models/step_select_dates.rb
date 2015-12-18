@@ -39,7 +39,8 @@ class StepSelectDates < Step
   end
 
   def summarise( state_values, connector = "are " )
-    "dates #{connector}#{state_values.map( &summarise_value ).join( ", " )}"
+    "<span class='summary-key'>dates #{connector}</span>" +
+    "#{state_values.map( &summarise_value ).join( " <span class='summary-key'>and</span> " )}"
   end
 
   def multivalued?
@@ -90,7 +91,7 @@ class StepSelectDates < Step
 
   def summarise_value
     Proc.new {|state_value|
-      case state_value.to_sym
+      s = case state_value.to_sym
       when :ytd
         "year to date"
       when :latest_q
@@ -100,6 +101,7 @@ class StepSelectDates < Step
       else
         state_value
       end
+      "<span class='summary-value'>#{s}</span>"
     }
   end
 

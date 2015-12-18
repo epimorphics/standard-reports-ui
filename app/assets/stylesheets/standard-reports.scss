@@ -269,3 +269,11 @@ $lr-green-nav-darkened: darken( $lr-green-nav, 20% );
 ol.numbered {
   list-style: decimal inside;
 }
+
+.summary-key {
+  color: $grey-1;
+}
+
+.summary-value {
+  font-weight: bold;
+}

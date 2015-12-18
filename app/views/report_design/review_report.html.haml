@@ -7,10 +7,8 @@
   %p
     The report options you have selected are:
 
-  %ul.list-unstyled.options-summary
-    - @workflow.each_state_key do |state_key, value|
-      %li
-        = @workflow.summarise_selection( state_key, value )
+  %ul.list.list-bullet.options-summary
+    = review_selections( @workflow )
 
   = form_tag( @workflow.form_action( :download_report, :show ), method: "get" ) do
     = layout_existing_values( @workflow )

@@ -14,7 +14,8 @@ class StepSelectCountry < StepSelectArea
   end
 
   def summarise( value, connector = "is ")
-    "country #{connector}England and Wales"
+    "<span class='summary-key'>country #{connector}</span>" +
+    "<span class='summary-value'>England and Wales</span>"
   end
 
   def subtype

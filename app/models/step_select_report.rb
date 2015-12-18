@@ -18,9 +18,11 @@ class StepSelectReport < Step
   def summarise( state_value, connector = "is " )
     case state_value.to_sym
     when :avgPrice
-      "report type #{connector}average prices and volumes"
+      "<span class='summary-key'>report type #{connector}</span>" +
+      "<span class='summary-value'>average prices and volumes</span>"
     when :banded
-      "report type #{connector}banded prices"
+      "<span class='summary-key'>report type #{connector}</span>" +
+      "<span class='summary-value'>banded prices</span>"
     else
       "unknown report type!"
     end

@@ -162,4 +162,20 @@ module ReportDesignHelper
       concat label
     end
   end
+
+  def review_selections( workflow )
+    capture do
+      workflow.each_state_key do |state_key, value|
+        review_selection( workflow, state_key, value )
+      end
+    end
+  end
+
+  def review_selection( workflow, state_key, value )
+    if (step = workflow.step_with_param( state_key ))
+      concat( content_tag( :li ) do
+        step.summarise( value ).html_safe
+      end)
+    end
+  end
 end
