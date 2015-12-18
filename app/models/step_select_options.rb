@@ -6,11 +6,11 @@ class StepSelectOptions < Step
     super( :select_options, :age, :radio )
   end
 
-  def values( workflow = nil )
+  def values_options( workflow = nil )
     [
-      Struct::StepValue.new( "New-build properties only", :new ),
-      Struct::StepValue.new( "Existing properties only", :old ),
-      Struct::StepValue.new( "Both old and new properties", :any )
+      ["New-build properties only", :new],
+      ["Existing properties only", :old],
+      ["Both old and new properties", :any]
     ]
   end
 

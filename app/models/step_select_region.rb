@@ -6,9 +6,9 @@ class StepSelectRegion < StepSelectArea
     super( :select_region, :area, :radio )
   end
 
-  def values( workflow = nil )
+  def values_options( workflow )
     NAMES.map do |region_name|
-      Struct::StepValue.new( region_name.split.map(&:capitalize).join(' '), region_name )
+      [region_name.split.map(&:capitalize).join(' '), region_name]
     end
   end
 

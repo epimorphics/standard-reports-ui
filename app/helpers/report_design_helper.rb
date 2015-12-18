@@ -46,9 +46,9 @@ module ReportDesignHelper
   def toggle_button_option( step, value, radio )
     content_tag( :label ) do
       if radio
-        concat radio_button_tag( step.form_param, value.value )
+        concat radio_button_tag( step.form_param, value.value, value.active? )
       else
-        concat check_box_tag( step.form_param, value.value, false, id: nil )
+        concat check_box_tag( step.form_param, value.value, value.active?, id: nil )
       end
       concat value.label
     end
@@ -58,7 +58,7 @@ module ReportDesignHelper
     content_tag( :div ) do
       content_tag( :label ) do
         concat( step.input_label )
-        concat( text_field_tag( step.param_name, "", id: nil) )
+        concat( text_field_tag( step.param_name, workflow.state( step.param_name ), id: nil) )
       end
     end
   end
@@ -95,36 +95,37 @@ module ReportDesignHelper
       .summarise_current_value( workflow )
   end
 
-  def layout_custom_dates( delta, step )
+  def layout_custom_dates( delta, step, workflow )
     year = Time.now.year - delta
     content_tag( :div, class: "row") do
       concat( content_tag( :div, class: "col-sm-12 col-md-1") do
         content_tag( :h3, year.to_s )
       end )
       concat( content_tag( :div, class: "col-sm-12 col-md-11") do
-        concat( layout_all_year( step, year ) )
-        concat( layout_quarters( step, year ) )
-        concat( layout_months( step, year ) )
+        concat( layout_all_year( step, year, workflow ) )
+        concat( layout_quarters( step, year, workflow ) )
+        concat( layout_months( step, year, workflow ) )
       end )
 
     end
   end
 
-  def layout_all_year( step, year )
+  def layout_all_year( step, year, workflow )
     all_year = (year == Time.now.year) ? "to date" : "all year"
+    checked = workflow.has_state?( step.param_name, year.to_s )
     capture do
       concat prompted_row(
-        ->(){ labelled_check_box( "#{step.param_name}[]", year, "#{year} #{all_year}" )}
+        ->(){ labelled_check_box( "#{step.param_name}[]", year, "#{year} #{all_year}", checked )}
       )
     end
   end
 
-  def layout_quarters( step, year )
-    layout_quarters_or_months( step.quarters_for( year ), "quarters", "#{step.param_name}[]" )
+  def layout_quarters( step, year, workflow )
+    layout_quarters_or_months( step.quarters_for( year, workflow ), "quarters", "#{step.param_name}[]" )
   end
 
-  def layout_months( step, year )
-    layout_quarters_or_months( step.months_for( year ), "months", "#{step.param_name}[]" )
+  def layout_months( step, year, workflow )
+    layout_quarters_or_months( step.months_for( year, workflow ), "months", "#{step.param_name}[]" )
   end
 
   def layout_quarters_or_months( mqs, prompt, param_name )
@@ -133,7 +134,7 @@ module ReportDesignHelper
         ->(){
           content_tag( :ul, {class: "list-inline"} ) do
             mqs.each do |q|
-              concat( labelled_check_box_li( param_name, q.value, q.label ))
+              concat( labelled_check_box_li( param_name, q.value, q.label, q.active? ))
             end
           end
         }
@@ -149,15 +150,15 @@ module ReportDesignHelper
     end
   end
 
-  def labelled_check_box_li( param_name, value, label )
+  def labelled_check_box_li( param_name, value, label, checked )
     content_tag( :li ) do
-      labelled_check_box( param_name, value, label )
+      labelled_check_box( param_name, value, label, checked )
     end
   end
 
-  def labelled_check_box( param_name, value, label )
+  def labelled_check_box( param_name, value, label, checked )
     content_tag( :label ) do
-      concat check_box_tag( param_name, value )
+      concat check_box_tag( param_name, value, checked )
       concat label
     end
   end

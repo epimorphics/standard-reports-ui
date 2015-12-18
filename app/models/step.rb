@@ -1,6 +1,6 @@
 # Base class for a workflow step
 
-Struct.new( "StepValue", :label, :value )
+Struct.new( "StepValue", :label, :value, :"active?" )
 
 class Step
   attr_reader :name, :param_name, :layout, :flash
@@ -60,5 +60,16 @@ class Step
 
   def stop?( workflow )
     workflow.has_state?( :stop, param_name.to_s )
+  end
+
+  def create_values( workflow = nil )
+    values_options( workflow ).map do |options|
+      create_value( *options, workflow )
+    end
+  end
+  alias :values :create_values
+
+  def create_value( label, value, workflow )
+    Struct::StepValue.new( label, value, workflow && workflow.has_state?( param_name, value ) )
   end
 end

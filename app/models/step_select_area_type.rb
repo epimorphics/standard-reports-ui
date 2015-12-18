@@ -6,15 +6,15 @@ class StepSelectAreaType < Step
     super( :select_area_type, :areaType, :radio )
   end
 
-  def values( workflow = nil )
+  def values_options( workflow )
     [
-      Struct::StepValue.new( "All of England and Wales", :country ),
-      Struct::StepValue.new( "Region", :region ),
-      Struct::StepValue.new( "County, Unitary Authority or Greater London", :county ),
-      Struct::StepValue.new( "District or London Borough", :district ),
-      Struct::StepValue.new( "Post-code area", :pcArea ),
-      Struct::StepValue.new( "Post-code district", :pcDistrict ),
-      Struct::StepValue.new( "Post-code sector", :pcSector )
+      ["All of England and Wales", :country],
+      ["Region", :region],
+      ["County, Unitary Authority or Greater London", :county],
+      ["District or London Borough", :district],
+      ["Post-code area", :pcArea],
+      ["Post-code district", :pcDistrict],
+      ["Post-code sector", :pcSector]
     ]
   end
 

@@ -26,28 +26,28 @@ class StepSelectDatesTest < ActiveSupport::TestCase
   end
 
   it "should report 12 months available for previous years" do
-    months = step.months_for( 2014 )
+    months = step.months_for( 2014, workflow )
     months.length.must_equal 12
     months.first.label.must_equal "Jan 2014"
     months.last.label.must_equal "Dec 2014"
   end
 
   it "should report 9 months available for current year" do
-    months = step.months_for( 2015 )
+    months = step.months_for( 2015, workflow )
     months.length.must_equal 9
     months.first.label.must_equal "Jan 2015"
     months.last.label.must_equal "Sep 2015"
   end
 
   it "should report 12 quarters available for previous years" do
-    quarters = step.quarters_for( 2014 )
+    quarters = step.quarters_for( 2014, workflow )
     quarters.length.must_equal 4
     quarters.first.label.must_equal "Q1 2014"
     quarters.last.label.must_equal "Q4 2014"
   end
 
   it "should report 9 quarters available for current year" do
-    quarters = step.quarters_for( 2015 )
+    quarters = step.quarters_for( 2015, workflow )
     quarters.length.must_equal 3
     quarters.first.label.must_equal "Q1 2015"
     quarters.last.label.must_equal "Q3 2015"

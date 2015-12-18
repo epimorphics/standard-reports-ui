@@ -52,8 +52,12 @@ class Workflow
   end
 
   def has_state?( name, value = nil )
-    v = state( name )
-    value ? (value == v) : !!v
+    sv = state( name )
+    if value
+      is_or_includes?( sv, value )
+    else
+      !!sv
+    end
   end
 
   def traverse_to( step_name )
@@ -141,5 +145,13 @@ class Workflow
 
   def traverse_workflow
     initial_step.traverse( self )
+  end
+
+  def is_or_includes?( value, v )
+    if value.is_a?( Array )
+      value.include?( v.to_s )
+    else
+      value.to_s == v.to_s
+    end
   end
 end

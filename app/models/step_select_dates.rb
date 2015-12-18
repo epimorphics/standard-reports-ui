@@ -15,19 +15,19 @@ class StepSelectDates < Step
   end
 
   def values( workflow )
-    {latest: latest_values}
+    {latest: latest_values( workflow )}
   end
 
-  def months_for( year )
-    period_values( year,
+  def months_for( year, workflow )
+    period_values( workflow, year,
       scale: 1,
       value_fn: ->( m, y ){ "%04d-%02d" % [y, m] },
       label_fn: ->( m, y ){ "#{I18n.t("date.abbr_month_names")[m]} #{y}" }
     )
   end
 
-  def quarters_for( year )
-    period_values( year,
+  def quarters_for( year, workflow )
+    period_values( workflow, year,
       scale: 3,
       value_fn: ->( q, y ){ "#{y}-Q#{q}" },
       label_fn: ->( q, y ){ "Q#{q} #{y}" }
@@ -60,16 +60,19 @@ class StepSelectDates < Step
 
   private
 
-  def year_values
-    (EARLIEST_YEAR .. latest_year).to_a
+  def year_values( workflow )
+    (EARLIEST_YEAR .. latest_year).map do |year|
+      create_value( year, year.to_s, workflow )
+    end
   end
 
-  def period_values( year, m_or_q )
+  def period_values( workflow, year, m_or_q )
     latest_m = (year == latest_year) ? report_manager_service.latest_month : 12
     latest_mq = (latest_m / m_or_q[:scale]).to_i
     (1..latest_mq).map do |mq|
-      Struct::StepValue.new( m_or_q[:label_fn].call( mq, year ),
-                             m_or_q[:value_fn].call( mq, year ) )
+      create_value( m_or_q[:label_fn].call( mq, year ),
+                    m_or_q[:value_fn].call( mq, year ),
+                    workflow )
     end
   end
 
@@ -77,11 +80,11 @@ class StepSelectDates < Step
     report_manager_service.latest_year
   end
 
-  def latest_values
+  def latest_values( workflow )
     [
-      Struct::StepValue.new( "Year to date", :ytd ),
-      Struct::StepValue.new( "Latest quarter for which data is available", :latest_q ),
-      Struct::StepValue.new( "Latest month for which data is available", :latest_m )
+      create_value( "Year to date", :ytd, workflow ),
+      create_value( "Latest quarter for which data is available", :latest_q, workflow ),
+      create_value( "Latest month for which data is available", :latest_m, workflow )
     ]
   end
 
