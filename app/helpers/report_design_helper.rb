@@ -164,23 +164,24 @@ module ReportDesignHelper
   end
 
   def review_selections( workflow )
+    params = Workflow::STEP_SEQUENCE.map( &:param_name )
     capture do
-      workflow.each_state_key do |state_key, value|
-        review_selection( workflow, state_key, value )
+      params.each do |state_name|
+        if (step = workflow.step_with_param( state_name ))
+          concat( review_selection( workflow, step ) ) if step.respond_to?( :summarise )
+        end
       end
     end
   end
 
-  def review_selection( workflow, state_key, value )
-    if (step = workflow.step_with_param( state_key ))
-      concat( content_tag( :li ) do
-        concat step.summarise( value ).html_safe
-        concat show_change_link( workflow, state_key )
-      end)
+  def review_selection( workflow, step )
+    content_tag( :li ) do
+      concat step.summarise( workflow.state( step.param_name ) ).html_safe
+      concat show_change_link( workflow, step )
     end
   end
 
-  def show_change_link( workflow, state_key )
-    link_to( "change&hellip;".html_safe, workflow.params.merge( {stop: state_key } ), {class: "change-option copy-14"})
+  def show_change_link( workflow, step )
+    link_to( "change&hellip;".html_safe, workflow.params.merge( {stop: step.param_name } ), {class: "change-option copy-14"})
   end
 end
