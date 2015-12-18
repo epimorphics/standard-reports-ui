@@ -105,7 +105,9 @@ class Workflow
   end
 
   def step_progress_summary
-    step_no = STEP_SEQUENCE.find_index {|s| s.incomplete?( self )}
+    step_no = STEP_SEQUENCE.find_index do |s|
+      s.incomplete?( self ) || has_state?( :stop, s.param_name )
+    end
     "Step #{step_no + 1} of #{STEP_SEQUENCE.length}"
   end
 
