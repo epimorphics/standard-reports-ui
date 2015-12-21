@@ -1,4 +1,24 @@
 %h1
-  Landing page welcome
+  Price Paid Data &ndash; Standard Reports
 
-= link_to "report design", controller: :report_design, action: :show
+%p
+  Land Registry publishes open data on prices paid for properties sold in England and Wales. For customers who want
+  aggregate price data for statistical analysis, this
+  %strong
+    standard reports application
+  allows anyone to configure a report for various geographical areas in England and Wales,
+  from the country level down to postcode sector, and then download the data in a form suitable
+  for using in a spreadsheet or other data analysis tool.
+
+%p
+  There is no charge for using this service.
+
+%p
+  = link_to "create a standard report", {controller: :report_design, action: :show}, class: "button"
+
+%p.text-muted
+  Note: standard reports contain aggregated prices by geographical area. If you are looking for details
+  of individual property sales, please use the
+  %a{ href: "/app/ppd" }
+    PPD report builder
+  instead.
