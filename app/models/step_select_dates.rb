@@ -101,7 +101,7 @@ class StepSelectDates < Step
       else
         state_value
       end
-      "<span class='summary-value'>#{s}</span>"
+      "<span class='c-review-report--summary-value'>#{s}</span>"
     }
   end
 

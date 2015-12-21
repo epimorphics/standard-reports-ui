@@ -52,6 +52,11 @@ ol.numbered {
   list-style: decimal inside;
 }
 
+input[type=checkbox],
+input[type=radio] {
+  transform: scale(1.5);
+  -webkit-transform: scale(1.5);
+}
 
 /* objects */
 
@@ -104,6 +109,21 @@ ol.numbered {
   }
 }
 
+.o-form-control {
+  line-height: 3rem;
+
+  .o-form-control--label {
+  }
+
+  .o-form-control--input {
+    margin-right: 0.8rem;
+  }
+
+  .o-form-control--label input[type=text] {
+    margin-left: 0.8rem;
+  }
+}
+
 /* components */
 
 .c-lr-header {
@@ -125,6 +145,9 @@ ol.numbered {
   }
 }
 
+.c-form-submit {
+  margin-top: 2rem;
+}
 
 /* utilities */
 

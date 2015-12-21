@@ -3,9 +3,11 @@ module ReportDesignHelper
     step = workflow.current_step
 
     form_tag( workflow.form_action, method: "get" ) do
-      concat layout_existing_values( workflow )
-      concat layout_flash( step )
-      concat layout_workflow_form( workflow, step )
+      concat( content_tag( :fieldset ) do
+        concat layout_existing_values( workflow )
+        concat layout_flash( step )
+        concat layout_workflow_form( workflow, step )
+      end )
       concat layout_submit_button
     end
   end
@@ -25,17 +27,17 @@ module ReportDesignHelper
     layout_values_as_toggle_buttons_list( step, step.values( workflow ), true )
   end
 
-  def layout_values_as_toggle_buttons_list( step, values, radio )
+  def layout_values_as_toggle_buttons_list( step, values, radio, cls = "" )
     content_tag( :ul, class: "list-unstyled" ) do
-      layout_values_as_toggle_buttons( step, values, radio )
+      layout_values_as_toggle_buttons( step, values, radio, cls )
     end
   end
 
-  def layout_values_as_toggle_buttons( step, values, radio )
+  def layout_values_as_toggle_buttons( step, values, radio, cls = "" )
     capture do
       values.each do |value|
         concat(
-          content_tag( :li ) do
+          content_tag( :li, class: cls ) do
             toggle_button_option( step, value, radio )
           end
         )
@@ -44,21 +46,23 @@ module ReportDesignHelper
   end
 
   def toggle_button_option( step, value, radio )
-    content_tag( :label ) do
-      if radio
-        concat radio_button_tag( step.form_param, value.value, value.active? )
-      else
-        concat check_box_tag( step.form_param, value.value, value.active?, id: nil )
+    content_tag( :div, class: "o-form-control") do
+      content_tag( :label, class: "o-form-control--label" ) do
+        if radio
+          concat radio_button_tag( step.form_param, value.value, value.active?, class: "o-form-control--input" )
+        else
+          concat check_box_tag( step.form_param, value.value, value.active?, id: nil, class: "o-form-control--input")
+        end
+        concat value.label
       end
-      concat value.label
     end
   end
 
   def layout_textinput( workflow, step )
-    content_tag( :div ) do
-      content_tag( :label ) do
+    content_tag( :div, class: "o-form-control" ) do
+      content_tag( :label, class: "o-form-control--label" ) do
         concat( step.input_label )
-        concat( text_field_tag( step.param_name, workflow.state( step.param_name ), id: nil) )
+        concat( text_field_tag( step.param_name, workflow.state( step.param_name ), id: nil, class: "o-form-control--input") )
       end
     end
   end
@@ -74,7 +78,7 @@ module ReportDesignHelper
   end
 
   def layout_submit_button
-    submit_tag( "Next", class: "button", name: nil )
+    submit_tag( "Next", class: "button c-form-submit", name: nil )
   end
 
   def layout_existing_values( workflow )
@@ -145,20 +149,22 @@ module ReportDesignHelper
   def prompted_row( main_block )
     capture do
       content_tag( :div, {class: "col-sm-12 col-md-10"} ) do
-        main_block.call
+        content_tag( :div, class: "o-form-control") do
+          main_block.call
+        end
       end
     end
   end
 
   def labelled_check_box_li( param_name, value, label, checked )
-    content_tag( :li ) do
+    content_tag( :li, class: "o-form-control--label" ) do
       labelled_check_box( param_name, value, label, checked )
     end
   end
 
   def labelled_check_box( param_name, value, label, checked )
-    content_tag( :label ) do
-      concat check_box_tag( param_name, value, checked )
+    content_tag( :label, class: "o-form-control--label" ) do
+      concat check_box_tag( param_name, value, checked, class: "o-form-control--input" )
       concat label
     end
   end
