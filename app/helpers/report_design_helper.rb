@@ -182,6 +182,6 @@ module ReportDesignHelper
   end
 
   def show_change_link( workflow, step )
-    link_to( "change&hellip;".html_safe, workflow.params.merge( {stop: step.param_name } ), {class: "change-option copy-14"})
+    link_to( "change&hellip;".html_safe, workflow.params.merge( {stop: step.param_name } ), {class: "c-review-report--change-option copy-14"})
   end
 end

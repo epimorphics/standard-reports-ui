@@ -39,8 +39,8 @@ class StepSelectDates < Step
   end
 
   def summarise( state_values, connector = "are " )
-    "<span class='summary-key'>dates #{connector}</span>" +
-    "#{state_values.map( &summarise_value ).join( " <span class='summary-key'>and</span> " )}"
+    "<span class='c-review-report--summary-key'>dates #{connector}</span>" +
+    "#{state_values.map( &summarise_value ).join( " <span class='c-review-report--summary-key'>and</span> " )}"
   end
 
   def multivalued?

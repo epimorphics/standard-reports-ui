@@ -32,8 +32,8 @@ class StepSelectCountyOrDistrict < StepSelectArea
   end
 
   def summarise( state_value, connector = "is " )
-    "<span class='summary-key'>#{subtype_label.capitalize} #{connector}</span>" +
-    "<span class='summary-value'>#{state_value}</span>"
+    "<span class='c-review-report--summary-key'>#{subtype_label.capitalize} #{connector}</span>" +
+    "<span class='c-review-report--summary-value'>#{state_value}</span>"
   end
 
   def validate( value )

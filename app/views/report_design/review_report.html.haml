@@ -7,7 +7,7 @@
   %p
     The report options you have selected are:
 
-  %ul.list.list-bullet.options-summary
+  %ul.list.list-bullet.c-review-report
     = review_selections( @workflow )
 
   = form_tag( @workflow.form_action( :download_report, :show ), method: "get" ) do

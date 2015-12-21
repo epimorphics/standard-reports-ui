@@ -44,8 +44,8 @@ class StepSelectAggregationType < Step
     if state_value.to_sym == :none
       "do not aggregate data"
     else
-      "<span class='summary-key'>aggregate data</span> by " +
-      "<span class='summary-value'>#{state_value}</span>"
+      "<span class='c-review-report--summary-key'>aggregate data</span> by " +
+      "<span class='c-review-report--summary-value'>#{state_value}</span>"
     end
   end
 

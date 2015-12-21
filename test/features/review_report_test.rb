@@ -7,7 +7,7 @@ feature "review the report summary" do
     page.must_have_css( ".container form[method=get]" )
     page.must_have_css( ".container .review-report" )
     page.must_have_css( ".container input.button[type=submit]")
-    page.must_have_css( ".container ul.options-summary" )
+    page.must_have_css( ".container ul.c-review-report" )
 
     %i{ report areaType aggregate 'period[]' age }.each do |param|
       page.must_have_css( ".container input[type=hidden][name=#{param}]")

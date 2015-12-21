@@ -17,8 +17,8 @@ class StepSelectRegion < StepSelectArea
   end
 
   def summarise( state_value, connector = "is " )
-    "<span class='summary-key'>region #{connector}</span>" +
-    "<span class='summary-value'>#{state_value}</span>"
+    "<span class='c-review-report--summary-key'>region #{connector}</span>" +
+    "<span class='c-review-report--summary-value'>#{state_value}</span>"
   end
 
   def subtype

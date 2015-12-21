@@ -21,46 +21,42 @@
     :javascript
       document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
 
-    %header#global-header.with-proposition{ role: "banner" }
+    %header#global-header.with-proposition.c-lr-header{ role: "banner" }
       .header-wrapper
         .header-global
           .header-logo
             %a.content{ href: "https://www.gov.uk/government/organisations/land-registry/", title: "Go to the Land Registry homepage" }
               = image_tag "lr_logo_221_80.png"
-        .header-proposition
+        .header-proposition.c-lr-header--header-proposition
           .content
             %a.js-header-toggle.menu{ href: "#proposition-links"}
               Menu
             %nav#proposition-menu
               - relative_root = Rails.application.config.relative_url_root || ""
-              - ppd_active = request.original_url =~ /ppd/ ? :active : nil
-              - qonsole_active = request.original_url =~ /qonsole/ ? :active : nil
-              - std_reports_active = request.original_url =~ /standard-report/ ? :active : nil
-              - hpi_active = (ppd_active || qonsole_active || std_reports_active) ? nil : "active"
 
-              %a#proposition-name{ href: "http://landregistry.data.gov.uk" }
+              %a#proposition-name.c-lr-header--proposition-name{ href: "http://landregistry.data.gov.uk" }
                 Land Registry Linked Open Data
-              .beta-tag
+              .o-beta-tag
                 beta
               %ul#proposition-links
                 %li
-                  %a{ href: "#{relative_root}/hpi", class: hpi_active }
+                  %a.c-lr-header--header-proposition--a{ href: "#{relative_root}/hpi" }
                     House Price Index
                 %li
-                  %a{ href: "#{relative_root.gsub(/hpi/, "ppd")}", class: ppd_active }
+                  %a.c-lr-header--header-proposition--a{ href: "#{relative_root.gsub(/hpi/, "ppd")}" }
                     Price Paid Data
                 %li
-                  %a{ href: "#{relative_root.gsub(/hpi/, "standard-reports")}", class: std_reports_active }
+                  %a.c-lr-header--header-proposition--a__active{ href: "#{relative_root.gsub(/hpi/, "stdreps")}" }
                     Standard Reports
                 %li
-                  %a{ href: "#{relative_root}/qonsole", class: qonsole_active }
+                  %a.c-lr-header--header-proposition--a{ href: "#{relative_root}/qonsole" }
                     SPARQL query
 
-    .lr-top-bar
+    .o-lr-top-bar
 
     =render partial: "common/flash_message"
 
-    .container{ role: "main"}
+    .container.o-container{ role: "main"}
       .row
         .col-md-12
           = yield
