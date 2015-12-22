@@ -65,4 +65,8 @@ class ReportStatus
       .gsub( ".csv", "" )
       .gsub( "-", " ")
   end
+
+  def as_json( options = nil )
+    json
+  end
 end

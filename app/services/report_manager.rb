@@ -38,6 +38,10 @@ class ReportManager
     @requests
   end
 
+  def as_json( options = nil )
+    requests
+  end
+
   private
 
   def url
