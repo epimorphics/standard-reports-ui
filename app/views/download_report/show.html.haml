@@ -5,3 +5,26 @@
     - @report_manager.requests.each do |request|
       = render_report_request( request )
 
+  %noscript
+    You do not have JavaScript enabled on this page, so please periodically refresh the page
+    to see the latest status of the downloads.
+
+:javascript
+  (function() {
+    var DELAY_MS = 5000;
+
+    var refreshPage = function() {
+      $.get( window.location )
+       .done( function( response ) {
+         var html = $(response).filter( ".download-report" );
+         var running = html.find( "[data-running=true]" ).length > 0;
+
+         $(".download-report").html( html );
+         if (running) {
+           setTimeout( refreshPage, DELAY_MS );
+         }
+       } );
+    };
+
+    setTimeout( refreshPage, DELAY_MS );
+  })();

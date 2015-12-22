@@ -1,6 +1,6 @@
 module DownloadRequestHelper
   def render_report_request( request )
-    content_tag( :li, class: "report-status" ) do
+    content_tag( :li, class: "report-status", data: {running: request.running?} ) do
       concat( report_id( request ) )
       concat( tag( :br  ))
       concat( request_status( request ) )
