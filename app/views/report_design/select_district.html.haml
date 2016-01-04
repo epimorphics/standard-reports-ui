@@ -8,3 +8,10 @@
     Enter the name of the district (i.e. local authority) you wish the report to cover:
 
   = workflow_step_form( @workflow )
+
+  :javascript
+    $( function() {
+      $("[name=area]").autocomplete( {
+        source: window.lr.data.district
+      } )
+    } );
