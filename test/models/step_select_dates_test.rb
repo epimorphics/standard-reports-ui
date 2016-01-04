@@ -58,9 +58,11 @@ class StepSelectDatesTest < ActiveSupport::TestCase
     step.each_year( false ) do |y|
       t << y
     end
-    t.length.must_equal 21
+    t.length.must_be :>=, 21
     t.first.must_equal 0
-    t.last.must_equal 20
+
+    final_value = t.length - 1
+    t.last.must_equal final_value
   end
 
   it "should provide a method for iterating over hidden years" do
@@ -68,9 +70,20 @@ class StepSelectDatesTest < ActiveSupport::TestCase
     step.each_year( true ) do |y|
       t << y
     end
-    t.length.must_equal 19
+    t.length.must_be :>=, 19
     t.first.must_equal 2
-    t.last.must_equal 20
+
+    final_value = t.length + 1
+    t.last.must_equal final_value
   end
 
+  it "should report no available months if the current year is later than the latest year" do
+    months = step.months_for( 2016, workflow )
+    months.length.must_equal 0
+  end
+
+  it "should report no available quarters if the current year is later than the latest year" do
+    months = step.quarters_for( 2016, workflow )
+    months.length.must_equal 0
+  end
 end

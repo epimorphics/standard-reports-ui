@@ -68,6 +68,14 @@ class StepSelectDates < Step
   end
 
   def period_values( workflow, year, m_or_q )
+    if year > latest_year
+      []
+    else
+      period_values_for( workflow, year, m_or_q )
+    end
+  end
+
+  def period_values_for( workflow, year, m_or_q )
     latest_m = (year == latest_year) ? report_manager_service.latest_month : 12
     latest_mq = (latest_m / m_or_q[:scale]).to_i
     (1..latest_mq).map do |mq|
