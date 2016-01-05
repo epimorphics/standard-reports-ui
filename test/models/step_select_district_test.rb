@@ -47,4 +47,11 @@ class StepSelectDistricTest < ActiveSupport::TestCase
     w = Workflow.new( areaType: "county" )
     step.provides?( :area, w ).must_equal false
   end
+
+  it "should also set the aggegation to none, since this is the smallest geographical unit" do
+    workflow = Workflow.new( area: "MENDIP" )
+    workflow.has_state?( :aggregate ).must_equal false
+    successor = step.traverse( workflow )
+    workflow.has_state?( :aggregate, :none ).must_equal true
+  end
 end

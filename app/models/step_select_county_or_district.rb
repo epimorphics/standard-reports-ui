@@ -25,6 +25,8 @@ class StepSelectCountyOrDistrict < StepSelectArea
     validated_value = validate( value )
     if validated_value
       workflow.set_state( param_name, validated_value )
+      workflow_update_hook( workflow )
+
       workflow.traverse_to( successor_step )
     else
       set_flash( "Sorry, #{subtype_label} '#{value}' was not recognised" )
@@ -45,5 +47,8 @@ class StepSelectCountyOrDistrict < StepSelectArea
     :select_aggregation_type
   end
 
+  # no nothing by default
+  def workflow_update_hook( workflow )
+  end
 
 end
