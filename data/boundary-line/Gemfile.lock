@@ -1,8 +1,11 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    byebug (8.2.0)
     dbf (3.0.3)
     rgeo (0.5.2)
+    rgeo-geojson (0.4.1)
+      rgeo (~> 0.5)
     rgeo-shapefile (0.2.3)
       dbf (>= 1.7.0)
       rgeo (>= 0.3.3)
@@ -11,6 +14,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  byebug
+  rgeo-geojson
   rgeo-shapefile
 
 BUNDLED WITH
