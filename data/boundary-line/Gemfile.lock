@@ -1,22 +1,39 @@
+PATH
+  remote: vendor/rgeo-geojson
+  specs:
+    rgeo-geojson (0.4.2)
+      rgeo (~> 0.5)
+
+PATH
+  remote: vendor/rgeo-shapefile
+  specs:
+    rgeo-shapefile (0.3.0)
+      dbf (~> 1.7)
+      rgeo (~> 0.3)
+
+PATH
+  remote: vendor/rgeo
+  specs:
+    rgeo (0.5.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
     byebug (8.2.0)
-    dbf (3.0.3)
-    rgeo (0.5.2)
-    rgeo-geojson (0.4.1)
-      rgeo (~> 0.5)
-    rgeo-shapefile (0.2.3)
-      dbf (>= 1.7.0)
-      rgeo (>= 0.3.3)
+    dbf (1.7.8)
+      fastercsv (~> 1.5.4)
+    fastercsv (1.5.5)
+    simplify_rb (0.1.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   byebug
-  rgeo-geojson
-  rgeo-shapefile
+  rgeo!
+  rgeo-geojson!
+  rgeo-shapefile!
+  simplify_rb
 
 BUNDLED WITH
    1.11.2
