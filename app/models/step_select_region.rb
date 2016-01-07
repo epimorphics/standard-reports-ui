@@ -26,6 +26,10 @@ class StepSelectRegion < StepSelectArea
   end
   alias :subtype_label :subtype
 
+  def map_enabled?
+    true
+  end
+
   NAMES = [
     "EAST ANGLIA",
     "EAST MIDLANDS",

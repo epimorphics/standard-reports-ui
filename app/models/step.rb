@@ -72,4 +72,8 @@ class Step
   def create_value( label, value, workflow )
     Struct::StepValue.new( label, value, workflow && workflow.has_state?( param_name, value ) )
   end
+
+  def map_enabled?
+    false
+  end
 end

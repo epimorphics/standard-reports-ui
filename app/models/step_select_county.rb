@@ -19,6 +19,10 @@ class StepSelectCounty < StepSelectCountyOrDistrict
     "County or unitary authority name"
   end
 
+  def map_enabled?
+    true
+  end
+
   NAMES = [
     "BATH AND NORTH EAST SOMERSET",
     "BEDFORD",
