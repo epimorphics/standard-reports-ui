@@ -14,4 +14,7 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require jquery-ui/autocomplete
+//= require leaflet
+//= require lodash
+//= require js-routes
 //= require_tree .

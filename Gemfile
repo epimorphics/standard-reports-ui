@@ -18,10 +18,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'haml-rails'
 gem 'jquery-rails'
+gem 'lodash-rails'
 gem 'bootstrap-sass'
 gem 'govuk_frontend_toolkit', github: "alphagov/govuk_frontend_toolkit_gem", submodules: true
 gem 'govuk_elements_rails', github: "ministryofjustice/govuk_elements_rails", submodules: true
 gem 'jquery-ui-rails'
+gem 'leaflet-rails'
+gem 'js-routes'
 
 gem 'faraday'
 gem 'faraday_middleware'
