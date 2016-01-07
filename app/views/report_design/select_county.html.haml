@@ -13,5 +13,14 @@
     $( function() {
       $("[name=area]").autocomplete( {
         source: window.lr.data.county
-      } )
+      } );
+
+      // Tell MapSearch where to put selected values
+      window.MapSearch.selectionCallback( function( value ) {
+        $("[name=area]").val( value );
+      } );
+
+      // Get the county outlines, then initialise the map
+      $.getJSON( Routes.root_path() + "county-features.json" )
+       .done( window.MapSearch.init );
     } );

@@ -3,12 +3,15 @@ module ReportDesignHelper
     step = workflow.current_step
 
     form_tag( workflow.form_action, method: "get" ) do
-      concat( content_tag( :fieldset ) do
-        concat layout_existing_values( workflow )
-        concat layout_flash( step )
-        concat layout_workflow_form( workflow, step )
-      end )
-      concat layout_submit_button
+      content_tag( :div, class: "row") do
+        concat( content_tag( :fieldset, class: "col-sm-12 col-md-6" ) do
+          concat layout_existing_values( workflow )
+          concat layout_flash( step )
+          concat layout_workflow_form( workflow, step )
+        end )
+        concat layout_map_control( step ) if step.map_enabled?
+        concat layout_submit_button
+      end
     end
   end
 
@@ -60,7 +63,7 @@ module ReportDesignHelper
 
   def layout_textinput( workflow, step )
     content_tag( :div, class: "o-form-control" ) do
-      content_tag( :label, class: "o-form-control--label" ) do
+      content_tag( :label, class: "o-form-control--label form-label" ) do
         concat( step.input_label )
         concat( text_field_tag( step.param_name, workflow.state( step.param_name ), id: nil, class: "o-form-control--input") )
       end
@@ -78,7 +81,9 @@ module ReportDesignHelper
   end
 
   def layout_submit_button
-    submit_tag( "Next", class: "button c-form-submit", name: nil )
+    content_tag( :div, class: "col-sm-12") do
+      submit_tag( "Next", class: "button c-form-submit", name: nil )
+    end
   end
 
   def layout_existing_values( workflow )
@@ -189,5 +194,12 @@ module ReportDesignHelper
 
   def show_change_link( workflow, step )
     link_to( "change&hellip;".html_safe, workflow.params.merge( {stop: step.param_name } ), {class: "c-review-report--change-option copy-14"})
+  end
+
+  def layout_map_control( step )
+    content_tag( :div, class: "col-sm-12 col-md-6" ) do
+      content_tag( :div, id: "map", class: "o-map" ) do
+      end
+    end
   end
 end

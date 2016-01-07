@@ -18,6 +18,10 @@
  *= require standard-reports
 
  *= require font-awesome
+ *= require leaflet
+
+ *= depend_on_asset "layers.png"
+ *= depend_on_asset "layers-2x.png"
  */
 
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"

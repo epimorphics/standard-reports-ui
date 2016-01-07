@@ -120,8 +120,13 @@ input[type=radio] {
     margin-right: 0.8rem;
   }
 
+  .o-form-control--label {
+    display: block;
+  }
+
   .o-form-control--label input[type=text] {
-    margin-left: 0.8rem;
+    // margin-left: 0.8rem;
+    width: 100%;
   }
 }
 

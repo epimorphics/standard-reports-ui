@@ -8,3 +8,15 @@
     Choose which region of the country the report should cover:
 
   = workflow_step_form( @workflow )
+
+  :javascript
+    $( function() {
+      // Tell MapSearch where to put selected values
+      window.MapSearch.selectionCallback( function( value ) {
+        $("[name=area][value='" + value.toLocaleUpperCase() + "']").click();
+      } );
+
+      // Get the county outlines, then initialise the map
+      $.getJSON( Routes.root_path() + "region-features.json" )
+       .done( window.MapSearch.init );
+    } );
