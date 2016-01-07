@@ -162,13 +162,13 @@ module ReportDesignHelper
   end
 
   def labelled_check_box_li( param_name, value, label, checked )
-    content_tag( :li, class: "o-form-control--label" ) do
+    content_tag( :li, class: "o-form-control--label-inline" ) do
       labelled_check_box( param_name, value, label, checked )
     end
   end
 
   def labelled_check_box( param_name, value, label, checked )
-    content_tag( :label, class: "o-form-control--label" ) do
+    content_tag( :label, class: "o-form-control--label-inline" ) do
       concat check_box_tag( param_name, value, checked, class: "o-form-control--input" )
       concat label
     end
