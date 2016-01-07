@@ -14,6 +14,11 @@ CEREMONIAL_SOURCE = "./Data/Supplementary_Ceremonial/Boundary-line-ceremonial-co
 
 SIMPLIFICATION = 40
 
+BNG_PROJECTION = RGeo::Cartesian.factory( proj4: '+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.060,0.1502,0.2470,0.8421,-20.4894 +units=m +no_defs' )
+LATLONG_PROJECTION = RGeo::Cartesian.factory( proj4: "+proj=longlat +ellps=WGS84 +towgs84=0,0,0 +no_defs" )
+
+MAX_AREA = 99999999
+
 def as_keys( name )
   name
     .gsub( /County\Z/, "" )
@@ -86,9 +91,8 @@ def from_xy( line )
   line.map {|p| [p[:x], p[:y]]}
 end
 
-def as_geojson_feature( record )
-  name = record.attributes["NAME"] || record.attributes["Name"]
-  RGeo::GeoJSON::Feature.new( record.geometry, name )
+def as_geojson_feature( name, record )
+  RGeo::GeoJSON::Feature.new( record.geometry, name, record.attributes )
 end
 
 def is_point?( p )
@@ -104,7 +108,6 @@ def is_line?( a )
 end
 
 def simplify_lines( a )
-  byebug unless a.is_a?( Array )
   a.map do |a_value|
     if is_line?( a_value )
       simplify_line( a_value )
@@ -114,8 +117,32 @@ def simplify_lines( a )
   end
 end
 
+def point_to_lat_long( point )
+  bng_point = BNG_PROJECTION.point( *point )
+  lat_long_point = RGeo::Feature.cast( bng_point, type: RGeo::Feature::Point, factory: LATLONG_PROJECTION, project: true )
+  [lat_long_point.x, lat_long_point.y]
+end
+
+def line_to_lat_long( a )
+  a.map do |a_value|
+    if is_point?( a_value )
+      point_to_lat_long( a_value )
+    else
+      line_to_lat_long( a_value )
+    end
+  end
+end
+
 def load_json
   File.exist?( "fc.json" ) && JSON.load( File.open( "fc.json" ) )
+end
+
+def transform_coordinates( json, fn )
+  j_features = json["features"]
+  j_features.each do |feature|
+    geometry = feature["geometry"]
+    geometry["coordinates"] = fn.call( geometry["coordinates"] )
+  end
 end
 
 json = load_json
@@ -124,10 +151,16 @@ if json
 else
   puts "Start indexing"
   index = composite_index
+
   puts "Done indexing, generating features"
 
   features = target_counties.map do |county_name|
-    as_geojson_feature( as_geo_record( county_name, index ) )
+    as_geojson_feature( county_name, as_geo_record( county_name, index ) )
+  end
+
+  puts "Sorting by reverse area"
+  features.sort! do |f0, f1|
+    (f1.property("HECTARES") || MAX_AREA) <=> (f0.property("HECTARES") || MAX_AREA)
   end
 
   puts "Done feature generation, generating collection"
@@ -139,17 +172,13 @@ end
 
 
 puts "Simplifying"
+transform_coordinates( json, method( :simplify_lines ) )
 
-j_features = json["features"]
-j_features.each do |feature|
-  geometry = feature["geometry"]
-  coords = geometry["coordinates"]
-  s_coords = simplify_lines( coords )
-  geometry["coordinates"] = s_coords
-end
+puts "Converting to lat long"
+transform_coordinates( json, method( :line_to_lat_long ) )
 
 File.open( "fc_simple.json", "w" ) do |file|
-  file << json.to_json
+  file << JSON.generate( json, indent: " ", object_nl: "\n", array_nl: "\n" )
   file.flush
 end
 
