@@ -19,6 +19,12 @@
       = render_report_request( request )
 
 
+  %p.text-muted.u-large-top-margin
+    To create additional reports, you can
+    = link_to( "return to the start", controller: :report_design, action: :show)
+    of this application.
+
+
 :javascript
   (function() {
     var DELAY_MS = 5000;
