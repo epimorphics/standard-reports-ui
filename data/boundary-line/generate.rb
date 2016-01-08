@@ -20,17 +20,21 @@ LATLONG_PROJECTION = RGeo::Cartesian.factory( proj4: "+proj=longlat +ellps=WGS84
 MAX_AREA = 99999999
 
 def as_keys( name )
-  name
-    .gsub( /County\Z/, "" )
-    .gsub( /\ACounty of/, "" )
-    .gsub( /\(B\)/, "" )
-    .gsub( /The City Of/i, "" )
-    .gsub( /City Of/i, "" )
-    .gsub( /euro region/i, "" )
-    .gsub( /\&/, "and" )
-    .strip
-    .upcase
-    .split( " - " )
+  candidates = []
+
+  name.upcase.split( " - ").each do |n|
+    n = n.gsub( /\(B\)/, "" )
+
+    candidates << n
+    candidates << n.gsub( /County\Z/, "" )
+    candidates << n.gsub( /\ACounty of/, "" )
+    candidates << n.gsub( /The City Of/i, "" )
+    candidates << n.gsub( /City Of/i, "" )
+    candidates << n.gsub( /euro region/i, "" )
+    candidates << n.gsub( /\&/, "AND" )
+  end
+
+  candidates.map( &:strip ).uniq
 end
 
 def create_index( filename, index = Hash.new )
@@ -59,7 +63,6 @@ end
 def normalize_county_name( name )
   name
     .upcase
-    .gsub( /CITY OF /, "" )
     .gsub( /RHONDDA CYNON TAFF/, "RHONDDA CYNON TAF")
     .gsub( /\AWREKIN\Z/, "TELFORD AND WREKIN")
 end
@@ -178,7 +181,7 @@ puts "Converting to lat long"
 transform_coordinates( json, method( :line_to_lat_long ) )
 
 File.open( "fc_simple.json", "w" ) do |file|
-  file << JSON.generate( json, indent: " ", object_nl: "\n", array_nl: "\n" )
+  file << JSON.generate( json )
   file.flush
 end
 
