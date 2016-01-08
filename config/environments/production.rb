@@ -76,5 +76,5 @@ Rails.application.configure do
 end
 
 JsRoutes.setup do |config|
-  config.prefix = "/app/stdreps"
+  config.prefix = "/app/standard-reports"
 end
