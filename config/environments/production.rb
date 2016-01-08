@@ -74,3 +74,7 @@ Rails.application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 end
+
+JsRoutes.setup do |config|
+  config.prefix = "/app/stdreps"
+end
