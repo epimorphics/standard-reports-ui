@@ -163,6 +163,10 @@ input[type=radio] {
 
 /* surface */
 
+.o-form-control--label details {
+  margin-left: 2.5rem;
+}
+
 // override UK gov stylesheet, which uses the highly specific #global-header selector
 #global-header.c-lr-header {
     background-color: white;

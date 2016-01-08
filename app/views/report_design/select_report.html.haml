@@ -1,3 +1,5 @@
+- step = @workflow.current_step
+
 .select-report
   %h1
     = render partial: "progress_indicator", locals: {workflow: @workflow}
@@ -7,4 +9,31 @@
     Different types of report can be created over the price paid data.
     Please choose one of the following:
 
-  = workflow_step_form( @workflow )
+  = form_tag( @workflow.form_action, method: "get" ) do
+    .row
+      %fieldset.col-sm-12
+        %ul.list-unstyled
+          %li
+            .o-form-control
+              %label.o-form-control--label
+                = radio_button_tag( step.form_param, step.values[0].value, step.values[0].active?, class: "o-form-control--input" )
+                = step.values[0].label
+                %details
+                  %summary
+                    %span.summary
+                      Example of this report type
+                  %div.panel
+                    = image_tag( "average-prices-report-screenshot.png", alt: "Screenshot of example average prices report " )
+          %li
+            .o-form-control
+              %label.o-form-control--label
+                = radio_button_tag( step.form_param, step.values[1].value, step.values[1].active?, class: "o-form-control--input" )
+                = step.values[1].label
+                %details
+                  %summary
+                    %span.summary
+                      Example of this report type
+                  %div.panel
+                    = image_tag( "banded-prices-report-screenshot.png", alt: "Screenshot of example banded prices report " )
+
+      = layout_submit_button
