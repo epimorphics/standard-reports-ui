@@ -47,8 +47,4 @@ class StepSelectCountyOrDistrict < StepSelectArea
     :select_aggregation_type
   end
 
-  # no nothing by default
-  def workflow_update_hook( workflow )
-  end
-
 end

@@ -23,6 +23,7 @@ class Step
   # step has some value
   def simple_traverse( workflow, following_state )
     if workflow.has_state?( param_name ) && !stop?( workflow )
+      workflow_update_hook( workflow )
       workflow.traverse_to( following_state )
     else
       self
@@ -76,4 +77,9 @@ class Step
   def map_enabled?
     false
   end
+
+  # When traversing, we do nothing by default
+  def workflow_update_hook( workflow )
+  end
+
 end

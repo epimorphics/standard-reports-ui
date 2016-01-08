@@ -48,4 +48,11 @@ class StepSelectPostcodeSectorTest < ActiveSupport::TestCase
     step.provides?( :area, w ).must_equal false
   end
 
+  it "should also set the aggegation to none, since this is the smallest postcode unit" do
+    workflow = Workflow.new( area: "BA6 8" )
+    workflow.has_state?( :aggregate ).must_equal false
+    successor = step.traverse( workflow )
+    workflow.has_state?( :aggregate, :none ).must_equal true
+  end
+
 end

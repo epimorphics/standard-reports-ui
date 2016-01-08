@@ -9,7 +9,7 @@ class StepSelectCountry < StepSelectArea
   end
 
   def traverse( workflow )
-    workflow.set_state( :area, ENGLAND_AND_WALES )
+    workflow_update_hook( workflow )
     workflow.traverse_to( :select_aggregation_type )
   end
 
@@ -22,4 +22,8 @@ class StepSelectCountry < StepSelectArea
     "country"
   end
   alias :subtype_label :subtype
+
+  def workflow_update_hook( workflow )
+    workflow.set_state( :area, ENGLAND_AND_WALES )
+  end
 end

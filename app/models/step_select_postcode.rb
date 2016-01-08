@@ -20,6 +20,7 @@ class StepSelectPostcode < StepSelectArea
 
     if validated_value
       workflow.set_state( param_name, validated_value )
+      workflow_update_hook( workflow )
       workflow.traverse_to( successor_step )
     else
       set_flash( "Sorry, '#{value}' does not appear to be a valid value for a #{subtype_label}." )

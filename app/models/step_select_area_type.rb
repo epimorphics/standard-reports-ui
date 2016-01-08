@@ -20,6 +20,7 @@ class StepSelectAreaType < Step
 
   def traverse( workflow )
     if (area_type = workflow.state( param_name )) && !stop?( workflow )
+      workflow_update_hook( workflow )
       workflow.traverse_to( :"select_#{area_type.underscore}" )
     else
       self

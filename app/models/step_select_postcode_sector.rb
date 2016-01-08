@@ -25,4 +25,9 @@ class StepSelectPostcodeSector < StepSelectPostcode
   def successor_step
     :select_dates
   end
+
+  def workflow_update_hook( workflow )
+    workflow.set_state( :aggregate, :none )
+  end
+
 end
