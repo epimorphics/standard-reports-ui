@@ -36,8 +36,6 @@
 
               %a#proposition-name.c-lr-header--proposition-name{ href: "http://landregistry.data.gov.uk" }
                 Land Registry Linked Open Data
-              .o-beta-tag
-                beta
               %ul#proposition-links
                 %li
                   %a.c-lr-header--header-proposition--a{ href: "#{relative_root}/hpi" }
@@ -54,9 +52,15 @@
 
     .o-lr-top-bar
 
+
     =render partial: "common/flash_message"
 
     .container.o-container{ role: "main"}
+      .phase-banner
+        %p
+          %strong.phase-tag BETA
+          %span.text-muted
+            This is a new service – your <a href="mailto:commercial.services@landregistry.gsi.gov.uk">feedback</a> will help us to improve it.
       .row
         .col-md-12
           = yield
