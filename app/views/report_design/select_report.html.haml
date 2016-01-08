@@ -1,4 +1,5 @@
 - step = @workflow.current_step
+- step_values = step.values( @workflow )
 
 .select-report
   %h1
@@ -16,8 +17,8 @@
           %li
             .o-form-control
               %label.o-form-control--label
-                = radio_button_tag( step.form_param, step.values[0].value, step.values[0].active?, class: "o-form-control--input" )
-                = step.values[0].label
+                = radio_button_tag( step.form_param, step_values[0].value, step_values[0].active?, class: "o-form-control--input" )
+                = step_values[0].label
                 %details
                   %summary
                     %span.summary
@@ -27,8 +28,8 @@
           %li
             .o-form-control
               %label.o-form-control--label
-                = radio_button_tag( step.form_param, step.values[1].value, step.values[1].active?, class: "o-form-control--input" )
-                = step.values[1].label
+                = radio_button_tag( step.form_param, step_values[1].value, step_values[1].active?, class: "o-form-control--input" )
+                = step_values[1].label
                 %details
                   %summary
                     %span.summary
