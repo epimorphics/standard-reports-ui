@@ -12,7 +12,7 @@ DISTRICT_SOURCE = "./Data/GB/district_borough_unitary_region.shp"
 EURO_REGION_SOURCE = "./Data/GB/european_region_region.shp"
 CEREMONIAL_SOURCE = "./Data/Supplementary_Ceremonial/Boundary-line-ceremonial-counties.shp"
 
-SIMPLIFICATION = 40
+SIMPLIFICATION = 500
 
 BNG_PROJECTION = RGeo::Cartesian.factory( proj4: '+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.060,0.1502,0.2470,0.8421,-20.4894 +units=m +no_defs' )
 LATLONG_PROJECTION = RGeo::Cartesian.factory( proj4: "+proj=longlat +ellps=WGS84 +towgs84=0,0,0 +no_defs" )
@@ -169,8 +169,11 @@ else
   puts "Done feature generation, generating collection"
   fc = RGeo::GeoJSON::FeatureCollection.new( features )
 
-  puts "Done collecting, starting encoding"
+  puts "Done collecting"
   json = RGeo::GeoJSON.encode( fc )
+
+  puts "Saving file fc.json"
+  File.open( "fc.json", "w" ) {|f| f << JSON.generate( json )}
 end
 
 
