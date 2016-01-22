@@ -8,7 +8,7 @@ class StepSelectAreaType < Step
 
   def values_options( workflow )
     [
-      ["All of England and Wales", :country],
+      ["Country", :country],
       ["Region", :region],
       ["County, Unitary Authority or Greater London", :county],
       ["District or London Borough", :district],

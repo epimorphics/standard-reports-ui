@@ -1,21 +1,27 @@
 # Workflow step of selecting a country
-# This is a degerate case because we don't let the user choose!
 
 class StepSelectCountry < StepSelectArea
   ENGLAND_AND_WALES = "EW"
 
   def initialize
-    super( :select_country, :area, :none )
+    super( :select_country, :area, :radio )
+  end
+
+  def values_options( workflow )
+    [["England and Wales", ENGLAND_AND_WALES]]
   end
 
   def traverse( workflow )
-    workflow_update_hook( workflow )
-    workflow.traverse_to( :select_aggregation_type )
+    simple_traverse( workflow, :select_aggregation_type )
   end
 
-  def summarise( value, connector = "is ")
-    "<span class='c-review-report--summary-key'>country #{connector}</span>" +
-    "<span class='c-review-report--summary-value'>England and Wales</span>"
+  def summarise( state_value, connector = "is " )
+    case state_value
+    when ENGLAND_AND_WALES
+      summarise_ew( connector )
+    else
+      summarise_other( state_value, connector )
+    end
   end
 
   def subtype
@@ -23,7 +29,16 @@ class StepSelectCountry < StepSelectArea
   end
   alias :subtype_label :subtype
 
-  def workflow_update_hook( workflow )
-    workflow.set_state( :area, ENGLAND_AND_WALES )
+  :private
+
+  def summarise_ew( connector )
+    "<span class='c-review-report--summary-key'>country #{connector}</span>" +
+    "<span class='c-review-report--summary-value'>England and Wales</span>"
   end
+
+  def summarise_other( state_value, connector )
+    "<span class='c-review-report--summary-key'>country #{connector}</span>" +
+    "<span class='c-review-report--summary-value'>#{state_value}</span>"
+  end
+
 end

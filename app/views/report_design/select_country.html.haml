@@ -1,0 +1,10 @@
+.select-country
+
+  %h1
+    = render partial: "progress_indicator", locals: {workflow: @workflow}
+    Select a country
+
+  %p
+    Choose which country the report should cover:
+
+  = workflow_step_form( @workflow )

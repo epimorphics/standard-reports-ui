@@ -2,7 +2,7 @@ require "test_helper"
 
 feature "show area aggregation selection" do
   scenario "visit the workflow step page for country level report" do
-    visit report_design_path( {report: :avgPrice, areaType: "country"} )
+    visit report_design_path( {report: :avgPrice, areaType: "country", area: "EW"} )
     page.must_have_css( ".container h1" )
     page.must_have_css( ".container form[method=get]" )
     page.must_have_css( ".container .select-aggregation-type" )
