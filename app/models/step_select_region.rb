@@ -7,9 +7,7 @@ class StepSelectRegion < StepSelectArea
   end
 
   def values_options( workflow )
-    NAMES.map do |region_name|
-      [region_name.split.map(&:capitalize).join(' '), region_name]
-    end
+    NAMES
   end
 
   def traverse( workflow )
@@ -31,16 +29,16 @@ class StepSelectRegion < StepSelectArea
   end
 
   NAMES = [
-    "EAST ANGLIA",
-    "EAST MIDLANDS",
-    "GREATER LONDON",
-    "NORTH",
-    "NORTH WEST",
-    "SOUTH EAST",
-    "SOUTH WEST",
-    "WALES",
-    "WEST MIDLANDS",
-    "YORKS AND HUMBER"
+    ["East Anglia",     "EAST ANGLIA"],
+    ["East Midlands",   "EAST MIDLANDS"],
+    ["Greater London",  "GREATER LONDON"],
+    ["North",           "NORTH"],
+    ["North West",      "NORTH WEST"],
+    ["South East",      "SOUTH EAST"],
+    ["South West",      "SOUTH WEST"],
+    ["Wales",           "WALES"],
+    ["West Midlands",   "WEST MIDLANDS"],
+    ["Yorksire And Humber", "YORKS AND HUMBER"]
   ]
 
 end
