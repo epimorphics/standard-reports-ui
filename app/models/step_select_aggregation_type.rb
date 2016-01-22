@@ -35,6 +35,8 @@ class StepSelectAggregationType < Step
     when "pcDistrict"
       [AGGREGATE_BY_PC_SECTOR,
        AGGREGATE_BY_NONE]
+    when "pcSector"
+      [AGGREGATE_BY_NONE]
     end
   end
 

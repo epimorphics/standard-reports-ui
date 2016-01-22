@@ -23,10 +23,10 @@ class StepSelectPostcodeSectorTest < ActiveSupport::TestCase
     successor.name.must_equal :select_pc_sector
   end
 
-  it 'should select dates as the next step if postcode sector is selected' do
+  it 'should select aggregation type as the next step if postcode sector is selected' do
     workflow = Workflow.new( area: "BA6 8" )
     successor = step.traverse( workflow )
-    successor.name.must_equal :select_dates
+    successor.name.must_equal :select_aggregation_type
   end
 
   it 'should select remain on this step if the validation does not pass and set the flash' do
@@ -48,11 +48,11 @@ class StepSelectPostcodeSectorTest < ActiveSupport::TestCase
     step.provides?( :area, w ).must_equal false
   end
 
-  it "should also set the aggegation to none, since this is the smallest postcode unit" do
+  it "should no longer set the aggegation to none" do
     workflow = Workflow.new( area: "BA6 8" )
     workflow.has_state?( :aggregate ).must_equal false
     successor = step.traverse( workflow )
-    workflow.has_state?( :aggregate, :none ).must_equal true
+    workflow.has_state?( :aggregate, :none ).must_equal false
   end
 
 end
