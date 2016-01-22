@@ -23,10 +23,10 @@ class StepSelectDistricTest < ActiveSupport::TestCase
     successor.name.must_equal :select_district
   end
 
-  it 'should select dates as the next step if district is selected' do
+  it 'should select aggregation as the next step if district is selected' do
     workflow = Workflow.new( area: "MENDIP" )
     successor = step.traverse( workflow )
-    successor.name.must_equal :select_dates
+    successor.name.must_equal :select_aggregation_type
   end
 
   it 'should select remain on this step if the validation does not pass and set the flash' do
@@ -40,7 +40,7 @@ class StepSelectDistricTest < ActiveSupport::TestCase
     step.generic_name.must_equal "select area"
   end
 
-  it 'should answer that the step provides the param name if the area type is distric' do
+  it 'should answer that the step provides the param name if the area type is district' do
     w = Workflow.new( areaType: "district" )
     step.provides?( :area, w ).must_equal true
 
@@ -48,10 +48,10 @@ class StepSelectDistricTest < ActiveSupport::TestCase
     step.provides?( :area, w ).must_equal false
   end
 
-  it "should also set the aggegation to none, since this is the smallest geographical unit" do
+  it "should no longer set the aggegation to none" do
     workflow = Workflow.new( area: "MENDIP" )
     workflow.has_state?( :aggregate ).must_equal false
     successor = step.traverse( workflow )
-    workflow.has_state?( :aggregate, :none ).must_equal true
+    workflow.has_state?( :aggregate, :none ).must_equal false
   end
 end

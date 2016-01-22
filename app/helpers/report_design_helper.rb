@@ -41,20 +41,22 @@ module ReportDesignHelper
       values.each do |value|
         concat(
           content_tag( :li, class: cls ) do
-            toggle_button_option( step, value, radio )
+            toggle_button_option( step, value, radio, values.size == 1 )
           end
         )
       end
     end
   end
 
-  def toggle_button_option( step, value, radio )
+  def toggle_button_option( step, value, radio, single_value )
+    active = value.active? || single_value
+
     content_tag( :div, class: "o-form-control") do
       content_tag( :label, class: "o-form-control--label" ) do
         if radio
-          concat radio_button_tag( step.form_param, value.value, value.active?, class: "o-form-control--input" )
+          concat radio_button_tag( step.form_param, value.value, active, class: "o-form-control--input" )
         else
-          concat check_box_tag( step.form_param, value.value, value.active?, id: nil, class: "o-form-control--input")
+          concat check_box_tag( step.form_param, value.value, active, id: nil, class: "o-form-control--input")
         end
         concat value.label
       end
