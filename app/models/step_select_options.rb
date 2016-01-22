@@ -8,9 +8,9 @@ class StepSelectOptions < Step
 
   def values_options( workflow = nil )
     [
-      ["Both old and new properties", :any]
+      ["Both old and new properties", :any],
       ["New-build properties only", :new],
-      ["Old properties only", :old],
+      ["Old properties only", :old]
     ]
   end
 
