@@ -38,7 +38,7 @@ class StepSelectRegion < StepSelectArea
     ["South West",      "SOUTH WEST"],
     ["Wales",           "WALES"],
     ["West Midlands",   "WEST MIDLANDS"],
-    ["Yorksire And Humber", "YORKS AND HUMBER"]
+    ["Yorkshire And Humber", "YORKS AND HUMBER"]
   ]
 
 end
