@@ -9,7 +9,7 @@ feature "show region selection" do
     page.must_have_css( ".container input.button[type=submit]")
 
     StepSelectRegion::NAMES.each do |region|
-      page.must_have_css( ".container input[type=radio][value='#{region}']")
+      page.must_have_css( ".container input[type=radio][value='#{region[1]}']")
     end
   end
 end
