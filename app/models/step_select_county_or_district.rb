@@ -13,24 +13,16 @@ class StepSelectCountyOrDistrict < StepSelectArea
   end
 
   def traverse( workflow )
-    value = workflow.state( param_name )
-    if value && !stop?( workflow )
-      validate_with( workflow, value )
-    else
-      self
-    end
+    simple_traverse( workflow, successor_step )
   end
 
-  def validate_with( workflow, value )
-    validated_value = validate( value )
-    if validated_value
-      workflow.set_state( param_name, validated_value )
-      workflow_update_hook( workflow )
+  def validate_value( workflow )
+    validate( value( workflow ) ) || validation_failure( workflow )
+  end
 
-      workflow.traverse_to( successor_step )
-    else
-      set_flash( "Sorry, #{subtype_label} '#{value}' was not recognised" )
-    end
+  def validation_failure( workflow )
+    set_flash( "Sorry, #{subtype_label} '#{value( workflow )}' was not recognised" )
+    false
   end
 
   def summarise( state_value, connector = "is " )
