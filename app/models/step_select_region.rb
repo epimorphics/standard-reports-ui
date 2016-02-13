@@ -28,6 +28,12 @@ class StepSelectRegion < StepSelectArea
     true
   end
 
+  def validate_value( workflow )
+    val = value( workflow )
+    NAMES.find {|n| n[1] == val} || validation_failure( val )
+  end
+
+
   NAMES = [
     ["East Anglia",     "EAST ANGLIA"],
     ["East Midlands",   "EAST MIDLANDS"],
@@ -40,5 +46,12 @@ class StepSelectRegion < StepSelectArea
     ["West Midlands",   "WEST MIDLANDS"],
     ["Yorkshire And Humber", "YORKS AND HUMBER"]
   ]
+
+  :private
+
+  def validation_failure( val )
+    set_flash( "Sorry, #{val} is not a recognised region" )
+    false
+  end
 
 end

@@ -28,9 +28,16 @@ class StepRegionTest < ActiveSupport::TestCase
   end
 
   it 'should select aggregation-type as the next step if region is selected' do
-    workflow = Workflow.new( area: "region" )
+    workflow = Workflow.new( area: "NORTH" )
     successor = step.traverse( workflow )
     successor.name.must_equal :select_aggregation_type
+  end
+
+  it 'should select fail to validate non-regions' do
+    workflow = Workflow.new( area: "HERE BE DRAGONS" )
+    successor = step.traverse( workflow )
+    successor.name.must_equal :select_region
+    successor.flash.must_match /Sorry/
   end
 
   it "should have a generic name" do
