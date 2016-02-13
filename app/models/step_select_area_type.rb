@@ -12,9 +12,9 @@ class StepSelectAreaType < Step
       ["Region", :region],
       ["County, Unitary Authority or Greater London", :county],
       ["District or London Borough", :district],
-      ["Post-code area", :pcArea],
-      ["Post-code district", :pcDistrict],
-      ["Post-code sector", :pcSector]
+      ["Postcode area", :pcArea],
+      ["Postcode district", :pcDistrict],
+      ["Postcode sector", :pcSector]
     ]
   end
 
