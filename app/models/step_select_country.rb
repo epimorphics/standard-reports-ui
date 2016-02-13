@@ -29,7 +29,16 @@ class StepSelectCountry < StepSelectArea
   end
   alias :subtype_label :subtype
 
+  def validate_value( workflow )
+    (value( workflow ) == ENGLAND_AND_WALES) || report_validation_failure( workflow )
+  end
+
   :private
+
+  def report_validation_failure( workflow )
+    set_flash( "Sorry, #{value(workflow)} is not a valid country selection" )
+    false
+  end
 
   def summarise_ew( connector )
     "<span class='c-review-report--summary-key'>country #{connector}</span>" +
