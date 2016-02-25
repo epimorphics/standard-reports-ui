@@ -30,7 +30,10 @@
     var DELAY_MS = 5000;
 
     var refreshPage = function() {
-      $.get( window.location )
+      var url = window.location;
+      url = url + (url.search.match( /_partial/ ) ? "" : "&_partial=true");
+
+      $.get( url )
        .done( function( response ) {
          var html = $(response).filter( ".download-report" );
          var running = html.find( "[data-running=true]" ).length > 0;
