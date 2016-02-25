@@ -84,7 +84,8 @@ module ReportDesignHelper
 
   def layout_submit_button
     content_tag( :div, class: "col-sm-12") do
-      submit_tag( "Next", class: "button c-form-submit", name: nil )
+      concat submit_tag( "Next", class: "button c-form-submit", name: nil )
+      concat link_to( "back", "#", class: "c-back-action" )
     end
   end
 
