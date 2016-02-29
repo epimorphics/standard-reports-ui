@@ -18,8 +18,15 @@
     - @report_manager.requests.each do |request|
       = render_report_request( request )
 
-
   %p.text-muted.u-large-top-margin
+    %strong Note
+    If you want to re-run
+    = n == 1 ? "this report" : "these reports"
+    again in future, please bookmark this page. If your selection
+    includes &quot;latest&quot; year, quarter or month, returning to this page will automatically re-compute
+    the report with the most up-to-date figures.
+
+  %p.text-muted
     To create additional reports, you can
     = link_to( "return to the start", controller: :report_design, action: :show)
     of this application.
