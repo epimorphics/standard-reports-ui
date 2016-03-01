@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5'
+gem 'rails', '4.2.5.2'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -20,7 +20,7 @@ gem 'haml-rails'
 gem 'jquery-rails'
 gem 'lodash-rails'
 gem 'bootstrap-sass'
-gem 'govuk_frontend_toolkit', github: "alphagov/govuk_frontend_toolkit_gem", submodules: true
+gem 'govuk_frontend_toolkit'#, github: "alphagov/govuk_frontend_toolkit_gem", submodules: true
 gem 'govuk_elements_rails', github: "ministryofjustice/govuk_elements_rails", submodules: true
 gem 'jquery-ui-rails'
 gem 'leaflet-rails'
@@ -31,6 +31,7 @@ gem 'faraday_middleware'
 gem 'yajl-ruby', require: 'yajl'
 gem 'font-awesome-rails'
 gem 'responders', '~> 2.0'
+gem 'modernizr-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
