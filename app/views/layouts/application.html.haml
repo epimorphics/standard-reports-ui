@@ -6,8 +6,6 @@
     = stylesheet_link_tag    "application", media: "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
-    = stylesheet_link_tag "https://www.gov.uk/service-manual/assets/govuk_template/stylesheets/govuk-template.css", media: "all"
-    = stylesheet_link_tag "https://www.gov.uk/service-manual/assets/stylesheets/main.css", media: "all"
     = favicon_link_tag
     %script{ type: "text/javascript", src: "https://apis.google.com/js/plusone.js"}
       {"parsetags": "explicit"}
@@ -20,8 +18,6 @@
       %script{ src: "assets/respond.min.js", type: "application/javascript"}
 
   %body.government.website.lr.ppd-standard-report
-    :javascript
-      document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
 
     %header#global-header.with-proposition.c-lr-header{ role: "banner" }
       .header-wrapper
@@ -57,10 +53,10 @@
 
     =render partial: "common/flash_message"
 
-    .container.o-container{ role: "main"}
-      .phase-banner
+    %main.container.o-container{ role: "main"}
+      .o-beta-banner
         %p
-          %strong.phase-tag BETA
+          %strong.o-beta-tag BETA
           %span.text-muted
             This is a new service – your <a href="mailto:commercial.services@landregistry.gov.uk">feedback</a> will help us to improve it.
       .row

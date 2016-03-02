@@ -3,7 +3,7 @@
 
 .select-dates
 
-  %h1
+  %h1.heading-medium
     = render partial: "progress_indicator", locals: {workflow: @workflow}
     Which time period should the report cover?
 
@@ -17,7 +17,7 @@
     %fieldset
       = layout_existing_values( @workflow )
 
-      %h2 Latest available
+      %h2.heading-small Latest available
 
       %p
         These options provide the latest data available for the given option. If you
@@ -27,7 +27,7 @@
       .clearfix
         = layout_values_as_toggle_buttons_list( step, values[:latest], false, "col-sm-12 col-md-11 col-md-offset-1" )
 
-      %h2
+      %h2.heading-small
         Choose specific dates
 
       = layout_custom_dates( 0, step, @workflow )

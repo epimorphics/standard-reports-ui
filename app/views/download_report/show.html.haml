@@ -1,7 +1,7 @@
 - n = @report_manager.requests.length
 
 .download-report
-  %h1 Your report #{"file".pluralize( n )}
+  %h1.heading-medium Your report #{"file".pluralize( n )}
   %p
     = n == 1 ? "A link" : "Links"
     to download your

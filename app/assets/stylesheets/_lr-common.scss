@@ -2,7 +2,7 @@
 // Trying to follow @csswizardry's CSS Namespaces advice
 // http://csswizardry.com/2015/03/more-transparent-ui-code-with-namespaces/
 
-@import "_gov_uk.scss";
+@import "govuk-elements";
 
 /* variables */
 
@@ -170,10 +170,19 @@ input[type=radio] {
   color: $grey-1;
 }
 
+.c-heading-prefix {
+  display: block;
+  color: $grey-1;
+}
+
 /* utilities */
 
 .u-large-top-margin {
   margin-top: 3rem;
+}
+
+.u-font-bold {
+  font-weight: bold;
 }
 
 /* surface */
@@ -184,7 +193,11 @@ input[type=radio] {
 
 // override UK gov stylesheet, which uses the highly specific #global-header selector
 #global-header.c-lr-header {
+  background-color: white;
+
+  .header-wrapper {
     background-color: white;
+  }
 }
 
 #global-header .header-proposition #proposition-name.c-lr-header--proposition-name {
@@ -237,4 +250,8 @@ input[type=radio] {
     margin: 0;
     padding-top: 0.1em;
   }
+}
+
+.panel {
+  border: 0;
 }

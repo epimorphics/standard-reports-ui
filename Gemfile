@@ -20,8 +20,9 @@ gem 'haml-rails'
 gem 'jquery-rails'
 gem 'lodash-rails'
 gem 'bootstrap-sass'
+gem 'govuk_template'
 gem 'govuk_frontend_toolkit'#, github: "alphagov/govuk_frontend_toolkit_gem", submodules: true
-gem 'govuk_elements_rails', github: "ministryofjustice/govuk_elements_rails", submodules: true
+gem 'govuk_elements_rails'#, github: "ministryofjustice/govuk_elements_rails", submodules: true
 gem 'jquery-ui-rails'
 gem 'leaflet-rails'
 gem 'js-routes'
