@@ -17,7 +17,12 @@ class StepSelectCountyOrDistrict < StepSelectArea
   end
 
   def validate_value( workflow )
-    validate( value( workflow ) ) || validation_failure( workflow )
+    normalized_value = validate( value( workflow ) )
+    unless normalized_value && (value( workflow ) == normalized_value)
+      workflow.set_state( param_name, normalized_value )
+    end
+
+    normalized_value || validation_failure( workflow )
   end
 
   def validation_failure( workflow )

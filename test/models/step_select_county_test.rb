@@ -47,4 +47,13 @@ class StepSelectCountyTest < ActiveSupport::TestCase
     w = Workflow.new( areaType: "district" )
     step.provides?( :area, w ).must_equal false
   end
+
+  it "should remember the normalized value for a county" do
+    workflow = Workflow.new( area: "devon" )
+    workflow.state( "area" ).must_equal "devon"
+    successor = step.traverse( workflow )
+    successor.name.must_equal :select_aggregation_type
+    workflow.state( "area" ).must_equal "DEVON"
+  end
+
 end

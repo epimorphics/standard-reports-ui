@@ -54,4 +54,12 @@ class StepSelectDistricTest < ActiveSupport::TestCase
     successor = step.traverse( workflow )
     workflow.has_state?( :aggregate, :none ).must_equal false
   end
+
+  it "should remember the normalized value for a district" do
+    workflow = Workflow.new( area: "mendip" )
+    workflow.state( "area" ).must_equal "mendip"
+    successor = step.traverse( workflow )
+    successor.name.must_equal :select_aggregation_type
+    workflow.state( "area" ).must_equal "MENDIP"
+  end
 end
