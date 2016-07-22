@@ -49,6 +49,9 @@ group :development, :test do
   gem 'minitest-reporters'
   gem 'capybara_minitest_spec'
   gem 'mocha'
+  gem 'minitest-vcr'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :development do

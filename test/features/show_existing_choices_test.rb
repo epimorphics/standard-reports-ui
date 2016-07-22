@@ -51,11 +51,13 @@ feature "existing user selections are shown in state of input controls" do
   end
 
   scenario "dates page" do
-    visit report_design_path( {report: "avgPrice", areaType: "county", area: "DEVON", aggregate: "district", period: ["ytd", "2014", "2014-Q1", "2014-01"], stop: "period"})
-    page.must_have_css( ".container input[name='period[]'][value=ytd][checked=checked]")
-    page.must_have_css( ".container input[name='period[]'][value='2014'][checked=checked]")
-    page.must_have_css( ".container input[name='period[]'][value='2014-Q1'][checked=checked]")
-    page.must_have_css( ".container input[name='period[]'][value='2014-01'][checked=checked]")
+    VCR.use_cassette( "latest_available_dates") do
+      visit report_design_path( {report: "avgPrice", areaType: "county", area: "DEVON", aggregate: "district", period: ["ytd", "2014", "2014-Q1", "2014-01"], stop: "period"})
+      page.must_have_css( ".container input[name='period[]'][value=ytd][checked=checked]")
+      page.must_have_css( ".container input[name='period[]'][value='2014'][checked=checked]")
+      page.must_have_css( ".container input[name='period[]'][value='2014-Q1'][checked=checked]")
+      page.must_have_css( ".container input[name='period[]'][value='2014-01'][checked=checked]")
+    end
   end
 
   scenario "options page" do
