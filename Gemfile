@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5.2'
+gem 'rails', '4.2.7'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -16,23 +16,26 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'haml-rails'
+# LR-common dependencies
 gem 'jquery-rails'
 gem 'lodash-rails'
+gem 'haml-rails'
 gem 'bootstrap-sass'
+gem 'font-awesome-rails'
+gem 'modernizr-rails'
+gem 'modulejs-rails'
 gem 'govuk_template'
-gem 'govuk_frontend_toolkit'#, github: "alphagov/govuk_frontend_toolkit_gem", submodules: true
-gem 'govuk_elements_rails'#, github: "ministryofjustice/govuk_elements_rails", submodules: true
+gem 'govuk_frontend_toolkit'
+gem 'govuk_elements_rails'
+
+# application dependencies
 gem 'jquery-ui-rails'
 gem 'leaflet-rails'
 gem 'js-routes'
-
 gem 'faraday'
 gem 'faraday_middleware'
 gem 'yajl-ruby', require: 'yajl'
-gem 'font-awesome-rails'
 gem 'responders', '~> 2.0'
-gem 'modernizr-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
