@@ -1,6 +1,7 @@
 - step = @workflow.current_step
 - step_values = step.values( @workflow )
 
+= render partial: "help"
 .select-report
   %h1.heading-medium
     = render partial: "progress_indicator", locals: {workflow: @workflow}
