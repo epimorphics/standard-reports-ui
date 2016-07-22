@@ -10,7 +10,7 @@ feature "review the report summary" do
     page.must_have_css( ".container ul.c-review-report" )
 
     %i{ report areaType aggregate 'period[]' age }.each do |param|
-      page.must_have_css( ".container input[type=hidden][name=#{param}]")
+      page.must_have_css( ".container input[name=#{param}]", visible: :hidden)
     end
   end
 end
