@@ -1,17 +1,116 @@
-@import "lr-common";
 
-/* settings */
+:focus,
+a:focus,
+input:focus {
+  background-color: white;
+  background-color: transparent;
+}
 
-/* elements */
+.btn-success:focus {
+  color: #333;
+}
 
-/* objects */
+.form-control:focus {
+  border: 0;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
 
-.o-request {
-  margin-left: 1rem;
+a {
+  cursor: pointer;
+}
+
+ol.numbered {
+  list-style: decimal outside;
+  margin-left: 2rem;
+}
+
+input[type=checkbox],
+input[type=radio] {
+  transform: scale(1.5);
+  -webkit-transform: scale(1.5);
+}
+
+.o-form-control {
+  line-height: 3rem;
+
+  .o-form-control--input {
+    margin-right: 0.8rem;
+  }
+
+  .o-form-control--label {
+    display: block;
+  }
+
+  .o-form-control--label-inline {
+    display: inline-block;
+  }
+
+  .o-form-control--label input[type=text] {
+    // margin-left: 0.8rem;
+    width: 100%;
+  }
 }
 
 /* components */
 
+.c-review-report {
+  .c-review-report--summary-key {
+    color: $grey-1;
+  }
+
+  .c-review-report--summary-value {
+    font-weight: bold;
+  }
+
+  .c-review-report--change-option {
+    font-size: 80%;
+    margin-left: 20px;
+  }
+}
+
+.c-form-submit {
+  margin-top: 30px;
+}
+
+.c-back-action {
+  display: none;
+}
+
+.js .c-back-action {
+  display: inline-block;
+  margin-top: 33px;
+  margin-left: 20px;
+  color: $grey-1;
+}
+
+.c-heading-prefix {
+  display: block;
+  color: $grey-1;
+}
+
 /* utilities */
 
+.u-large-top-margin {
+  margin-top: 3rem;
+}
+
+.u-font-bold {
+  font-weight: bold;
+}
+
 /* surface */
+
+.o-form-control--label details {
+  margin-left: 2.5em;
+}
+
+.select-dates .row {
+  margin-bottom: 1rem;
+}
+
+.o-map {
+  width: 100%;
+  min-height: 40rem;
+  margin-top: 2.5rem;
+}

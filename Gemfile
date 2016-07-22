@@ -18,15 +18,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # LR-common dependencies
 gem 'jquery-rails'
-gem 'lodash-rails'
 gem 'haml-rails'
 gem 'bootstrap-sass'
 gem 'font-awesome-rails'
 gem 'modernizr-rails'
 gem 'modulejs-rails'
-gem 'govuk_template'
-gem 'govuk_frontend_toolkit'
-gem 'govuk_elements_rails'
+gem 'lr_common_styles', github: "epimorphics/lr_common_styles"
 
 # application dependencies
 gem 'jquery-ui-rails'
@@ -44,6 +41,9 @@ group :development, :test do
   # Use Unicorn as the app server
   gem 'unicorn'
 
+end
+
+group :test do
   gem 'minitest-spec-rails'
   gem 'minitest-rails-capybara'
   gem 'minitest-reporters'
