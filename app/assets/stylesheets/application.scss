@@ -10,6 +10,7 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require jquery-ui
  *= depend_on_asset "layers.png"
  *= depend_on_asset "layers-2x.png"
  */
@@ -20,8 +21,6 @@
   "bootstrap-sprockets",
   "bootstrap",
   "font-awesome",
-  "jquery-ui/autocomplete",
-  "jquery-ui/datepicker",
   "lr_common_styles/lr-common",
   "leaflet",
   "standard-reports";
