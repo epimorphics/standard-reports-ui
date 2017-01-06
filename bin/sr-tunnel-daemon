@@ -1,10 +1,11 @@
 #!/bin/bash
+HOST=${LR_PRES_HOST:-LR-Pres-1-b}
 
 while true; do
-  ssh_running=`ps -fC ssh | grep 'lr-data-staging'`
+  ssh_running=`ps -fC ssh | grep $HOST`
   if [[ "${ssh_running:-null}" = null ]];then
     echo "Starting ssh tunnel"
-    ssh -f lr-data-staging-b -L 3030:ec2-54-246-79-255.eu-west-1.compute.amazonaws.com:3030 -N
+    ssh -f $HOST -L 8080:localhost:8080 -N
   fi
   sleep 5
 done
