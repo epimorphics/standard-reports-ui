@@ -111,7 +111,7 @@ module ReportDesignHelper
     year = Time.now.year - delta
     content_tag( :div, class: "row") do
       concat( content_tag( :div, class: "col-sm-12 col-md-1") do
-        content_tag( :h3, year.to_s, class: "u-font-bold" )
+        content_tag( :h3, year.to_s, class: "u-font-bold u-align-top" )
       end )
       concat( content_tag( :div, class: "col-sm-12 col-md-11") do
         concat( layout_all_year( step, year, workflow ) )
