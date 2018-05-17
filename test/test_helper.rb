@@ -1,15 +1,13 @@
+# frozen_string_literal: true
+
 ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path('../../config/environment', __FILE__)
+require File.expand_path('../config/environment', __dir__)
 require 'rails/test_help'
-require "minitest/rails/capybara"
-require "mocha/mini_test"
+require 'minitest/rails/capybara'
+require 'mocha/minitest'
 
-require "minitest/reporters"
+require 'minitest/reporters'
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
-
-class ActiveSupport::TestCase
-  # Add more helper methods to be used by all tests here...
-end
 
 VCR.configure do |c|
   c.cassette_library_dir = 'fixtures/vcr_cassettes'

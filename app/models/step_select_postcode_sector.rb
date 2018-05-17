@@ -1,17 +1,17 @@
+# frozen_string_literal: true
+
 # Workflow step of selecting a postcode sector
-
 class StepSelectPostcodeSector < StepSelectPostcode
-
   def initialize
-    super( :select_pc_sector )
+    super(:select_pc_sector)
   end
 
   def subtype_label
-    "postcode sector"
+    'postcode sector'
   end
 
   def subtype
-    "pcSector"
+    'pcSector'
   end
 
   def validation_pattern
@@ -19,11 +19,10 @@ class StepSelectPostcodeSector < StepSelectPostcode
   end
 
   def input_label
-    "Enter postcode sector:"
+    'Enter postcode sector:'
   end
 
   def successor_step
     :select_aggregation_type
   end
-
 end

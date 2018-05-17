@@ -3,12 +3,16 @@ AllCops:
     - app/models/regions_table.rb
     - app/models/locations_table.rb
     - 'node_modules/**/*'
+    - data/**/*
 
 # Customize rules
 Metrics/LineLength:
   Max: 100
   Exclude:
     - bin/**/*
+    - db/**/*
+    - config/**/*
+    - test/**/*
 
 Metrics/ClassLength:
   Exclude:
@@ -25,3 +29,7 @@ Metrics/MethodLength:
 
 Style/FormatStringToken:
   Enabled: false
+
+Naming/UncommunicativeMethodParamName:
+  Exclude:
+    - test/**/*

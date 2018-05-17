@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -16,22 +18,22 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # LR-common dependencies
-gem 'jquery-rails'
-gem 'haml-rails'
 gem 'bootstrap-sass'
 gem 'font-awesome-rails'
+gem 'haml-rails'
+gem 'jquery-rails'
+gem 'lr_common_styles', github: 'epimorphics/lr_common_styles'
 gem 'modernizr-rails'
 gem 'modulejs-rails'
-gem 'lr_common_styles', github: "epimorphics/lr_common_styles"
 
 # application dependencies
-gem 'jquery-ui-rails'
-gem 'leaflet-rails'
-gem 'js-routes'
 gem 'faraday'
 gem 'faraday_middleware'
-gem 'yajl-ruby', require: 'yajl'
+gem 'jquery-ui-rails'
+gem 'js-routes'
+gem 'leaflet-rails'
 gem 'responders', '~> 2.0'
+gem 'yajl-ruby', require: 'yajl'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -39,16 +41,15 @@ group :development, :test do
 
   # Use Unicorn as the app server
   gem 'unicorn'
-
 end
 
 group :test do
-  gem 'minitest-spec-rails'
+  gem 'capybara_minitest_spec'
   gem 'minitest-rails-capybara'
   gem 'minitest-reporters'
-  gem 'capybara_minitest_spec'
-  gem 'mocha'
+  gem 'minitest-spec-rails'
   gem 'minitest-vcr'
+  gem 'mocha'
   gem 'vcr'
   gem 'webmock'
 end

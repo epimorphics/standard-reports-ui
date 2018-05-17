@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 # Unit tests on the StepSelectReport class
 
 require 'test_helper'
 
 class StepSelectReportTest < ActiveSupport::TestCase
-  let( :step ) {StepSelectReport.new}
+  let(:step) { StepSelectReport.new }
 
   it 'should have a name' do
     step.name.must_equal :select_report
@@ -21,7 +23,7 @@ class StepSelectReportTest < ActiveSupport::TestCase
     step.values.length.must_be :>=, 2
   end
 
-  it "should have a generic name" do
-    step.generic_name.must_equal "select report type"
+  it 'should have a generic name' do
+    step.generic_name.must_equal 'select report type'
   end
 end

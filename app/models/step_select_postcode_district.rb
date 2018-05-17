@@ -1,17 +1,17 @@
+# frozen_string_literal: true
+
 # Workflow step of selecting a postcode district
-
 class StepSelectPostcodeDistrict < StepSelectPostcode
-
   def initialize
-    super( :select_pc_district )
+    super(:select_pc_district)
   end
 
   def subtype_label
-    "postcode district"
+    'postcode district'
   end
 
   def subtype
-    "pcDistrict"
+    'pcDistrict'
   end
 
   def validation_pattern
@@ -19,7 +19,6 @@ class StepSelectPostcodeDistrict < StepSelectPostcode
   end
 
   def input_label
-    "Enter postcode district:"
+    'Enter postcode district:'
   end
-
 end
