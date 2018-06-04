@@ -1,10 +1,11 @@
-# Unit tests on the StepSelectCounty class
+# frozen_string_literal: true
 
 require 'test_helper'
 
+# Unit tests on the StepSelectCounty class
 class StepSelectCountyTest < ActiveSupport::TestCase
-  let( :step ) {StepSelectCounty.new}
-  let( :workflow_empty_state ) {Workflow.new( {} )}
+  let(:step) { StepSelectCounty.new }
+  let(:workflow_empty_state) { Workflow.new({}) }
 
   it 'should have a name' do
     step.name.must_equal :select_county
@@ -19,41 +20,40 @@ class StepSelectCountyTest < ActiveSupport::TestCase
   end
 
   it 'should select itself in the traverse step if not yet complete' do
-    successor = step.traverse( workflow_empty_state )
+    successor = step.traverse(workflow_empty_state)
     successor.name.must_equal :select_county
   end
 
   it 'should select aggregation-type as the next step if region is selected' do
-    workflow = Workflow.new( area: "DEVON" )
-    successor = step.traverse( workflow )
+    workflow = Workflow.new(area: 'DEVON')
+    successor = step.traverse(workflow)
     successor.name.must_equal :select_aggregation_type
   end
 
   it 'should select remain on this step if the validation does not pass and set the flash' do
-    workflow = Workflow.new( area: "XXDEVON" )
-    successor = step.traverse( workflow )
+    workflow = Workflow.new(area: 'XXDEVON')
+    successor = step.traverse(workflow)
     successor.name.must_equal :select_county
-    step.flash.must_match /Sorry/
+    step.flash.must_match(/Sorry/)
   end
 
-  it "should have a generic name" do
-    step.generic_name.must_equal "select area"
+  it 'should have a generic name' do
+    step.generic_name.must_equal 'select area'
   end
 
   it 'should answer that the step provides the param name if the area type is county' do
-    w = Workflow.new( areaType: "county" )
-    step.provides?( :area, w ).must_equal true
+    w = Workflow.new(areaType: 'county')
+    step.provides?(:area, w).must_equal true
 
-    w = Workflow.new( areaType: "district" )
-    step.provides?( :area, w ).must_equal false
+    w = Workflow.new(areaType: 'district')
+    step.provides?(:area, w).must_equal false
   end
 
-  it "should remember the normalized value for a county" do
-    workflow = Workflow.new( area: "devon" )
-    workflow.state( "area" ).must_equal "devon"
-    successor = step.traverse( workflow )
+  it 'should remember the normalized value for a county' do
+    workflow = Workflow.new(area: 'devon')
+    workflow.state('area').must_equal 'devon'
+    successor = step.traverse(workflow)
     successor.name.must_equal :select_aggregation_type
-    workflow.state( "area" ).must_equal "DEVON"
+    workflow.state('area').must_equal 'DEVON'
   end
-
 end

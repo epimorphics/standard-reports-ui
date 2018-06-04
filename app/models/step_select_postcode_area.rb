@@ -1,17 +1,17 @@
+# frozen_string_literal: true
+
 # Workflow step of selecting a postcode area
-
 class StepSelectPostcodeArea < StepSelectPostcode
-
   def initialize
-    super( :select_pc_area )
+    super(:select_pc_area)
   end
 
   def subtype_label
-    "postcode area"
+    'postcode area'
   end
 
   def subtype
-    "pcArea"
+    'pcArea'
   end
 
   def validation_pattern
@@ -19,7 +19,6 @@ class StepSelectPostcodeArea < StepSelectPostcode
   end
 
   def input_label
-    "Enter postcode area:"
+    'Enter postcode area:'
   end
-
 end

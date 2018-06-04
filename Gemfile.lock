@@ -60,22 +60,26 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     ansi (1.5.0)
     arel (7.1.4)
+<<<<<<< HEAD
     autoprefixer-rails (8.5.2)
+=======
+    autoprefixer-rails (8.6.0)
+>>>>>>> dev
       execjs
     bindex (0.5.0)
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
     builder (3.2.3)
-    byebug (9.1.0)
-    capybara (2.16.1)
+    byebug (10.0.2)
+    capybara (2.18.0)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
-      xpath (~> 2.0)
-    capybara_minitest_spec (1.0.6)
+      xpath (>= 2.0, < 4.0)
+    capybara_minitest_spec (1.0.7)
       capybara (>= 2)
       minitest (>= 4)
     concurrent-ruby (1.0.5)
@@ -84,11 +88,15 @@ GEM
     crass (1.0.4)
     erubis (2.7.0)
     execjs (2.7.0)
-    faraday (0.13.1)
+    faraday (0.15.1)
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.12.2)
       faraday (>= 0.7.4, < 1.0)
+<<<<<<< HEAD
     ffi (1.9.23)
+=======
+    ffi (1.9.25)
+>>>>>>> dev
     font-awesome-rails (4.7.0.4)
       railties (>= 3.2, < 6.0)
     globalid (0.4.1)
@@ -128,12 +136,12 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
-    js-routes (1.4.2)
+    js-routes (1.4.4)
       railties (>= 3.2)
       sprockets-rails
     json (1.8.6)
-    kgio (2.11.0)
-    leaflet-rails (1.2.0)
+    kgio (2.11.2)
+    leaflet-rails (1.3.1)
       rails (>= 4.2.0)
     libv8 (3.16.14.19)
     lodash-rails (4.17.10)
@@ -164,7 +172,7 @@ GEM
       minitest-capybara (~> 0.8)
       minitest-metadata (~> 0.6)
       minitest-rails (~> 3.0)
-    minitest-reporters (1.1.19)
+    minitest-reporters (1.2.0)
       ansi
       builder
       minitest (>= 5.0)
@@ -176,17 +184,21 @@ GEM
       minispec-metadata (~> 2.0)
       minitest (>= 4.7.5)
       vcr (>= 2.9)
-    mocha (1.3.0)
+    mocha (1.5.0)
       metaclass (~> 0.0.1)
     modernizr-rails (2.7.1)
     modulejs-rails (2.2.0.0)
       railties (>= 4.0)
-    multi_json (1.12.2)
+    multi_json (1.13.1)
     multipart-post (2.0.0)
     nio4r (2.3.1)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
+<<<<<<< HEAD
     public_suffix (3.0.1)
+=======
+    public_suffix (3.0.2)
+>>>>>>> dev
     rack (2.0.5)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -260,27 +272,27 @@ GEM
     tilt (2.0.8)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (3.2.0)
+    uglifier (4.1.10)
       execjs (>= 0.3.0, < 3)
-    unicorn (5.3.1)
+    unicorn (5.4.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
-    vcr (3.0.3)
-    web-console (3.5.1)
+    vcr (4.0.0)
+    web-console (3.6.2)
       actionview (>= 5.0)
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
-    webmock (3.1.1)
+    webmock (3.4.1)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
-    xpath (2.1.0)
-      nokogiri (~> 1.3)
-    yajl-ruby (1.3.1)
+    xpath (3.0.0)
+      nokogiri (~> 1.8)
+    yajl-ruby (1.4.0)
 
 PLATFORMS
   ruby
@@ -320,4 +332,4 @@ DEPENDENCIES
   yajl-ruby
 
 BUNDLED WITH
-   1.16.0
+   1.16.1

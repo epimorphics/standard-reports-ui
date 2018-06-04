@@ -1,10 +1,11 @@
-# Encapsulation of the report status returned from the sr-manager API
+# frozen_string_literal: true
 
+# Encapsulation of the report status returned from the sr-manager API
 class ReportStatus
   attr_reader :json
 
-  def initialize( json )
-    @json = HashWithIndifferentAccess.new( json )
+  def initialize(json)
+    @json = HashWithIndifferentAccess.new(json)
   end
 
   def id
@@ -16,11 +17,11 @@ class ReportStatus
   end
 
   def completed?
-    status == "Completed"
+    status == 'Completed'
   end
 
   def failed?
-    status == "Failed"
+    status == 'Failed'
   end
 
   def running?
@@ -28,11 +29,11 @@ class ReportStatus
   end
 
   def unknown?
-    status == "Unknown"
+    status == 'Unknown'
   end
 
   def in_progress?
-    status == "InProgress"
+    status == 'InProgress'
   end
 
   def position
@@ -55,18 +56,18 @@ class ReportStatus
     @json[:urlXlsx]
   end
 
-  def url( format )
-    (format.to_sym == :csv) ? url_csv : url_excel
+  def url(format)
+    format.to_sym == :csv ? url_csv : url_excel
   end
 
   def label
-    (id || "")
-      .gsub( /\A.*\//, "" )
-      .gsub( ".csv", "" )
-      .gsub( "-", " ")
+    (id || '')
+      .gsub(%r{\A.*/}, '')
+      .gsub('.csv', '')
+      .tr('-', ' ')
   end
 
-  def as_json( options = nil )
+  def as_json(_options = nil)
     json
   end
 end

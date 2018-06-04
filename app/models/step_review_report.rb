@@ -1,19 +1,20 @@
-# Workflow step of reviewing report options
+# frozen_string_literal: true
 
+# Workflow step of reviewing report options
 class StepReviewReport < Step
   def initialize
-    super( :review_report, :confirm, nil )
+    super(:review_report, :confirm, nil)
   end
 
-  def values( workflow = nil )
+  def values(_workflow = nil)
     []
   end
 
-  def traverse( workflow )
+  def traverse(_workflow)
     self
   end
 
   def generic_name
-    "review"
+    'review'
   end
 end

@@ -1,10 +1,11 @@
-# Unit tests on the StepSelectRegion class
+# frozen_string_literal: true
 
 require 'test_helper'
 
+# Unit tests on the StepSelectRegion class
 class StepRegionTest < ActiveSupport::TestCase
-  let( :step ) {StepSelectRegion.new}
-  let( :workflow_empty_state ) {Workflow.new( {} )}
+  let(:step) { StepSelectRegion.new }
+  let(:workflow_empty_state) { Workflow.new({}) }
 
   it 'should have a name' do
     step.name.must_equal :select_region
@@ -23,33 +24,32 @@ class StepRegionTest < ActiveSupport::TestCase
   end
 
   it 'should select itself in the traverse step if not yet complete' do
-    successor = step.traverse( workflow_empty_state )
+    successor = step.traverse(workflow_empty_state)
     successor.name.must_equal :select_region
   end
 
   it 'should select aggregation-type as the next step if region is selected' do
-    workflow = Workflow.new( area: "NORTH" )
-    successor = step.traverse( workflow )
+    workflow = Workflow.new(area: 'NORTH')
+    successor = step.traverse(workflow)
     successor.name.must_equal :select_aggregation_type
   end
 
   it 'should select fail to validate non-regions' do
-    workflow = Workflow.new( area: "HERE BE DRAGONS" )
-    successor = step.traverse( workflow )
+    workflow = Workflow.new(area: 'HERE BE DRAGONS')
+    successor = step.traverse(workflow)
     successor.name.must_equal :select_region
-    successor.flash.must_match /Sorry/
+    successor.flash.must_match(/Sorry/)
   end
 
-  it "should have a generic name" do
-    step.generic_name.must_equal "select area"
+  it 'should have a generic name' do
+    step.generic_name.must_equal 'select area'
   end
 
   it 'should answer that the step provides the param name if the area type is region' do
-    w = Workflow.new( areaType: "region" )
-    step.provides?( :area, w ).must_equal true
+    w = Workflow.new(areaType: 'region')
+    step.provides?(:area, w).must_equal true
 
-    w = Workflow.new( areaType: "district" )
-    step.provides?( :area, w ).must_equal false
+    w = Workflow.new(areaType: 'district')
+    step.provides?(:area, w).must_equal false
   end
-
 end

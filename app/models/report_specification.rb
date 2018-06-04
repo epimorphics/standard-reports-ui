@@ -1,9 +1,10 @@
-# Class encapsulating a set of options for a report
+# frozen_string_literal: true
 
+# Class encapsulating a set of options for a report
 class ReportSpecification
-  def initialize( params, report_manager )
-    @params = HashWithIndifferentAccess.new( params )
-    normalize_period( report_manager ) if @params[:period]
+  def initialize(params, report_manager)
+    @params = HashWithIndifferentAccess.new(params)
+    normalize_period(report_manager) if @params[:period]
   end
 
   def to_hash
@@ -12,20 +13,20 @@ class ReportSpecification
 
   private
 
-  def normalize_period( report_manager )
+  def normalize_period(report_manager)
     case @params[:period].to_sym
     when :ytd
       @params[:period] = report_manager.latest_year
 
     when :latest_q
-      @params[:period] = latest_quarter( report_manager )
+      @params[:period] = latest_quarter(report_manager)
 
     when :latest_m
       @params[:period] = report_manager.latest_month_spec
     end
   end
 
-  def latest_quarter( report_manager )
+  def latest_quarter(report_manager) # rubocop:disable Metrics/MethodLength
     case report_manager.latest_month
     when 1..2
       "#{report_manager.latest_year - 1}-Q4"
@@ -39,5 +40,4 @@ class ReportSpecification
       "#{report_manager.latest_year}-Q4"
     end
   end
-
 end

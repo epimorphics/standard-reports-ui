@@ -1,0 +1,35 @@
+AllCops:
+  Exclude:
+    - app/models/regions_table.rb
+    - app/models/locations_table.rb
+    - 'node_modules/**/*'
+    - data/**/*
+
+# Customize rules
+Metrics/LineLength:
+  Max: 100
+  Exclude:
+    - bin/**/*
+    - db/**/*
+    - config/**/*
+    - test/**/*
+
+Metrics/ClassLength:
+  Exclude:
+    - test/**/*
+
+Metrics/BlockLength:
+  Exclude:
+    - test/**/*
+    - lib/tasks/**/*
+
+Metrics/MethodLength:
+  Exclude:
+    - lib/tasks/location.rake
+
+Style/FormatStringToken:
+  Enabled: false
+
+Naming/UncommunicativeMethodParamName:
+  Exclude:
+    - test/**/*

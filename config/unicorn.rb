@@ -1,9 +1,5 @@
-if ENV["RAILS_ENV"] == "development"
-  worker_processes 1
-else
-  #worker_processes 3
-  worker_processes 1
-end
+# frozen_string_literal: true
 
+worker_processes 1
 timeout 300
 listen 3000
