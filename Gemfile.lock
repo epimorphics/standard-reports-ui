@@ -60,11 +60,7 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     ansi (1.5.0)
     arel (7.1.4)
-<<<<<<< HEAD
-    autoprefixer-rails (8.5.2)
-=======
     autoprefixer-rails (8.6.0)
->>>>>>> dev
       execjs
     bindex (0.5.0)
     bootstrap-sass (3.3.7)
@@ -92,11 +88,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.12.2)
       faraday (>= 0.7.4, < 1.0)
-<<<<<<< HEAD
-    ffi (1.9.23)
-=======
     ffi (1.9.25)
->>>>>>> dev
     font-awesome-rails (4.7.0.4)
       railties (>= 3.2, < 6.0)
     globalid (0.4.1)
@@ -194,11 +186,7 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
-<<<<<<< HEAD
-    public_suffix (3.0.1)
-=======
     public_suffix (3.0.2)
->>>>>>> dev
     rack (2.0.5)
     rack-test (0.6.3)
       rack (>= 1.0)
