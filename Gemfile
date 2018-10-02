@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.2'
+gem 'rails', '~> 5.2.1'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -22,7 +22,7 @@ gem 'bootstrap-sass'
 gem 'font-awesome-rails'
 gem 'haml-rails'
 gem 'jquery-rails'
-gem 'lr_common_styles', github: 'epimorphics/lr_common_styles'
+gem 'lr_common_styles', git: 'https://github.com/epimorphics/lr_common_styles'
 gem 'modernizr-rails'
 gem 'modulejs-rails'
 
