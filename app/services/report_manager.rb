@@ -6,10 +6,13 @@ class ReportManager
 
   def initialize(config = nil)
     return unless config
+
     @url = config[:url]
     @api = config[:api]
 
     return unless (params = config[:params])
+    return unless validate?(params)
+
     @requested_format = params[:format]
     @requested_format = @requested_format.to_sym if @requested_format
     start_requests(params)
@@ -39,6 +42,14 @@ class ReportManager
     requests
   end
 
+  def valid?
+    !errors
+  end
+
+  def errors
+    @errors&.join(', ')
+  end
+
   private
 
   def url
@@ -59,33 +70,57 @@ class ReportManager
 
   # Convert a hash with optionally multiple values for some
   # keys into an array of hashes where every key has only a
-  # single value
+  # single value. So, for example,
+  #     a=1&b[]=2&b[]=3
+  # becomes
+  #     [{a: 1, b: 2}, {a: 1, b: 3}]
   def create_params_sets(params) # rubocop:disable Metrics/MethodLength
-    separated = [{}]
+    product = [{}]
 
     params.each do |k, v|
-      separated_ = []
-      k_na = non_array_key(k)
+      product_ = []
 
-      separated.each do |h|
+      product.each do |h|
         (v.is_a?(Array) ? v : [v]).each do |vv|
           h_copy = h.dup
-          h_copy[k_na] = vv
-          separated_ << h_copy
+          h_copy[k] = vv
+          product_ << h_copy
         end
       end
-      separated = separated_
+      product = product_
     end
 
-    separated
-  end
-
-  def non_array_key(key)
-    key.to_s.gsub('[]', '').to_sym
+    product
   end
 
   def start_request(req_spec)
     json = api.post_json("#{url}report-request", req_spec.to_hash)
     ReportStatus.new(json)
+  end
+
+  def validate?(params)
+    key_present?(params, :report)
+    key_present?(params, :areaType)
+    key_present?(params, :area)
+    key_present?(params, :aggregate)
+    key_present?(params, :age)
+    array_key_present?(params, :period)
+
+    valid?
+  end
+
+  def key_present?(params, key)
+    return unless !params.key?(key) || params[key].nil? || params[key].to_s.empty?
+
+    @errors ||= []
+    @errors << "missing parameter #{key}"
+  end
+
+  def array_key_present?(params, key)
+    return unless !params.key?(key) || params[key].nil? ||
+                  !params[key].is_a?(Array) || params[key].empty?
+
+    @errors ||= []
+    @errors << "missing parameter #{key}"
   end
 end
