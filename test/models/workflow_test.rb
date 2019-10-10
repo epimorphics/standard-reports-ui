@@ -7,17 +7,17 @@ class WorkflowTest < ActiveSupport::TestCase
   let(:empty_workflow) { Workflow.new({}) }
 
   it 'should have at least one step defined' do
-    empty_workflow.steps.wont_be_empty
+    _(empty_workflow.steps).wont_be_empty
   end
 
   it 'should choose the select report step if the workflow is just started' do
-    empty_workflow.current_step.name.must_equal :select_report
+    _(empty_workflow.current_step.name).must_equal :select_report
   end
 
   let(:report_type_selected_workflow) { Workflow.new(report: :avgPrice) }
 
   it 'should choose the select area step if the report has been chosen' do
-    report_type_selected_workflow.current_step.name.must_equal :select_area_type
+    _(report_type_selected_workflow.current_step.name).must_equal :select_area_type
   end
 
   it 'should allow state values to be queried' do
@@ -41,7 +41,7 @@ class WorkflowTest < ActiveSupport::TestCase
   end
 
   it 'should allow state values to be read' do
-    report_type_selected_workflow.state(:report).must_equal :avgPrice
+    _(report_type_selected_workflow.state(:report)).must_equal :avgPrice
   end
 
   it 'should not care if the state is initialized with string keys' do
@@ -56,7 +56,7 @@ class WorkflowTest < ActiveSupport::TestCase
     report_type_selected_workflow.each_state_ignoring(nil) do |s, v|
       acc << "#{s}--#{v}"
     end
-    acc.must_equal ['report--avgPrice']
+    _(acc).must_equal ['report--avgPrice']
   end
 
   it 'should support the iteration over states with multi-values' do
@@ -67,53 +67,53 @@ class WorkflowTest < ActiveSupport::TestCase
       acc << "#{p}--#{v}"
     end
 
-    acc.must_include 'report--avgPrice'
-    acc.must_include 'period[]--latest_m'
-    acc.must_include 'period[]--latest_q'
+    _(acc).must_include 'report--avgPrice'
+    _(acc).must_include 'period[]--latest_m'
+    _(acc).must_include 'period[]--latest_q'
   end
 
   it 'should be able to summarise a state value in a readable form' do
-    report_type_selected_workflow.summarise_selection(:report, 'avgPrice')
-                                 .must_match(/report type.*average prices and volumes/)
+    _(report_type_selected_workflow.summarise_selection(:report, 'avgPrice'))
+      .must_match(/report type.*average prices and volumes/)
   end
 
   it 'should intialise the workflow history' do
     workflow = Workflow.new({})
-    workflow.initial_step.name.must_equal :select_report
-    workflow.step_history.length.must_equal 1
+    _(workflow.initial_step.name).must_equal :select_report
+    _(workflow.step_history.length).must_equal 1
   end
 
   it 'should build the workflow history' do
     workflow = Workflow.new(report: 'avgPrice')
     workflow.current_step
-    workflow.step_history.length.must_equal 2
-    workflow.prior_step.name.must_equal :select_report
+    _(workflow.step_history.length).must_equal 2
+    _(workflow.prior_step.name).must_equal :select_report
   end
 
   it 'should correctly summarise county selections' do
     workflow = Workflow.new(areaType: 'county', area: 'DEVON')
 
-    workflow.summarise_selection(:area, 'DEVON').must_match(/County.*is.*DEVON/)
+    _(workflow.summarise_selection(:area, 'DEVON')).must_match(/County.*is.*DEVON/)
   end
 
   it 'should traverse to the first step with an empty state' do
     workflow = Workflow.new({})
     step = StepSelectReport.new
     step_to = step.traverse(workflow)
-    step_to.name.must_equal :select_report
+    _(step_to.name).must_equal :select_report
   end
 
   it 'should traverse to the appropriate step with a partial state' do
     workflow = Workflow.new(report: 'avgPrices', areaType: 'county')
     step = StepSelectReport.new
     step_to = step.traverse(workflow)
-    step_to.name.must_equal :select_county
+    _(step_to.name).must_equal :select_county
   end
 
   it 'should stop at a step if given a stop parameter in the workflow' do
     workflow = Workflow.new(report: 'avgPrices', areaType: 'county', stop: 'areaType')
     step = StepSelectReport.new
     step_to = step.traverse(workflow)
-    step_to.name.must_equal :select_area_type
+    _(step_to.name).must_equal :select_area_type
   end
 end

@@ -10,9 +10,9 @@ class ReportManagerTest < ActiveSupport::TestCase
 
     rm = ReportManager.new(api: api)
 
-    rm.latest_month.must_equal 9
-    rm.latest_year.must_equal 2015
-    rm.latest_month_spec.must_equal '2015-09'
+    _(rm.latest_month).must_equal 9
+    _(rm.latest_year).must_equal 2015
+    _(rm.latest_month_spec).must_equal '2015-09'
   end
 
   it 'should permit valid requests' do
@@ -30,8 +30,8 @@ class ReportManagerTest < ActiveSupport::TestCase
     )
 
     rm = ReportManager.new(api: api, params: params)
-    rm.valid?.must_equal true
-    rm.errors.must_be_nil
+    _(rm.valid?).must_equal true
+    _(rm.errors).must_be_nil
   end
 
   it 'should reject invalid requests (no period)' do
@@ -47,8 +47,8 @@ class ReportManagerTest < ActiveSupport::TestCase
     )
 
     rm = ReportManager.new(api: api, params: params)
-    rm.valid?.must_equal false
-    rm.errors.must_equal 'missing parameter period'
+    _(rm.valid?).must_equal false
+    _(rm.errors).must_equal 'missing parameter period'
   end
 
   it 'should reject invalid requests (no value for period)' do
@@ -65,8 +65,8 @@ class ReportManagerTest < ActiveSupport::TestCase
     )
 
     rm = ReportManager.new(api: api, params: params)
-    rm.valid?.must_equal false
-    rm.errors.must_equal 'missing parameter period'
+    _(rm.valid?).must_equal false
+    _(rm.errors).must_equal 'missing parameter period'
   end
 
   it 'should reject invalid requests (no area)' do
@@ -76,13 +76,13 @@ class ReportManagerTest < ActiveSupport::TestCase
     params = ActionController::Parameters.new(
       report: 'avgPrice',
       areaType: 'region',
-      aggregate:  'county',
+      aggregate: 'county',
       period: [2018],
-      age:  'any'
+      age: 'any'
     )
 
     rm = ReportManager.new(api: api, params: params)
-    rm.valid?.must_equal false
-    rm.errors.must_equal 'missing parameter area'
+    _(rm.valid?).must_equal false
+    _(rm.errors).must_equal 'missing parameter area'
   end
 end

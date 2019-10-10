@@ -7,6 +7,6 @@ feature 'can advance to area type select' do
     visit report_design_path
     choose 'Average prices and volumes'
     click_button 'Next'
-    page.must_have_css('.select-area-type')
+    _(page).must_have_css('.select-area-type')
   end
 end

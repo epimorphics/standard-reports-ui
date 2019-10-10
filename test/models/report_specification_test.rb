@@ -8,21 +8,21 @@ class ReportSpecificationTest < ActiveSupport::TestCase
 
   it 'should record parameters correctly' do
     rs = ReportSpecification.new({ a: 1, b: 2 }, nil)
-    rs.to_hash[:a].must_equal 1
-    rs.to_hash[:b].must_equal 2
-    rs.to_hash[:c].must_equal nil
+    _(rs.to_hash[:a]).must_equal 1
+    _(rs.to_hash[:b]).must_equal 2
+    _(rs.to_hash[:c]).must_be_nil
   end
 
   it 'should normalise the latest year' do
     rm = mock_report_manager(9, 2015)
     rs = ReportSpecification.new({ period: 'ytd' }, rm)
-    rs.to_hash[:period].must_equal(2015)
+    _(rs.to_hash[:period]).must_equal(2015)
   end
 
   it 'should normalise the latest month' do
     rm = mock_report_manager(9, 2015)
     rs = ReportSpecification.new({ period: 'latest_m' }, rm)
-    rs.to_hash[:period].must_equal('2015-09')
+    _(rs.to_hash[:period]).must_equal('2015-09')
   end
 
   it 'should normalise the latest quarter' do
@@ -42,9 +42,12 @@ class ReportSpecificationTest < ActiveSupport::TestCase
     ]
 
     expectations.each do |expectation|
-      ReportSpecification
-        .new({ period: 'latest_q' }, mock_report_manager(expectation[:m], 2015))
-        .to_hash[:period].must_equal(expectation[:q])
+      _(
+        ReportSpecification
+          .new({ period: 'latest_q' }, mock_report_manager(expectation[:m], 2015))
+          .to_hash[:period]
+      )
+        .must_equal(expectation[:q])
     end
   end
 end

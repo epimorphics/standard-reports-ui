@@ -8,15 +8,15 @@ class StepTest < ActiveSupport::TestCase
   let(:step) { Step.new(:test_step, :test_param, :test_layout) }
 
   it 'should have a name' do
-    step.name.must_equal :test_step
+    _(step.name).must_equal :test_step
   end
 
   it 'should have a parameter' do
-    step.param_name.must_equal :test_param
+    _(step.param_name).must_equal :test_param
   end
 
   it 'should have a layout' do
-    step.layout.must_equal :test_layout
+    _(step.layout).must_equal :test_layout
   end
 
   it 'should not report as completed if the param is missing' do
