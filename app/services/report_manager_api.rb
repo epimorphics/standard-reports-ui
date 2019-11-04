@@ -80,6 +80,7 @@ class ReportManagerApi
     end
 
     raise "Failed to post to #{http_url}: #{response.status.inspect}" unless ok?(response)
+    
     response
   end
 
@@ -87,8 +88,8 @@ class ReportManagerApi
     Faraday.new(url: http_url) do |faraday|
       faraday.request  :url_encoded
       faraday.use      FaradayMiddleware::FollowRedirects
-      faraday.adapter  :net_http
       set_logger_if_rails(faraday)
+      faraday.adapter :net_http
     end
   end
 
