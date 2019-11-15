@@ -63,6 +63,7 @@ class Workflow # rubocop:disable Metrics/ClassLength
 
   def traverse_to(step_name)
     raise "unknown step #{step_name}" unless (next_step = step(step_name))
+
     @step_history << next_step
     next_step.traverse(self)
   end
@@ -97,6 +98,7 @@ class Workflow # rubocop:disable Metrics/ClassLength
 
   def summarise_selection(state_name, state_value)
     return unless (step = step_with_param(state_name))
+
     step.summarise(state_value)
   end
 

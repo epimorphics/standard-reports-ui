@@ -24,9 +24,9 @@ class ReportManagerTest < ActiveSupport::TestCase
       report: 'avgPrice',
       areaType: 'region',
       area: 'EAST MIDLANDS',
-      aggregate:  'county',
+      aggregate: 'county',
       period: %w[ytd 2018],
-      age:  'any'
+      age: 'any'
     )
 
     rm = ReportManager.new(api: api, params: params)
@@ -42,8 +42,8 @@ class ReportManagerTest < ActiveSupport::TestCase
       report: 'avgPrice',
       areaType: 'region',
       area: 'EAST MIDLANDS',
-      aggregate:  'county',
-      age:  'any'
+      aggregate: 'county',
+      age: 'any'
     )
 
     rm = ReportManager.new(api: api, params: params)
@@ -59,9 +59,9 @@ class ReportManagerTest < ActiveSupport::TestCase
       report: 'avgPrice',
       areaType: 'region',
       area: 'EAST MIDLANDS',
-      aggregate:  'county',
+      aggregate: 'county',
       period: [],
-      age:  'any'
+      age: 'any'
     )
 
     rm = ReportManager.new(api: api, params: params)
