@@ -172,7 +172,7 @@ GEM
       minitest-capybara (~> 0.8)
       minitest-metadata (~> 0.6)
       minitest-rails (~> 3.0)
-    minitest-reporters (1.4.1)
+    minitest-reporters (1.4.2)
       ansi
       builder
       minitest (>= 5.0)
@@ -252,7 +252,7 @@ GEM
     sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    sentry-raven (2.12.2)
+    sentry-raven (2.12.3)
       faraday (>= 0.7.6, < 1.0)
     sexp_processor (4.13.0)
     spring (2.1.0)

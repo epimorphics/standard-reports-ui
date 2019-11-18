@@ -33,8 +33,8 @@ gem 'jquery-ui-rails'
 gem 'js-routes'
 gem 'leaflet-rails'
 gem 'responders', '~> 2.0'
-gem 'yajl-ruby', require: 'yajl'
 gem 'sentry-raven'
+gem 'yajl-ruby', require: 'yajl'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

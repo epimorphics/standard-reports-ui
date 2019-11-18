@@ -40,6 +40,7 @@ class ReportManagerApi
     end
 
     raise "Failed to read from #{http_url}: #{response.status.inspect}" unless ok?(response)
+
     response
   end
 
@@ -80,7 +81,7 @@ class ReportManagerApi
     end
 
     raise "Failed to post to #{http_url}: #{response.status.inspect}" unless ok?(response)
-    
+
     response
   end
 
