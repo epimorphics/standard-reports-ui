@@ -1,5 +1,10 @@
 # Standard Reports UI: change log
 
+## 1.1.2 - 2019-12-09
+
+- Add `ActionController::BadRequest` to the list of exceptions that
+  Sentry will ignore
+
 ## 1.1.1 - 2019-10-10
 
 - General update of gem dependencies
