@@ -85,4 +85,58 @@ class ReportManagerTest < ActiveSupport::TestCase
     _(rm.valid?).must_equal false
     _(rm.errors).must_equal 'missing parameter area'
   end
+
+  it 'should reject postal-district area types that do not have a valid postcode' do
+    api = mock('report_manager_api')
+    api.stubs(:get).returns('2015-09')
+
+    params = ActionController::Parameters.new(
+      report: 'avgPrice',
+      areaType: 'pcDistrict',
+      area: '; select wombles from wimbledon',
+      aggregate: 'county',
+      period: [2018],
+      age: 'any'
+    )
+
+    rm = ReportManager.new(api: api, params: params)
+    _(rm.valid?).must_equal false
+    _(rm.errors).must_equal 'invalid postal code'
+  end
+
+  it 'should reject postcode-area area types that do not have a valid postcode' do
+    api = mock('report_manager_api')
+    api.stubs(:get).returns('2015-09')
+
+    params = ActionController::Parameters.new(
+      report: 'avgPrice',
+      areaType: 'pcArea',
+      area: '; select wombles from wimbledon',
+      aggregate: 'county',
+      period: [2018],
+      age: 'any'
+    )
+
+    rm = ReportManager.new(api: api, params: params)
+    _(rm.valid?).must_equal false
+    _(rm.errors).must_equal 'invalid postal code'
+  end
+
+  it 'should reject postcode-sector area types that do not have a valid postcode' do
+    api = mock('report_manager_api')
+    api.stubs(:get).returns('2015-09')
+
+    params = ActionController::Parameters.new(
+      report: 'avgPrice',
+      areaType: 'pcSector',
+      area: '; select wombles from wimbledon',
+      aggregate: 'county',
+      period: [2018],
+      age: 'any'
+    )
+
+    rm = ReportManager.new(api: api, params: params)
+    _(rm.valid?).must_equal false
+    _(rm.errors).must_equal 'invalid postal code'
+  end
 end

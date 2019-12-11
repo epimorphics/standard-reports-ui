@@ -106,6 +106,8 @@ class ReportManager
     key_present?(params, :age)
     array_key_present?(params, :period)
 
+    valid_postcodes?(params) if valid?
+
     valid?
   end
 
@@ -122,5 +124,25 @@ class ReportManager
 
     @errors ||= []
     @errors << "missing parameter #{key}"
+  end
+
+  def valid_postcodes?(params)
+    area = params[:area]
+    pattern = validation_pattern(params)
+
+    return unless pattern && !pattern.match?(area)
+
+    @errors ||= []
+    @errors << 'invalid postal code'
+  end
+
+  def validation_pattern(params)
+    area_type = params[:areaType].to_sym
+
+    {
+      pcSector: StepSelectPostcodeSector::VALIDATION,
+      pcDistrict: StepSelectPostcodeDistrict::VALIDATION,
+      pcArea: StepSelectPostcodeArea::VALIDATION
+    }[area_type]
   end
 end

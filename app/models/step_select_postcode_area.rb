@@ -2,6 +2,8 @@
 
 # Workflow step of selecting a postcode area
 class StepSelectPostcodeArea < StepSelectPostcode
+  VALIDATION = /\A[A-Z][A-Z]?\Z/.freeze
+
   def initialize
     super(:select_pc_area)
   end
@@ -15,7 +17,7 @@ class StepSelectPostcodeArea < StepSelectPostcode
   end
 
   def validation_pattern
-    /\A[A-Z][A-Z]?\Z/
+    VALIDATION
   end
 
   def input_label

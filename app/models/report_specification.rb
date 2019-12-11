@@ -14,6 +14,8 @@ class ReportSpecification
   private
 
   def normalize_period(report_manager)
+    return unless @params[:period].respond_to?(:to_sym)
+
     case @params[:period].to_sym
     when :ytd
       @params[:period] = report_manager.latest_year
