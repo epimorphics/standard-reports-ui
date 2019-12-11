@@ -1,5 +1,9 @@
 # Standard Reports UI: change log
 
+## 1.1.3 - 2019-12-11
+
+- Add validation to avoid SPARQL-injection attack via postal codes
+
 ## 1.1.2 - 2019-12-09
 
 - Add `ActionController::BadRequest` to the list of exceptions that
