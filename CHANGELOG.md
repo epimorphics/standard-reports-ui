@@ -1,5 +1,10 @@
 # Standard Reports UI: change log
 
+## 1.2.0 - 2019-12-17
+
+- Changed minor version number as we've switched to using a
+  separate Sentry project for this app.
+
 ## 1.1.3 - 2019-12-11
 
 - Add validation to avoid SPARQL-injection attack via postal codes
