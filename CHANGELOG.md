@@ -1,5 +1,10 @@
 # Standard Reports UI: change log
 
+## 1.2.1 - 2020-03-19
+
+- Updates to various gem dependencies following some CVE warnings, 
+  but keeping Rails at version 5 for now.
+
 ## 1.2.0 - 2019-12-17
 
 - Changed minor version number as we've switched to using a
