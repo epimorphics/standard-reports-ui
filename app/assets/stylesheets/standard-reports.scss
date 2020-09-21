@@ -69,8 +69,14 @@ input[type=radio] {
   }
 }
 
-.c-form-submit {
-  margin-top: 30px;
+.c-form-actions {
+  margin-top: 2em;
+  display: flex;
+  align-items: center;
+
+  > * {
+    margin-right: 1em;
+  }
 }
 
 .c-back-action {
@@ -79,14 +85,25 @@ input[type=radio] {
 
 .js .c-back-action {
   display: inline-block;
-  margin-top: 33px;
-  margin-left: 20px;
-  color: $grey-1;
 }
 
 .c-heading-prefix {
   display: block;
   color: $grey-1;
+}
+
+.c-select-dates {
+  .row {
+    margin-bottom: 1rem;
+  }
+
+  details > .panel {
+    display: none;
+  }
+
+  details[open] > .panel {
+    display: block;
+  }
 }
 
 /* utilities */
@@ -109,10 +126,6 @@ input[type=radio] {
   margin-left: 2.5em;
 }
 
-.select-dates .row {
-  margin-bottom: 1rem;
-}
-
 .o-map {
   width: 100%;
   min-height: 40rem;
@@ -122,4 +135,15 @@ input[type=radio] {
 .o-help-link {
   @extend .pull-right;
   font-size: 90%
+}
+
+
+.button--secondary,
+.button--secondary:visited,
+.button--secondary:focus,
+.button--secondary:hover {
+  color: #0b0c0c !important;
+  background-color: #f3f2f1;
+  -webkit-box-shadow: 0 2px 0 #929191;
+  box-shadow: 0 2px 0 #929191;
 }

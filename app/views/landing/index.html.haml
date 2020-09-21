@@ -14,16 +14,16 @@
   There is no charge for using this service.
 
 %p
-  = link_to "create a standard report", {controller: :report_design, action: :show}, class: "button"
+  = link_to('create a standard report', {controller: :report_design, action: :show}, class: 'button button-start')
 
-%p.text-muted
+%p
   Note: standard reports contain aggregated prices by geographical area. If you are looking for details
   of individual property sales, please use the
   %a{ href: "/app/ppd" }
     PPD report builder
   instead.
 
-%p.text-muted
+%p
   You can read more information
   = succeed "." do
     = link_to "about this service", "https://www.gov.uk/guidance/price-paid-data-standard-reports#guidance-on-searching-the-data"

@@ -91,9 +91,9 @@ module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
   end
 
   def layout_submit_button
-    content_tag(:div, class: 'col-sm-12') do
+    content_tag(:div, class: 'c-form-actions col-sm-12') do
       concat submit_tag('Next', class: 'button c-form-submit', name: nil)
-      concat link_to('back', '#', class: 'c-back-action')
+      concat link_to('back', '#', class: 'button button--secondary c-back-action')
     end
   end
 
@@ -181,7 +181,12 @@ module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
 
   def labelled_check_box(param_name, value, label, checked)
     content_tag(:label, class: 'o-form-control--label-inline') do
-      concat check_box_tag(param_name, value, checked, class: 'o-form-control--input')
+      concat check_box_tag(
+        "#{param_name}#{value}",
+        value.to_s, checked,
+        class: 'o-form-control--input',
+        name: param_name
+      )
       concat label
     end
   end
@@ -205,8 +210,12 @@ module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
   end
 
   def show_change_link(workflow, step)
-    link_to('change&hellip;'.html_safe, workflow.params.merge(stop: step.param_name),
-            class: 'c-review-report--change-option copy-14')
+    link_to(
+      'change&hellip;'.html_safe,
+      workflow.params.merge(stop: step.param_name),
+      class: 'c-review-report--change-option copy-14',
+      'aria-label' => "change report option #{step.name}"
+    )
   end
 
   def layout_map_control(_step)
