@@ -8,7 +8,7 @@ feature 'show date selection' do
       visit report_design_path(report: :avgPrice, areaType: 'country', area: 'EW', aggregate: 'county')
       _(page).must_have_css('.container h1')
       _(page).must_have_css('.container form[method=get]')
-      _(page).must_have_css('.container .select-dates')
+      _(page).must_have_css('.container .c-select-dates')
       _(page).must_have_css('.container input.button[type=submit]')
 
       %i[ytd latest_q latest_m].each do |period|
