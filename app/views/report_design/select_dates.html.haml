@@ -2,7 +2,7 @@
 - step = @workflow.current_step
 - values = step.values( @workflow )
 
-.select-dates
+.c-select-dates
 
   %h1.heading-medium
     = render partial: "progress_indicator", locals: {workflow: @workflow}
@@ -43,3 +43,5 @@
             = layout_custom_dates( years_ago, step, @workflow )
 
     = layout_submit_button
+
+.clearfix

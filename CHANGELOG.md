@@ -1,5 +1,15 @@
 # Standard Reports UI: change log
 
+## 1.3.0 - 2020-09-21 (Ian)
+
+Updates to improve WCAG compliance, including:
+
+- remove `.text-muted` on some elements to improve colour contrast
+- ensure that hidden elements are not tabbable
+- ensure that form elements have unique IDs
+- add aria-label to ensure that action intents are clear and unique
+- use standard button styles for the form actions
+
 ## 1.2.2 - 2020-07-06
 
 - Updates to Gem dependencies following some CVE warnings
