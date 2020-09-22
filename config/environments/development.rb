@@ -39,4 +39,6 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.assets.quiet = true
+
+  config.accessibility_document_path = '/doc/accessibility'
 end

@@ -77,6 +77,8 @@ Rails.application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   config.relative_url_root = '/app/standard-reports'
+
+  config.accessibility_document_path = '/app/root/doc/accessibility'
 end
 
 JsRoutes.setup do |config|
