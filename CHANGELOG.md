@@ -1,5 +1,9 @@
 # Standard Reports UI: change log
 
+## 1.3.2
+
+- added the accessibility statement
+
 ## 1.3.1 - 2020-09-22 (Ian)
 
 - added skip-to-main-content link
