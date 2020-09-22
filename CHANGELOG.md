@@ -1,5 +1,9 @@
 # Standard Reports UI: change log
 
+## 1.3.1 - 2020-09-22 (Ian)
+
+- added skip-to-main-content link
+
 ## 1.3.0 - 2020-09-21 (Ian)
 
 Updates to improve WCAG compliance, including:
