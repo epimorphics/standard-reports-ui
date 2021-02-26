@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Struct.new('StepValue', :label, :value, :"active?")
+Struct.new('StepValue', :label, :value, :active?)
 
 # Base class for a workflow step
 class Step

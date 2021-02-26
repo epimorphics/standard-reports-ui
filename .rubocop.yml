@@ -4,9 +4,10 @@ AllCops:
     - app/models/locations_table.rb
     - 'node_modules/**/*'
     - data/**/*
+  NewCops: enable
 
 # Customize rules
-Metrics/LineLength:
+Layout/LineLength:
   Max: 100
   Exclude:
     - bin/**/*
@@ -30,6 +31,12 @@ Metrics/MethodLength:
 Style/FormatStringToken:
   Enabled: false
 
-Naming/UncommunicativeMethodParamName:
+Naming/MethodParameterName:
   Exclude:
     - test/**/*
+
+Lint/DuplicateBranch:
+  Enabled: false
+
+Style/OptionalBooleanParameter:
+  Enabled: false
