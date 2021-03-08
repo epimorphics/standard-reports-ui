@@ -54,6 +54,8 @@ group :test do
   gem 'minitest-spec-rails'
   gem 'minitest-vcr'
   gem 'mocha'
+  gem 'rubocop'
+  gem 'rubocop-rails'
   gem 'vcr'
   gem 'webmock'
 end
