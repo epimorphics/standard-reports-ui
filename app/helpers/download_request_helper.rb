@@ -12,7 +12,7 @@ module DownloadRequestHelper
     end
   end
 
-  def request_status(request) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+  def request_status(request) # rubocop:disable Metrics/MethodLength
     capture do
       if request.unknown?
         concat render_unknown_request(request)

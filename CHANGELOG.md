@@ -1,5 +1,10 @@
 # Standard Reports UI: change log
 
+## 1.3.3 - 2021-03-08
+
+- Switch from Travis to Github actions for CI tests
+- dependency updates
+
 ## 1.3.2
 
 - added the accessibility statement

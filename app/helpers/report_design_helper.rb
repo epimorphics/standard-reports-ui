@@ -115,7 +115,7 @@ module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
       .summarise_current_value(workflow)
   end
 
-  # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
   def layout_custom_dates(delta, step, workflow)
     year = Time.now.year - delta
     content_tag(:div, class: 'row') do
@@ -129,7 +129,7 @@ module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
       end)
     end
   end
-  # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
+  # rubocop:enable Metrics/MethodLength
 
   def layout_all_year(step, year, workflow)
     all_year = year == Time.now.year ? 'to date' : 'all year'
@@ -195,8 +195,8 @@ module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
     params = Workflow::STEP_SEQUENCE.map(&:param_name)
     capture do
       params.each do |state_name|
-        if (step = workflow.step_with_param(state_name))
-          concat(review_selection(workflow, step)) if step.respond_to?(:summarise)
+        if (step = workflow.step_with_param(state_name)) && step.respond_to?(:summarise)
+          concat(review_selection(workflow, step))
         end
       end
     end
@@ -220,8 +220,7 @@ module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
 
   def layout_map_control(_step)
     content_tag(:div, class: 'col-sm-12 col-md-6') do
-      content_tag(:div, id: 'map', class: 'o-map') do
-      end
+      tag(:div, id: 'map', class: 'o-map')
     end
   end
 end

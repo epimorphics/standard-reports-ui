@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Service object for interacting with remote service-manager API
-class ReportManager
+class ReportManager # rubocop:disable Metrics/ClassLength
   DEFAULT_URL = 'http://localhost:8080/sr-manager/'
 
   def initialize(config = nil)
@@ -31,12 +31,10 @@ class ReportManager
   end
 
   def latest_month_spec
-    @latest_month_spec ||= api.get(url + 'latest-month-available', accept: 'text/plain')
+    @latest_month_spec ||= api.get("#{url}latest-month-available", accept: 'text/plain')
   end
 
-  attr_reader :requested_format
-
-  attr_reader :requests
+  attr_reader :requested_format, :requests
 
   def as_json(_options = nil)
     requests

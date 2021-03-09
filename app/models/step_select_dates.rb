@@ -51,12 +51,10 @@ class StepSelectDates < Step
     'select dates'
   end
 
-  def each_year(hidden_only = true)
+  def each_year(hidden_only = true, &block)
     start_delta = hidden_only ? YEARS_SHOWN_BY_DEFAULT : 0
     delta = Time.now.year - EARLIEST_YEAR
-    (start_delta..delta).each do |d|
-      yield d
-    end
+    (start_delta..delta).each(&block)
   end
 
   private

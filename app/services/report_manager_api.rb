@@ -121,7 +121,7 @@ class ReportManagerApi
       Rails.logger.info(msg)
       throw msg
     else
-      throw 'JSON result was not parsed correctly: ' + json.slice(0, 1000)
+      throw "JSON result was not parsed correctly: #{json.slice(0, 1000)}"
     end
   end
 end
