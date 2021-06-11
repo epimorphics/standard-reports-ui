@@ -91,16 +91,12 @@ GEM
     erubi (1.10.0)
     erubis (2.7.0)
     execjs (2.8.1)
-    faraday (1.4.2)
-      faraday-em_http (~> 1.0)
-      faraday-em_synchrony (~> 1.0)
+    faraday (1.4.1)
       faraday-excon (~> 1.1)
       faraday-net_http (~> 1.0)
       faraday-net_http_persistent (~> 1.1)
       multipart-post (>= 1.2, < 3)
       ruby2_keywords (>= 0.0.4)
-    faraday-em_http (1.0.0)
-    faraday-em_synchrony (1.0.0)
     faraday-excon (1.1.0)
     faraday-net_http (1.0.1)
     faraday-net_http_persistent (1.1.0)
@@ -331,7 +327,7 @@ DEPENDENCIES
   bootstrap-sass
   byebug
   capybara_minitest_spec
-  faraday
+  faraday (< 1.4.2)
   faraday_middleware
   font-awesome-rails
   haml-rails
@@ -366,4 +362,4 @@ DEPENDENCIES
   yajl-ruby
 
 BUNDLED WITH
-   2.1.4
+   2.2.17
