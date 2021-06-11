@@ -17,4 +17,5 @@
 //= require leaflet
 //= require lodash
 //= require js-routes
+//= require lr_common_styles/application
 //= require_tree .
