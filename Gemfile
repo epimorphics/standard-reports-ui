@@ -30,6 +30,8 @@ gem 'modulejs-rails'
 gem 'lr_common_styles', git: 'https://github.com/epimorphics/lr_common_styles'
 # gem 'lr_common_styles', path: '/home/ian/projects/hmlr/lr_common_styles'
 
+gem 'json_rails_logger', git: 'https://github.com/epimorphics/json-rails-logger.git', branch: 'main'
+
 # application dependencies
 gem 'faraday'
 gem 'faraday_middleware'
