@@ -80,7 +80,6 @@ Rails.application.configure do
 
   config.accessibility_document_path = '/accessibility'
   config.privacy_document_path = '/privacy'
-
 end
 
 JsRoutes.setup do |config|
