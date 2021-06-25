@@ -1,5 +1,9 @@
 # Standard Reports UI: change log
 
+## 1.3.4 - 2021-06-25
+
+- (Joseph) Small config change to allow linking to privacy notice.
+
 ## 1.3.3 - 2021-03-08
 
 - Switch from Travis to Github actions for CI tests

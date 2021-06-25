@@ -41,4 +41,5 @@ Rails.application.configure do
   config.assets.quiet = true
 
   config.accessibility_document_path = '/doc/accessibility'
+  config.privacy_document_path = '/doc/privacy'
 end
