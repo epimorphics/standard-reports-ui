@@ -21,5 +21,6 @@ RUN bundle install
 ENV RAILS_ENV="production"
 EXPOSE 3000
 
-# Add app entrypoint script
+# Precompile assets and add entrypoint script
+RUN rake assets:precompile
 ENTRYPOINT [ "sh", "./entrypoint.sh" ]
