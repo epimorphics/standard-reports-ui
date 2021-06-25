@@ -141,4 +141,8 @@ class ReportManager # rubocop:disable Metrics/ClassLength
       pcArea: StepSelectPostcodeArea::VALIDATION
     }[area_type]
   end
+
+  def api_service_url
+    Rails.application.config.api_service_url
+  end
 end
