@@ -48,8 +48,12 @@ class ReportManager # rubocop:disable Metrics/ClassLength
 
   private
 
+  def default_url
+    "#{api_service_url}/sr-manager/"
+  end
+
   def url
-    @url ||= DEFAULT_URL
+    @url ||= default_url
   end
 
   def api
