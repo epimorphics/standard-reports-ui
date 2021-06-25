@@ -79,6 +79,8 @@ Rails.application.configure do
   config.relative_url_root = '/app/standard-reports'
 
   config.accessibility_document_path = '/accessibility'
+  config.privacy_document_path = '/privacy'
+
 end
 
 JsRoutes.setup do |config|
