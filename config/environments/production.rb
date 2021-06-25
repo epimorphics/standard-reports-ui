@@ -74,9 +74,9 @@ Rails.application.configure do
   config.active_support.deprecation = :notify
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = ::Logger::Formatter.new
+  # config.log_formatter = ::Logger::Formatter.new
 
-  config.relative_url_root = '/app/standard-reports'
+  config.logger = JsonRailsLogger::Logger.new($stdout)
 
   config.accessibility_document_path = '/accessibility'
   config.privacy_document_path = '/privacy'
