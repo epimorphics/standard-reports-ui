@@ -11,8 +11,10 @@ COPY . .
 RUN apt-get install tzdata \
                     git
 
+ARG BUNDLER_VERSION=2.1.4
+
 # Install bundler and gems
-RUN gem install bundler:2.1.4
+RUN gem install bundler:$BUNDLER_VERSION
 RUN bundle install --without="development"
 
 # Set environment variables and expose the running port
