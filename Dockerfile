@@ -15,7 +15,7 @@ ARG BUNDLER_VERSION=2.1.4
 
 # Install bundler and gems
 RUN gem install bundler:$BUNDLER_VERSION
-RUN bundle install --without="development"
+RUN bundle install
 
 # Set environment variables and expose the running port
 ENV RAILS_ENV="production"
