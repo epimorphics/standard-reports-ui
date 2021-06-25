@@ -80,6 +80,8 @@ Rails.application.configure do
 
   config.relative_url_root = ENV['RELATIVE_URL_ROOT'] || '/'
 
+  config.api_service_url = ENV['API_SERVICE_URL']
+
   config.accessibility_document_path = '/accessibility'
   config.privacy_document_path = '/privacy'
 end
