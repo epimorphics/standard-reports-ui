@@ -78,10 +78,12 @@ Rails.application.configure do
 
   config.logger = JsonRailsLogger::Logger.new($stdout)
 
+  config.relative_url_root = ENV['RELATIVE_URL_ROOT'] || '/'
+
   config.accessibility_document_path = '/accessibility'
   config.privacy_document_path = '/privacy'
 end
 
 JsRoutes.setup do |config|
-  config.prefix = '/app/standard-reports'
+  config.prefix = ENV['RELATIVE_URL_ROOT'] || '/'
 end
