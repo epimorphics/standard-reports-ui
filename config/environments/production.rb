@@ -74,14 +74,18 @@ Rails.application.configure do
   config.active_support.deprecation = :notify
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = ::Logger::Formatter.new
+  # config.log_formatter = ::Logger::Formatter.new
 
-  config.relative_url_root = '/app/standard-reports'
+  config.logger = JsonRailsLogger::Logger.new($stdout)
+
+  config.relative_url_root = ENV['RELATIVE_URL_ROOT'] || '/'
+
+  config.api_service_url = ENV['API_SERVICE_URL']
 
   config.accessibility_document_path = '/accessibility'
   config.privacy_document_path = '/privacy'
 end
 
 JsRoutes.setup do |config|
-  config.prefix = '/app/standard-reports'
+  config.prefix = ENV['RELATIVE_URL_ROOT'] || '/'
 end

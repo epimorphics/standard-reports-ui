@@ -4,6 +4,7 @@ AllCops:
     - app/models/locations_table.rb
     - 'node_modules/**/*'
     - data/**/*
+    - 'Gemfile'
   NewCops: enable
 
 # Customize rules

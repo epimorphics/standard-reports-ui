@@ -2,6 +2,8 @@
 
 source 'https://rubygems.org'
 
+gem 'execjs', '< 2.8.0'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '< 6.0.0'
 # Use SCSS for stylesheets
@@ -27,6 +29,8 @@ gem 'modulejs-rails'
 
 gem 'lr_common_styles', git: 'https://github.com/epimorphics/lr_common_styles'
 # gem 'lr_common_styles', path: '/home/ian/projects/hmlr/lr_common_styles'
+
+gem 'json_rails_logger', git: 'https://github.com/epimorphics/json-rails-logger.git', branch: 'main'
 
 # application dependencies
 gem 'faraday'
