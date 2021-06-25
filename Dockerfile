@@ -8,7 +8,6 @@ WORKDIR /usr/src/app
 COPY . .
 
 # Prerequisites for gems install
-RUN rm -rf /application/Gemfile.lock
 RUN apt-get install tzdata \
                     git
 
