@@ -2,8 +2,6 @@
 
 # Service object for interacting with remote service-manager API
 class ReportManager # rubocop:disable Metrics/ClassLength
-  DEFAULT_URL = 'http://localhost:8080/sr-manager/'
-
   def initialize(config = nil)
     return unless config
 
