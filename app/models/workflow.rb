@@ -81,7 +81,7 @@ class Workflow # rubocop:disable Metrics/ClassLength
   end
 
   def params
-    @params ||= @state.select { |k, _v| whitelist_key(k) }
+    @params ||= @state.select { |k, _v| allowlist_key(k) }
   end
 
   def_delegator :params, :each, :each_state_key
@@ -92,7 +92,7 @@ class Workflow # rubocop:disable Metrics/ClassLength
     end
   end
 
-  def whitelist_key(key)
+  def allowlist_key(key)
     step_with_param(key)
   end
 
