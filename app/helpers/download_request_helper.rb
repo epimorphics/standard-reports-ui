@@ -29,20 +29,20 @@ module DownloadRequestHelper
   end
 
   def render_unknown_request(request)
-    tag(:span, class: 'o-request--status__warning') do
+    content_tag(:span, class: 'o-request--status__warning') do
       "Request #{request.id} was not recognised as a valid report request."
     end
   end
 
   def render_failed_request(request)
-    tag(:span, class: 'o-request--status__warning') do
-      "Request #{request.id} did not complete successfully." \
-        'Ideally we will put more info here. In the meantime, please check the log file'
+    content_tag(:span, class: 'o-request--status__warning') do
+      "Request #{request.id} did not complete successfully. " + "
+      Ideally we will put more info here. In the meantime, please check the log file"
     end
   end
 
   def render_completed_request(request) # rubocop:disable Metrics/MethodLength
-    tag(:span, class: 'o-request--status__success') do
+    content_tag(:span, class: 'o-request--status__success') do
       concat('Ready: ')
       concat(tag(:br))
       concat(
