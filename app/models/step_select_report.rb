@@ -19,10 +19,10 @@ class StepSelectReport < Step
     case state_value.to_sym
     when :avgPrice
       "<span class='c-review-report--summary-key'>report type #{connector}</span>" \
-        "<span class='c-review-report--summary-value'>average prices and volumes</span>"
+      "<span class='c-review-report--summary-value'>average prices and volumes</span>"
     when :banded
       "<span class='c-review-report--summary-key'>report type #{connector}</span>" \
-        "<span class='c-review-report--summary-value'>banded prices</span>"
+      "<span class='c-review-report--summary-value'>banded prices</span>"
     else
       'unknown report type!'
     end
