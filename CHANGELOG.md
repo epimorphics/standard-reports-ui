@@ -1,5 +1,9 @@
 # Standard Reports UI: change log
 
+## 1.3.5 - 2021-09-29
+
+- (Mairead) Added Object.assign polyfill
+
 ## 1.3.4 - 2021-06-25
 
 - (Joseph) Small config change to allow linking to privacy notice.

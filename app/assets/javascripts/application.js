@@ -16,6 +16,7 @@
 //= require jquery-ui/widgets/autocomplete
 //= require leaflet
 //= require lodash
+//= require object-assign-polyfill 
 //= require js-routes
 //= require lr_common_styles/application
 //= require_tree .
