@@ -3,6 +3,7 @@
 ## 1.3.5 - 2021-09-29
 
 - (Mairead) Added Object.assign polyfill
+- (Joseph) Bundle update to common styles
 
 ## 1.3.4 - 2021-06-25
 
