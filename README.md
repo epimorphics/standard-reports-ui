@@ -28,3 +28,7 @@ to localhost. See `bin/sr-tunnel-daemon`.
 Simply:
 
     bundle exec rails test
+
+## Issues
+
+Please use the [shared issues list](https://github.com/epimorphics/hmlr-linked-data/issues)
