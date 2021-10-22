@@ -1,5 +1,9 @@
 # Standard Reports UI: change log
 
+## 1.3.6 - 2021-10-22
+
+- (Joseph) Add North and West Northamptonshire to county names
+
 ## 1.3.5 - 2021-09-29
 
 - (Mairead) Added Object.assign polyfill
