@@ -2,7 +2,11 @@
 
 ## 1.3.6 - 2021-10-22
 
-- (Joseph) Add North and West Northamptonshire to county names
+- (Joseph) Add North and West Northamptonshire to county names.
+- (Joseph) Add Bournemouth, Christchurch and Poole to county names.
+- (Joseph) Add Somerset West and Taunton to district names.
+- (Joseph) Add East Suffolk to district names.
+- (Joseph) Add West Suffolk to district names.
 
 ## 1.3.5 - 2021-09-29
 
