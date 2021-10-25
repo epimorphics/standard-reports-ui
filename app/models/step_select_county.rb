@@ -30,6 +30,7 @@ class StepSelectCounty < StepSelectCountyOrDistrict # rubocop:disable Metrics/Cl
     'BLACKPOOL',
     'BLAENAU GWENT',
     'BOURNEMOUTH',
+    'BOURNEMOUTH, CHRISTCHURCH AND POOLE',
     'BRACKNELL FOREST',
     'BRIDGEND',
     'BRIGHTON AND HOVE',
