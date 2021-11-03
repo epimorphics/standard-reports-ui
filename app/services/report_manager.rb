@@ -5,8 +5,8 @@ class ReportManager # rubocop:disable Metrics/ClassLength
   def initialize(config = nil)
     return unless config
 
-    @url = config[:url]
-    @api = config[:api]
+    @url = config[:url] || default_url
+    @api = config[:api] || ReportManagerApi.new
 
     return unless (params = config[:params])
     return unless validate?(params)
@@ -50,14 +50,6 @@ class ReportManager # rubocop:disable Metrics/ClassLength
 
   def default_url
     "#{api_service_url}/sr-manager/"
-  end
-
-  def url
-    @url ||= default_url
-  end
-
-  def api
-    @api ||= ReportManagerApi.new
   end
 
   def start_requests(params)
