@@ -2,6 +2,8 @@
 
 # Service object for interacting with remote service-manager API
 class ReportManager # rubocop:disable Metrics/ClassLength
+  attr_reader :requested_format, :requests, :url, :api
+
   def initialize(config = nil)
     return unless config
 
@@ -31,8 +33,6 @@ class ReportManager # rubocop:disable Metrics/ClassLength
   def latest_month_spec
     @latest_month_spec ||= api.get("#{url}latest-month-available", accept: 'text/plain')
   end
-
-  attr_reader :requested_format, :requests
 
   def as_json(_options = nil)
     requests
