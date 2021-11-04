@@ -2,13 +2,11 @@
 
 # Service object for interacting with remote service-manager API
 class ReportManager # rubocop:disable Metrics/ClassLength
-  attr_reader :requested_format, :requests, :url, :api
-
   def initialize(config = nil)
     return unless config
 
-    @url = config[:url] || default_url
-    @api = config[:api] || ReportManagerApi.new
+    @url = config[:url]
+    @api = config[:api]
 
     return unless (params = config[:params])
     return unless validate?(params)
@@ -34,6 +32,8 @@ class ReportManager # rubocop:disable Metrics/ClassLength
     @latest_month_spec ||= api.get("#{url}latest-month-available", accept: 'text/plain')
   end
 
+  attr_reader :requested_format, :requests
+
   def as_json(_options = nil)
     requests
   end
@@ -50,6 +50,14 @@ class ReportManager # rubocop:disable Metrics/ClassLength
 
   def default_url
     "#{api_service_url}/sr-manager/"
+  end
+
+  def url
+    @url ||= default_url
+  end
+
+  def api
+    @api ||= ReportManagerApi.new
   end
 
   def start_requests(params)
@@ -139,6 +147,6 @@ class ReportManager # rubocop:disable Metrics/ClassLength
   end
 
   def api_service_url
-    Rails.application.config.api_service_url || 'http://localhost:8080/sr-manager/'
+    Rails.application.config.api_service_url
   end
 end
