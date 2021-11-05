@@ -42,7 +42,7 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  config.api_service_url = ENV['API_SERVICE_URL']
+  config.api_service_url = ENV['API_SERVICE_URL'] || 'http://localhost:8080'
 
   config.accessibility_document_path = '/doc/accessibility'
   config.privacy_document_path = '/doc/privacy'

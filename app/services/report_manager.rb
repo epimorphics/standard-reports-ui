@@ -147,6 +147,6 @@ class ReportManager # rubocop:disable Metrics/ClassLength
   end
 
   def api_service_url
-    Rails.application.config.api_service_url || 'http://localhost:8080'
+    Rails.application.config.api_service_url
   end
 end
