@@ -2,8 +2,6 @@
 
 # Service object for interacting with remote service-manager API
 class ReportManager # rubocop:disable Metrics/ClassLength
-  DEFAULT_URL = 'http://localhost:8080/sr-manager/'
-
   def initialize(config = nil)
     return unless config
 
@@ -50,8 +48,12 @@ class ReportManager # rubocop:disable Metrics/ClassLength
 
   private
 
+  def default_url
+    "#{api_service_url}/sr-manager/"
+  end
+
   def url
-    @url ||= DEFAULT_URL
+    @url ||= default_url
   end
 
   def api
@@ -142,5 +144,9 @@ class ReportManager # rubocop:disable Metrics/ClassLength
       pcDistrict: StepSelectPostcodeDistrict::VALIDATION,
       pcArea: StepSelectPostcodeArea::VALIDATION
     }[area_type]
+  end
+
+  def api_service_url
+    Rails.application.config.api_service_url
   end
 end
