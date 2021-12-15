@@ -4,13 +4,22 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
-# Ignore bundler config.
-/.bundle
-
-# Ignore all logfiles and tempfiles.
-/log/*
 !/log/.keep
-/tmp
 .byebug_history
+.github-token
+.npmrc
+.tags
+/.bundle
+/log/*
+/public/packs
+/public/packs-test
+/tmp
 C:\\nppdf32Log\\debuglog.txt
+coverage
+fc.json
+fc_simple.json
+index-names.txt
+index.json
+public/assets
+tags
 test/query_test.rb
