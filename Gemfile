@@ -13,7 +13,7 @@ gem 'uglifier', '>= 1.3.0'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-# gem 'libv8-node',  '>= 16.10.0.0'
+gem 'libv8-node',  '>= 16.10.0.0'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
