@@ -168,8 +168,6 @@ GEM
     kgio (2.11.4)
     leaflet-rails (1.7.0)
       rails (>= 4.2.0)
-    libv8-node (16.10.0.0)
-    libv8-node (16.10.0.0-aarch64-linux)
     lodash-rails (4.17.21)
       railties (>= 3.1)
     lograge (0.11.2)
@@ -366,7 +364,6 @@ DEPENDENCIES
   js-routes (< 2.0)
   json_rails_logger!
   leaflet-rails
-  libv8-node (>= 16.10.0.0)
   lr_common_styles!
   minitest-rails-capybara
   minitest-reporters
