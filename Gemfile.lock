@@ -168,6 +168,11 @@ GEM
     kgio (2.11.4)
     leaflet-rails (1.7.0)
       rails (>= 4.2.0)
+    libv8-node (16.10.0.0)
+    libv8-node (16.10.0.0-aarch64-linux)
+    libv8-node (16.10.0.0-x86_64-darwin)
+    libv8-node (16.10.0.0-x86_64-linux)
+    libv8-node (16.10.0.0-x86_64-linux-musl)
     lodash-rails (4.17.21)
       railties (>= 3.1)
     lograge (0.11.2)
@@ -222,6 +227,10 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.12.5)
       mini_portile2 (~> 2.6.1)
+      racc (~> 1.4)
+    nokogiri (1.12.5-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.12.5-x86_64-linux)
       racc (~> 1.4)
     parallel (1.21.0)
     parser (3.0.3.2)
@@ -348,6 +357,8 @@ GEM
 PLATFORMS
   -darwin-20
   aarch64-linux
+  x86_64-darwin-17
+  x86_64-linux
 
 DEPENDENCIES
   bootstrap-sass
@@ -364,6 +375,7 @@ DEPENDENCIES
   js-routes (< 2.0)
   json_rails_logger!
   leaflet-rails
+  libv8-node (>= 16.10.0.0)
   lr_common_styles!
   minitest-rails-capybara
   minitest-reporters
