@@ -1,5 +1,9 @@
 # Standard Reports UI: change log
 
+## 1.3.5 - 2021-12-11
+
+- (Mairead) Added deployment sub repo and assisting deployment files
+
 ## 1.3.4 - 2021-06-25
 
 - (Joseph) Small config change to allow linking to privacy notice.

@@ -1,0 +1,11 @@
+version: 2
+name:  epimorphics/standard-reports-ui
+key: standard-reports-ui
+deployments:
+  - tag: "v{ver}"
+    deploy: "prod"
+    publish: "prod"
+  - branch: "dev-infrastructure"
+    deploy: "dev"
+    publish: "dev"
+  - branch: "[a-zA-Z0-9]+"
