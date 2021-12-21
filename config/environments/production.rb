@@ -78,7 +78,7 @@ Rails.application.configure do
 
   config.logger = JsonRailsLogger::Logger.new($stdout)
 
-  config.relative_url_root = ENV['RELATIVE_URL_ROOT'] || '/'
+  config.relative_url_root = ENV['RAILS_RELATIVE_URL_ROOT'] || '/'
 
   config.api_service_url = ENV['API_SERVICE_URL'] || 'http://localhost:8080'
 
@@ -87,5 +87,5 @@ Rails.application.configure do
 end
 
 JsRoutes.setup do |config|
-  config.prefix = ENV['RELATIVE_URL_ROOT'] || '/'
+  config.prefix = ENV['RAILS_RELATIVE_URL_ROOT'] || '/'
 end
