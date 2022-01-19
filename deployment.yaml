@@ -1,6 +1,6 @@
 version: 2
 name:  epimorphics/standard-reports-ui
-key: standard-reports-ui
+key: std_rpts_ui
 deployments:
   - tag: "v{ver}"
     deploy: "prod"
