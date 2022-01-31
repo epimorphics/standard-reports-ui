@@ -12,6 +12,11 @@ with the report download link, if a report with those options
 has already been generated and cached, or a queue position
 as the job moves up the batch queue.
 
+## Environment Variables
+
+API_SERVICE_URL: the location (excluding path) of Standard 
+                 Reports Manager endpoint.
+
 ## Development
 
 This is a fairly standard Rails project, with no particular
