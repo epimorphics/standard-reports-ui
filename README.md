@@ -71,7 +71,7 @@ configuration](https://github.com/epimorphics/hmlr-ansible-deployment/blob/maste
 
 If you need to run a different API version then the easiest route to
 discovering the most recent is to use the [AWS
-ECR](https://eu-west-1.console.aws.amazon.com/ecr/repositories/private/018852084843/epimorphics/lr-data-api/dev?region=eu-west-1)
+ECR](https://eu-west-1.console.aws.amazon.com/ecr/repositories/private/018852084843/epimorphics/standard-reports-manager/dev?region=eu-west-1)
 console.
 
 ### Running the app locally in dev mode
