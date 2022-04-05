@@ -28,10 +28,6 @@ gem 'jquery-rails'
 gem 'modernizr-rails'
 gem 'modulejs-rails'
 
-gem 'lr_common_styles', git: 'https://github.com/epimorphics/lr_common_styles'
-
-gem 'json_rails_logger', git: 'https://github.com/epimorphics/json-rails-logger.git', branch: 'main'
-
 # application dependencies
 gem 'faraday'
 gem 'faraday_middleware'
@@ -70,4 +66,9 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+end
+
+source 'https://rubygems.pkg.github.com/epimorphics' do
+  gem 'json_rails_logger'
+  gem 'lr_common_styles'
 end
