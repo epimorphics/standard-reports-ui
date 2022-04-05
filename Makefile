@@ -67,7 +67,7 @@ realclean: clean
 run:
 	@-docker stop standardreports
 	@-docker rm standardreports && sleep 20
-	@docker run -e API_SERVICE_URL=${API_SERVICE_URL} --add-host loopback:host-gateway -p 3000:3000 --rm --name standardreports ${REPO}:${TAG}
+	@docker run -e API_SERVICE_URL=${API_SERVICE_URL} --add-host host.docker.internal:host-gateway -p 3000:3000 --rm --name standardreports ${REPO}:${TAG}
 
 tag:
 	@echo ${TAG}
