@@ -1,5 +1,3 @@
-# See github-workflows for the latest version of this file.
-
 name: "Build & Publish Docker Image"
 on:
   workflow_dispatch: {}
@@ -13,8 +11,8 @@ jobs:
       aws_access_key_id:     "${{ secrets.BUILD_HMLR_AWS_ACCESS_KEY_ID }}"
       aws_secret_access_key: "${{ secrets.BUILD_HMLR_AWS_SECRET_ACCESS_KEY }}"
       # Fixed
-      epi_gpr_access_token:  "${{ secrets.EPI_GPR_ACCESS_TOKEN }}"
-  deploy: 
+      epi_gpr_access_token:  "${{ secrets.HMLR_GPR_ACCESS_TOKEN }}"
+  deploy:
     needs: "publish"
     uses:  "epimorphics/github-workflows/.github/workflows/deploy.yml@reusable"
     with:
