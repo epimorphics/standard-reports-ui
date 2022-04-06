@@ -35,3 +35,24 @@ module StandardReportsUi
     config.autoload_paths << Rails.root.join('services')
   end
 end
+
+# Monkey-patch the bit of Rails that emits the start-up log message, so that it
+# is written out in JSON format that our combined logging service can handle
+# This version is Rails 5.x specific. A different pattern is needed for Rails 6
+# applications.
+module Rails
+  # :nodoc:
+  class Server
+    # :nodoc:
+    def print_boot_information
+      url = "on #{options[:SSLEnable] ? 'https' : 'http'}://#{options[:Host]}:#{options[:Port]}"
+
+      msg = {
+        level: 'INFO',
+        ts: DateTime.now.rfc3339(3),
+        message: "Starting #{server} Rails #{Rails.version} in #{Rails.env} #{url}"
+      }
+      puts msg.to_json
+    end
+  end
+end

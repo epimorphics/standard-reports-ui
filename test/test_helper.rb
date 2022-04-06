@@ -7,7 +7,6 @@ require 'minitest/rails/capybara'
 require 'mocha/minitest'
 
 require 'minitest/reporters'
-Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 VCR.configure do |c|
   c.cassette_library_dir = 'fixtures/vcr_cassettes'
