@@ -38,7 +38,7 @@ gem 'leaflet-rails'
 gem 'puma'
 gem 'prometheus-client', '~> 4.0'
 gem 'responders', '~> 2.0'
-gem 'sentry-raven'
+gem 'sentry-ruby', '~> 5.2'
 gem 'yajl-ruby', require: 'yajl'
 
 group :development, :test do
