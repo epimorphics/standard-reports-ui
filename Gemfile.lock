@@ -102,6 +102,8 @@ GEM
     ffi (1.15.5)
     font-awesome-rails (4.7.0.8)
       railties (>= 3.2, < 8.0)
+    get_process_mem (0.2.7)
+      ffi (~> 1.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
     govuk_elements_rails (2.0.0)
@@ -213,6 +215,7 @@ GEM
     parallel (1.22.1)
     parser (3.1.1.0)
       ast (~> 2.4.1)
+    prometheus-client (4.0.0)
     psych (4.0.3)
       stringio
     public_suffix (4.0.6)
@@ -371,6 +374,7 @@ DEPENDENCIES
   faraday
   faraday_middleware
   font-awesome-rails
+  get_process_mem (~> 0.2.7)
   haml-rails
   jbuilder (~> 2.0)
   jquery-rails
@@ -387,6 +391,7 @@ DEPENDENCIES
   mocha
   modernizr-rails
   modulejs-rails
+  prometheus-client (~> 4.0)
   puma
   rails (< 6.0.0)
   responders (~> 2.0)

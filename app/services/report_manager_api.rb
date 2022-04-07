@@ -1,27 +1,39 @@
 # frozen_string_literal: true
 
 # Encapsulates the HTTP API for the report manager
-class ReportManagerApi
+class ReportManagerApi # rubocop:disable Metrics/ClassLength
+  attr_reader :instrumenter
+
+  def initialize(instrumenter = ActiveSupport::Notifications)
+    @instrumenter = instrumenter
+  end
+
   # Get parsed JSON from the given URL
   def get_json(http_url, options)
     parse_json(get(http_url, options))
   end
 
   def post_json(http_url, options, json = nil)
+    start_time = Time.now
     response = post_to_api(http_url, options, json)
+
     if ok?(response)
+      record_api_ok_response(start_time, response)
       load_status_report(response)
     else
-      throw "API POST to '#{http_url}' failed: #{response.status} '#{response.body}'"
+      record_api_error_response(http_url, 'POST', response, start_time)
     end
   end
 
   def get(http_url, options = {})
+    start_time = Time.now
     response = get_from_api(http_url, options)
+
     if ok?(response)
+      record_api_ok_response(http_url, 'GET', response, start_time)
       response.body
     else
-      throw "API GET from '#{http_url}' failed #{response.status} '#{response.body}'"
+      record_api_error_response(http_url, 'GET', response, start_time)
     end
   end
 
@@ -30,7 +42,7 @@ class ReportManagerApi
   def get_from_api(http_url, options) # rubocop:disable Metrics/MethodLength
     conn = set_connection_timeout(create_http_connection(http_url))
 
-    response = conn.get do |req|
+    conn.get do |req|
       req.headers['Accept'] = if (accept = options.delete(:accept))
                                 accept
                               else
@@ -38,10 +50,8 @@ class ReportManagerApi
                               end
       req.params.merge! options
     end
-
-    raise "Failed to read from #{http_url}: #{response.status.inspect}" unless ok?(response)
-
-    response
+  rescue Faraday::ConnectionFailed => e
+    record_failed_connection(http_url, e)
   end
 
   def load_status_report(response)
@@ -73,23 +83,20 @@ class ReportManagerApi
   def post_to_api(http_url, options, json)
     conn = set_connection_timeout(create_http_connection(http_url))
 
-    response = conn.post do |req|
+    conn.post do |req|
       req.headers['Accept'] = 'application/json'
       req.headers['Content-Type'] = 'application/json'
       req.params.merge!(options)
       req.body = json if json
     end
-
-    raise "Failed to post to #{http_url}: #{response.status.inspect}" unless ok?(response)
-
-    response
+  rescue Faraday::ConnectionFailed => e
+    record_failed_connection(http_url, e)
   end
 
   def create_http_connection(http_url)
     Faraday.new(url: http_url) do |faraday|
       faraday.request  :url_encoded
       faraday.use      FaradayMiddleware::FollowRedirects
-      set_logger_if_rails(faraday)
       faraday.adapter :net_http
     end
   end
@@ -103,10 +110,6 @@ class ReportManagerApi
     (200..207).cover?(response.status)
   end
 
-  def set_logger_if_rails(faraday) # rubocop:disable Naming/AccessorMethodName
-    faraday.response :logger, Rails.logger if defined?(Rails) && Rails.env.development?
-  end
-
   def as_http_api(api)
     api.start_with?('http:') ? api : "#{url}#{api}"
   end
@@ -115,13 +118,36 @@ class ReportManagerApi
     @parser ||= Yajl::Parser.new
   end
 
-  def report_json_failure(json)
-    if defined?(Rails)
-      msg = 'JSON result was not parsed correctly (no temp file saved)'
-      Rails.logger.info(msg)
-      throw msg
-    else
-      throw "JSON result was not parsed correctly: #{json.slice(0, 1000)}"
-    end
+  def report_json_failure(_json)
+    msg = 'JSON result was not parsed correctly'
+    Sentry.capture_message(msg)
+    Rails.logger.error(msg)
+    throw msg
+  end
+
+  def record_api_error_response(http_url, method, response, start_time)
+    log_api_response(response, start_time: start_time, url: http_url, message: "API #{method}")
+    instrumenter&.instrument('response.api', response: response, duration: Time.now - start_time)
+
+    throw "API #{method} to '#{http_url}' failed: #{response.status} '#{response.body}'"
+  end
+
+  def record_api_ok_response(http_url, method, response, start_time)
+    log_api_response(response, start_time: start_time, url: http_url, message: "API #{method}")
+    instrumenter&.instrument('response.api', response: response, duration: Time.now - start_time)
+  end
+
+  def record_failed_connection(http_url, exception)
+    instrumenter&.instrument('connection_failure.api', exception: exception, url: http_url)
+    throw "Failed to connect to '#{http_url}'"
+  end
+
+  def log_api_response(response, start_time:, url: nil, status: nil, message: '')
+    Rails.logger.info(
+      url: response ? response.env[:url].to_s : url,
+      status: status || response.status,
+      duration: Time.now - start_time,
+      message: message
+    )
   end
 end
