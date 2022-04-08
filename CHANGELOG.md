@@ -1,5 +1,12 @@
 # Standard Reports UI: change log
 
+## 1.4.0 - 2022-04-07
+
+- (Ian) Adopt all of the current Epimorphics best-practice deployment patterns,
+  including shared GitHub actions, updated Makefile and Dockerfile, Prometheus
+  monitoring, and updated version of Sentry.
+- (Ian) Updated the README as part of handover.
+
 ## 1.3.5 - 2021-12-11
 
 - (Mairead) Added deployment sub repo and assisting deployment files
