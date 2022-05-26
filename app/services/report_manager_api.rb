@@ -18,7 +18,7 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
     response = post_to_api(http_url, options, json)
 
     if ok?(response)
-      record_api_ok_response(start_time, response)
+      record_api_ok_response(http_url, 'POST', response, start_time)
       load_status_report(response)
     else
       record_api_error_response(http_url, 'POST', response, start_time)
