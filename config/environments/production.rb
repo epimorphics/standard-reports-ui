@@ -24,7 +24,7 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'] || true
+  config.public_file_server.enabled = ENV.fetch('RAILS_SERVE_STATIC_FILES', true)
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
@@ -67,14 +67,14 @@ Rails.application.configure do
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
 
-  config.relative_url_root = ENV['RAILS_RELATIVE_URL_ROOT']
+  config.relative_url_root = ENV.fetch('RAILS_RELATIVE_URL_ROOT', '/app/standard-reports')
 
-  config.api_service_url = ENV['API_SERVICE_URL']
+  config.api_service_url = ENV.fetch('API_SERVICE_URL', nil)
 
   config.accessibility_document_path = '/accessibility'
   config.privacy_document_path = '/privacy'
 end
 
 JsRoutes.setup do |config|
-  config.prefix = ENV['RAILS_RELATIVE_URL_ROOT'] || '/'
+  config.prefix = ENV.fetch('RAILS_RELATIVE_URL_ROOT', '/app/standard-reports')
 end

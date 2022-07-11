@@ -367,6 +367,7 @@ PLATFORMS
   -darwin-20
   aarch64-linux
   x86_64-darwin-17
+  x86_64-darwin-21
   x86_64-linux
 
 DEPENDENCIES
@@ -412,4 +413,4 @@ DEPENDENCIES
   yajl-ruby
 
 BUNDLED WITH
-   2.3.5
+   2.3.13
