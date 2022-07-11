@@ -1,5 +1,11 @@
 # Standard Reports UI: change log
 
+## 1.4.1 - 2022-07-11
+
+- (Jon) Set the default root path environment variable to be `/app/standard-reports`
+ in the production environment as well as updated variable requests to use `fetch`
+  to future proof the codebase
+
 ## 1.4.0 - 2022-04-07
 
 - (Ian) Adopt all of the current Epimorphics best-practice deployment patterns,
