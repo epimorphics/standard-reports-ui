@@ -1,5 +1,10 @@
 # Standard Reports UI: change log
 
+
+## 1.3.7 - 2022-08-22
+
+- (Jon) Add Folkestone and Hythe to district names.
+
 ## 1.3.6 - 2021-10-22
 
 - (Joseph) Add North and West Northamptonshire to county names.
