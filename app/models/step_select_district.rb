@@ -140,6 +140,7 @@ class StepSelectDistrict < StepSelectCountyOrDistrict # rubocop:disable Metrics/
     'FAREHAM',
     'FENLAND',
     'FLINTSHIRE',
+    'FOLKESTONE AND HYTHE',
     'FOREST HEATH',
     'FOREST OF DEAN',
     'FYLDE',
