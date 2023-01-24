@@ -51,7 +51,7 @@ this is:
 AWS_PROFILE=lr docker run \
   -v `pwd`/test/fixtures/conf/app.conf:/etc/standard-reports/app.conf
   -p 8080:8080 \
-  018852084843.dkr.ecr.eu-west-1.amazonaws.com/epimorphics/standard-reports-manager/dev:733e91d
+  018852084843.dkr.ecr.eu-west-1.amazonaws.com/epimorphics/standard-reports-manager/dev:d1418af
 ```
 
 This maps a test fixture app configuration, which connects to the public Fuseki
@@ -64,7 +64,7 @@ dev configuration. Performance investigations should be run using a production
 instance of the service; running with the local dev Docker container as
 described above should be limited to app development or maintainance tasks.
 
-**Note** that the identity of the Docker image (`733e91d` in the example above)
+**Note** that the identity of the Docker image (`d1418af` in the example above)
 will change periodically. The currently deployed dev api image version is given
 by the `std_reports_mgr` tag in the ansible [dev
 configuration](https://github.com/epimorphics/hmlr-ansible-deployment/blob/master/ansible/group_vars/dev/tags.yml).
