@@ -70,7 +70,12 @@ group :development do
   gem 'spring'
 end
 
+# TODO: For running the app locally for testing you can set this to your local path
+# gem 'json_rails_logger', '~> 0.3.4', path: '~/Epimorphics/shared/json-rails-logger/'
+# gem 'lr_common_styles', '~> 1.9.0', path: '~/Epimorphics/clients/land-registry/projects/lr-common-styles/'
+
+# TODO: In production you want to set this to the gem from the epimorphics package repo
 source 'https://rubygems.pkg.github.com/epimorphics' do
-  gem 'json_rails_logger'
-  gem 'lr_common_styles'
+  gem 'json_rails_logger', '~> 0.3.4'
+  gem 'lr_common_styles', '~> 1.9.0'
 end
