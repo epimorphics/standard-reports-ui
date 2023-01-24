@@ -67,10 +67,13 @@ Rails.application.configure do
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
 
-  config.relative_url_root = ENV.fetch('RAILS_RELATIVE_URL_ROOT', '/app/standard-reports')
+  # In Production no default values are passed on the basis that missing
+  # configuration options represent a category of bug, and in that case the
+  # deployment should fail fast and noisily.
+  config.relative_url_root = ENV.fetch('RAILS_RELATIVE_URL_ROOT')
+  config.api_service_url = ENV.fetch('API_SERVICE_URL')
 
-  config.api_service_url = ENV.fetch('API_SERVICE_URL', nil)
-
+  # Use default paths for documentation.
   config.accessibility_document_path = '/accessibility'
   config.privacy_document_path = '/privacy'
 end
