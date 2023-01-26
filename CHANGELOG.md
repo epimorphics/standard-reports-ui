@@ -11,6 +11,10 @@
   current version `~>1.3.4` (this is to cover out of sync release versions)
 - (Jon) Updated the production `lr_common_styles` gem version to be at least the
   current version `~>1.9.0` (this is to cover out of sync release versions)
+- (Jon) Renamed the global env variable `RAILS_RELATIVE_URL_ROOT` to
+  `APPLICATION_PATH` to be more clear on it's use in the codebase.
+- (Jon) Refactored better guards in `entrypoint.sh` to ensure the required env
+  vars are set accordingly or deployment will fail noisily.
 
 ## 1.4.1 - 2022-07-11
 
