@@ -116,6 +116,6 @@ of the application:
 
 | name                       | description                                                          | typical value            |
 | -------------------------- | -------------------------------------------------------------------- | ------------------------ |
-| `RAILS_RELATIVE_URL_ROOT`  | The path from the server root to the application                     | `/app/standard-reports`  |
+| `APPLICATION_PATH`         | The path from the server root to the application                     | `/app/standard-reports`  |
 | `API_SERVICE_URL`          | The base URL from which data is accessed, including the HTTP scheme  | `http://localhost:8080`  |
 | `SENTRY_API_KEY`           | The Sentry DSN for sending exceptions and errors to Sentry           |                          |
