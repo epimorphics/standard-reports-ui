@@ -1,16 +1,19 @@
 # Standard Reports UI: change log
 
-## 1.4.2 - 2023-01
+## 1.4.2 - 2023-03-10
 
+- (Jon) Added a cli recommendation for running the `sr-manager` locally;
+  resolved a markdown linting issue with using HTML in markdown; as well as
+  fixed a simple typo in the `localhost:3001` port example
 - (Jon) Refactors the elapsed time calculated for API requests to be resolved
   as microseconds rather than milliseconds. This is to improve the reporting of
   the elapsed time in the system tooling logs.
 - (Jon) Minor text changes to the `Gemfile` to include instructions for running
   Epimorphics specific gems locally during the development of those gems.
 - (Jon) Updated the production `json_rails_logger` gem version to be at least the
-  current version `~>1.3.4` (this is to cover out of sync release versions)
+  current version `~>1.3.5` (this is to cover out of sync release versions)
 - (Jon) Updated the production `lr_common_styles` gem version to be at least the
-  current version `~>1.9.0` (this is to cover out of sync release versions)
+  current version `~>1.9.1` (this is to cover out of sync release versions)
 - (Jon) Renamed the global env variable `RAILS_RELATIVE_URL_ROOT` to
   `APPLICATION_PATH` to be more clear on it's use in the codebase.
 - (Jon) Refactored better guards in `entrypoint.sh` to ensure the required env
