@@ -45,7 +45,8 @@ by the Ansible configuration.
 In development, it is helpful to have an instance of the API available. The
 preferred pattern is to run the Docker container that holds the `sr-manager`
 API locally, but connected to the remote triple store. A suggested way to do
-this is:
+this is opening a terminal session in the root directory for this repository and
+using the following command to start the `sr-manager` instance:
 
 ```sh
 AWS_PROFILE=lr docker run \
@@ -76,8 +77,7 @@ console.
 
 ### Running the app locally in dev mode
 
-Assuming the API is running on port 8080 (the default), to start the standard
-reports app:
+Assuming the API is running on port 8080 (the default), to start the app locally:
 
 ```sh
 API_SERVICE_URL=http://localhost:8080 rails server
@@ -107,7 +107,7 @@ proxy](https://github.com/epimorphics/simple-web-proxy) that you can use.
 
 With the simple web proxy, and the two Docker containers running, access the
 application as
-[`localhost:30001/app/standard-reports/`](http://localhost:3001/app/standard-reports/).
+[`localhost:3001/app/standard-reports/`](http://localhost:3001/app/standard-reports/).
 
 ## Configuration environment variables
 
