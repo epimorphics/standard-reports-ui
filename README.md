@@ -109,6 +109,21 @@ With the simple web proxy, and the two Docker containers running, access the
 application as
 [`localhost:3001/app/standard-reports/`](http://localhost:3001/app/standard-reports/).
 
+### entrypoint.sh
+
+This script is used as the main entry point for starting the app from the `Dockerfile`.
+
+The Rails Framework requires certain values to be set as a Global environment variable
+when starting. To ensure the `APPLICATION_ROOT` is only set in one place per
+application we have added this to the `entrypoint.sh` file along with the `SCRIPT_NAME`.
+The Rails secret is also created here.
+
+There is a workaround to removing the PID lock of the Rails process in the event
+of the application crashing and not releasing the process.
+
+We have to pass the `API_SERVICE_URL` so that it is available in the `entrypoint.sh`
+or the application will throw an error and exit before starting
+
 ## Configuration environment variables
 
 We use a number of environment variables to determine the runtime behaviour
@@ -116,6 +131,6 @@ of the application:
 
 | name                       | description                                                          | typical value            |
 | -------------------------- | -------------------------------------------------------------------- | ------------------------ |
-| `APPLICATION_PATH`         | The path from the server root to the application                     | `/app/standard-reports`  |
+| `APPLICATION_ROOT`         | The path from the server root to the application                     | `/app/standard-reports`  |
 | `API_SERVICE_URL`          | The base URL from which data is accessed, including the HTTP scheme  | `http://localhost:8080`  |
 | `SENTRY_API_KEY`           | The Sentry DSN for sending exceptions and errors to Sentry           |                          |
