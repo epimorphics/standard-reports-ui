@@ -20,7 +20,6 @@ then
   exit 1
 fi
 
-
 echo "{'ts': '`date -u +%FT%T.%3NZ`', 'message': {'text: 'Standard Reports starting with API_SERVICE_URL ${API_SERVICE_URL} at APPLICATION_ROOT ${APPLICATION_ROOT}', 'level': 'INFO'}}"
 
 # Handle secrets based on env
