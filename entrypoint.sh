@@ -11,16 +11,14 @@ then
   export RAILS_ENV=production
 fi
 
-[ -z "API_SERVICE_URL" ] && echo "{'ts': '`date -u +%FT%T.%3NZ`', 'message': {'text: 'You have not specified env var API_SERVICE_URL', 'level': 'ERROR'}}" >&2
+[ -z "API_SERVICE_URL" ] && echo '{"ts": "'`date -u +%FT%T.%3NZ`'", "level": "ERROR", "message": "You have not specified an API_SERVICE_URL"}' >&2
 
-[ -z "APPLICATION_ROOT" ] && echo "{'ts': '`date -u +%FT%T.%3NZ`', 'message': {'text: 'You have not specified env var APPLICATION_ROOT', 'level': 'ERROR'}}" >&2
+[ -z "APPLICATION_ROOT" ] && echo echo '{"ts": "'`date -u +%FT%T.%3NZ`'", "level": "ERROR", "message": "You have not specified an APPLICATION_ROOT"}' >&2
 
 if [ -z "API_SERVICE_URL" ] || [-z "APPLICATION_ROOT"]
 then
   exit 1
 fi
-
-echo "{'ts': '`date -u +%FT%T.%3NZ`', 'message': {'text: 'Standard Reports starting with API_SERVICE_URL ${API_SERVICE_URL} at APPLICATION_ROOT ${APPLICATION_ROOT}', 'level': 'INFO'}}"
 
 # Handle secrets based on env
 if [ "$RAILS_ENV" == "production" ] && [ -z "$SECRET_KEY_BASE" ]
@@ -30,5 +28,7 @@ fi
 
 export RAILS_RELATIVE_URL_ROOT=${APPLICATION_ROOT:-'/app/standard-reports'}
 export SCRIPT_NAME=${APPLICATION_ROOT}
+
+echo '{"ts": "'`date -u +%FT%T.%3NZ`'", "level": "INFO", "message": "Starting Standard Reports UI. API_SERVICE_URL='${API_SERVICE_URL}' RAILS_ENV='${RAILS_ENV}' RAILS_RELATIVE_URL_ROOT='${RAILS_RELATIVE_URL_ROOT}'"}'
 
 exec ./bin/rails server -e ${RAILS_ENV} -b 0.0.0.0
