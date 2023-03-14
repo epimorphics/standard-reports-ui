@@ -6,9 +6,11 @@ FROM ruby:${RUBY_VERSION}-alpine${ALPINE_VERSION} as base
 ARG BUNDLER_VERSION
 
 RUN apk add --update \
-    tzdata \
+    bash \
+    coreutils \
     git \
     nodejs \
+    tzdata \
     && rm -rf /var/cache/apk/* \
     && gem install bundler:$BUNDLER_VERSION \
     && bundle config --global frozen 1
@@ -27,9 +29,7 @@ RUN ./bin/bundle config set --local without 'development test' && ./bin/bundle i
 
 COPY app app
 COPY config config
-COPY lib lib
 COPY public public
-COPY vendor vendor
 
 # Compile
 
