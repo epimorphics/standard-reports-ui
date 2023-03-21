@@ -29,7 +29,6 @@ RUN ./bin/bundle config set --local without 'development test' && ./bin/bundle i
 
 COPY app app
 COPY config config
-COPY lib lib
 COPY public public
 
 # Compile
