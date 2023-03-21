@@ -37,7 +37,8 @@ Rails.application.configure do
   # yet still be able to expire them through the digest params.
   config.assets.digest = true
 
-  # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
+  # `config.assets.precompile` and `config.assets.version` have moved to
+  # config/initializers/assets.rb
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
@@ -46,8 +47,12 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
 
+  # Tag rails logs with useful information
   config.log_tags = %i[subdomain request_id request_method]
+  # When sync mode is true, all output is immediately flushed to the underlying
+  # operating system and is not buffered by Ruby internally.
   $stdout.sync = true
+  # Log the stdout output to the Epimorphics JSON logging gem
   config.logger = JsonRailsLogger::Logger.new($stdout)
 
   # Use a different cache store in production.
@@ -64,26 +69,26 @@ Rails.application.configure do
     'Expires' => 5.minutes.from_now.to_formatted_s(:rfc822)
   }
 
-  # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  # config.action_controller.asset_host = 'http://assets.example.com'
-
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
-  # the I18n.default_locale when a translation cannot be found).
+  # the I18n.default_locale when a translation can not be found).
   config.i18n.fallbacks = true
 
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
 
-  # The application root should be specified in the entrypoint.sh file and therefore
-  # in Production no fall back values are passed on the basis that missing
-  # configuration options represent a category of bug, and in that case the
-  # deployment should fail fast and noisily.
-  config.relative_url_root = ENV['RAILS_RELATIVE_URL_ROOT']
-  # API location should also be specified in the entrypoint.sh file
+  # The RAILS_RELATIVE_URL_ROOT env var should NOT be used in Production
+  # The default value is passed in as the compiled assets have no knowledge of
+  # the base path and utilise the config.relative_url_root value to prefix the
+  # compiled asset paths
+  config.relative_url_root = '/app/standard-reports'
+
+  # API_SERVICE_URL should also be specified in the entrypoint.sh file and
+  # set in the Makefile as an env variable for the docker container when run as an image.
+  # API_SERVICE_URL is required by both Docker image and Rails
   config.api_service_url = ENV['API_SERVICE_URL']
 
   # Use default paths for documentation.
