@@ -10,4 +10,10 @@ require 'prometheus/middleware/exporter'
 use Prometheus::Middleware::Collector
 use Prometheus::Middleware::Exporter
 
-run Rails.application
+if ENV['RAILS_ENV'] != 'production'
+    run Rails.application
+else
+  map Rails.application.config.relative_url_root || '/' do
+    run Rails.application
+  end
+end

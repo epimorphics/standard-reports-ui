@@ -5,6 +5,7 @@ ARG RUBY_VERSION
 FROM ruby:${RUBY_VERSION}-alpine${ALPINE_VERSION} as base
 ARG BUNDLER_VERSION
 
+
 RUN apk add --update \
     bash \
     coreutils \
@@ -33,10 +34,12 @@ COPY public public
 
 # Compile
 
-RUN RAILS_ENV=production bundle exec rake assets:precompile \
+RUN RAILS_ENV=production \
+# RAILS_RELATIVE_URL_ROOT=/ \
+  bundle exec rake assets:precompile \
   && mkdir -m 777 /usr/src/app/coverage
 
-# Start a new stage to minimise the final image size
+# Start a new build stage to minimise the final image size
 FROM base
 
 ARG image_name
@@ -57,7 +60,7 @@ EXPOSE 3000
 WORKDIR /usr/src/app
 
 COPY --from=builder --chown=app /usr/local/bundle /usr/local/bundle
-COPY --from=builder --chown=app /usr/src/app     .
+COPY --from=builder --chown=app /usr/src/app .
 
 USER app
 
