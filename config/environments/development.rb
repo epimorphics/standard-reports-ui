@@ -44,6 +44,8 @@ Rails.application.configure do
 
   config.api_service_url = ENV.fetch('API_SERVICE_URL', 'http://localhost:8080')
 
+  config.relative_url_root = ENV.fetch('RAILS_RELATIVE_URL_ROOT', '/')
+
   config.assets.quiet = true
 
   config.accessibility_document_path = '/doc/accessibility'
