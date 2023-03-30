@@ -39,19 +39,6 @@ If need be, `config.relative_url_root` may by overridden by means of the
 `RAILS_RELATIVE_URL_ROOT` environment variable, althought this could also
 require rebuilding the assets or docker image.
 
-### Building and Running the docker container
-
-```sh
-make image run
-```
-
-or, if the image is already built, simply
-
-```sh
-make run
-```
-Docker images run in `production` mode.
-
 ### Running Rails as a server
 
 For rails applications you can start the server locally using the following command:
@@ -73,8 +60,20 @@ set this as the value must be exported. i.e.
 export SECRET_KEY_BASE=$(./bin/rails secret)
 ```
 
+### Building and Running the docker container
 
-To test the running application visit `localhost:<port>/{application path}`.
+```sh
+make image run
+```
+
+or, if the image is already built, simply
+
+```sh
+make run
+```
+Docker images run in `production` mode.
+
+To test the running application visit `localhost:<port>/<application path>`.
 
 ## Runtime Configuration environment variables
 
@@ -86,9 +85,9 @@ of the application:
 | `API_SERVICE_URL`          | The base URL from which data is accessed, including the HTTP scheme eg. | None                       |
 |                            | http://localhost:8888 if running a `data-api service` locally           |                            |
 |                            | http://data-api:8080  if running a `data-api docker` image locally      |                            |
-| `SECRET_KEY_BASE`          | See [description](https://api.rubyonrails.org/classes/Rails/Application.html#method-i-secret_key_base).
-For `development` mode a acceptable value is already configured, in production mode this should be set to the output of `rails secret`.
-This is handled automatically when starting a docker container, or the `server` `make` target | |
+| `SECRET_KEY_BASE`          | See [description](https://api.rubyonrails.org/classes/Rails/Application.html#method-i-secret_key_base). | |
+|                            | For `development` mode a acceptable value is already configured, in production mode this should be set to the output of `rails secret`. | |
+|                            | This is handled automatically when starting a docker container, or the `server` `make` target | |
 | `SENTRY_API_KEY`           | The DSN for sending reports to the PPD Sentry account                   | None                       |
 
 
