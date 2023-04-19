@@ -71,7 +71,8 @@ group :development do
 end
 
 # rubocop:disable Layout/LineLength
-# TODO: For running the app locally for testing you can set this to your local path
+# TODO: While running the rails app locally for testing you can set gems to your local path
+# ! These "local" paths do not work with a docker image - use the repo instead
 # gem 'json_rails_logger', '~> 0.3.5', path: '~/Epimorphics/shared/json-rails-logger/'
 # gem 'lr_common_styles', '~> 1.9.1', path: '~/Epimorphics/clients/land-registry/projects/lr_common_styles/'
 # rubocop:enable Layout/LineLength
