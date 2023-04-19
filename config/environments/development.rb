@@ -55,7 +55,6 @@ Rails.application.configure do
   # API location can be specified in the environment but defaults to the dev service
   config.api_service_url = ENV.fetch('API_SERVICE_URL', 'http://localhost:8888')
 
-
   # Use default paths for documentation.
   config.accessibility_document_path = '/doc/accessibility'
   config.privacy_document_path = '/doc/privacy'

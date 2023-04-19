@@ -7,16 +7,17 @@ BUNDLER_VERSION?=$(shell tail -1 Gemfile.lock | tr -d ' ')
 ECR?=${ACCOUNT}.dkr.ecr.eu-west-1.amazonaws.com
 GPR_OWNER?=epimorphics
 NAME?=$(shell awk -F: '$$1=="name" {print $$2}' deployment.yaml | sed -e 's/[[:blank:]]//g')
-SHORTNAME?=$(shell echo ${NAME} | cut -f2 -d/)
 PAT?=$(shell read -p 'Github access token:' TOKEN; echo $$TOKEN)
+PORT?=3003
 RUBY_VERSION?=$(shell cat .ruby-version)
+SHORTNAME?=$(shell echo ${NAME} | cut -f2 -d/)
 STAGE?=dev
-API_SERVICE_URL?= http://localhost:8080
+API_SERVICE_URL?=http://standard-reports-manager:8080
 
 BRANCH:=$(shell git rev-parse --abbrev-ref HEAD)
 COMMIT=$(shell git rev-parse --short HEAD)
 VERSION?=$(shell /usr/bin/env ruby -e 'require "./app/lib/version" ; puts Version::VERSION')
-TAG?=$(shell printf '%s_%s_%08d' ${VERSION} ${COMMIT} ${GITHUB_RUN_NUMBER})
+TAG?=$(shell printf '%s-%s-%08d' ${VERSION} ${COMMIT} ${GITHUB_RUN_NUMBER})
 
 ${TAG}:
 	@echo ${TAG}
@@ -71,11 +72,17 @@ publish: image
 realclean: clean
 	@rm -f ${GITHUB_TOKEN} ${BUNDLE_CFG}
 
-run:
-	@echo "Stopping ${SHORTNAME} ..."
-	@-docker stop ${SHORTNAME} && sleep 10
+run: start
+	@if docker network inspect dnet > /dev/null 2>&1; then echo "Using docker network dnet"; else echo "Create docker network dnet"; docker network create dnet; sleep 2; fi
+	@docker run -p ${PORT}:3000 -e API_SERVICE_URL=${API_SERVICE_URL} --network dnet --rm --name ${SHORTNAME} ${REPO}:${TAG}
+
+server: assets start
+	@export SECRET_KEY_BASE=$(./bin/rails secret)
+	@API_SERVICE_URL=${API_SERVICE_URL} ./bin/rails server -p ${PORT}
+
+start:
+	@docker stop ${SHORTNAME} > /dev/null 2>&1 || :
 	@echo "Starting ${SHORTNAME} ..."
-	@docker run -e API_SERVICE_URL=${API_SERVICE_URL} --add-host host.docker.internal:host-gateway -p 3000:3000 --rm --name ${SHORTNAME} ${REPO}:${TAG}
 
 tag:
 	@echo ${TAG}
@@ -92,8 +99,8 @@ vars:
 	@echo "ECR = ${ECR}"
 	@echo "GPR_OWNER = ${GPR_OWNER}"
 	@echo "NAME = ${NAME}"
-	@echo "SHORTNAME = ${SHORTNAME}"
 	@echo "RUBY_VERSION = ${RUBY_VERSION}"
+	@echo "SHORTNAME = ${SHORTNAME}"
 	@echo "STAGE = ${STAGE}"
 	@echo "COMMIT = ${COMMIT}"
 	@echo "TAG = ${TAG}"

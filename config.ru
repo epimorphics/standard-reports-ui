@@ -10,4 +10,6 @@ require 'prometheus/middleware/exporter'
 use Prometheus::Middleware::Collector
 use Prometheus::Middleware::Exporter
 
-run Rails.application
+map Rails.application.config.relative_url_root || '/' do
+  run Rails.application
+end
