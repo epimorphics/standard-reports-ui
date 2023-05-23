@@ -35,19 +35,27 @@ Rails.application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
 
-  config.log_tags = %i[subdomain request_id request_method]
-  $stdout.sync = true
-  config.logger = JsonRailsLogger::Logger.new($stdout)
-
-  # Raises error for missing translations
-  # config.action_view.raise_on_missing_translations = true
-
-  config.api_service_url = ENV.fetch('API_SERVICE_URL', 'http://localhost:8080')
-
-  config.relative_url_root = ENV.fetch('RAILS_RELATIVE_URL_ROOT', '/')
-
+  # Don't print a log message every time an asset file is loaded
   config.assets.quiet = true
 
+  # Tag rails logs with useful information
+  config.log_tags = %i[subdomain request_id request_method]
+  # When sync mode is true, all output is immediately flushed to the underlying
+  # operating system and is not buffered by Ruby internally.
+  $stdout.sync = true
+  # Log the stdout output to the Epimorphics JSON logging gem
+  config.logger = JsonRailsLogger::Logger.new($stdout)
+
+  # By default Rails expects that your application is running at the root (e.g. /).
+  # This configuration sets running your application inside a directory.
+  # Rails needs to know this directory to generate the appropriate routes.
+  # Alternatively you can set the RAILS_RELATIVE_URL_ROOT environment variable.
+  config.relative_url_root = ENV.fetch('RAILS_RELATIVE_URL_ROOT', '/')
+
+  # API location can be specified in the environment but defaults to the dev service
+  config.api_service_url = ENV.fetch('API_SERVICE_URL', 'http://localhost:8888')
+
+  # Use default paths for documentation.
   config.accessibility_document_path = '/doc/accessibility'
   config.privacy_document_path = '/doc/privacy'
 end

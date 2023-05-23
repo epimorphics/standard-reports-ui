@@ -41,7 +41,7 @@ assets:
 	@./bin/bundle install
 	@./bin/rails assets:clean assets:precompile
 
-auth: ${BUNDLE_CFG}
+auth: ${GITHUB_TOKEN} ${BUNDLE_CFG}
 
 clean:
 	@[ -d public/assets ] && ./bin/rails assets:clobber || :
