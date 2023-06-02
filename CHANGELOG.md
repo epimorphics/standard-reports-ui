@@ -1,5 +1,9 @@
 # Standard Reports UI: change log
 
+## 1.4.3 - 2023-06-03
+
+- (Jon) Updated the `json_rails_logger` gem to the latest 1.0.0 release.
+
 ## 1.4.2 - 2023-03-10
 
 - (Jon) Added a cli recommendation for running the `sr-manager` locally;
