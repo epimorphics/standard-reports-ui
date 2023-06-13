@@ -103,8 +103,8 @@ the application:
 | name                       | description                                                             | default value              |
 | -------------------------- | ----------------------------------------------------------------------- | -------------------------- |
 | `API_SERVICE_URL`          | The base URL from which data is accessed, including the HTTP scheme eg. | None                       |
-|                            | <http://localhost:8888> if running a `data-api service` locally         |                            |
-|                            | <http://data-api:8080>  if running a `data-api docker` image locally    |                            |
+|                            | <http://localhost:8888> if running a `standard-reports-manager service` locally         |                            |
+|                            | <http://standard-reports-manager:8080>  if running a `standard-reports-manager docker` image locally    |                            |
 | `SECRET_KEY_BASE`          | See [description](https://api.rubyonrails.org/classes/Rails/Application.html#method-i-secret_key_base). | |
 |                            | For `development` mode a acceptable value is already configured, in production mode this should be set to the output of `rails secret`. | |
 |                            | This is handled automatically when starting a docker container, or the `server` `make` target | |
@@ -189,7 +189,7 @@ wget -O test/fixtures/conf/app.conf https://raw.githubusercontent.com/epimorphic
 ```sh
 docker run --network dnet -p 8081:8080 --rm --name standard-reports-manager \
     -v $(pwd)/test/fixtures/conf/app.conf:/etc/standard-reports/app.conf \
-    018852084843.dkr.ecr.eu-west-1.amazonaws.com/epimorphics/standard-reports-manager/dev:733e91d
+    018852084843.dkr.ecr.eu-west-1.amazonaws.com/epimorphics/standard-reports-manager/dev:0.1.1_5ebbea4_00000030
 ```
 
 the latest image can be found here
