@@ -43,6 +43,7 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
     conn = set_connection_timeout(create_http_connection(http_url))
 
     conn.get do |req|
+      req.headers['X-Request-ID'] = Thread.current[:request_id] if Thread.current[:request_id]
       req.headers['Accept'] = if (accept = options.delete(:accept))
                                 accept
                               else
@@ -84,6 +85,7 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
     conn = set_connection_timeout(create_http_connection(http_url))
 
     conn.post do |req|
+      req.headers['X-Request-ID'] = Thread.current[:request_id] if Thread.current[:request_id]
       req.headers['Accept'] = 'application/json'
       req.headers['Content-Type'] = 'application/json'
       req.params.merge!(options)
