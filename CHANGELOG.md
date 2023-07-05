@@ -1,5 +1,25 @@
 # Standard Reports UI: change log
 
+## 1.5.0 - 2023-07-05
+
+- (Jon) This sets the cache control headers to be public and cacheable with a
+  retry limit of 5 mins as per the other cache settings.
+  [GH-114](https://github.com/epimorphics/hmlr-linked-data/issues/114)
+- (Jon) Primarily to add the Request ID in the headers to pass to SR Manager but
+  also including the addition of the `detailed_request_log` to match the other
+  apps and additional debugging messages while in development
+  [GH-124](https://github.com/epimorphics/hmlr-linked-data/issues/124)
+- (Jon) Keeping with the logging improvements this change rewrites the messages
+  passed to the logging gem to ensure the included details are simple and
+  straight to the point. This should also improve the issues reported in
+  [GH-117](https://github.com/epimorphics/hmlr-linked-data/issues/117) ,
+  at least from the front-end point of view!
+- (Jon) Updated the [README](README.md) to include the `API_SERVICE_URL`
+  variable to ensure the local `standard_reports_manager` instance is used in
+  the test environment.
+- (Jon) Ensures we're using the latest version of `json_rails_logger` as well as
+  other minor and patch updated gems
+
 ## 1.4.4 - 2023-06-07
 
 - (Jon) Updated the `json_rails_logger` gem to the latest 1.0.1 release.
@@ -15,13 +35,13 @@
 - (Jon) Added a cli recommendation for running the `sr-manager` locally;
   resolved a markdown linting issue with using HTML in markdown; as well as
   fixed a simple typo in the `localhost:3001` port example
-- (Jon) Refactors the elapsed time calculated for API requests to be resolved
-  as microseconds rather than milliseconds. This is to improve the reporting of
-  the elapsed time in the system tooling logs.
+- (Jon) Refactors the elapsed time calculated for API requests to be resolved as
+  microseconds rather than milliseconds. This is to improve the reporting of the
+  elapsed time in the system tooling logs.
 - (Jon) Minor text changes to the `Gemfile` to include instructions for running
   Epimorphics specific gems locally during the development of those gems.
-- (Jon) Updated the production `json_rails_logger` gem version to be at least the
-  current version `~>1.3.5` (this is to cover out of sync release versions)
+- (Jon) Updated the production `json_rails_logger` gem version to be at least
+  the current version `~>1.3.5` (this is to cover out of sync release versions)
 - (Jon) Updated the production `lr_common_styles` gem version to be at least the
   current version `~>1.9.1` (this is to cover out of sync release versions)
 - (Jon) Refactored better guards in `entrypoint.sh` to ensure the required env
