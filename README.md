@@ -221,8 +221,11 @@ Rubocop should complete with no warnings.
 Simply:
 
 ```sh
-bundle exec rails test
+API_SERVICE_URL=http://localhost:8081 bundle exec rails test
 ```
+
+Passing in the `API_SERVICE_URL` is required to ensure the tests run against the
+`standard-reports-manager` service running locally.
 
 ## Issues
 
