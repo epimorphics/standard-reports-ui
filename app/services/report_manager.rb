@@ -95,6 +95,7 @@ class ReportManager # rubocop:disable Metrics/ClassLength
 
   def start_request(req_spec)
     json = api.post_json("#{url}report-request", req_spec.to_hash)
+    Rails.logger.debug { "ReportManager: #{json}" } if Rails.env.development?
     ReportStatus.new(json)
   end
 

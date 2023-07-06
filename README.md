@@ -103,7 +103,7 @@ the application:
 | name                       | description                                                             | default value              |
 | -------------------------- | ----------------------------------------------------------------------- | -------------------------- |
 | `API_SERVICE_URL`          | The base URL from which data is accessed, including the HTTP scheme eg. | None                       |
-|                            | <http://localhost:8888> if running a `standard-reports-manager service` locally         |                            |
+|                            | <http://localhost:8081> if running a `standard-reports-manager service` locally         |                            |
 |                            | <http://standard-reports-manager:8080>  if running a `standard-reports-manager docker` image locally    |                            |
 | `SECRET_KEY_BASE`          | See [description](https://api.rubyonrails.org/classes/Rails/Application.html#method-i-secret_key_base). | |
 |                            | For `development` mode a acceptable value is already configured, in production mode this should be set to the output of `rails secret`. | |
@@ -221,8 +221,11 @@ Rubocop should complete with no warnings.
 Simply:
 
 ```sh
-bundle exec rails test
+API_SERVICE_URL=http://localhost:8081 bundle exec rails test
 ```
+
+Passing in the `API_SERVICE_URL` is required to ensure the tests run against the
+`standard-reports-manager` service running locally.
 
 ## Issues
 

@@ -43,6 +43,7 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
     conn = set_connection_timeout(create_http_connection(http_url))
 
     conn.get do |req|
+      req.headers['X-Request-ID'] = Thread.current[:request_id] if Thread.current[:request_id]
       req.headers['Accept'] = if (accept = options.delete(:accept))
                                 accept
                               else
@@ -80,10 +81,11 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
     result || json_hash
   end
 
-  def post_to_api(http_url, options, json)
+  def post_to_api(http_url, options, json) # rubocop:disable Metrics/AbcSize
     conn = set_connection_timeout(create_http_connection(http_url))
 
     conn.post do |req|
+      req.headers['X-Request-ID'] = Thread.current[:request_id] if Thread.current[:request_id]
       req.headers['Accept'] = 'application/json'
       req.headers['Content-Type'] = 'application/json'
       req.params.merge!(options)
@@ -125,19 +127,33 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
     throw msg
   end
 
-  def record_api_error_response(http_url, method, response, start_time)
+  def record_api_error_response(http_url, method, response, start_time) # rubocop:disable Metrics/MethodLength
     end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC, :microsecond)
     ellapsed_time = end_time - start_time
-    log_api_response(response, start_time, url: http_url, message: "API #{method}")
+    error_message = "API #{method} to '#{http_url}' failed: '#{response.body}'"
+    log_api_response(
+      response,
+      start_time,
+      url: http_url,
+      status: response.status,
+      message: error_message
+    )
     instrumenter&.instrument('response.api', response: response, duration: ellapsed_time)
 
-    throw "API #{method} to '#{http_url}' failed: #{response.status} '#{response.body}'"
+    throw error_message
   end
 
-  def record_api_ok_response(http_url, method, response, start_time)
+  def record_api_ok_response(http_url, method, response, start_time) # rubocop:disable Metrics/MethodLength
     end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC, :microsecond)
     ellapsed_time = end_time - start_time
-    log_api_response(response, start_time, url: http_url, message: "API #{method}")
+    success_message = "API #{method} to '#{http_url}' succeeded: '#{response.body}'"
+    log_api_response(
+      response,
+      start_time,
+      url: http_url,
+      status: response.status,
+      message: success_message
+    )
     instrumenter&.instrument('response.api', response: response, duration: ellapsed_time)
   end
 
@@ -146,14 +162,29 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
     throw "Failed to connect to '#{http_url}'"
   end
 
+  # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
   def log_api_response(response, start_time, url: nil, status: nil, message: '')
     end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC, :microsecond)
     ellapsed_time = end_time - start_time
-    Rails.logger.info(
+
+    log_fields = {
       url: response ? response.env[:url].to_s : url,
       status: status || response.status,
       duration: ellapsed_time,
       message: message
-    )
+    }
+
+    response_status = response ? response.status : status
+
+    case response_status
+    when 500..599
+      log_fields[:message] = env['action_dispatch.exception']
+      Rails.logger.error(JSON.generate(log_fields))
+    when 400..499
+      Rails.logger.warn(JSON.generate(log_fields))
+    else
+      Rails.logger.info(JSON.generate(log_fields))
+    end
   end
+  # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
 end
