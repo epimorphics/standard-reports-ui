@@ -1,5 +1,11 @@
 # Standard Reports UI: change log
 
+## 1.5.0.1 - 2023-07-11
+
+- (Jon) Updated the `app/controllers/application_controller.rb` to include the
+  `before_action` for the `change_default_caching_policy` method to ensure the
+  default `Cache-Control` header for all requests is set to 5 minutes (300 seconds).
+
 ## 1.5.0 - 2023-07-05
 
 - (Jon) This sets the cache control headers to be public and cacheable with a
