@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  before_action :change_default_caching_policy
+
   around_action :log_request_result
   def log_request_result
     start = Process.clock_gettime(Process::CLOCK_MONOTONIC, :microsecond)
