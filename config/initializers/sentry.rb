@@ -1,10 +1,12 @@
 # frozen-string-literal: true
 
-Raven.configure do |config|
-  config.dsn = config.dsn = 'https://96fe8408c7cf4b789a47bf3866897353@sentry.io/1859755'
-  config.current_environment = ENV['DEPLOYMENT_ENVIRONMENT'] || Rails.env
-  config.environments = %w[production test]
-  config.release = Version::VERSION
-  config.tags = { app: 'lr-dgu-std-reports' }
-  config.excluded_exceptions += ['ActionController::BadRequest']
+if ENV['SENTRY_API_KEY']
+  Sentry.init do |config|
+    config.dsn = ENV['SENTRY_API_KEY']
+    config.environment = ENV['DEPLOYMENT_ENVIRONMENT'] || Rails.env
+    config.enabled_environments = %w[production test]
+    config.release = Version::VERSION
+    config.breadcrumbs_logger = %i[active_support_logger http_logger]
+    config.excluded_exceptions += ['ActionController::BadRequest']
+  end
 end
