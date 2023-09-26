@@ -68,9 +68,22 @@
   monitoring, and updated version of Sentry.
 - (Ian) Updated the README as part of handover.
 
-## 1.3.5 - 2021-12-11
+## 1.3.7
+
+- (Jon) Add Folkestone and Hythe to district names.
+
+## 1.3.6 - 2021-10-22
+
+- (Joseph) Add North and West Northamptonshire to county names.
+- (Joseph) Add Bournemouth, Christchurch and Poole to county names.
+- (Joseph) Add Somerset West and Taunton to district names.
+- (Joseph) Add East Suffolk to district names.
+- (Joseph) Add West Suffolk to district names.
+
+## 1.3.5
 
 - (Mairead) Added deployment sub repo and assisting deployment files
+- (Mairead) Added Object.assign polyfill
 
 ## 1.3.4 - 2021-06-25
 

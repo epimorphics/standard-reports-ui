@@ -36,8 +36,8 @@ module DownloadRequestHelper
 
   def render_failed_request(request)
     content_tag(:span, class: 'o-request--status__warning') do
-      "Request #{request.id} did not complete successfully. " + "
-      Ideally we will put more info here. In the meantime, please check the log file"
+      "Request #{request.id} did not complete successfully." \
+        'Ideally we will put more info here. In the meantime, please check the log file'
     end
   end
 
