@@ -10,7 +10,9 @@ our report generator API. This batch job will either return with the report
 download link, if a report with those options has already been generated and
 cached, or a queue position as the job moves up the batch queue.
 
-## Running this service
+Please see the other repositories in the [HM Land Registry Open
+Data](https://github.com/epimorphics/hmlr-linked-data/) project for more
+details.
 
 This application can be run stand-alone as a rails server in `development` mode.
 However, when deployed, applications will run behind a reverse proxy.
