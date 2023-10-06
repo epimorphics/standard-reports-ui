@@ -14,7 +14,7 @@ Please see the other repositories in the [HM Land Registry Open
 Data](https://github.com/epimorphics/hmlr-linked-data/) project for more
 details.
 
-### Running the Standard Reports Manager locally
+## Running the Standard Reports Manager locally
 
 The application connects to the Standard Reports Manager service to submit
 requests.
@@ -25,7 +25,7 @@ manager](https://github.com/epimorphics/standard-reports-manager/) repository.
 or pulled from the Amazon Elastic Container Registry
 [ECR](https://eu-west-1.console.aws.amazon.com/ecr/repositories/private/018852084843/epimorphics/standard-reports-manager/dev?region=eu-west-1).
 
-#### Building and running from [standard reports manager](https://github.com/epimorphics/standard-reports-manager/) repository
+### Building and running from [standard reports manager](https://github.com/epimorphics/standard-reports-manager/) repository
 
 To build and a run a new docker image check out the  [standard reports
 manager](https://github.com/epimorphics/standard-reports-manager/) repository
@@ -35,7 +35,7 @@ and run
 make image run
 ```
 
-#### Running an existing [ECR](https://eu-west-1.console.aws.amazon.com/ecr/repositories/private/018852084843/epimorphics/standard-reports-manager/dev?region=eu-west-1) image
+### Running an existing [ECR](https://eu-west-1.console.aws.amazon.com/ecr/repositories/private/018852084843/epimorphics/standard-reports-manager/dev?region=eu-west-1) image
 
 Obtaining an ECR image requires:
 
@@ -82,7 +82,7 @@ To create the docker network run
 docker network create dnet
 ```
 
-### To run the Standard Reports Manager as a docker container
+### Running as a docker container
 
 Take a copy of the latest Manager development configuation file
 
