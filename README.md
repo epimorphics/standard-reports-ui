@@ -194,6 +194,7 @@ If need be, `config.relative_url_root` may by overridden by means of the
 `RAILS_RELATIVE_URL_ROOT` environment variable, althought this could also
 require rebuilding the assets or docker image.
 
+## Additional Information
 
 ### Coding standards
 
@@ -215,7 +216,20 @@ Passing in the `API_SERVICE_URL` is required to ensure the tests run against the
 Please add issues to the [shared issues
 list](https://github.com/epimorphics/hmlr-linked-data/issues)
 
-## Additional Information
+### Runtime Configuration environment variables
+
+We use a number of environment variables to determine the runtime behaviour of
+the application:
+
+| name                       | description                                                             | default value              |
+| -------------------------- | ----------------------------------------------------------------------- | -------------------------- |
+| `API_SERVICE_URL`          | The base URL from which data is accessed, including the HTTP scheme eg. | None                       |
+|                            | <http://localhost:8081> if running a `standard-reports-manager service` locally         |                            |
+|                            | <http://standard-reports-manager:8080>  if running a `standard-reports-manager docker` image locally    |                            |
+| `SECRET_KEY_BASE`          | See [description](https://api.rubyonrails.org/classes/Rails/Application.html#method-i-secret_key_base). | |
+|                            | For `development` mode a acceptable value is already configured, in production mode this should be set to the output of `rails secret`. | |
+|                            | This is handled automatically when starting a docker container, or the `server` `make` target | |
+| `SENTRY_API_KEY`           | The DSN for sending reports to the PPD Sentry account                   | None                       |
 
 ### Deployment
 
