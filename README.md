@@ -211,7 +211,7 @@ API_SERVICE_URL=http://localhost:8081 bundle exec rails test
 Passing in the `API_SERVICE_URL` is required to ensure the tests run against the
 `standard-reports-manager` service running locally.
 
-## Issues
+### Issues
 
 Please add issues to the [shared issues
 list](https://github.com/epimorphics/hmlr-linked-data/issues)
