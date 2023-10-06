@@ -110,11 +110,8 @@ port.
 With this set up, the api service is available on `http://localhost:8081` from
 the host or `http://standard-reports-manager:8080` from inside other docker containers.
 
-## Developer notes
 
-### Structure
 
-This is a fairly standard Rails project, with no particular surprises.
 
 ### Coding standards
 
