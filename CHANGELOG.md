@@ -1,5 +1,9 @@
 # Standard Reports UI: change log
 
+## 1.5.2 - 2023-11-27
+
+- (Jon) Updated the `lr_common_styles` gem to the latest 1.9.3 patch release.
+
 ## 1.5.1 - 2023-11-23
 
 - (Jon) Updated the `lr_common_styles` gem to the latest 1.9.2 patch release.
