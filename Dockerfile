@@ -14,6 +14,7 @@ RUN apk add --update \
     tzdata \
     && rm -rf /var/cache/apk/* \
     && gem install rubygems-update -v 3.4.22 \
+    && update_rubygems \
     && gem install bundler:$BUNDLER_VERSION \
     && bundle config --global frozen 1
 
