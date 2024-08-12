@@ -1,6 +1,6 @@
 # Standard Reports UI: change log
 
-## 1.5.2 - 2023-11-27
+## 1.5.3 - 2024-08
 
 - (Dan) Adds underline text to laning page of standard reports and to help link[114](https://github.com/epimorphics/standard-reports-ui/issues/114)
 
