@@ -2,6 +2,10 @@
 
 ## 1.5.2 - 2023-11-27
 
+- (Dan) Adds underline text to laning page of standard reports and to help link[114](https://github.com/epimorphics/standard-reports-ui/issues/114)
+
+## 1.5.2 - 2023-11-27
+
 - (Jon) Updated the `lr_common_styles` gem to the latest 1.9.3 patch release.
 
 ## 1.5.1 - 2023-11-23
