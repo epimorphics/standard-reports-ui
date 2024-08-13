@@ -3,6 +3,7 @@
 ## 1.5.3 - 2024-08
 
 - (Dan) Styled the help button to match PPD [117](https://github.com/epimorphics/standard-reports-ui/issues/117)
+- (Dan) Adds more descriptive text to action buttons on the report page [115](https://github.com/epimorphics/standard-reports-ui/issues/115)
 
 ## 1.5.2 - 2023-11-27
 
