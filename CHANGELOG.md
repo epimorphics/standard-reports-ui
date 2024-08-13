@@ -1,5 +1,9 @@
 # Standard Reports UI: change log
 
+## 1.5.3 - 2024-08
+
+- (Dan) Adds more descriptive text to action buttons on the report page [115](https://github.com/epimorphics/standard-reports-ui/issues/115)
+
 ## 1.5.2 - 2023-11-27
 
 - (Jon) Updated the `lr_common_styles` gem to the latest 1.9.3 patch release.
