@@ -2,6 +2,8 @@
 
 ## 1.5.3 - 2024-08
 
+- (Dan) Updates the button text on reports page to be dynamic and adds aria labels to help screen readers [119](https://github.com/epimorphics/standard-reports-ui/issues/119)
+- (Dan) Update the error message for the postcode selectors step 3/7 [120](https://github.com/epimorphics/standard-reports-ui/issues/120)
 - (Dan) Update the error message for the postcode selectors step 3/7 [120](https://github.com/epimorphics/standard-reports-ui/issues/120)
 - (Dan) Updates step 3/7 to return user input rather than false when user inputs invalid value [118](https://github.com/epimorphics/standard-reports-ui/issues/118)
 - (Dan) Adds underline text to laning page of standard reports and to help link[114](https://github.com/epimorphics/standard-reports-ui/issues/114)
