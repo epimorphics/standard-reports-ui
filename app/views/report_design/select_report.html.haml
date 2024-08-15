@@ -15,24 +15,24 @@
     .row
       %fieldset.col-sm-12
         %ul.list-unstyled
-          %li
+          %li{"aria-labelled-by": "average-prices-report"}
             .o-form-control
               %label.o-form-control--label
                 = radio_button_tag( step.form_param, step_values[0].value, step_values[0].active?, class: "o-form-control--input" )
                 = step_values[0].label
                 %details
-                  %summary
+                  %summary#average-prices-report
                     %span.summary
                       Click to view an example of the average prices and volumes report type
                   %div.panel
                     = image_tag( "average-prices-report-screenshot.png", alt: "Screenshot of example average prices report " )
-          %li
+          %li{"aria-labelled-by": "banded-prices-report"}
             .o-form-control
               %label.o-form-control--label
                 = radio_button_tag( step.form_param, step_values[1].value, step_values[1].active?, class: "o-form-control--input" )
                 = step_values[1].label
                 %details
-                  %summary
+                  %summary#banded-prices-report
                     %span.summary
                       Click to view an example of the banded prices report type
                   %div.panel
