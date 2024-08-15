@@ -364,7 +364,7 @@ GEM
       json
       lograge
       railties
-    lr_common_styles (1.9.3)
+    lr_common_styles (1.9.4)
       bootstrap-sass (~> 3.4.0)
       font-awesome-rails (~> 4.7.0.1)
       govuk_elements_rails (~> 2.0.0)
@@ -402,7 +402,7 @@ DEPENDENCIES
   json_rails_logger (~> 1.0.0)!
   leaflet-rails
   libv8-node (>= 16.10.0.0)
-  lr_common_styles (~> 1.9.3)!
+  lr_common_styles (~> 1.9, >= 1.9.4)!
   minitest-rails-capybara
   minitest-reporters
   minitest-spec-rails
