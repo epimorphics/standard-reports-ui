@@ -24,7 +24,7 @@ class StepSelectPostcode < StepSelectArea
       workflow.traverse_to(successor_step)
     else
       set_flash("Sorry, '#{value}' does not appear to be a valid value for a #{subtype_label}.
-      Have you left a space between the digits?")
+      Perhaps there's a typo or too many characters or maybe an extra space somewhere?")
     end
   end
 
