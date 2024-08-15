@@ -2,7 +2,7 @@
 
 ## 1.5.3 - 2024-08
 
-- (Dan) Update the error message for the postcode sector step 3/7 [120](https://github.com/epimorphics/standard-reports-ui/issues/120)
+- (Dan) Update the error message for the postcode selectors step 3/7 [120](https://github.com/epimorphics/standard-reports-ui/issues/120)
 - (Dan) Updates step 3/7 to return user input rather than false when user inputs invalid value [118](https://github.com/epimorphics/standard-reports-ui/issues/118)
 - (Dan) Adds underline text to laning page of standard reports and to help link[114](https://github.com/epimorphics/standard-reports-ui/issues/114)
 - (Dan) Styled the help button to match PPD [117](https://github.com/epimorphics/standard-reports-ui/issues/117)
