@@ -1,5 +1,7 @@
+= content_for(:title, 'Price Paid Data &ndash; Standard Reports'.html_safe)
+
 %h1.heading-large
-  Price Paid Data &ndash; Standard Reports
+  = yield(:title)
 
 %p
   HM Land Registry publishes open data on prices paid for properties sold in England and Wales. For customers who want

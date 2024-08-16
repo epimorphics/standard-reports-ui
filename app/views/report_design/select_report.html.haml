@@ -1,3 +1,5 @@
+= content_for(:title, "#{@workflow.step_progress_summary} &ndash; Report Design".html_safe)
+
 - step = @workflow.current_step
 - step_values = step.values( @workflow )
 
