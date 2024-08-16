@@ -2,6 +2,7 @@
 
 ## 1.5.3 - 2024-08
 
+- (Dan) Updates the page titles throughout the app [116](https://github.com/epimorphics/standard-reports-ui/issues/116)
 - (Dan) Updates the button text on reports page to be dynamic and adds aria labels to help screen readers [119](https://github.com/epimorphics/standard-reports-ui/issues/119)
 - (Dan) Update the error message for the postcode selectors step 3/7 [120](https://github.com/epimorphics/standard-reports-ui/issues/120)
 - (Dan) Update the error message for the postcode selectors step 3/7 [120](https://github.com/epimorphics/standard-reports-ui/issues/120)

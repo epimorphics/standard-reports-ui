@@ -1,4 +1,7 @@
-%h1.heading-large Invalid request
+= content_for(:title, "Invalid request")
+
+%h1.heading-large
+  = yield(:title)
 
 %p
   Your request could not be processed, due to:

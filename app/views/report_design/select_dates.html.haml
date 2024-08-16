@@ -1,3 +1,5 @@
+= content_for(:title, "#{@workflow.step_progress_summary} &ndash; Report Design".html_safe)
+
 = render partial: "help"
 - step = @workflow.current_step
 - values = step.values( @workflow )
