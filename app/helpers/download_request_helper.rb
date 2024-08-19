@@ -46,12 +46,12 @@ module DownloadRequestHelper
       concat('Ready: ')
       concat(tag(:br))
       concat(
-        link_to("Microsoft Excel format <i class='fa fa-external-link'></i>".html_safe,
+        link_to("Microsoft Excel format <i class='fa fa-external-link text-link'></i>".html_safe,
                 request.url(:xlsx))
       )
       concat(tag(:br))
       concat(
-        link_to("open-data (csv) format <i class='fa fa-external-link'></i>".html_safe,
+        link_to("open-data (csv) format <i class='fa fa-external-link text-link'></i>".html_safe,
                 request.url(:csv))
       )
     end
