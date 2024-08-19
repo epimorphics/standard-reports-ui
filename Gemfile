@@ -80,5 +80,5 @@ end
 # TODO: In production you want to set this to the gem from the epimorphics package repo
 source 'https://rubygems.pkg.github.com/epimorphics' do
   gem 'json_rails_logger', '~> 1.0.0'
-  gem 'lr_common_styles', '~> 1.9', '>= 1.9.4'
+  gem 'lr_common_styles', '~> 1.9', '>= 1.9.5'
 end
