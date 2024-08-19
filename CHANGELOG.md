@@ -2,6 +2,7 @@
 
 ## 1.5.3 - 2024-08
 
+- (Dan) Updates report page styles so links are underlined and gives download report page a seperate page title
 - (Dan) Updates gemfile to use v1.9.5 lr_common_styles
 - (Dan) Updates the page titles throughout the app [116](https://github.com/epimorphics/standard-reports-ui/issues/116)
 - (Dan) Updates the button text on reports page to be dynamic and adds aria labels to help screen readers [119](https://github.com/epimorphics/standard-reports-ui/issues/119)
