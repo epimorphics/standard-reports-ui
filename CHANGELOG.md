@@ -2,6 +2,7 @@
 
 ## 1.5.3 - 2024-08
 
+- (Dan) Updates alt text for screenshots of example reports [115](https://github.com/epimorphics/standard-reports-ui/issues/115)
 - (Dan) Updates report page styles so links are underlined and gives download report page a seperate page title
 - (Dan) Updates gemfile to use v1.9.5 lr_common_styles
 - (Dan) Updates the page titles throughout the app [116](https://github.com/epimorphics/standard-reports-ui/issues/116)
