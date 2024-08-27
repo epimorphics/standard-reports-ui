@@ -27,4 +27,18 @@ class StepSelectPostcodeSector < StepSelectPostcode
   def successor_step
     :select_aggregation_type
   end
+
+  def validate_with(workflow, value)
+    validated_value = validate(value)
+
+    if validated_value
+      workflow.set_state(param_name, validated_value)
+      workflow_update_hook(workflow)
+      workflow.traverse_to(successor_step)
+    else
+      set_flash("Sorry, '#{value}' does not appear to be a valid value for a #{subtype_label}.
+      A #{subtype_label} is the first part of a UK postcode, up to and including the first 
+      digit after the space. For example &quot;B17 0&quot; or &quot;TA9 3&quot;".html_safe)
+    end
+  end
 end
