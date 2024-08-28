@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Workflow step of selecting a county
-class StepSelectCounty < StepSelectCountyOrDistrict # rubocop:disable Metrics/ClassLength
+class StepSelectCounty < StepSelectCountyOrDistrict
   def initialize
     super(:select_county, :area)
   end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Service object for interacting with remote service-manager API
-class ReportManager # rubocop:disable Metrics/ClassLength
+class ReportManager
   def initialize(config = nil)
     return unless config
 
@@ -74,7 +74,7 @@ class ReportManager # rubocop:disable Metrics/ClassLength
   #     a=1&b[]=2&b[]=3
   # becomes
   #     [{a: 1, b: 2}, {a: 1, b: 3}]
-  def create_params_sets(params) # rubocop:disable Metrics/MethodLength
+  def create_params_sets(params)
     product = [{}]
 
     params.each do |k, v|
