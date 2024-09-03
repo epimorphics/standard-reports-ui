@@ -1,4 +1,4 @@
-.PHONY:	assets clean image lint publish realclean run tag test vars
+.PHONY:	assets auth check clean image lint local publish realclean run tag test vars
 
 ACCOUNT?=$(shell aws sts get-caller-identity | jq -r .Account)
 ALPINE_VERSION?=3.13
@@ -28,23 +28,27 @@ REPO?=${ECR}/${IMAGE}
 GITHUB_TOKEN=.github-token
 BUNDLE_CFG=.bundle/config
 
-all: image
-
 ${BUNDLE_CFG}: ${GITHUB_TOKEN}
 	@./bin/bundle config set --local rubygems.pkg.github.com ${GPR_OWNER}:`cat ${GITHUB_TOKEN}`
 
 ${GITHUB_TOKEN}:
 	@echo ${PAT} > ${GITHUB_TOKEN}
 
-assets:
-	@./bin/bundle config set --local without 'development'
+all: image
+
+assets: auth
+	@./bin/bundle config set --local without 'development test'
 	@./bin/bundle install
 	@./bin/rails assets:clean assets:precompile
 
 auth: ${GITHUB_TOKEN} ${BUNDLE_CFG}
 
+check: lint test
+	@echo "All checks passed."
+
 clean:
 	@[ -d public/assets ] && ./bin/rails assets:clobber || :
+	@@ rm -rf bundle coverage log node_modules
 
 image: auth
 	@echo Building ${REPO}:${TAG} ...
@@ -63,6 +67,12 @@ image: auth
 
 lint: assets
 	@./bin/bundle exec rubocop
+
+local:
+	@echo "Installing all packages ..."
+	@./bin/bundle install
+	@echo "Starting local server ..."
+	@./bin/rails server -p ${PORT}
 
 publish: image
 	@echo Publishing image: ${REPO}:${TAG} ...
@@ -88,6 +98,7 @@ tag:
 	@echo ${TAG}
 
 test: assets
+	@echo "Running tests ..."
 	@./bin/rails test
 
 vars:
