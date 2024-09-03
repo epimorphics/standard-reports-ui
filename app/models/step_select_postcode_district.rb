@@ -33,8 +33,8 @@ class StepSelectPostcodeDistrict < StepSelectPostcode
       workflow.traverse_to(successor_step)
     else
       set_flash("Sorry, '#{value}' does not appear to be a valid value for a #{subtype_label}.
-      A #{subtype_label} is the first part of a UK postcode, up to the space. For example 
-      &quot;B17&quot; or &quot;TA9&quot".html_safe)
+      A #{subtype_label} is the first part of a UK postcode, up to the space. For example
+      'B17' or 'TA9'.")
     end
   end
 end
