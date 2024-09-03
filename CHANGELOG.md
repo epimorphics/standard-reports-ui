@@ -1,7 +1,8 @@
 # Standard Reports UI: change log
 
-## 1.5.3 - 2024-08
+## 1.5.3 - 2024-09
 
+- (Dan) Fixes bug XXS vulnerability [133](https://github.com/epimorphics/standard-reports-ui/issues/133)
 - (Dan) Update the error messages for the postcode selectors step 3/7 so each error message is unique to the postcode selector [120](https://github.com/epimorphics/standard-reports-ui/issues/120)
 - (Dan) Updates alt text for screenshots of example reports [115](https://github.com/epimorphics/standard-reports-ui/issues/115)
 - (Dan) Updates report page styles so links are underlined and gives download report page a seperate page title
