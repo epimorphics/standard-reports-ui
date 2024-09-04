@@ -12,7 +12,7 @@ module DownloadRequestHelper
     end
   end
 
-  def request_status(request) # rubocop:disable Metrics/MethodLength
+  def request_status(request)
     capture do
       if request.unknown?
         concat render_unknown_request(request)
@@ -41,7 +41,7 @@ module DownloadRequestHelper
     end
   end
 
-  def render_completed_request(request) # rubocop:disable Metrics/MethodLength
+  def render_completed_request(request)
     content_tag(:span, class: 'o-request--status__success') do
       concat('Ready: ')
       concat(tag(:br))

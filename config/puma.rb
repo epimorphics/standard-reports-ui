@@ -38,6 +38,7 @@ pidfile ENV.fetch('PIDFILE', 'tmp/pids/server.pid')
 
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
+plugin :metrics
 
 # Use a custom log formatter to emit Puma log messages in a JSON format
 log_formatter do |str|
