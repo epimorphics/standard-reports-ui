@@ -2,6 +2,9 @@
 
 ## 1.5.4 - 2024-09
 
+- (Jon) Moved all mirrored configuration settings from individual environments
+  into the application configuration to reduce the need to manage multiple
+  sources of truth
 - (Jon) Implemented improved boilerplate metrics integration to offer analysis
   of current application usage stats
 - (Jon) Added `process_threads` gauge to prometheus metrics alongside isolating
@@ -29,10 +32,15 @@
 
 ## 1.5.3 - 2024-09
 
-- (Dan) Fixes bug XXS vulnerability [133](https://github.com/epimorphics/standard-reports-ui/issues/133)
-- (Dan) Update the error messages for the postcode selectors step 3/7 so each error message is unique to the postcode selector [120](https://github.com/epimorphics/standard-reports-ui/issues/120)
-- (Dan) Updates alt text for screenshots of example reports [115](https://github.com/epimorphics/standard-reports-ui/issues/115)
-- (Dan) Updates report page styles so links are underlined and gives download report page a seperate page title
+- (Dan) Fixes bug XXS vulnerability
+  [133](https://github.com/epimorphics/standard-reports-ui/issues/133)
+- (Dan) Update the error messages for the postcode selectors step 3/7 so each
+  error message is unique to the postcode selector
+  [120](https://github.com/epimorphics/standard-reports-ui/issues/120)
+- (Dan) Updates alt text for screenshots of example reports
+  [115](https://github.com/epimorphics/standard-reports-ui/issues/115)
+- (Dan) Updates report page styles so links are underlined and gives download
+  report page a seperate page title
 - (Dan) Updates gemfile to use v1.9.5 lr_common_styles
 - (Dan) Updates the page titles throughout the app
   [116](https://github.com/epimorphics/standard-reports-ui/issues/116)
