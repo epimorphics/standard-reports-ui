@@ -90,10 +90,6 @@ Rails.application.configure do
   # set in the Makefile as an env variable for the docker container when run as an image.
   # API_SERVICE_URL is required by both Docker image and Rails
   config.api_service_url = ENV.fetch('API_SERVICE_URL', nil)
-
-  # Use default paths for documentation.
-  config.accessibility_document_path = '/accessibility'
-  config.privacy_document_path = '/privacy'
 end
 
 JsRoutes.setup do |config|
