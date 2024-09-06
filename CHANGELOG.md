@@ -1,6 +1,6 @@
 # Standard Reports UI: change log
 
-## 1.5.4 - 2024-09
+## 1.5.3 - 2024-09
 
 - (Jon) Moved all mirrored configuration settings from individual environments
   into the application configuration to reduce the need to manage multiple
@@ -29,9 +29,6 @@
   rules!
 - (Jon) Updated `.gitignore` to include ignoring `byebug` history as well as
   sets the tmp directory ignore to be anywhere, not just at the project root
-
-## 1.5.3 - 2024-09
-
 - (Dan) Fixes bug XXS vulnerability
   [133](https://github.com/epimorphics/standard-reports-ui/issues/133)
 - (Dan) Update the error messages for the postcode selectors step 3/7 so each
