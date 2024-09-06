@@ -1,3 +1,5 @@
+= content_for(:title, "#{@workflow.step_progress_summary} &ndash; Report Design".html_safe)
+
 - step = @workflow.current_step
 - step_values = step.values( @workflow )
 
@@ -15,28 +17,28 @@
     .row
       %fieldset.col-sm-12
         %ul.list-unstyled
-          %li
+          %li{"aria-labelled-by": "average-prices-report"}
             .o-form-control
               %label.o-form-control--label
                 = radio_button_tag( step.form_param, step_values[0].value, step_values[0].active?, class: "o-form-control--input" )
                 = step_values[0].label
                 %details
-                  %summary
+                  %summary#average-prices-report
                     %span.summary
-                      Example of this report type
+                      Click to view an example of the average prices and volumes report type
                   %div.panel
-                    = image_tag( "average-prices-report-screenshot.png", alt: "Screenshot of example average prices report " )
-          %li
+                    = image_tag( "average-prices-report-screenshot.png", alt: "Screenshot of example average prices report. Excel table showing 2015 house prices and sales volumes for East Anglia counties including Cambridgeshire and Norfolk." )
+          %li{"aria-labelled-by": "banded-prices-report"}
             .o-form-control
               %label.o-form-control--label
                 = radio_button_tag( step.form_param, step_values[1].value, step_values[1].active?, class: "o-form-control--input" )
                 = step_values[1].label
                 %details
-                  %summary
+                  %summary#banded-prices-report
                     %span.summary
-                      Example of this report type
+                      Click to view an example of the banded prices report type
                   %div.panel
-                    = image_tag( "banded-prices-report-screenshot.png", alt: "Screenshot of example banded prices report " )
+                    = image_tag( "banded-prices-report-screenshot.png", alt: "Screenshot of example banded prices report. Excel table showing 2015 sales volumes by price band for different property types across East Anglia counties, including Cambridgeshire and Norfolk. " )
 
       = layout_existing_values( @workflow )
       = layout_submit_button

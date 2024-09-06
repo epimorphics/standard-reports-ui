@@ -1,5 +1,66 @@
 # Standard Reports UI: change log
 
+## 1.5.4 - 2024-09
+
+- (Jon) Moved all mirrored configuration settings from individual environments
+  into the application configuration to reduce the need to manage multiple
+  sources of truth
+- (Jon) Implemented improved boilerplate metrics integration to offer analysis
+  of current application usage stats
+- (Jon) Added `process_threads` gauge to prometheus metrics alongside isolating
+  thread counts to specific status' as per the Rails thread documentation
+  [GH-148](https://github.com/epimorphics/hmlr-linked-data/issues/148)
+- (Jon) Updated the approach to resolve
+  [GH-142](https://github.com/epimorphics/hmlr-linked-data/issues/142)
+- (Jon) Excluded prometheus metrics from the testing environment to reduce noise
+  in the logs
+- (Jon) Added `puma-metrics` gem to provide base metrics for the Puma web server
+- (Jon) Added the `internal_error_event` metric to the improved error controls
+- (Jon) Tweaked the application controller to improve error control and display
+  provided message in themed pages to match the rest of the application
+- (Jon) Added `puma.stats` to footer template in development environment only,
+  again as per the approach in the [`LR_Common_Styles`
+  gem](https://github.com/epimorphics/lr_common_styles/releases/tag/1.9.6)
+- (Jon) Reorganised makefile targets alphabetically as well as mirrored other
+  improvements from the other applications in the suite
+- (Jon) Updated .rubocop.yml primarily reorganising the rules alphabetically as
+  well as adding `CountAsOne` to both `Metrics/ClassLength` and
+  `Metrics/MethodLength`; includes files with removed earlier disabling of said
+  rules!
+- (Jon) Updated `.gitignore` to include ignoring `byebug` history as well as
+  sets the tmp directory ignore to be anywhere, not just at the project root
+
+## 1.5.3 - 2024-09
+
+- (Dan) Fixes bug XXS vulnerability
+  [133](https://github.com/epimorphics/standard-reports-ui/issues/133)
+- (Dan) Update the error messages for the postcode selectors step 3/7 so each
+  error message is unique to the postcode selector
+  [120](https://github.com/epimorphics/standard-reports-ui/issues/120)
+- (Dan) Updates alt text for screenshots of example reports
+  [115](https://github.com/epimorphics/standard-reports-ui/issues/115)
+- (Dan) Updates report page styles so links are underlined and gives download
+  report page a seperate page title
+- (Dan) Updates gemfile to use v1.9.5 lr_common_styles
+- (Dan) Updates the page titles throughout the app
+  [116](https://github.com/epimorphics/standard-reports-ui/issues/116)
+- (Dan) Updates the button text on reports page to be dynamic and adds aria
+  labels to help screen readers
+  [119](https://github.com/epimorphics/standard-reports-ui/issues/119)
+- (Dan) Update the error message for the postcode selectors step 3/7
+  [120](https://github.com/epimorphics/standard-reports-ui/issues/120)
+- (Dan) Update the error message for the postcode selectors step 3/7
+  [120](https://github.com/epimorphics/standard-reports-ui/issues/120)
+- (Dan) Updates step 3/7 to return user input rather than false when user inputs
+  invalid value
+  [118](https://github.com/epimorphics/standard-reports-ui/issues/118)
+- (Dan) Adds underline text to laning page of standard reports and to help
+  link[114](https://github.com/epimorphics/standard-reports-ui/issues/114)
+- (Dan) Styled the help button to match PPD
+  [117](https://github.com/epimorphics/standard-reports-ui/issues/117)
+- (Dan) Adds more descriptive text to action buttons on the report page
+  [115](https://github.com/epimorphics/standard-reports-ui/issues/115)
+
 ## 1.5.2 - 2023-11-27
 
 - (Jon) Updated the `lr_common_styles` gem to the latest 1.9.3 patch release.
@@ -14,7 +75,8 @@
 
 - (Jon) Updated the `app/controllers/application_controller.rb` to include the
   `before_action` for the `change_default_caching_policy` method to ensure the
-  default `Cache-Control` header for all requests is set to 5 minutes (300 seconds).
+  default `Cache-Control` header for all requests is set to 5 minutes (300
+  seconds).
 
 ## 1.5.0 - 2023-07-05
 
@@ -28,8 +90,8 @@
 - (Jon) Keeping with the logging improvements this change rewrites the messages
   passed to the logging gem to ensure the included details are simple and
   straight to the point. This should also improve the issues reported in
-  [GH-117](https://github.com/epimorphics/hmlr-linked-data/issues/117) ,
-  at least from the front-end point of view!
+  [GH-117](https://github.com/epimorphics/hmlr-linked-data/issues/117) , at
+  least from the front-end point of view!
 - (Jon) Updated the [README](README.md) to include the `API_SERVICE_URL`
   variable to ensure the local `standard_reports_manager` instance is used in
   the test environment.
