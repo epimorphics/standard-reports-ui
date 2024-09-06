@@ -18,16 +18,17 @@ class StepSelectCountyOrDistrict < StepSelectArea
   end
 
   def validate_value(workflow)
+    input_text = value(workflow)
     normalized_value = validate(value(workflow))
     unless normalized_value && (value(workflow) == normalized_value)
-      workflow.set_state(param_name, normalized_value)
+      workflow.set_state(param_name, input_text)
     end
 
-    normalized_value || validation_failure(workflow)
+    normalized_value || validation_failure(input_text)
   end
 
-  def validation_failure(workflow)
-    set_flash("Sorry, #{subtype_label} '#{value(workflow)}' was not recognised")
+  def validation_failure(input_text)
+    set_flash("Sorry, #{subtype_label} '#{input_text}' was not recognised")
     false
   end
 

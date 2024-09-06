@@ -14,7 +14,7 @@ class StepSelectAggregationType < Step
     super(:select_aggregation_type, :aggregate, :radio)
   end
 
-  def values_options(workflow) # rubocop:disable Metrics/MethodLength, Metrics/CyclomaticComplexity
+  def values_options(workflow) # rubocop:disable Metrics/CyclomaticComplexity
     case workflow.state(:areaType)
     when 'country'
       [AGGREGATE_BY_REGION, AGGREGATE_BY_COUNTY, AGGREGATE_BY_DISTRICT,

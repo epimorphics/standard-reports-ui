@@ -1,3 +1,5 @@
+= content_for(:title, "Download your report file")
+
 - n = @report_manager.requests.length
 
 .download-report
@@ -28,7 +30,7 @@
 
   %p.text-muted
     To create additional reports, you can
-    = link_to( "return to the start", controller: :report_design, action: :show)
+    = link_to( "return to the start", controller: :report_design, action: :show, class: "text-link")
     of this application.
 
 
