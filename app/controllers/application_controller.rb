@@ -27,6 +27,9 @@ class ApplicationController < ActionController::Base
   # or attempt to render a generic error page if no specific error page exists
   unless Rails.application.config.consider_all_requests_local
     rescue_from StandardError do |e|
+      # Instrument ActiveSupport::Notifications for internal errors:
+      ActiveSupport::Notifications.instrument('internal_error.application', exception: e)
+      # Trigger the appropriate error handling method based on the exception
       case e.class
       when ActionController::RoutingError, ActionView::MissingTemplate
         :render404
@@ -41,10 +44,7 @@ class ApplicationController < ActionController::Base
   end
 
   def handle_internal_error(exception)
-    # Notify subscribers of the internal error event and render the appropriate error page
-    # or attempt to render a generic error page if no specific error page exists
-    # unless the exception is a 404, in which case do nothing
-    instrument_internal_error(exception) unless exception.status == 404
+    # Render the appropriate error page based on the exception
     if exception.instance_of? ArgumentError
       render_error(400)
     else
@@ -118,13 +118,4 @@ class ApplicationController < ActionController::Base
     end
   end
   # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
-
-  # Notify subscriber(s) of an internal error event with the payload of the
-  # exception once done
-  # @param [Exception] exp the exception that caused the error
-  # @return [ActiveSupport::Notifications::Event] provides an object-oriented
-  # interface to the event
-  def instrument_internal_error(exception)
-    ActiveSupport::Notifications.instrument('internal_error.application', exception: exception)
-  end
 end
