@@ -1,6 +1,6 @@
 # Standard Reports UI: change log
 
-## Unreleased
+## 1.5.4 - 2024-09
 
 - (Jon) Updated the application exceptions controller to instrument the
   `ActiveSupport::Notifications` for internal errors
