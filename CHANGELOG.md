@@ -2,6 +2,18 @@
 
 ## 1.5.3 - 2024-09
 
+- (Jon) Updated the application exceptions controller to instrument the
+  `ActiveSupport::Notifications` for internal errors
+  [GH-139](https://github.com/epimorphics/standard-reports-ui/issues/139)
+- (Jon) Updated `config/initializers/prometheus.rb` to include the `Middleware
+  instrumentation` fix for the 0 memory bug by notifying Action Dispatch
+  subscribers on Prometheus initialise
+  [GH-139](https://github.com/epimorphics/standard-reports-ui/issues/139)
+- (Jon) Updated `config/puma.rb` to include metrics plugin and port information
+  for the metrics endpoint as environment variable, with default, to enable
+  running multiple sibling HMLR apps locally if needed without port conflicts
+  [GH-139](https://github.com/epimorphics/standard-reports-ui/issues/139)
+- (Jon) Updated the `lr_common_styles` gem to the latest 1.9.9 patch release.
 - (Jon) Moved all mirrored configuration settings from individual environments
   into the application configuration to reduce the need to manage multiple
   sources of truth
