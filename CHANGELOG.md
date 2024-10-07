@@ -1,5 +1,9 @@
 # Standard Reports UI: change log
 
+## 1.6.0 - 2024-10
+
+- (Dan) Updates ruby version to 2.7.8 and alpine version to 3.16 [GH-143](https://github.com/epimorphics/standard-reports-ui/issues/143)
+
 ## 1.5.4 - 2024-09
 
 - (Jon) Updated the application exceptions controller to instrument the
