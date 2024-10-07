@@ -1,6 +1,6 @@
 # Standard Reports UI: change log
 
-## 1.5.5 - 2024-10
+## 1.6.0 - 2024-10
 
 - (Dan) Updates ruby version to 2.7.8 and alpine version to 3.16 [GH-143](https://github.com/epimorphics/standard-reports-ui/issues/143)
 
