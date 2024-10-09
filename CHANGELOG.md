@@ -1,5 +1,12 @@
 # Standard Reports UI: change log
 
+## 1.5.4 - 2024-10
+
+- (Jon) Wrapped the Internal Error Instrumentation in an `unless` block to
+  ensure the application does not report internal errors to the Prometheus
+  metrics when the error is a 404 or 422 thereby reducing the noise in the Slack
+  alerts channel
+
 ## 1.5.3 - 2024-09
 
 - (Jon) Updated the application exceptions controller to instrument the
