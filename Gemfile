@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 gem 'execjs', '< 2.8.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '< 6.0.0'
+gem 'rails'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
