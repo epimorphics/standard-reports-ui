@@ -11,8 +11,12 @@
 
 - (Dan) Updates ruby version to 2.7.8 and alpine version to 3.16 [GH-143](https://github.com/epimorphics/standard-reports-ui/issues/143)
 
-## 1.5.4 - 2024-09
+## 1.5.4 - 2024-10
 
+- (Jon) Wrapped the Internal Error Instrumentation in an `unless` block to
+  ensure the application does not report internal errors to the Prometheus
+  metrics when the error is a 404 or 422 thereby reducing the noise in the Slack
+  alerts channel
 - (Jon) Updated the application exceptions controller to instrument the
   `ActiveSupport::Notifications` for internal errors
   [GH-139](https://github.com/epimorphics/standard-reports-ui/issues/139)

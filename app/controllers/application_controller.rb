@@ -27,8 +27,10 @@ class ApplicationController < ActionController::Base
   # or attempt to render a generic error page if no specific error page exists
   unless Rails.application.config.consider_all_requests_local
     rescue_from StandardError do |e|
-      # Instrument ActiveSupport::Notifications for internal errors:
-      ActiveSupport::Notifications.instrument('internal_error.application', exception: e)
+      # Instrument ActiveSupport::Notifications for internal errors but only for non-404 errors:
+      unless e.is_a?(ActionController::RoutingError) || e.is_a?(ActionView::MissingTemplate)
+        ActiveSupport::Notifications.instrument('internal_error.application', exception: e)
+      end
       # Trigger the appropriate error handling method based on the exception
       case e.class
       when ActionController::RoutingError, ActionView::MissingTemplate
@@ -104,7 +106,7 @@ class ApplicationController < ActionController::Base
       body: request.body.gets&.gsub("\n", '\n'),
       method: request.method,
       status: response.status,
-      message: Rack::Utils::HTTP_STATUS_CODES[response.status]
+      message: response.message || Rack::Utils::HTTP_STATUS_CODES[response.status]
     }
 
     case response.status
