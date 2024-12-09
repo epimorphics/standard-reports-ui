@@ -52,9 +52,6 @@
   rules!
 - (Jon) Updated `.gitignore` to include ignoring `byebug` history as well as
   sets the tmp directory ignore to be anywhere, not just at the project root
-
-## 1.5.3 - 2024-09
-
 - (Dan) Fixes bug XXS vulnerability
   [133](https://github.com/epimorphics/standard-reports-ui/issues/133)
 - (Dan) Update the error messages for the postcode selectors step 3/7 so each
