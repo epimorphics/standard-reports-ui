@@ -1,6 +1,17 @@
 # Standard Reports UI: change log
 
-## 1.5.3 - 2024-09
+## 2.0.0 - 2024-12
+
+- (Bogdan) Updated all gems by regenerating `Gemfile.lock`
+- (Bogdan) Upgraded alpine to `3.20`
+- (Bogdan) Upgraded rails to `7.2.2`
+- (Bogdan) Upgraded ruby to `3.3.5`
+
+## 1.6.0 - 2024-10
+
+- (Dan) Updates ruby version to 2.7.8 and alpine version to 3.16 [GH-143](https://github.com/epimorphics/standard-reports-ui/issues/143)
+
+## 1.5.4 - 2024-09
 
 - (Jon) Updated the application exceptions controller to instrument the
   `ActiveSupport::Notifications` for internal errors

@@ -2,23 +2,23 @@
 
 source 'https://rubygems.org'
 
-gem 'execjs', '< 2.8.0'
+gem 'execjs'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '< 6.0.0'
+gem 'rails'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails'
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-gem 'libv8-node', '>= 16.10.0.0'
+gem 'libv8-node'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 1.1.0', group: :doc
+gem 'sdoc', group: :doc
 
 # LR-common dependencies
 gem 'bootstrap-sass'
@@ -31,15 +31,15 @@ gem 'modulejs-rails'
 # application dependencies
 gem 'faraday'
 gem 'faraday_middleware'
-gem 'get_process_mem', '~> 0.2.7'
+gem 'get_process_mem'
 gem 'jquery-ui-rails'
-gem 'js-routes', '< 2.0'
+gem 'js-routes'
 gem 'leaflet-rails'
-gem 'prometheus-client', '~> 4.0'
+gem 'prometheus-client'
 gem 'puma'
 gem 'puma-metrics'
-gem 'responders', '~> 2.0'
-gem 'sentry-ruby', '~> 5.2'
+gem 'responders'
+gem 'sentry-ruby'
 gem 'yajl-ruby', require: 'yajl'
 
 group :development, :test do
@@ -71,15 +71,15 @@ group :development do
   gem 'spring'
 end
 
-# rubocop:disable Layout/LineLength
-# TODO: While running the rails app locally for testing you can set gems to your local path
-# ! These "local" paths do not work with a docker image - use the repo instead
-# gem 'json_rails_logger', '~> 1.0.0', path: '~/Epimorphics/shared/json-rails-logger/'
-# gem 'lr_common_styles', '~> 1.9.0', path: '~/Epimorphics/clients/land-registry/projects/lr_common_styles/'
-# rubocop:enable Layout/LineLength
-
 # TODO: In production you want to set this to the gem from the epimorphics package repo
 source 'https://rubygems.pkg.github.com/epimorphics' do
   gem 'json_rails_logger', '~> 1.0.0'
-  gem 'lr_common_styles', '~> 1.9.0'
+  gem 'lr_common_styles'
 end
+
+# rubocop:disable Layout/LineLength
+# TODO: While running the rails app locally for testing you can set gems to your local path
+# ! These "local" paths do not work with a docker image - use the repo instead
+# gem 'json_rails_logger', path: '~/Epimorphics/shared/json-rails-logger/'
+# gem 'lr_common_styles', path: '~/Epimorphics/clients/land-registry/projects/lr_common_styles/'
+# rubocop:enable Layout/LineLength
