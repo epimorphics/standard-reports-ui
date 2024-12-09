@@ -1,3 +1,4 @@
+$grey-1: #6f777b;
 
 :focus,
 a:focus,
@@ -133,7 +134,7 @@ input[type=radio] {
 }
 
 .o-help-link {
-  @extend .pull-right;
+  @extend .pull-right !optional;
   font-size: 90%
 }
 
