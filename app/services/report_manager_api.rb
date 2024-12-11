@@ -178,7 +178,7 @@ class ReportManagerApi
 
     case response_status
     when 500..599
-      log_fields[:message] = env['action_dispatch.exception']
+      log_fields[:message] = response.env['action_dispatch.exception']
       Rails.logger.error(JSON.generate(log_fields))
     when 400..499
       Rails.logger.warn(JSON.generate(log_fields))
