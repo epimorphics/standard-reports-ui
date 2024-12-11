@@ -1,5 +1,9 @@
 # Standard Reports UI: change log
 
+## 2.0.1 - 2024-12
+
+- (Bogdan) Fixed a bug that was causing an internal application error in `ReportManagerApi`
+
 ## 2.0.0 - 2024-12
 
 - (Bogdan) Updated all gems by regenerating `Gemfile.lock`
