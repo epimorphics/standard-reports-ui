@@ -47,6 +47,8 @@ class ApplicationController < ActionController::Base
       render_error(400)
     else
       Rails.logger.warn "No explicit error page for exception #{exception} - #{exception.class}"
+      # Instrument ActiveSupport::Notifications for internal server errors only:
+      instrument_internal_error(exception)
       render_error(500)
     end
   end
