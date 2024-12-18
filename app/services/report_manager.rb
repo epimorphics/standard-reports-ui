@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Service object for interacting with remote service-manager API
-class ReportManager
+class ReportManager # rubocop:disable Metrics/ClassLength
   def initialize(config = nil)
     return unless config
 
@@ -104,7 +104,7 @@ class ReportManager
 
   def start_request(req_spec)
     json = api.post_json("#{url}report-request", req_spec.to_hash)
-    Rails.logger.debug { "ReportManager: #{json}" } if Rails.env.development?
+    Rails.logger.debug { "ReportManager response: #{json}" } if Rails.env.development?
     ReportStatus.new(json)
   end
 
@@ -122,7 +122,9 @@ class ReportManager
   end
 
   def key_present?(params, key)
-    return false unless !params.key?(key) || params[key].nil? || params[key].to_s.empty?
+    return false unless !params.key?(key) ||
+                        params[key].nil? ||
+                        params[key].to_s.empty?
 
     @errors ||= []
     @errors << "missing parameter #{key}"
