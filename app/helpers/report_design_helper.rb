@@ -2,7 +2,7 @@
 
 # :nodoc:
 module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
-  def workflow_step_form(workflow) # rubocop:disable Metrics/AbcSize
+  def workflow_step_form(workflow) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     step = workflow.current_step
 
     form_tag(workflow.form_action, method: 'get') do
@@ -51,7 +51,7 @@ module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
     end
   end
 
-  def toggle_button_option(step, value, radio, single_value)
+  def toggle_button_option(step, value, radio, single_value) # rubocop:disable Metrics/MethodLength
     active = value.active? || single_value
 
     content_tag(:div, class: 'o-form-control') do
@@ -115,7 +115,7 @@ module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
       .summarise_current_value(workflow)
   end
 
-  def layout_custom_dates(delta, step, workflow)
+  def layout_custom_dates(delta, step, workflow) # rubocop:disable Metrics/MethodLength
     year = Time.current.year - delta
     content_tag(:div, class: 'row') do
       concat(content_tag(:div, class: 'col-sm-12 col-md-1') do
@@ -147,7 +147,7 @@ module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
     layout_quarters_or_months(step.months_for(year, workflow), 'months', "#{step.param_name}[]")
   end
 
-  def layout_quarters_or_months(mqs, _prompt, param_name)
+  def layout_quarters_or_months(mqs, _prompt, param_name) # rubocop:disable Metrics/MethodLength
     capture do
       concat prompted_row(
         lambda {
@@ -202,7 +202,7 @@ module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
 
   def review_selection(workflow, step)
     content_tag(:li) do
-      concat step.summarise(workflow.state(step.param_name)).html_safe
+      concat step.summarise(workflow.state(step.param_name)).html_safe # rubocop:disable Rails/OutputSafety
       concat show_change_link(workflow, step)
     end
   end
