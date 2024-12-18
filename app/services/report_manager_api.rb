@@ -126,7 +126,7 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
     Rails.logger.error(msg)
   end
 
-  def record_api_error_response(http_url, method, response, start_time)
+  def record_api_error_response(http_url, method, response, start_time) # rubocop:disable Metrics/MethodLength
     end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC, :microsecond)
     ellapsed_time = end_time - start_time
     body = response&.body
