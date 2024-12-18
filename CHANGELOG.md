@@ -1,8 +1,21 @@
 # Standard Reports UI: change log
 
+## 2.0.2 - 2024-12
+
+- (Jon) Myriad of tweaks to ensure variables either fail quietly via safe
+  navigation or are set to a default value to prevent errors in the application
+- (Jon) Updated the error template path to use `Rails.public_path` as well as
+  contain the `html` extension to ensure the correct template is rendered
+- (Jon) Improves error metrics reporting to ensure that logging always happens
+  with the appropriate severity depending on the exception status while reducing
+  the types of errors that can trigger a an error metric and therefore a
+  notification in slack
+  [GH-149](https://github.com/epimorphics/hmlr-linked-data/issues/149)
+
 ## 2.0.1 - 2024-12
 
-- (Bogdan) Fixed a bug that was causing an internal application error in `ReportManagerApi`
+- (Bogdan) Fixed a bug that was causing an internal application error in
+  `ReportManagerApi`
 
 ## 2.0.0 - 2024-12
 
@@ -13,7 +26,8 @@
 
 ## 1.6.0 - 2024-10
 
-- (Dan) Updates ruby version to 2.7.8 and alpine version to 3.16 [GH-143](https://github.com/epimorphics/standard-reports-ui/issues/143)
+- (Dan) Updates ruby version to 2.7.8 and alpine version to 3.16
+  [GH-143](https://github.com/epimorphics/standard-reports-ui/issues/143)
 
 ## 1.5.4 - 2024-09
 
