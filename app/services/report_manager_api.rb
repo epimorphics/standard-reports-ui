@@ -129,12 +129,14 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
   def record_api_error_response(http_url, method, response, start_time)
     end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC, :microsecond)
     ellapsed_time = end_time - start_time
-    error_message = "API #{method} to '#{http_url}' failed: '#{response.body}'"
+    body = response&.body
+    status = response&.status
+    error_message = "API #{method} to '#{http_url}' failed: '#{body}'"
     log_api_response(
       response,
       start_time,
       url: http_url,
-      status: response.status,
+      status: status,
       message: error_message
     )
     instrumenter&.instrument('service_exception.api', response: response, duration: ellapsed_time)
