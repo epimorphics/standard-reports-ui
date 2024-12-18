@@ -78,7 +78,7 @@ class ReportManager
   #     a=1&b[]=2&b[]=3
   # becomes
   #     [{a: 1, b: 2}, {a: 1, b: 3}]
-  def create_params_sets(params)
+  def create_params_sets(params) # rubocop:disable Metrics/MethodLength
     product = [{}]
 
     params.each do |k, v|

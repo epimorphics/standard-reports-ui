@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Encapsulates the HTTP API for the report manager
-class ReportManagerApi
+class ReportManagerApi # rubocop:disable Metrics/ClassLength
   attr_reader :instrumenter
 
   def initialize(instrumenter = ActiveSupport::Notifications)
@@ -39,7 +39,7 @@ class ReportManagerApi
 
   private
 
-  def get_from_api(http_url, options)
+  def get_from_api(http_url, options) # rubocop:disable Metrics/MethodLength
     conn = set_connection_timeout(create_http_connection(http_url))
 
     conn.get do |req|
@@ -65,7 +65,7 @@ class ReportManagerApi
 
   # Parse the given JSON string into a data structure. Throws an exception if
   # parsing fails
-  def parse_json(json)
+  def parse_json(json) # rubocop:disable Metrics/MethodLength
     result = nil
 
     json_hash = parser.parse(StringIO.new(json)) do |json_chunk|
@@ -143,7 +143,7 @@ class ReportManagerApi
     throw error_message
   end
 
-  def record_api_ok_response(http_url, method, response, start_time)
+  def record_api_ok_response(http_url, method, response, start_time) # rubocop:disable Metrics/MethodLength
     end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC, :microsecond)
     ellapsed_time = end_time - start_time
     success_message = "API #{method} to '#{http_url}' succeeded: '#{response.body}'"
@@ -162,7 +162,7 @@ class ReportManagerApi
     throw "Failed to connect to '#{http_url}'"
   end
 
-  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity
   def log_api_response(response, start_time, url: nil, status: nil, message: '')
     end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC, :microsecond)
     ellapsed_time = end_time - start_time
@@ -186,5 +186,5 @@ class ReportManagerApi
       Rails.logger.info(JSON.generate(log_fields))
     end
   end
-  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity
 end
