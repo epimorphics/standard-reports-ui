@@ -39,7 +39,7 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
 
   private
 
-  def get_from_api(http_url, options) # rubocop:disable Metrics/MethodLength
+  def get_from_api(http_url, options)
     conn = set_connection_timeout(create_http_connection(http_url))
 
     conn.get do |req|
@@ -126,7 +126,7 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
     Rails.logger.error(msg)
   end
 
-  def record_api_error_response(http_url, method, response, start_time) # rubocop:disable Metrics/MethodLength
+  def record_api_error_response(http_url, method, response, start_time)
     end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC, :microsecond)
     ellapsed_time = end_time - start_time
     body = response&.body
@@ -142,7 +142,7 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
     instrumenter&.instrument('service_exception.api', response: response, duration: ellapsed_time)
   end
 
-  def record_api_ok_response(http_url, method, response, start_time) # rubocop:disable Metrics/MethodLength
+  def record_api_ok_response(http_url, method, response, start_time)
     end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC, :microsecond)
     ellapsed_time = end_time - start_time
     success_message = "API #{method} to '#{http_url}' succeeded: '#{response.body}'"
