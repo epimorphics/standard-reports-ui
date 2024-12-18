@@ -137,7 +137,7 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
       status: response.status,
       message: error_message
     )
-    instrumenter&.instrument('response.api', response: response, duration: ellapsed_time)
+    instrumenter&.instrument('service_exception.api', response: response, duration: ellapsed_time)
 
     throw error_message
   end
