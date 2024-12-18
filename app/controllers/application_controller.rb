@@ -81,7 +81,7 @@ class ApplicationController < ActionController::Base
 
   def render_html_error_page(status)
     render(layout: true,
-           file: Rails.root.join('public', 'landing', status.to_s),
+           file: Rails.public_path + "landing/#{status}.html",
            status: status)
   end
 
