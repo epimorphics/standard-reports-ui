@@ -167,17 +167,20 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
     ellapsed_time = end_time - start_time
 
     log_fields = {
-      url: response ? response.env[:url].to_s : url,
-      status: status || response.status,
+      url: url,
       duration: ellapsed_time,
+      status: status,
       message: message
     }
+    # Replace specific fields if available in the response
+    log_fields[:url] = response.env[:url].to_s if response
+    log_fields[:status] = response.status if response
+    log_fields[:message] = response.body if response
 
-    response_status = response ? response.status : status
-
-    case response_status
+    case log_fields[:status]
     when 500..599
-      log_fields[:message] = response.env['action_dispatch.exception']
+      exp = response.env['action_dispatch.exception'] || response.env['exception']
+      log_fields[:message] = exp.message if exp
       Rails.logger.error(JSON.generate(log_fields))
     when 400..499
       Rails.logger.warn(JSON.generate(log_fields))
