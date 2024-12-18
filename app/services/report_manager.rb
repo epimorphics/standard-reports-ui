@@ -17,11 +17,15 @@ class ReportManager
   end
 
   def latest_month
-    latest_month_spec.split('-').second.to_i
+    # with fallback to current month if not available
+    month = latest_month_spec&.split('-') || Time.zone.today.strftime('%Y-%m').split('-')
+    month.second.to_i
   end
 
   def latest_year
-    latest_month_spec.split('-').first.to_i
+    # with fallback to current year if not available
+    year = latest_month_spec&.split('-') || Time.zone.today.strftime('%Y-%m').split('-')
+    year&.first.to_i
   end
 
   def latest_quarter
