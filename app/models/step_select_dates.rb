@@ -95,7 +95,7 @@ class StepSelectDates < Step
     ]
   end
 
-  def summarise_value
+  def summarise_value # rubocop:disable Metrics/MethodLength
     proc { |state_value|
       s = case state_value.to_sym
           when :ytd
