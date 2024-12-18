@@ -113,15 +113,17 @@ class ReportManager
   end
 
   def key_present?(params, key)
-    return unless !params.key?(key) || params[key].nil? || params[key].to_s.empty?
+    return false unless !params.key?(key) || params[key].nil? || params[key].to_s.empty?
 
     @errors ||= []
     @errors << "missing parameter #{key}"
   end
 
   def array_key_present?(params, key)
-    return unless !params.key?(key) || params[key].nil? ||
-                  !params[key].is_a?(Array) || params[key].empty?
+    return false unless !params.key?(key) ||
+                        params[key].nil? ||
+                        !params[key].is_a?(Array) ||
+                        params[key].empty?
 
     @errors ||= []
     @errors << "missing parameter #{key}"
@@ -131,7 +133,7 @@ class ReportManager
     area = params[:area]
     pattern = validation_pattern(params)
 
-    return unless pattern && !pattern.match?(area)
+    return false unless pattern && !pattern.match?(area)
 
     @errors ||= []
     @errors << 'invalid postal code'
