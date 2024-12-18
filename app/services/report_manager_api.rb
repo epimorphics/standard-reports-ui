@@ -109,7 +109,7 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
   end
 
   def ok?(response)
-    (200..207).cover?(response.status)
+    (200..207).cover?(response.status) if response
   end
 
   def as_http_api(api)
