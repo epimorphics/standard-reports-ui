@@ -120,11 +120,10 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
     @parser ||= Yajl::Parser.new
   end
 
-  def report_json_failure(_json)
-    msg = 'JSON result was not parsed correctly'
+  def report_json_failure(json)
+    msg = "Failed to parse JSON: #{json.inspect}"
     Sentry.capture_message(msg)
     Rails.logger.error(msg)
-    throw msg
   end
 
   def record_api_error_response(http_url, method, response, start_time)
