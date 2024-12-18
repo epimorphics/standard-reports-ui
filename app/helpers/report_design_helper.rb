@@ -218,7 +218,7 @@ module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
 
   def layout_map_control(_step)
     content_tag(:div, class: 'col-sm-12 col-md-6') do
-      tag(:div, id: 'map', class: 'o-map')
+      tag.div(id: 'map', class: 'o-map')
     end
   end
 end
