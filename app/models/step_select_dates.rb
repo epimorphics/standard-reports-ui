@@ -51,10 +51,10 @@ class StepSelectDates < Step
     'select dates'
   end
 
-  def each_year(hidden_only: true, &block)
+  def each_year(hidden_only: true, &block) # rubocop:disable Style/ArgumentsForwarding
     start_delta = hidden_only ? YEARS_SHOWN_BY_DEFAULT : 0
     delta = Time.current.year - EARLIEST_YEAR
-    (start_delta..delta).each(&block)
+    (start_delta..delta).each(&block) # rubocop:disable Style/ArgumentsForwarding
   end
 
   private
