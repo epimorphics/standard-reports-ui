@@ -140,8 +140,6 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
       message: error_message
     )
     instrumenter&.instrument('service_exception.api', response: response, duration: ellapsed_time)
-
-    throw error_message
   end
 
   def record_api_ok_response(http_url, method, response, start_time) # rubocop:disable Metrics/MethodLength
@@ -160,7 +158,6 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
 
   def record_failed_connection(http_url, exception)
     instrumenter&.instrument('connection_failure.api', exception: exception, url: http_url)
-    throw "Failed to connect to '#{http_url}'"
   end
 
   # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity
