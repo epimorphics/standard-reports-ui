@@ -51,7 +51,7 @@ module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
     end
   end
 
-  def toggle_button_option(step, value, radio, single_value)
+  def toggle_button_option(step, value, radio, single_value) # rubocop:disable Metrics/MethodLength
     active = value.active? || single_value
 
     content_tag(:div, class: 'o-form-control') do
@@ -116,7 +116,7 @@ module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
   end
 
   def layout_custom_dates(delta, step, workflow)
-    year = Time.now.year - delta
+    year = Time.current.year - delta
     content_tag(:div, class: 'row') do
       concat(content_tag(:div, class: 'col-sm-12 col-md-1') do
         content_tag(:h3, year.to_s, class: 'u-font-bold u-align-top')
@@ -130,7 +130,7 @@ module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
   end
 
   def layout_all_year(step, year, workflow)
-    all_year = year == Time.now.year ? 'to date' : 'all year'
+    all_year = year == Time.current.year ? 'to date' : 'all year'
     checked = workflow.has_state?(step.param_name, year.to_s)
     capture do
       concat prompted_row(
@@ -218,7 +218,7 @@ module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
 
   def layout_map_control(_step)
     content_tag(:div, class: 'col-sm-12 col-md-6') do
-      tag(:div, id: 'map', class: 'o-map')
+      tag.div(id: 'map', class: 'o-map')
     end
   end
 end

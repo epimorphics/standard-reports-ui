@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Encapsulates the HTTP API for the report manager
-class ReportManagerApi
+class ReportManagerApi # rubocop:disable Metrics/ClassLength
   attr_reader :instrumenter
 
   def initialize(instrumenter = ActiveSupport::Notifications)
@@ -65,7 +65,7 @@ class ReportManagerApi
 
   # Parse the given JSON string into a data structure. Throws an exception if
   # parsing fails
-  def parse_json(json)
+  def parse_json(json) # rubocop:disable Metrics/MethodLength
     result = nil
 
     json_hash = parser.parse(StringIO.new(json)) do |json_chunk|
@@ -109,7 +109,7 @@ class ReportManagerApi
   end
 
   def ok?(response)
-    (200..207).cover?(response.status)
+    (200..207).cover?(response.status) if response
   end
 
   def as_http_api(api)
@@ -120,27 +120,26 @@ class ReportManagerApi
     @parser ||= Yajl::Parser.new
   end
 
-  def report_json_failure(_json)
-    msg = 'JSON result was not parsed correctly'
+  def report_json_failure(json)
+    msg = "Failed to parse JSON: #{json.inspect}"
     Sentry.capture_message(msg)
     Rails.logger.error(msg)
-    throw msg
   end
 
   def record_api_error_response(http_url, method, response, start_time)
     end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC, :microsecond)
     ellapsed_time = end_time - start_time
-    error_message = "API #{method} to '#{http_url}' failed: '#{response.body}'"
+    body = response&.body
+    status = response&.status
+    error_message = "API #{method} to '#{http_url}' failed: '#{body}'"
     log_api_response(
       response,
       start_time,
       url: http_url,
-      status: response.status,
+      status: status,
       message: error_message
     )
-    instrumenter&.instrument('response.api', response: response, duration: ellapsed_time)
-
-    throw error_message
+    instrumenter&.instrument('service_exception.api', response: response, duration: ellapsed_time)
   end
 
   def record_api_ok_response(http_url, method, response, start_time)
@@ -159,26 +158,28 @@ class ReportManagerApi
 
   def record_failed_connection(http_url, exception)
     instrumenter&.instrument('connection_failure.api', exception: exception, url: http_url)
-    throw "Failed to connect to '#{http_url}'"
   end
 
-  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity
   def log_api_response(response, start_time, url: nil, status: nil, message: '')
     end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC, :microsecond)
     ellapsed_time = end_time - start_time
 
     log_fields = {
-      url: response ? response.env[:url].to_s : url,
-      status: status || response.status,
+      url: url,
       duration: ellapsed_time,
+      status: status,
       message: message
     }
+    # Replace specific fields if available in the response
+    log_fields[:url] = response.env[:url].to_s if response
+    log_fields[:status] = response.status if response
+    log_fields[:message] = response.body if response
 
-    response_status = response ? response.status : status
-
-    case response_status
+    case log_fields[:status]
     when 500..599
-      log_fields[:message] = response.env['action_dispatch.exception']
+      exp = response.env['action_dispatch.exception'] || response.env['exception']
+      log_fields[:message] = exp.message if exp
       Rails.logger.error(JSON.generate(log_fields))
     when 400..499
       Rails.logger.warn(JSON.generate(log_fields))
@@ -186,5 +187,5 @@ class ReportManagerApi
       Rails.logger.info(JSON.generate(log_fields))
     end
   end
-  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity
 end
