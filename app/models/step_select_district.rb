@@ -23,7 +23,8 @@ class StepSelectDistrict < StepSelectCountyOrDistrict
     :select_aggregation_type
   end
 
-  NAMES = [
+  # The names of all the districts
+  NAMES = [ # rubocop:disable Metrics/CollectionLiteralLength
     'ADUR',
     'ALLERDALE',
     'AMBER VALLEY',
