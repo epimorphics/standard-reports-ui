@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Service object for interacting with remote service-manager API
-class ReportManager
+class ReportManager # rubocop:disable Metrics/ClassLength
   def initialize(config = nil)
     return unless config
 
@@ -17,15 +17,24 @@ class ReportManager
   end
 
   def latest_month
-    latest_month_spec.split('-').second.to_i
+    latest_month_spec && latest_month_spec.split('-').second.to_i
+  rescue StandardError => e
+    msg = "Failed to retreive latest month from #{url}latest-month-available"
+    Rails.logger.error { "#{msg}: #{e}" }
   end
 
   def latest_year
-    latest_month_spec.split('-').first.to_i
+    latest_month_spec && latest_month_spec.split('-').first.to_i
+  rescue StandardError => e
+    msg = "Failed to retreive latest year from #{url}latest-month-available"
+    Rails.logger.error { "#{msg}: #{e}" }
   end
 
   def latest_quarter
-    (latest_month / 3).to_i
+    latest_month && (latest_month / 3).to_i
+  rescue StandardError => e
+    msg = "Failed to retreive latest quarter from #{url}latest-month-available"
+    Rails.logger.error { "#{msg}: #{e}" }
   end
 
   def latest_month_spec
@@ -74,7 +83,7 @@ class ReportManager
   #     a=1&b[]=2&b[]=3
   # becomes
   #     [{a: 1, b: 2}, {a: 1, b: 3}]
-  def create_params_sets(params)
+  def create_params_sets(params) # rubocop:disable Metrics/MethodLength
     product = [{}]
 
     params.each do |k, v|
@@ -95,7 +104,7 @@ class ReportManager
 
   def start_request(req_spec)
     json = api.post_json("#{url}report-request", req_spec.to_hash)
-    Rails.logger.debug { "ReportManager: #{json}" } if Rails.env.development?
+    Rails.logger.debug { "ReportManager response: #{json}" } if Rails.env.development?
     ReportStatus.new(json)
   end
 
@@ -113,15 +122,19 @@ class ReportManager
   end
 
   def key_present?(params, key)
-    return unless !params.key?(key) || params[key].nil? || params[key].to_s.empty?
+    return false unless !params.key?(key) ||
+                        params[key].nil? ||
+                        params[key].to_s.empty?
 
     @errors ||= []
     @errors << "missing parameter #{key}"
   end
 
   def array_key_present?(params, key)
-    return unless !params.key?(key) || params[key].nil? ||
-                  !params[key].is_a?(Array) || params[key].empty?
+    return false unless !params.key?(key) ||
+                        params[key].nil? ||
+                        !params[key].is_a?(Array) ||
+                        params[key].empty?
 
     @errors ||= []
     @errors << "missing parameter #{key}"
@@ -131,7 +144,7 @@ class ReportManager
     area = params[:area]
     pattern = validation_pattern(params)
 
-    return unless pattern && !pattern.match?(area)
+    return false unless pattern && !pattern.match?(area)
 
     @errors ||= []
     @errors << 'invalid postal code'
