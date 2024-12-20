@@ -2,7 +2,7 @@
 
 # Workflow step of selecting a postcode district
 class StepSelectPostcodeDistrict < StepSelectPostcode
-  VALIDATION = /\A[A-Z][A-Z]?[0-9][0-9]?[A-Z]?\Z/.freeze
+  VALIDATION = /\A[A-Z][A-Z]?[0-9][0-9]?[A-Z]?\Z/
 
   def initialize
     super(:select_pc_district)

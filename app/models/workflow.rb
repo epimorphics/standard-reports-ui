@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Model encapsulating the report-generation workflow
-class Workflow
+class Workflow # rubocop:disable Metrics/ClassLength
   extend Forwardable
 
   attr_reader :step_history
