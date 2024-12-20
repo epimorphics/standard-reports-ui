@@ -51,9 +51,9 @@ class StepSelectDates < Step
     'select dates'
   end
 
-  def each_year(hidden_only = true, &block)
+  def each_year(hidden_only = true, &block) # rubocop:disable Style/OptionalBooleanParameter
     start_delta = hidden_only ? YEARS_SHOWN_BY_DEFAULT : 0
-    delta = Time.now.year - EARLIEST_YEAR
+    delta = Time.current.year - EARLIEST_YEAR
     (start_delta..delta).each(&block)
   end
 
@@ -95,7 +95,7 @@ class StepSelectDates < Step
     ]
   end
 
-  def summarise_value
+  def summarise_value # rubocop:disable Metrics/MethodLength
     proc { |state_value|
       s = case state_value.to_sym
           when :ytd
