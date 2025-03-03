@@ -39,7 +39,7 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
 
   private
 
-  def get_from_api(http_url, options)
+  def get_from_api(http_url, options) # rubocop:disable Metrics/MethodLength
     conn = set_connection_timeout(create_http_connection(http_url))
 
     conn.get do |req|
