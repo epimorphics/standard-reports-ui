@@ -43,11 +43,10 @@ gem 'sentry-ruby'
 gem 'yajl-ruby', require: 'yajl'
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-
-  # Use Unicorn as the app server
-  gem 'unicorn'
+  gem 'dotenv'
+  gem 'rubocop'
+  gem 'rubocop-rails'
 end
 
 group :test do
@@ -57,8 +56,6 @@ group :test do
   gem 'minitest-spec-rails'
   gem 'minitest-vcr'
   gem 'mocha'
-  gem 'rubocop'
-  gem 'rubocop-rails'
   gem 'vcr'
   gem 'webmock'
 end
@@ -73,7 +70,7 @@ end
 
 # TODO: In production you want to set this to the gem from the epimorphics package repo
 source 'https://rubygems.pkg.github.com/epimorphics' do
-  gem 'json_rails_logger', '~> 1.0.0'
+  gem 'json_rails_logger'
   gem 'lr_common_styles'
 end
 
