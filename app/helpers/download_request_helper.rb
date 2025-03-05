@@ -6,7 +6,7 @@ module DownloadRequestHelper
     content_tag(:li) do
       content_tag(:div, class: 'o-request', data: { running: request.running? }) do
         concat(report_id(request))
-        concat(tag(:br))
+        concat(tag.br)
         concat(request_status(request))
       end
     end
@@ -44,12 +44,12 @@ module DownloadRequestHelper
   def render_completed_request(request)
     content_tag(:span, class: 'o-request--status__success') do
       concat('Ready: ')
-      concat(tag(:br))
+      concat(tag.br)
       concat(
         link_to("Microsoft Excel format <i class='fa fa-external-link text-link'></i>".html_safe,
                 request.url(:xlsx))
       )
-      concat(tag(:br))
+      concat(tag.br)
       concat(
         link_to("open-data (csv) format <i class='fa fa-external-link text-link'></i>".html_safe,
                 request.url(:csv))

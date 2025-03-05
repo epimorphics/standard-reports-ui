@@ -21,18 +21,18 @@ class StepTest < ActiveSupport::TestCase
 
   it 'should not report as completed if the param is missing' do
     w = Workflow.new({})
-    refute step.completed?(w)
+    assert_not step.completed?(w)
     assert step.incomplete?(w)
   end
 
   it 'should report as completed if the param is present' do
     w = Workflow.new(test_param: 'foo')
     assert step.completed?(w)
-    refute step.incomplete?(w)
+    assert_not step.incomplete?(w)
   end
 
   it 'should answer generically that a step provides its param name' do
     assert step.provides?(:test_param, nil)
-    refute step.provides?(:test_paramXX, nil)
+    assert_not step.provides?(:test_paramXX, nil)
   end
 end

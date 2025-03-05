@@ -5,7 +5,7 @@ class ReportStatus
   attr_reader :json
 
   def initialize(json)
-    @json = HashWithIndifferentAccess.new(json)
+    @json = ActiveSupport::HashWithIndifferentAccess.new(json)
   end
 
   def id
