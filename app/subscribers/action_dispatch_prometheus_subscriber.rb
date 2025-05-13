@@ -1,14 +1,11 @@
 # frozen_string_literal: true
 
-# Subscribe to `*.action_controller`` events
-#
-# Note: This is Rails 5 specific. In Rails 6, we'd subscribe to
-# `request.action_dispatch`
-class ActionControllerPrometheusSubscriber < ActiveSupport::Subscriber
-  attach_to :action_controller
+# Subscribe to :action_dispatch events
+class ActionDispatchPrometheusSubscriber < ActiveSupport::Subscriber
+  attach_to :action_dispatch
 
   # rubocop:disable Metrics/AbcSize
-  def process_action(_event)
+  def process_middleware(_event)
     mem = GetProcessMem.new
     Prometheus::Client.registry
                       .get(:memory_used_mb)
