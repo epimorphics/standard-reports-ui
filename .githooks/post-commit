@@ -49,7 +49,7 @@ if [ -n "$NEW_TEST_FILES" ]; then
   fi
 
   for file in $NEW_TEST_FILES; do
-    # if file is syste test file run rake test:system filename
+    # if file is system test file run rake test:system filename
     if [[ "$file" == *"./test/system/*_test.rb" ]]; then
       printf '\n\033[0;33mRunning system test for "%s"...\033[0m\n', "$file"
       bundle exec rake test:system "$file"
