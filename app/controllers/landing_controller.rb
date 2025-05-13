@@ -2,5 +2,7 @@
 
 # :nodoc:
 class LandingController < ApplicationController
-  def index; end
+  def index
+    LoggingHelper.log_request({ params: params, path: request.path }, 'info')
+  end
 end
