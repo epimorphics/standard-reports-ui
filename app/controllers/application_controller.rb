@@ -4,7 +4,7 @@
 class ApplicationController < ActionController::Base
   include Rails.application.routes.url_helpers
   include ActionView::Helpers::TranslationHelper
-  include LoggingHelper
+  include Log
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
     yield
     # Calculate elapsed time and convert to milliseconds
     duration = (Process.clock_gettime(Process::CLOCK_MONOTONIC, :microsecond) - start) / 1000
-    LoggingHelper.log_request({ duration: })
+    Log.info('Request completed', { duration: })
   end
 
   # Handle specific types of exceptions and render the appropriate error page
@@ -47,18 +47,20 @@ class ApplicationController < ActionController::Base
   end
 
   # Render the appropriate error page based on the exception
-  def handle_internal_error(exception) # rubocop:disable Metrics/MethodLength
+  def handle_internal_error(exception)
     # Render the appropriate error page based on the exception
     if exception.instance_of? ArgumentError
       render_error(400)
     else
       cname = exception.class.name
       logged_fields = {
-        message: "No explicit error page for exception #{exception} - #{cname}",
         status: Rack::Utils::HTTP_STATUS_CODES[exception]
       }
       logged_fields[:backtrace] = exception.backtrace.join("\n") if Rails.env.development?
-      LoggingHelper.log_request(logged_fields)
+      Log.error(
+        "No explicit error page for exception #{exception} - #{cname}",
+        logged_fields
+      )
       # Instrument ActiveSupport::Notifications for internal errors but only for 500 errors:
       instrument_application_error(exception)
       render_error(500)
