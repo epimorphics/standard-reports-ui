@@ -119,47 +119,23 @@ class ApplicationController < ActionController::Base
 
   # Notify subscriber(s) of an internal error event with the payload of the
   # exception once done
-  # @param [Exception] the exception that caused the error
+  # @param [exc] exp the exception that caused the error
   # @return [ActiveSupport::Notifications::Event] provides an object-oriented
   # interface to the event
-  def instrument_application_error(exception)
-    ActiveSupport::Notifications.instrument('internal_error.application', exception:)
-  end
-
-  # Instrument the response
-  # @param [Faraday::Response] response the response to instrument
-  # @param [Integer] duration the duration of the request in milliseconds
-  # @return [ActiveSupport::Notifications::Event] provides an object-oriented
-  # interface to the event
-  def instrument_response(response, duration)
-    ActiveSupport::Notifications.instrument('response.api', response:, duration:)
-  end
-
-  # Instrument the connection failure
-  # @param [Faraday::ConnectionFailed] exception the exception to instrument
-  # @return [ActiveSupport::Notifications::Event] provides an object-oriented
-  # interface to the event
-  def instrument_connection_failure(exception)
-    ActiveSupport::Notifications.instrument('connection_failure.api', exception:)
-  end
-
-  # Instrument the service exception
-  # @param [ServiceException] exception the exception to instrument
-  # @return [ActiveSupport::Notifications::Event] provides an object-oriented
-  # interface to the event
-  def instrument_service_exception(exception)
-    ActiveSupport::Notifications.instrument('service_exception.api', exception:)
-  end
-
-  # Do not instrument for resource not found
-  # @param [Faraday::ResourceNotFound] exception the exception to not instrument
-  # @param [String] incident_id the incident ID to not instrument on
-  # @return [NilClass] returns nil
-  def do_not_instrument_resource_not_found(exception, incident_id)
-    log_fields = {
-      message: "Failed to find incident #{incident_id} from API due to: #{exception}",
-      status: 404
+  def instrument_application_error(exc) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+    err = {
+      message: exc&.message || exc,
+      status: exc&.status || Rack::Utils::SYMBOL_TO_STATUS_CODE[exc]
     }
-    Rails.logger.warn(JSON.generate(log_fields))
+    err[:type] = exc.class&.name if exc&.class
+    err[:cause] = exc&.cause if exc&.cause
+    err[:backtrace] = exc&.backtrace if exc&.backtrace && Rails.env.development?
+    # Log the exception to the Rails logger with the appropriate severity
+    Rails.logger.send(err[:status] < 500 ? :warn : :error, JSON.generate(err))
+    # Return unless the status code is 500 or greater to ensure subscribers are NOT notified
+    return unless err[:status] >= 500
+
+    # Instrument the internal error event to notify subscribers of the error
+    ActiveSupport::Notifications.instrument('internal_error.application', exception: err)
   end
 end
