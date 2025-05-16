@@ -6,7 +6,7 @@ class DownloadReportController < ApplicationController
     layout = whole_page?(params) && 'application'
     @report_manager = ReportManager.new(params: params)
 
-    LoggingHelper.log_request({ params: params, path: request.path }, 'info')
+    Log.info('Download Report Controller', { params: params, path: request.path })
 
     if @report_manager.valid?
       render_report(layout)
