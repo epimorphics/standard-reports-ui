@@ -2,6 +2,8 @@
 
 # Encapsulates the HTTP API for the report manager
 class ReportManagerApi # rubocop:disable Metrics/ClassLength
+  include Log
+
   attr_reader :instrumenter
 
   def initialize(instrumenter = ActiveSupport::Notifications)
@@ -17,7 +19,7 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
     start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC, :microsecond)
     response = post_to_api(http_url, options, json)
 
-    if ok?(response)
+    if ok?(response, http_url)
       record_api_ok_response(http_url, 'POST', response, start_time)
       load_status_report(response)
     else
@@ -29,7 +31,7 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
     start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC, :microsecond)
     response = get_from_api(http_url, options)
 
-    if ok?(response)
+    if ok?(response, http_url)
       record_api_ok_response(http_url, 'GET', response, start_time)
       response.body
     else
@@ -81,7 +83,7 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
     result || json_hash
   end
 
-  def post_to_api(http_url, options, json) # rubocop:disable Metrics/AbcSize
+  def post_to_api(http_url, options, json)
     conn = set_connection_timeout(create_http_connection(http_url))
 
     conn.post do |req|
@@ -97,9 +99,15 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
 
   def create_http_connection(http_url)
     Faraday.new(url: http_url) do |faraday|
-      faraday.request  :url_encoded
-      faraday.use      FaradayMiddleware::FollowRedirects
-      faraday.adapter :net_http
+      faraday.use Faraday::Request::UrlEncoded
+      faraday.use Faraday::Request::Retry
+      faraday.use FaradayMiddleware::FollowRedirects
+      # instrument the request to log the time it takes to complete
+      faraday.request :instrumentation, name: 'requests.api'
+      # be sure to raise exceptions on 40x, 50x responses
+      faraday.response :raise_error
+      # setting the adapter must be the final step, otherwise get a warning from Faraday
+      faraday.adapter(:net_http)
     end
   end
 
@@ -108,12 +116,23 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
     conn
   end
 
-  def ok?(response)
-    (200..207).cover?(response.status) if response
+  def ok?(response, http_url)
+    unless (200..207).cover?(response.status)
+      response_body = JSON.parse(response.body, symbolize_names: true)
+      response_message = response_body[:message]
+      response_error = response_body[:error]
+      msg = "#{response_error}: #{response_message}"
+
+      raise ServiceException.new(msg, response.status, http_url, response.body)
+    end
+
+    true
   end
 
   def as_http_api(api)
-    api.start_with?('http:') ? api : "#{url}#{api}"
+    Log.debug { "API: #{api}, URL: #{url}" } if Rails.env.development?
+    uri = URI.parse(api)
+    uri.scheme ? api : "#{url}#{api}"
   end
 
   def parser
@@ -123,69 +142,39 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
   def report_json_failure(json)
     msg = "Failed to parse JSON: #{json.inspect}"
     Sentry.capture_message(msg)
-    Rails.logger.error(msg)
+    Log.error(msg)
   end
 
   def record_api_error_response(http_url, method, response, start_time)
     end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC, :microsecond)
-    ellapsed_time = end_time - start_time
-    body = response&.body
-    status = response&.status
-    error_message = "API #{method} to '#{http_url}' failed: '#{body}'"
-    log_api_response(
-      response,
-      start_time,
-      url: http_url,
-      status: status,
-      message: error_message
-    )
-    instrumenter&.instrument('service_exception.api', response: response, duration: ellapsed_time)
+    ellapsed_time = (end_time - start_time) / 1000 # convert to milliseconds
+    log_fields = { method: method, response_time: ellapsed_time, url: http_url }
+    message = "API #{method} to '#{http_url}' failed"
+
+    if response
+      message += ": '#{response.body}'"
+      log_fields[:status] = response.status
+    end
+    Log.error(message, log_fields, 'error')
+    instrumenter&.instrument('service_exception.api', response:, duration: ellapsed_time)
   end
 
   def record_api_ok_response(http_url, method, response, start_time)
     end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC, :microsecond)
-    ellapsed_time = end_time - start_time
-    success_message = "API #{method} to '#{http_url}' succeeded: '#{response.body}'"
-    log_api_response(
-      response,
-      start_time,
-      url: http_url,
-      status: response.status,
-      message: success_message
-    )
-    instrumenter&.instrument('response.api', response: response, duration: ellapsed_time)
-  end
+    ellapsed_time = (end_time - start_time) / 1000 # convert to milliseconds
+    log_fields = { method: method, response_time: ellapsed_time, url: http_url }
+    message = "API #{method} to '#{http_url}' succeeded"
 
-  def record_failed_connection(http_url, exception)
-    instrumenter&.instrument('connection_failure.api', exception: exception, url: http_url)
-  end
-
-  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity
-  def log_api_response(response, start_time, url: nil, status: nil, message: '')
-    end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC, :microsecond)
-    ellapsed_time = end_time - start_time
-
-    log_fields = {
-      url: url,
-      duration: ellapsed_time,
-      status: status,
-      message: message
-    }
-    # Replace specific fields if available in the response
-    log_fields[:url] = response.env[:url].to_s if response
-    log_fields[:status] = response.status if response
-    log_fields[:message] = response.body if response
-
-    case log_fields[:status]
-    when 500..599
-      exp = response.env['action_dispatch.exception'] || response.env['exception']
-      log_fields[:message] = exp.message if exp
-      Rails.logger.error(JSON.generate(log_fields))
-    when 400..499
-      Rails.logger.warn(JSON.generate(log_fields))
-    else
-      Rails.logger.info(JSON.generate(log_fields))
+    if response
+      message += ": '#{response.body}'"
+      log_fields[:status] = response.status
     end
+    Log.info(message, log_fields)
+    instrumenter&.instrument('response.api', response:, duration: ellapsed_time)
   end
-  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity
+
+  def record_failed_connection(exception, http_url)
+    Log.error("Failed to connect to API at #{http_url} due to: #{exception}", exception)
+    instrumenter&.instrument('connection_failure.api', exception:)
+  end
 end
