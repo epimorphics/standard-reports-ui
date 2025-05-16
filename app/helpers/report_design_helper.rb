@@ -2,7 +2,7 @@
 
 # :nodoc:
 module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
-  def workflow_step_form(workflow) # rubocop:disable Metrics/AbcSize
+  def workflow_step_form(workflow)
     step = workflow.current_step
 
     form_tag(workflow.form_action, method: 'get') do
