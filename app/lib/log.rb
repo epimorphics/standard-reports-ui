@@ -17,10 +17,11 @@ module Log
   LOG_FIELDS = {
     # HTTP request or response body
     body: 'string',
-    # The logged message, should include time taken to process the event (in ms) - use an integer value
-    message: 'number',
+    # The logged message, should include time taken to process the event (in ms)
+    # - use an integer value
+    message: 'string',
     # HTTP method
-    method: 'GET' || 'POST' || 'PUT' || 'DELETE' || 'PATCH',
+    method: %w[GET POST PUT DELETE PATCH],
     # HTTP request path
     path: 'string',
     # HTTP request parameters as a stringified JSON object
@@ -30,7 +31,7 @@ module Log
     # The number of rows / records returned by a request
     returned_rows: 'number',
     # The status of a request
-    request_status: 'received' || 'processing' || 'complete',
+    request_status: %w[received processing complete],
     # Time taken to process the event (in seconds) - maybe a float/decimal value
     request_time: 'number'
   }.freeze
@@ -92,8 +93,8 @@ module Log
     if service.respond_to?(:api) && fields[:path].blank?
       fields[:path] = URI.parse(service.api).path
     elsif params.present? && fields[:path].present?
-      query = params.is_a?(Hash) ? params : params.except('permitted', 'controller', 'action').to_unsafe_h # rubocop:disable Layout/LineLength
-      fields[:path] += "?#{query.map { |k, v| "#{k}=#{v}" }.join('&')}"
+      query = params.is_a?(Hash) && params.except('permitted', 'controller', 'action')
+      fields[:path] += "?#{query.map { |k, v| "#{k}=#{v}" }.join('&')}" if query.present?
     end
 
     # * Set the request method to the HTTP method if not present
