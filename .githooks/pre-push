@@ -1,6 +1,6 @@
 #!/bin/bash
 : "${CLIENT_PROFILE:=hmlr}"
-: "${API_SERVICE_URL:=http://data-api:8080}"
+: "${API_SERVICE_URL:=http://standard-reports-manager:8080}"
 
 list="issue spike task"
 
