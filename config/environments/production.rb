@@ -94,6 +94,6 @@ Rails.application.configure do
   config.api_service_url = ENV.fetch('API_SERVICE_URL', nil)
 end
 
-JsRoutes.setup do |config|
-  config.prefix = ENV.fetch('RAILS_RELATIVE_URL_ROOT', '/app/standard-reports')
-end
+# JsRoutes.setup do |config|
+#   config.default_url_options.script_name = ENV.fetch('RAILS_RELATIVE_URL_ROOT', '/app/standard-reports')
+# end
