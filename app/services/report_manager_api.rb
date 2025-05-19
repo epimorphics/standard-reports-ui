@@ -130,7 +130,7 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
   end
 
   def as_http_api(api)
-    Log.debug { "API: #{api}, URL: #{url}" } if Rails.env.development?
+    Log.debug { "API: #{api}, URL: #{url.to_json}" } if Rails.env.development?
     uri = URI.parse(api)
     uri.scheme ? api : "#{url}#{api}"
   end
@@ -152,7 +152,7 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
     message = "API #{method} to '#{http_url}' failed"
 
     if response
-      message += ": '#{response.body}'"
+      message += response.body.to_json if response.body.present?
       log_fields[:status] = response.status
     end
     Log.error(message, log_fields, 'error')
@@ -163,12 +163,10 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
     end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC, :microsecond)
     ellapsed_time = (end_time - start_time) / 1000 # convert to milliseconds
     log_fields = { method: method, response_time: ellapsed_time, url: http_url }
-    message = "API #{method} to '#{http_url}' succeeded"
+    message = "API #{method} request to '#{http_url}' succeeded"
 
-    if response
-      message += ": '#{response.body}'"
-      log_fields[:status] = response.status
-    end
+    log_fields[:status] = response.status if response
+
     Log.info(message, log_fields)
     instrumenter&.instrument('response.api', response:, duration: ellapsed_time)
   end
