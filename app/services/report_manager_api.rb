@@ -171,7 +171,7 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
     instrumenter&.instrument('response.api', response:, duration: ellapsed_time)
   end
 
-  def record_failed_connection(exception, http_url)
+  def record_failed_connection(http_url, exception)
     Log.error("Failed to connect to API at #{http_url} due to: #{exception}", exception)
     instrumenter&.instrument('connection_failure.api', exception:)
   end
