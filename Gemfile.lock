@@ -438,7 +438,7 @@ GEM
 GEM
   remote: https://rubygems.pkg.github.com/epimorphics/
   specs:
-    json_rails_logger (2.0.5)
+    json_rails_logger (2.0.6)
       json
       lograge
       railties
