@@ -25,7 +25,16 @@ class ApplicationController < ActionController::Base
     yield
     # Calculate elapsed time and convert to milliseconds
     duration = (Process.clock_gettime(Process::CLOCK_MONOTONIC, :microsecond) - start) / 1000
-    Log.info('Request completed', { duration: })
+    Log.info(
+      'Processing request',
+      {
+        duration:,
+        method: request.method,
+        params:,
+        path: request.path,
+        status: response.status
+      }
+    )
   end
 
   # Handle specific types of exceptions and render the appropriate error page
@@ -56,7 +65,10 @@ class ApplicationController < ActionController::Base
       logged_fields = {
         status: Rack::Utils::HTTP_STATUS_CODES[exception]
       }
-      logged_fields[:backtrace] = exception.backtrace.join("\n") if Rails.env.development? || Rails.logger.debug?
+      if Rails.env.development? || Rails.logger.debug?
+        logged_fields[:backtrace] =
+          exception.backtrace.join("\n")
+      end
       Log.error(
         "No explicit error page for exception #{exception} - #{cname}",
         logged_fields
