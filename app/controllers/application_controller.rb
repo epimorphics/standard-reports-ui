@@ -56,7 +56,7 @@ class ApplicationController < ActionController::Base
       logged_fields = {
         status: Rack::Utils::HTTP_STATUS_CODES[exception]
       }
-      logged_fields[:backtrace] = exception.backtrace.join("\n") if Rails.env.development?
+      logged_fields[:backtrace] = exception.backtrace.join("\n") if Rails.env.development? || Rails.logger.debug?
       Log.error(
         "No explicit error page for exception #{exception} - #{cname}",
         logged_fields
