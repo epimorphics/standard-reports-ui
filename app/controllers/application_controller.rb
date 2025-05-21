@@ -86,7 +86,7 @@ class ApplicationController < ActionController::Base
   def render_error(status, sentry_code = nil)
     reset_response
 
-    error_status = Rack::Utils::SYMBOL_TO_STATUS_CODE[status] if error_status.is_a?(Symbol)
+    error_status = Rack::Utils::SYMBOL_TO_STATUS_CODE[status] if status.is_a?(Symbol)
     respond_to do |format|
       format.html { render_html_error_page(error_status, sentry_code) }
       # Anything else returns the status as human readable plain string
