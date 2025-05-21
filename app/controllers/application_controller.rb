@@ -83,7 +83,7 @@ class ApplicationController < ActionController::Base
     render_error(500)
   end
 
-  def render_error(error_status, sentry_code = nil)
+  def render_error(status, sentry_code = nil)
     reset_response
 
     error_status = Rack::Utils::SYMBOL_TO_STATUS_CODE[status] if error_status.is_a?(Symbol)
