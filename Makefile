@@ -79,7 +79,7 @@ realclean: clean
 
 run: start
 	@if docker network inspect dnet > /dev/null 2>&1; then echo "Using docker network dnet"; else echo "Create docker network dnet"; docker network create dnet; sleep 2; fi
-	@docker run -d -p ${PORT}:3000 -e API_SERVICE_URL=${API_SERVICE_URL} --network dnet --rm --name ${SHORTNAME} ${REPO}:${TAG}
+	@docker run --detach --publish ${PORT}:3000 -env API_SERVICE_URL=${API_SERVICE_URL} --network dnet --rm --name ${SHORTNAME} ${REPO}:${TAG}
 
 server: assets start
 	@API_SERVICE_URL=${API_SERVICE_URL} ./bin/rails server -p ${PORT}
