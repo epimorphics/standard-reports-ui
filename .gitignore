@@ -62,3 +62,6 @@ tags
 # Ignore automatically generated js-routes files.
 /app/assets/javascripts/routes.js
 /app/assets/javascripts/routes.d.ts
+
+# Ignore Standard Reports Manager configuration file download logs
+wget-log
