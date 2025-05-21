@@ -2,14 +2,14 @@
 
 require File.expand_path('boot', __dir__)
 
-require 'rails'
+# require 'rails'
 # Pick the frameworks you want:
-require 'active_model/railtie'
-require 'active_job/railtie'
+# require 'active_model/railtie'
+# require 'active_job/railtie'
 # require "active_record/railtie"
 require 'action_controller/railtie'
 require 'action_mailer/railtie'
-require 'action_view/railtie'
+# require 'action_view/railtie'
 require 'sprockets/railtie'
 require 'rails/test_unit/railtie'
 
@@ -28,6 +28,9 @@ module StandardReportsUi
     config.accessibility_document_path = '/accessibility'
     config.privacy_document_path = '/privacy'
 
+    # Default contact email address to Land Registry Data Services
+    config.contact_email_address = 'data.services@mail.landregistry.gov.uk'
+
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
@@ -36,27 +39,31 @@ module StandardReportsUi
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    # !DEPRECATION WARNING: `to_time` will always preserve the full system
+    # ! timezone offset rather than offset of the receiver in Rails 8.1.
+    # * To opt in to the new behavior and maintain system timezone,
+    # * set the value to :zone; otherwise, set to false
+    config.active_support.to_time_preserves_timezone = :zone
+
     config.autoload_paths << Rails.root.join('services')
   end
 end
 
 # Monkey-patch the bit of Rails that emits the start-up log message, so that it
 # is written out in JSON format that our combined logging service can handle
-# This version is Rails 5.x specific. A different pattern is needed for Rails 6
-# applications.
 module Rails
   # :nodoc:
-  class Server
+  module Command
     # :nodoc:
-    def print_boot_information
-      url = "on #{options[:SSLEnable] ? 'https' : 'http'}://#{options[:Host]}:#{options[:Port]}"
-
-      msg = {
-        ts: DateTime.now.utc.strftime('%FT%T.%3NZ'),
-        level: 'INFO',
-        message: "Starting #{server} Rails #{Rails.version} in #{Rails.env} #{url}"
-      }
-      puts msg.to_json
+    class ServerCommand
+      def print_boot_information(server, url)
+        msg = {
+          ts: DateTime.now.utc.strftime('%FT%T.%3NZ'),
+          level: 'INFO',
+          message: "Starting #{server} Rails #{Rails.version} in #{Rails.env} #{url}"
+        }
+        say msg.to_json
+      end
     end
   end
 end

@@ -6,3 +6,5 @@
 require File.expand_path('config/application', __dir__)
 
 Rails.application.load_tasks
+# Update js-routes file before javascript build
+task "assets:precompile" => "js:routes"

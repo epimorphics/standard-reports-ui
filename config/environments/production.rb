@@ -54,6 +54,8 @@ Rails.application.configure do
   $stdout.sync = true
   # Log the stdout output to the Epimorphics JSON logging gem
   config.logger = JsonRailsLogger::Logger.new($stdout)
+  # Set the log level to the value of the LOG_LEVEL environment variable, or 'info' by default
+  config.log_level = ENV.fetch('LOG_LEVEL', 'info').to_sym
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -66,7 +68,7 @@ Rails.application.configure do
   # This will affect assets in /public, e.g. webpacker assets.
   config.public_file_server.headers = {
     'Cache-Control' => "public, max-age=#{5.minutes.to_i}",
-    'Expires' => 5.minutes.from_now.to_formatted_s(:rfc822)
+    'Expires' => 5.minutes.from_now.to_fs(:rfc822)
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.
@@ -92,6 +94,6 @@ Rails.application.configure do
   config.api_service_url = ENV.fetch('API_SERVICE_URL', nil)
 end
 
-JsRoutes.setup do |config|
-  config.prefix = ENV.fetch('RAILS_RELATIVE_URL_ROOT', '/app/standard-reports')
-end
+# JsRoutes.setup do |config|
+#   config.default_url_options.script_name = ENV.fetch('RAILS_RELATIVE_URL_ROOT', '/app/standard-reports')
+# end

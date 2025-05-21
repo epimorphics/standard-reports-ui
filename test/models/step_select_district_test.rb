@@ -51,9 +51,9 @@ class StepSelectDistricTest < ActiveSupport::TestCase
 
   it 'should no longer set the aggegation to none' do
     workflow = Workflow.new(area: 'MENDIP')
-    refute workflow.has_state?(:aggregate)
+    assert_not workflow.has_state?(:aggregate)
     step.traverse(workflow)
-    refute workflow.has_state?(:aggregate, :none)
+    assert_not workflow.has_state?(:aggregate, :none)
   end
 
   it 'should remember the normalized value for a district' do

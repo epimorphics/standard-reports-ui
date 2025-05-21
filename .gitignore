@@ -53,3 +53,15 @@ tags
 .tool-versions
 .github-token
 .npmrc
+
+# Ignore local configuration files
+.env
+.env*.local
+!.env.development
+
+# Ignore automatically generated js-routes files.
+/app/assets/javascripts/routes.js
+/app/assets/javascripts/routes.d.ts
+
+# Ignore Standard Reports Manager configuration file download logs
+wget-log

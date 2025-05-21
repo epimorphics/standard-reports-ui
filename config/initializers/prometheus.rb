@@ -26,7 +26,7 @@ prometheus.counter(
 prometheus.counter(
   :internal_application_error,
   docstring: 'Unexpected events and internal error count, labelled by message',
-  labels: [:message]
+  labels: %i[message result status]
 )
 
 # Prometheus gauges

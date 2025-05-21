@@ -6,6 +6,11 @@ gem 'execjs'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
+# Adding this here to allow the use of `dotenv` in the config.ru file
+gem 'dotenv', groups: %i[development test], require: false
+# Use Puma as the app server
+gem 'puma'
+
 # Use SCSS for stylesheets
 gem 'sass-rails'
 # Use Uglifier as compressor for JavaScript assets
@@ -36,34 +41,31 @@ gem 'jquery-ui-rails'
 gem 'js-routes'
 gem 'leaflet-rails'
 gem 'prometheus-client'
-gem 'puma'
 gem 'puma-metrics'
 gem 'responders'
-gem 'sentry-ruby'
+gem 'sentry-rails'
 gem 'yajl-ruby', require: 'yajl'
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-
-  # Use Unicorn as the app server
-  gem 'unicorn'
+  gem 'foreman'
+  gem 'ostruct'
+  gem 'rubocop'
+  gem 'rubocop-rails'
 end
 
 group :test do
-  gem 'capybara_minitest_spec'
   gem 'minitest-rails-capybara'
   gem 'minitest-reporters'
   gem 'minitest-spec-rails'
   gem 'minitest-vcr'
   gem 'mocha'
-  gem 'rubocop'
-  gem 'rubocop-rails'
   gem 'vcr'
   gem 'webmock'
 end
 
 group :development do
+  gem 'meta_request' # Devtools panel for Rails development
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console'
 
@@ -73,13 +75,11 @@ end
 
 # TODO: In production you want to set this to the gem from the epimorphics package repo
 source 'https://rubygems.pkg.github.com/epimorphics' do
-  gem 'json_rails_logger', '~> 1.0.0'
+  gem 'json_rails_logger'
   gem 'lr_common_styles'
 end
 
-# rubocop:disable Layout/LineLength
 # TODO: While running the rails app locally for testing you can set gems to your local path
 # ! These "local" paths do not work with a docker image - use the repo instead
 # gem 'json_rails_logger', path: '~/Epimorphics/shared/json-rails-logger/'
 # gem 'lr_common_styles', path: '~/Epimorphics/clients/land-registry/projects/lr_common_styles/'
-# rubocop:enable Layout/LineLength
