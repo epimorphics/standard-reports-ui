@@ -13,8 +13,8 @@ input:focus {
 
 .form-control:focus {
   border: 0;
-  box-shadow: none;
   -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
 a {
@@ -28,8 +28,8 @@ ol.numbered {
 
 input[type=checkbox],
 input[type=radio] {
-  transform: scale(1.5);
   -webkit-transform: scale(1.5);
+  transform: scale(1.5);
 }
 
 .o-form-control {
@@ -93,17 +93,26 @@ input[type=radio] {
   color: $grey-1;
 }
 
-.c-select-dates {
+.c-select-dates,
+.select-report {
   .row {
     margin-bottom: 1rem;
   }
 
   details > .panel {
     display: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
   }
 
   details[open] > .panel {
     display: block;
+    &:has(picture) {
+      overflow-x: auto;
+      overflow-y: hidden;
+      width: auto;
+      max-width: 100%;
+    }
   }
 }
 

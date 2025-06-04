@@ -1,0 +1,5 @@
+#!/bin/sh
+# Start the web server
+web: API_SERVICE_URL="$API_SERVICE_URL" PORT="$PORT" make server;
+# Start the API server
+api: AWS_PROFILE="$AWS_PROFILE" MANAGER_SERVICE_TAG="$MANAGER_SERVICE_TAG" make manager ; sleep 3
