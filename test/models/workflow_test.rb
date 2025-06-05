@@ -23,13 +23,13 @@ class WorkflowTest < ActiveSupport::TestCase
   it 'should allow state values to be queried' do
     assert report_type_selected_workflow.has_state?(:report)
     assert report_type_selected_workflow.has_state?(:report, :avgPrice)
-    refute report_type_selected_workflow.has_state?(:reportzzz)
-    refute report_type_selected_workflow.has_state?(:report, :avgPricezzz)
+    assert_not report_type_selected_workflow.has_state?(:reportzzz)
+    assert_not report_type_selected_workflow.has_state?(:report, :avgPricezzz)
   end
 
   it 'should allow state values to be set' do
     workflow = Workflow.new({})
-    refute workflow.has_state?(:foo)
+    assert_not workflow.has_state?(:foo)
 
     workflow.set_state(:foo, 'bar')
     assert workflow.has_state?(:foo)

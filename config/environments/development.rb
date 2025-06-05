@@ -45,6 +45,8 @@ Rails.application.configure do
   $stdout.sync = true
   # Log the stdout output to the Epimorphics JSON logging gem
   config.logger = JsonRailsLogger::Logger.new($stdout)
+  # Set the log level to the value of the LOG_LEVEL environment variable, or 'debug' by default
+  config.log_level = ENV.fetch('LOG_LEVEL', 'debug').to_sym
 
   # By default Rails expects that your application is running at the root (e.g. /).
   # This configuration sets running your application inside a directory.
@@ -54,4 +56,8 @@ Rails.application.configure do
 
   # API location can be specified in the environment but defaults to the dev service
   config.api_service_url = ENV.fetch('API_SERVICE_URL', 'http://localhost:8888')
+
+  # Automatically update js-routes file
+  # when routes.rb is changed
+  config.middleware.use(JsRoutes::Middleware)
 end

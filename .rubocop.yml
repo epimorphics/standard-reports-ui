@@ -1,15 +1,19 @@
+plugins: rubocop-rails
+
 AllCops:
+  TargetRubyVersion: 3.3
   Exclude:
     - app/models/regions_table.rb
     - app/models/locations_table.rb
-    - 'node_modules/**/*'
+    - "node_modules/**/*"
     - data/**/*
-    - 'Gemfile'
+    - "Gemfile"
   NewCops: enable
 
 # Customize rules
 Layout/LineLength:
   Max: 100
+  AllowedPatterns: ['^(\s*#)']
   Exclude:
     - bin/**/*
     - db/**/*
@@ -19,6 +23,12 @@ Layout/LineLength:
 Lint/DuplicateBranch:
   Enabled: false
 
+Metrics/AbcSize:
+  Max: 30
+  Exclude:
+    - test/**/*
+    - lib/tasks/**/*
+
 Metrics/BlockLength:
   Max: 30
   Exclude:
@@ -26,13 +36,14 @@ Metrics/BlockLength:
     - lib/tasks/**/*
 
 Metrics/ClassLength:
-  CountAsOne: ['array', 'hash', 'heredoc', 'method_call']
+  CountAsOne: ["array", "hash", "heredoc", "method_call"]
   Exclude:
     - test/**/*
 
 Metrics/MethodLength:
-  CountAsOne: ['array', 'hash', 'heredoc', 'method_call']
+  CountAsOne: ["array", "hash", "heredoc", "method_call"]
   Exclude:
+    - test/**/*
     - lib/tasks/location.rake
 
 Naming/MethodParameterName:
