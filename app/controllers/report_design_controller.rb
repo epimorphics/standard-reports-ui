@@ -10,6 +10,14 @@ class ReportDesignController < ApplicationController
   private
 
   def render_named_step(workflow)
+    message = "Requesting Report Design: #{workflow.current_step.generic_name.titleize}"
+    message += " [#{workflow.step_progress_summary.downcase}]"
+    log_fields = { params: params }
+    log_fields[:path] = request.path
+    if workflow.current_step != workflow.initial_step
+      log_fields[:path] += "?#{workflow.params.map { |k, v| "#{k}=#{v}" }.join('&amp;')}"
+    end
+    Log.info(message, log_fields)
     render step_template(workflow.current_step)
   end
 
