@@ -19,21 +19,21 @@ class ReportManager # rubocop:disable Metrics/ClassLength
   def latest_month
     latest_month_spec && latest_month_spec.split('-').second.to_i
   rescue StandardError => e
-    msg = "Failed to retreive latest month from #{url}latest-month-available"
+    msg = "Failed to retrieve latest month from #{url}latest-month-available"
     Rails.logger.error { "#{msg}: #{e}" }
   end
 
   def latest_year
     latest_month_spec && latest_month_spec.split('-').first.to_i
   rescue StandardError => e
-    msg = "Failed to retreive latest year from #{url}latest-month-available"
+    msg = "Failed to retrieve latest year from #{url}latest-month-available"
     Rails.logger.error { "#{msg}: #{e}" }
   end
 
   def latest_quarter
     latest_month && (latest_month / 3).to_i
   rescue StandardError => e
-    msg = "Failed to retreive latest quarter from #{url}latest-month-available"
+    msg = "Failed to retrieve latest quarter from #{url}latest-month-available"
     Rails.logger.error { "#{msg}: #{e}" }
   end
 
@@ -103,8 +103,11 @@ class ReportManager # rubocop:disable Metrics/ClassLength
   end
 
   def start_request(req_spec)
+    Log.info(
+      'Requesting from Report Manager',
+      { params: req_spec.to_hash, path: "#{url}report-request" }
+    )
     json = api.post_json("#{url}report-request", req_spec.to_hash)
-    Rails.logger.debug { "ReportManager response: #{json}" } if Rails.env.development?
     ReportStatus.new(json)
   end
 

@@ -1,5 +1,18 @@
 # Standard Reports UI: change log
 
+## 2.1.0 - 2025-05
+
+- Implements structured logging using JSON format, improving readability and
+  integration with logging services.
+- Configures log level via environment variable.
+- Adds pre-commit and post-commit hooks for code quality checks and testing.
+- Introduces development environment configuration and Procfile for easier local
+  setup.
+- Reconfigures Sentry for better error tracking in development and production
+  environments.
+- Updates dependencies and adds new gems to improve application functionality.
+- Updates rubocop and adjusts helpers and models via rubocop.
+
 ## 2.0.2 - 2024-12
 
 - (Jon) Myriad of tweaks to ensure variables either fail quietly via safe

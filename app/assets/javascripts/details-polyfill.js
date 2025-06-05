@@ -9,7 +9,7 @@
 (function () {
   'use strict';
 
-  var NATIVE_DETAILS = typeof document.createElement('details').open === 'boolean';
+  var HAS_NATIVE_DETAILS = typeof document.createElement('details').open === 'boolean';
 
   // Add event construct for modern browsers or IE
   // which fires the callback with a pre-converted target reference
@@ -61,7 +61,7 @@
 
   // Create a started flag so we can prevent the initialisation
   // function firing from both DOMContentLoaded and window.onload
-  var started = false;
+  var started = HAS_NATIVE_DETAILS;
 
   // Initialisation function
   function addDetailsPolyfill(list) {
@@ -105,7 +105,7 @@
 
       // Set tabIndex so the summary is keyboard accessible for non-native elements
       // http://www.saliences.com/browserBugs/tabIndex.html
-      if (!NATIVE_DETAILS) {
+      if (!HAS_NATIVE_DETAILS) {
         details.__summary.tabIndex = 0;
       }
 
@@ -117,7 +117,7 @@
       } else {
         details.__summary.setAttribute('aria-expanded', 'false');
         details.__content.setAttribute('aria-hidden', 'true');
-        if (!NATIVE_DETAILS) {
+        if (!HAS_NATIVE_DETAILS) {
           details.__content.style.display = 'none';
         }
       }
@@ -128,7 +128,7 @@
 
       // If this is not a native implementation, create an arrow
       // inside the summary
-      if (!NATIVE_DETAILS) {
+      if (!HAS_NATIVE_DETAILS) {
 
         var twisty = document.createElement('i');
 
@@ -156,7 +156,7 @@
       summary.__details.__summary.setAttribute('aria-expanded', (expanded ? 'false' : 'true'));
       summary.__details.__content.setAttribute('aria-hidden', (hidden ? 'false' : 'true'));
 
-      if (!NATIVE_DETAILS) {
+      if (!HAS_NATIVE_DETAILS) {
         summary.__details.__content.style.display = (expanded ? 'none' : '');
 
         var hasOpenAttr = summary.__details.getAttribute('open') !== null;

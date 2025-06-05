@@ -2,7 +2,7 @@
 
 # :nodoc:
 module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
-  def workflow_step_form(workflow) # rubocop:disable Metrics/AbcSize
+  def workflow_step_form(workflow)
     step = workflow.current_step
 
     form_tag(workflow.form_action, method: 'get') do
@@ -202,7 +202,7 @@ module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
 
   def review_selection(workflow, step)
     content_tag(:li) do
-      concat step.summarise(workflow.state(step.param_name)).html_safe
+      concat step.summarise(workflow.state(step.param_name)).html_safe # rubocop:disable Rails/OutputSafety
       concat show_change_link(workflow, step)
     end
   end

@@ -13,12 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require lr_common_styles/application
 //= require jquery-ui/widgets/autocomplete
 //= require leaflet
 //= require lodash
-//= require object-assign-polyfill 
+//= require object-assign-polyfill
 //= require js-routes
-//= require lr_common_styles/application
 //= require_tree .
 
 //= link favicon/apple-touch-icon.png

@@ -3,7 +3,7 @@
 # Class encapsulating a set of options for a report
 class ReportSpecification
   def initialize(params, report_manager)
-    @params = HashWithIndifferentAccess.new(params)
+    @params = ActiveSupport::HashWithIndifferentAccess.new(params)
     normalize_period(report_manager) if @params[:period]
   end
 
