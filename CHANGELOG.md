@@ -1,5 +1,12 @@
 # Standard Reports UI: change log
 
+## Unreleased
+
+- Remove deprecated uglifier dependency
+- Add dotenv and byebug for dev/test environments
+- Selectively apply RuboCop rules with annotations
+- Bump `lr_common_styles` gem version for GA Tag updates
+
 ## 2.1.0 - 2025-05
 
 - Implements structured logging using JSON format, improving readability and
