@@ -6,6 +6,7 @@
 - Add dotenv and byebug for dev/test environments
 - Selectively apply RuboCop rules with annotations
 - Bump `lr_common_styles` gem version for GA Tag updates
+- Add support for custom docker `RUN_VAR`s
 
 ## 2.1.0 - 2025-05
 
