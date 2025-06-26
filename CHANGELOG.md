@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 2.1.1 - 2025-06
+
 - Updates to Ruby 3.4.4 and Alpine 3.22 in Docker setup
 - Introduces environment helper for enhanced UI context
 - Refines asset management in build processes
