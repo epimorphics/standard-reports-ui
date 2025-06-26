@@ -1,4 +1,5 @@
 = content_for(:title, "#{@workflow.step_progress_summary} &ndash; Report Design".html_safe)
+- content_for(:current_environment_title, EnvironmentHelper.environment_title)
 
 = render partial: "help"
 .select-pc-district
