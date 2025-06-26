@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Updates to Ruby 3.4.4 and Alpine 3.22 in Docker setup
+- Introduces environment helper for enhanced UI context
+- Refines asset management in build processes
+- Upgrades styling components for consistency
 - Remove deprecated uglifier dependency
 - Add dotenv and byebug for dev/test environments
 - Selectively apply RuboCop rules with annotations
