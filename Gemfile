@@ -6,15 +6,20 @@ gem 'execjs'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
-# Adding this here to allow the use of `dotenv` in the config.ru file
-gem 'dotenv', groups: %i[development test], require: false
 # Use Puma as the app server
 gem 'puma'
 
+# Assets group is temporarily disabled due to versioning issues with Rails
+# group :assets do
 # Use SCSS for stylesheets
 gem 'sass-rails'
+# ! Webpacker removes the need for Uglifier so we can safely remove it.
+# ! If you want to use Uglifier, uncomment the line below
+# ! and ensure you have the 'uglifier' gem in your Gemfile.
+# ! See https://www.mintbit.com/blog/rails-5-6-upgrade-es6-uglifier-bug/
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier'
+# gem 'uglifier', require: false
+# end
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -46,8 +51,10 @@ gem 'responders'
 gem 'sentry-rails'
 gem 'yajl-ruby', require: 'yajl'
 
+gem 'byebug', groups: %i[development test]
+gem 'dotenv', groups: %i[development test]
+
 group :development, :test do
-  gem 'byebug'
   gem 'foreman'
   gem 'ostruct'
   gem 'rubocop'
