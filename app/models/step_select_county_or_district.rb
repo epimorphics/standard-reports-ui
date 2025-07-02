@@ -24,10 +24,10 @@ class StepSelectCountyOrDistrict < StepSelectArea
       workflow.set_state(param_name, input_text)
     end
 
-    normalized_value || validation_failure?(input_text)
+    normalized_value || validation_failure(input_text)
   end
 
-  def validation_failure?(input_text)
+  def validation_failure(input_text)
     set_flash("Sorry, #{subtype_label} '#{input_text}' was not recognised")
     false
   end
