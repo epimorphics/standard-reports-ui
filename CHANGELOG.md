@@ -1,5 +1,12 @@
 # Standard Reports UI: change log
 
+## 2.1.1 - 2025-06
+
+- Hotfix: Ensuring current data contains the expected geographic boundaries
+- fix: rReplacing hard coded lists with external data files
+- refactor: Adding error handling for JSON loading
+- refactor: Refining naming conventions to adhere to coding standards
+
 ## 2.1.0 - 2025-05
 
 - Implements structured logging using JSON format, improving readability and
