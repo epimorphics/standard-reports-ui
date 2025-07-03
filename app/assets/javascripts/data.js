@@ -8,6 +8,7 @@ window.lr.data = (function () {
       { value: "BLACKBURN WITH DARWEN", label: "Blackburn With Darwen" },
       { value: "BLACKPOOL", label: "Blackpool" },
       { value: "BLAENAU GWENT", label: "Blaenau Gwent" },
+      { value: "BOURNEMOUTH", label: "Bournemouth" },
       { value: "BOURNEMOUTH, CHRISTCHURCH AND POOLE", label: "Bournemouth, Christchurch And Poole" },
       { value: "BRACKNELL FOREST", label: "Bracknell Forest" },
       { value: "BRIDGEND", label: "Bridgend" },
@@ -484,7 +485,7 @@ window.lr.data = (function () {
       { value: "SOUTH WEST", label: "South West" },
       { value: "WALES", label: "Wales" },
       { value: "WEST MIDLANDS", label: "West Midlands" },
-      { value: "YORKS AND HUMBER", label: "Yorks And Humber" },
+      { value: "YORKS AND HUMBER", label: "Yorkshire And Humber" },
     ],
   }
 })()

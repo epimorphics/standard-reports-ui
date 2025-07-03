@@ -30,7 +30,7 @@ class StepSelectRegion < StepSelectArea
 
   def validate_value(workflow)
     val = value(workflow)
-    NAMES.find { |n| n[1] == val } || validation_failure(val)
+    NAMES.find { |n| n[1] == val } || validation_failure?(val)
   end
 
   NAMES = [
@@ -48,7 +48,7 @@ class StepSelectRegion < StepSelectArea
 
   private
 
-  def validation_failure(val)
+  def validation_failure?(val)
     set_flash("Sorry, #{val} is not a recognised region")
     false
   end

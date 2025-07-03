@@ -45,7 +45,7 @@ COPY config.ru Gemfile Gemfile.lock Rakefile ./
 COPY app app
 COPY bin bin
 COPY config config
-COPY lib lib
+COPY data data
 COPY public public
 
 ARG RAILS_RELATIVE_URL_ROOT

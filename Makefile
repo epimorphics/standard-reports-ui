@@ -10,6 +10,7 @@ NAME?=$(shell awk -F: '$$1=="name" {print $$2}' deployment.yaml | sed -e 's/[[:b
 PAT?=$(shell read -p 'Github access token:' TOKEN; echo $$TOKEN)
 PORT?=3003
 RUBY_VERSION?=$(shell cat .ruby-version)
+RUN_VARS?=--publish
 SHORTNAME?=$(shell echo ${NAME} | cut -f2 -d/)
 STAGE?=dev
 API_SERVICE_URL?=http://localhost:8081
