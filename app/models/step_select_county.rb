@@ -15,6 +15,15 @@ class StepSelectCounty < StepSelectCountyOrDistrict
 
   def names
     read_data_file('data/county-names.txt')
+  rescue Errno::ENOENT => e
+    Rails.logger.error "County names file not found: #{e.message}"
+    []
+  rescue JSON::ParserError => e
+    Rails.logger.error "Error parsing county names file: #{e.message}"
+    []
+  rescue StandardError => e
+    Rails.logger.error "Error loading county names: #{e.message}"
+    []
   end
 
   def input_label
