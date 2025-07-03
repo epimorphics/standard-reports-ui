@@ -118,6 +118,7 @@ window.lr.data = (function () {
       { value: "TYNE AND WEAR", label: "Tyne And Wear" },
       { value: "WARRINGTON", label: "Warrington" },
       { value: "WARWICKSHIRE", label: "Warwickshire" },
+      { value: "WESTMORLAND AND FURNESS", label: "Westmorland And Furness" },
       { value: "WEST BERKSHIRE", label: "West Berkshire" },
       { value: "WEST MIDLANDS", label: "West Midlands" },
       { value: "WEST NORTHAMPTONSHIRE", label: "West Northamptonshire" },
