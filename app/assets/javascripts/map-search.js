@@ -62,7 +62,7 @@ window.MapSearch = (function(
   };
 
   var locationName = function( feature ) {
-    return feature.id || feature.properties.NAME.replace( / Euro Region/i, "" )
+    return feature.id || feature.properties.name.replace(/ Euro Region/i, '')
   };
 
   var onHighlightFeature = function( e ) {

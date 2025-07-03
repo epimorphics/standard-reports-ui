@@ -25,5 +25,8 @@
 
       // Get the county outlines, then initialise the map
       $.getJSON( Routes.root_path() + "county-features.json" )
-       .done( window.MapSearch.init );
+        .done( window.MapSearch.init )
+        .fail( function() {
+          console.error( "Failed to load county features." );
+        } )
     } );
