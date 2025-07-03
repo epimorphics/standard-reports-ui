@@ -1,21 +1,15 @@
-window.lr = window.lr || {};
+window.lr = window.lr || {}
 window.lr.data = (function () {
-  "use strict";
+  "use strict"
   return {
     county: [
-      {
-        value: "BATH AND NORTH EAST SOMERSET",
-        label: "Bath And North East Somerset",
-      },
+      { value: "BATH AND NORTH EAST SOMERSET", label: "Bath And North East Somerset" },
       { value: "BEDFORD", label: "Bedford" },
       { value: "BLACKBURN WITH DARWEN", label: "Blackburn With Darwen" },
       { value: "BLACKPOOL", label: "Blackpool" },
       { value: "BLAENAU GWENT", label: "Blaenau Gwent" },
       { value: "BOURNEMOUTH", label: "Bournemouth" },
-      {
-        value: "BOURNEMOUTH, CHRISTCHURCH AND POOLE",
-        label: "Bournemouth, Christchurch And Poole",
-      },
+      { value: "BOURNEMOUTH, CHRISTCHURCH AND POOLE", label: "Bournemouth, Christchurch And Poole" },
       { value: "BRACKNELL FOREST", label: "Bracknell Forest" },
       { value: "BRIDGEND", label: "Bridgend" },
       { value: "BRIGHTON AND HOVE", label: "Brighton And Hove" },
@@ -27,16 +21,10 @@ window.lr.data = (function () {
       { value: "CENTRAL BEDFORDSHIRE", label: "Central Bedfordshire" },
       { value: "CEREDIGION", label: "Ceredigion" },
       { value: "CHESHIRE EAST", label: "Cheshire East" },
-      {
-        value: "CHESHIRE WEST AND CHESTER",
-        label: "Cheshire West And Chester",
-      },
+      { value: "CHESHIRE WEST AND CHESTER", label: "Cheshire West And Chester" },
       { value: "CITY OF BRISTOL", label: "City Of Bristol" },
       { value: "CITY OF DERBY", label: "City Of Derby" },
-      {
-        value: "CITY OF KINGSTON UPON HULL",
-        label: "City Of Kingston Upon Hull",
-      },
+      { value: "CITY OF KINGSTON UPON HULL", label: "City Of Kingston Upon Hull" },
       { value: "CITY OF NOTTINGHAM", label: "City Of Nottingham" },
       { value: "CITY OF PETERBOROUGH", label: "City Of Peterborough" },
       { value: "CITY OF PLYMOUTH", label: "City Of Plymouth" },
@@ -149,10 +137,7 @@ window.lr.data = (function () {
       { value: "BASILDON", label: "Basildon" },
       { value: "BASINGSTOKE AND DEANE", label: "Basingstoke And Deane" },
       { value: "BASSETLAW", label: "Bassetlaw" },
-      {
-        value: "BATH AND NORTH EAST SOMERSET",
-        label: "Bath And North East Somerset",
-      },
+      { value: "BATH AND NORTH EAST SOMERSET", label: "Bath And North East Somerset" },
       { value: "BEDFORD", label: "Bedford" },
       { value: "BEXLEY", label: "Bexley" },
       { value: "BIRMINGHAM", label: "Birmingham" },
@@ -196,10 +181,7 @@ window.lr.data = (function () {
       { value: "CHELTENHAM", label: "Cheltenham" },
       { value: "CHERWELL", label: "Cherwell" },
       { value: "CHESHIRE EAST", label: "Cheshire East" },
-      {
-        value: "CHESHIRE WEST AND CHESTER",
-        label: "Cheshire West And Chester",
-      },
+      { value: "CHESHIRE WEST AND CHESTER", label: "Cheshire West And Chester" },
       { value: "CHESTERFIELD", label: "Chesterfield" },
       { value: "CHICHESTER", label: "Chichester" },
       { value: "CHILTERN", label: "Chiltern" },
@@ -207,10 +189,7 @@ window.lr.data = (function () {
       { value: "CHRISTCHURCH", label: "Christchurch" },
       { value: "CITY OF BRISTOL", label: "City Of Bristol" },
       { value: "CITY OF DERBY", label: "City Of Derby" },
-      {
-        value: "CITY OF KINGSTON UPON HULL",
-        label: "City Of Kingston Upon Hull",
-      },
+      { value: "CITY OF KINGSTON UPON HULL", label: "City Of Kingston Upon Hull" },
       { value: "CITY OF LONDON", label: "City Of London" },
       { value: "CITY OF NOTTINGHAM", label: "City Of Nottingham" },
       { value: "CITY OF PETERBOROUGH", label: "City Of Peterborough" },
@@ -302,10 +281,7 @@ window.lr.data = (function () {
       { value: "ISLINGTON", label: "Islington" },
       { value: "KENSINGTON AND CHELSEA", label: "Kensington And Chelsea" },
       { value: "KETTERING", label: "Kettering" },
-      {
-        value: "KING'S LYNN AND WEST NORFOLK",
-        label: "King's Lynn And West Norfolk",
-      },
+      { value: "KING'S LYNN AND WEST NORFOLK", label: "King's Lynn And West Norfolk" },
       { value: "KINGSTON UPON THAMES", label: "Kingston Upon Thames" },
       { value: "KIRKLEES", label: "Kirklees" },
       { value: "KNOWSLEY", label: "Knowsley" },
@@ -354,10 +330,7 @@ window.lr.data = (function () {
       { value: "NORTH SOMERSET", label: "North Somerset" },
       { value: "NORTH TYNESIDE", label: "North Tyneside" },
       { value: "NORTH WARWICKSHIRE", label: "North Warwickshire" },
-      {
-        value: "NORTH WEST LEICESTERSHIRE",
-        label: "North West Leicestershire",
-      },
+      { value: "NORTH WEST LEICESTERSHIRE", label: "North West Leicestershire" },
       { value: "NORTHAMPTON", label: "Northampton" },
       { value: "NORTHUMBERLAND", label: "Northumberland" },
       { value: "NORWICH", label: "Norwich" },
@@ -404,10 +377,7 @@ window.lr.data = (function () {
       { value: "SHROPSHIRE", label: "Shropshire" },
       { value: "SLOUGH", label: "Slough" },
       { value: "SOLIHULL", label: "Solihull" },
-      {
-        value: "SOMERSET WEST AND TAUNTON",
-        label: "Somerset West And Taunton",
-      },
+      { value: "SOMERSET WEST AND TAUNTON", label: "Somerset West And Taunton" },
       { value: "SOUTH BUCKS", label: "South Bucks" },
       { value: "SOUTH CAMBRIDGESHIRE", label: "South Cambridgeshire" },
       { value: "SOUTH DERBYSHIRE", label: "South Derbyshire" },
@@ -515,7 +485,7 @@ window.lr.data = (function () {
       { value: "SOUTH WEST", label: "South West" },
       { value: "WALES", label: "Wales" },
       { value: "WEST MIDLANDS", label: "West Midlands" },
-      { value: "YORKS AND HUMBER", label: "Yorks And Humber" },
+      { value: "YORKS AND HUMBER", label: "Yorkshire And Humber" },
     ],
-  };
-})();
+  }
+})()
