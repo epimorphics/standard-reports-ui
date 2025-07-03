@@ -43,6 +43,7 @@ window.lr.data = (function () {
       { value: "CONWY", label: "Conwy" },
       { value: "CORNWALL", label: "Cornwall" },
       { value: "COUNTY DURHAM", label: "County Durham" },
+      { value: "CUMBERLAND", label: "Cumberland" },
       { value: "CUMBRIA", label: "Cumbria" },
       { value: "DARLINGTON", label: "Darlington" },
       { value: "DENBIGHSHIRE", label: "Denbighshire" },
