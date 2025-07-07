@@ -8,4 +8,7 @@ CHANGELOG.md
 README.md
 log/
 
+data/boundary-line/
+data/generate.rb
+
 public/assets/
