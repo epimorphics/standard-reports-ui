@@ -56,7 +56,7 @@ class ApplicationController < ActionController::Base
   end
 
   # Render the appropriate error page based on the exception
-  def handle_internal_error(exception)
+  def handle_internal_error(exception) # rubocop:disable Metrics/MethodLength
     # Render the appropriate error page based on the exception
     if exception.instance_of? ArgumentError
       render_error(400)
