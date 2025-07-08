@@ -14,6 +14,7 @@ RUN_VARS?=--publish
 SHORTNAME?=$(shell echo ${NAME} | cut -f2 -d/)
 STAGE?=dev
 API_SERVICE_URL?=http://localhost:8081
+RUN_VARS?=--publish
 
 BRANCH:=$(shell git rev-parse --abbrev-ref HEAD)
 COMMIT=$(shell git rev-parse --short HEAD)
@@ -37,7 +38,7 @@ ${GITHUB_TOKEN}:
 
 all: image
 
-assets: auth
+assets:
 	@echo "Installing all packages ..."
 	@./bin/bundle install
 	@echo "Cleaning up precompiled assets ..."
@@ -82,7 +83,7 @@ run: start
 	@if docker network inspect dnet > /dev/null 2>&1; then echo "Using docker network dnet"; else echo "Create docker network dnet"; docker network create dnet; sleep 2; fi
 	@docker run ${RUN_VARS} ${PORT}:3000 --env API_SERVICE_URL=${API_SERVICE_URL} --network dnet --rm --name ${SHORTNAME} ${REPO}:${TAG}
 
-server: assets start
+server: start
 	@API_SERVICE_URL=${API_SERVICE_URL} ./bin/rails server -p ${PORT}
 
 start: stop

@@ -1,5 +1,19 @@
 # Standard Reports UI: change log
 
+## Unreleased
+
+## 2.1.2 - 2025-07
+
+- Updates to Ruby 3.4.4 and Alpine 3.22 in Docker setup
+- Introduces environment helper for enhanced UI context
+- Refines asset management in build processes
+- Upgrades styling components for consistency
+- Remove deprecated uglifier dependency
+- Add dotenv and byebug for dev/test environments
+- Selectively apply RuboCop rules with annotations
+- Bump `lr_common_styles` gem version for GA Tag updates
+- Add support for custom docker `RUN_VAR`s
+
 ## 2.1.1 - 2025-06
 
 - Hotfix: Ensuring current data contains the expected geographic boundaries
