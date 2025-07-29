@@ -23,7 +23,7 @@ class Step
   # Simple traversal requires only that the parameter for this
   # step has some value
   def simple_traverse(workflow, following_state)
-    if workflow.has_state?(param_name) && !stop?(workflow) && validate_value(workflow)
+    if workflow.has_state?(param_name) && !stop?(workflow) && validate_value?(workflow)
       workflow_update_hook(workflow)
       workflow.traverse_to(following_state)
     else
@@ -82,7 +82,7 @@ class Step
   # When traversing, we do nothing by default
   def workflow_update_hook(workflow); end
 
-  def validate_value(_workflow)
+  def validate_value?(_workflow)
     true
   end
 end
