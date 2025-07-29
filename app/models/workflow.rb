@@ -52,7 +52,7 @@ class Workflow # rubocop:disable Metrics/ClassLength
     steps[name]
   end
 
-  def has_state?(name, value = nil) # rubocop:disable Naming/PredicateName
+  def has_state?(name, value = nil) # rubocop:disable Naming/PredicatePrefix
     sv = state(name)
     if value
       is_or_includes?(sv, value)
@@ -148,7 +148,7 @@ class Workflow # rubocop:disable Metrics/ClassLength
     initial_step.traverse(self)
   end
 
-  def is_or_includes?(value, value1) # rubocop:disable Naming/PredicateName
+  def is_or_includes?(value, value1) # rubocop:disable Naming/PredicatePrefix
     if value.is_a?(Array)
       value.include?(value1.to_s)
     else
