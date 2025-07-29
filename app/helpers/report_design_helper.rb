@@ -13,7 +13,7 @@ module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
           concat layout_workflow_form(workflow, step)
         end)
         concat layout_map_control(step) if step.map_enabled?
-        concat layout_submit_button
+        concat layout_submit_button(workflow)
       end
     end
   end
@@ -90,10 +90,25 @@ module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
     end
   end
 
-  def layout_submit_button
+  def layout_submit_button(workflow)
     content_tag(:div, class: 'c-form-actions col-sm-12') do
-      concat submit_tag('Next', class: 'button c-form-submit', name: nil)
-      concat link_to('back', '#', class: 'button button--secondary c-back-action')
+      concat submit_tag(
+        'Next',
+        class: 'button c-form-submit',
+        name: nil,
+        type: 'submit',
+        'data-action' => 'next',
+        'aria-label' => 'go to next step in report design workflow'
+      )
+      concat button_tag(
+        'back',
+        class: 'button button--secondary c-back-action',
+        name: nil,
+        type: 'button',
+        'data-action' => 'back',
+        'aria-label' => 'go back to previous step in report design workflow',
+        disabled: workflow.params.blank?
+      )
     end
   end
 
