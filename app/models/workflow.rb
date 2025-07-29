@@ -86,9 +86,9 @@ class Workflow # rubocop:disable Metrics/ClassLength
 
   def_delegator :params, :each, :each_state_key
 
-  def each_state_ignoring(ignore = nil, &block)
+  def each_state_ignoring(ignore = nil, &)
     params.each do |key, values|
-      each_state_value(key, values, &block) unless key == ignore
+      each_state_value(key, values, &) unless key == ignore
     end
   end
 
