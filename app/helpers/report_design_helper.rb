@@ -58,7 +58,7 @@ module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
       content_tag(:label, class: 'o-form-control--label') do
         if radio
           concat radio_button_tag(step.form_param, value.value, active,
-                                  class: 'o-form-control--input')
+                                  class: 'o-form-control--input', required: true)
         else
           concat check_box_tag(step.form_param, value.value, active,
                                id: nil,
@@ -90,24 +90,26 @@ module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
     end
   end
 
-  def layout_submit_button(workflow)
+  def layout_submit_button(workflow, enabled = true)
     content_tag(:div, class: 'c-form-actions col-sm-12') do
-      concat submit_tag(
-        'Next',
-        class: 'button c-form-submit',
-        name: nil,
-        type: 'submit',
-        'data-action' => 'next',
-        'aria-label' => 'go to next step in report design workflow'
-      )
+      if enabled
+        concat submit_tag(
+          'Next',
+          class: 'button c-form-submit',
+          name: nil,
+          type: 'submit',
+          'data-action' => 'next',
+          'aria-label' => 'go to next step in report design workflow'
+        )
+      end
       concat button_tag(
-        'back',
+        'Back',
         class: 'button button--secondary c-back-action',
         name: nil,
         type: 'button',
         'data-action' => 'back',
         'aria-label' => 'go back to previous step in report design workflow',
-        disabled: workflow.params.blank?
+        disabled: workflow&.params.blank?
       )
     end
   end

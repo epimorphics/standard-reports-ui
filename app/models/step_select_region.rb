@@ -49,7 +49,13 @@ class StepSelectRegion < StepSelectArea
   private
 
   def validation_failure(val) # rubocop:disable Naming/PredicateMethod
-    set_flash("Sorry, #{val} is not a recognised region")
+    if val.empty?
+      set_flash('Sorry, no region was selected')
+    else
+      # If the value is not recognised, we report it as an error
+      set_flash("Sorry, '#{val}' is not a recognised region")
+    end
+    # return false to indicate failure
     false
   end
 end

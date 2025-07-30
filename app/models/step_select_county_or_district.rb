@@ -21,20 +21,26 @@ class StepSelectCountyOrDistrict < StepSelectArea
     input_text = value(workflow)
     normalized_value = validate(value(workflow))
     unless normalized_value && (value(workflow) == normalized_value)
-      workflow.set_state(param_name, input_text)
+      workflow.set_state(param_name, normalized_value)
     end
 
-    normalized_value || validation_failure?(input_text)
+    input_text || validation_failure(input_text)
   end
 
   def validation_failure(input_text) # rubocop:disable Naming/PredicateMethod
-    set_flash("Sorry, #{subtype_label} '#{input_text}' was not recognised")
+    if input_text.empty?
+      set_flash("Sorry, no #{subtype_label} was selected")
+    else
+      # If the value is not recognised, we report it as an error
+      set_flash("Sorry, '#{input_text}' is not a recognised #{subtype_label}")
+    end
+    # return false to indicate failure
     false
   end
 
   def summarise(state_value, connector = 'is ')
     "<span class='c-review-report--summary-key'>#{subtype_label.capitalize} #{connector}</span>" \
-      "<span class='c-review-report--summary-value'>#{state_value}</span>"
+      "<span class='c-review-report--summary-value'>#{state_value.titleize}</span>"
   end
 
   def validate(value)

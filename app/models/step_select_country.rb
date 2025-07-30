@@ -37,7 +37,13 @@ class StepSelectCountry < StepSelectArea
   private
 
   def report_validation_failure(workflow) # rubocop:disable Naming/PredicateMethod
-    set_flash("Sorry, #{value(workflow)} is not a valid country selection")
+    if value(workflow).empty?
+      set_flash('Sorry, no country was selected')
+    else
+      # If the value is not recognised, we report it as an error
+      set_flash("Sorry, '#{value(workflow)}' is not a valid country selection")
+    end
+    # return false to indicate failure
     false
   end
 
