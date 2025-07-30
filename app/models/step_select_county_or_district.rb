@@ -2,6 +2,8 @@
 
 # Workflow step of selecting a county
 class StepSelectCountyOrDistrict < StepSelectArea
+  include ApplicationHelper
+
   def initialize(step_name, param_name)
     super(step_name, param_name, :textinput)
   end
@@ -24,7 +26,7 @@ class StepSelectCountyOrDistrict < StepSelectArea
       workflow.set_state(param_name, normalized_value)
     end
 
-    input_text || validation_failure(input_text)
+    titleise(normalized_value) || validation_failure(input_text)
   end
 
   def validation_failure(input_text) # rubocop:disable Naming/PredicateMethod
@@ -40,7 +42,7 @@ class StepSelectCountyOrDistrict < StepSelectArea
 
   def summarise(state_value, connector = 'is ')
     "<span class='c-review-report--summary-key'>#{subtype_label.capitalize} #{connector}</span>" \
-      "<span class='c-review-report--summary-value'>#{state_value.titleize}</span>"
+      "<span class='c-review-report--summary-value'>#{titleise(state_value)}</span>"
   end
 
   def validate(value)
