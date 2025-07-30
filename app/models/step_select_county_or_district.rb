@@ -27,7 +27,7 @@ class StepSelectCountyOrDistrict < StepSelectArea
     normalized_value || validation_failure?(input_text)
   end
 
-  def validation_failure?(input_text)
+  def validation_failure(input_text) # rubocop:disable Naming/PredicateMethod
     set_flash("Sorry, #{subtype_label} '#{input_text}' was not recognised")
     false
   end
