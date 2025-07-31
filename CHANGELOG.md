@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Update gem dependencies for compatibility and performance
+- Refactor string handling with a new helper method
+- Ensure consistent styling for disabled buttons
+- Update methods for clearer naming and logic flow
+- Improve bundler command execution and error logging
 - Updates to Ruby 3.4.4 and Alpine 3.22 in Docker setup
 - Introduces environment helper for enhanced UI context
 - Refines asset management in build processes

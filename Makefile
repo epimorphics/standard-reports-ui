@@ -1,7 +1,7 @@
-.PHONY:	assets auth check clean image lint local publish realclean run tag test vars
+.PHONY:	assets auth check clean image lint publish realclean run tag test vars
 
 ACCOUNT?=$(shell aws sts get-caller-identity | jq -r .Account)
-ALPINE_VERSION?=3.20
+ALPINE_VERSION?=3.22
 AWS_REGION?=eu-west-1
 BUNDLER_VERSION?=$(shell tail -1 Gemfile.lock | tr -d ' ')
 ECR?=${ACCOUNT}.dkr.ecr.${AWS_REGION}.amazonaws.com
@@ -10,28 +10,27 @@ NAME?=$(shell awk -F: '$$1=="name" {print $$2}' deployment.yaml | sed -e 's/[[:b
 PAT?=$(shell read -p 'Github access token:' TOKEN; echo $$TOKEN)
 PORT?=3003
 RUBY_VERSION?=$(shell cat .ruby-version)
-RUN_VARS?=--publish
 SHORTNAME?=$(shell echo ${NAME} | cut -f2 -d/)
 STAGE?=dev
 API_SERVICE_URL?=http://localhost:8081
-RUN_VARS?=--publish
+RAILS_RELATIVE_URL_ROOT?=/app/standard-reports
+RUN_VARS?=-p
 
 BRANCH:=$(shell git rev-parse --abbrev-ref HEAD)
 COMMIT=$(shell git rev-parse --short HEAD)
 VERSION?=$(shell /usr/bin/env ruby -e 'require "./app/lib/version" ; puts Version::VERSION')
-TAG?=$(shell printf '%s-%s-%08d' ${VERSION} ${COMMIT} ${GITHUB_RUN_NUMBER})
-
-${TAG}:
-	@echo ${TAG}
+TAG?=$(shell printf '%s_%s_%08d' ${VERSION} ${COMMIT} ${GITHUB_RUN_NUMBER})
 
 IMAGE?=${NAME}/${STAGE}
 REPO?=${ECR}/${IMAGE}
 
 GITHUB_TOKEN=.github-token
 BUNDLE_CFG=.bundle/config
+BUNDLE=./bin/bundle
+RAILS=./bin/rails
 
 ${BUNDLE_CFG}: ${GITHUB_TOKEN}
-	@./bin/bundle config set --local rubygems.pkg.github.com ${GPR_OWNER}:`cat ${GITHUB_TOKEN}`
+	@${BUNDLE} config set --local rubygems.pkg.github.com ${GPR_OWNER}:`cat ${GITHUB_TOKEN}`
 
 ${GITHUB_TOKEN}:
 	@echo ${PAT} > ${GITHUB_TOKEN}
@@ -39,10 +38,10 @@ ${GITHUB_TOKEN}:
 all: image
 
 assets:
-	@echo "Installing all packages ..."
-	@./bin/bundle install
-	@echo "Cleaning up precompiled assets ..."
-	@./bin/rails assets:clean assets:precompile
+	@echo "Installing bundled gems ..."
+	@${BUNDLE} install
+	@echo "Cleaning and precompiling static assets ..."
+	@${BUNDLE} exec rake assets:clean assets:precompile
 
 auth: ${GITHUB_TOKEN} ${BUNDLE_CFG}
 
@@ -50,8 +49,13 @@ check: lint test
 	@echo "All checks passed."
 
 clean:
-	@[ -d public/assets ] && ./bin/rails assets:clobber || :
-	@@ rm -rf bundle coverage log node_modules
+	@echo "Cleaning up ${SHORTNAME} files..."
+# Clean up the project
+	@[ -d public/assets ] && ${RAILS} assets:clobber || :
+# Clear cache files from tmp/
+	@${RAILS} tmp:cache:clear
+# Remove temporary files and directories
+	@@ rm -rf bundle coverage log node_modules tmp
 
 image: auth
 	@echo Building ${REPO}:${TAG} ...
@@ -59,6 +63,7 @@ image: auth
 		--build-arg ALPINE_VERSION=${ALPINE_VERSION} \
 		--build-arg RUBY_VERSION=${RUBY_VERSION} \
 		--build-arg BUNDLER_VERSION=${BUNDLER_VERSION} \
+		--build-arg RAILS_RELATIVE_URL_ROOT=${RAILS_RELATIVE_URL_ROOT} \
 		--build-arg VERSION=${VERSION} \
 		--build-arg git_branch=${BRANCH} \
 		--build-arg git_commit_hash=${COMMIT} \
@@ -68,15 +73,24 @@ image: auth
 		.
 	@echo Done.
 
+forceclean: realclean
+# Remove all bundled files
+	@${BUNDLE} clean --force || :
+
 lint: assets
-	@./bin/bundle exec rubocop
+	@${BUNDLE} exec rubocop
+
+name:
+	@echo ${SHORTNAME}
 
 publish: image
 	@echo Publishing image: ${REPO}:${TAG} ...
+	@docker tag ${NAME}:${TAG} ${REPO}:${TAG} 2>&1
 	@docker push ${REPO}:${TAG} 2>&1
 	@echo Done.
 
 realclean: clean
+	@echo "Removing authentication from ${SHORTNAME}..."
 	@rm -f ${GITHUB_TOKEN} ${BUNDLE_CFG}
 
 run: start
@@ -84,7 +98,7 @@ run: start
 	@docker run ${RUN_VARS} ${PORT}:3000 --env API_SERVICE_URL=${API_SERVICE_URL} --network dnet --rm --name ${SHORTNAME} ${REPO}:${TAG}
 
 server: start
-	@API_SERVICE_URL=${API_SERVICE_URL} ./bin/rails server -p ${PORT}
+	@API_SERVICE_URL=${API_SERVICE_URL} ${RAILS} server -p ${PORT}
 
 start: stop
 	@echo "Starting ${SHORTNAME} pointing to ${API_SERVICE_URL} API ..."
@@ -98,7 +112,7 @@ tag:
 
 test: assets
 	@echo "Running tests ..."
-	@./bin/rails test
+	@${RAILS} test
 
 vars:
 	@echo "Docker: ${REPO}:${TAG}"
@@ -109,6 +123,7 @@ vars:
 	@echo "ECR = ${ECR}"
 	@echo "GPR_OWNER = ${GPR_OWNER}"
 	@echo "NAME = ${NAME}"
+	@echo "RAILS_RELATIVE_URL_ROOT = ${RAILS_RELATIVE_URL_ROOT}"
 	@echo "RUBY_VERSION = ${RUBY_VERSION}"
 	@echo "SHORTNAME = ${SHORTNAME}"
 	@echo "STAGE = ${STAGE}"

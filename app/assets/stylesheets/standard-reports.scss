@@ -157,3 +157,25 @@ input[type=radio] {
   -webkit-box-shadow: 0 2px 0 #929191;
   box-shadow: 0 2px 0 #929191;
 }
+
+.button.disabled,
+.button[disabled],
+.button[disabled="disabled"] {
+  color: #6f777b !important;
+  background-color: #f3f2f1;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  &:not([type=submit]){
+    &:hover {
+      cursor: default;
+      background-color: #f3f2f1;
+    }
+    &:focus,
+    &:active {
+      top: 0;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      outline: none !important; /* prevent focus ring - overriding previous !important */
+    }
+  }
+}

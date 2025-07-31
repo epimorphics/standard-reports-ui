@@ -21,7 +21,7 @@
           %li{"aria-labelled-by": "average-prices-report"}
             .o-form-control
               %label.o-form-control--label
-                = radio_button_tag( step.form_param, step_values[0].value, step_values[0].active?, class: "o-form-control--input" )
+                = radio_button_tag( step.form_param, step_values[0].value, step_values[0].active?, class: "o-form-control--input", required: true )
                 = step_values[0].label
                 %details
                   %summary#average-prices-report
@@ -34,7 +34,7 @@
           %li{"aria-labelled-by": "banded-prices-report"}
             .o-form-control
               %label.o-form-control--label
-                = radio_button_tag( step.form_param, step_values[1].value, step_values[1].active?, class: "o-form-control--input" )
+                = radio_button_tag( step.form_param, step_values[1].value, step_values[1].active?, class: "o-form-control--input", required: true )
                 = step_values[1].label
                 %details
                   %summary#banded-prices-report
@@ -46,4 +46,4 @@
                       %img{ src: image_path( "banded-prices-report-screenshot.png" ), alt: "Screenshot of example banded prices report. Excel table showing 2015 sales volumes by price band for different property types across East Anglia counties, including Cambridgeshire and Norfolk." }
 
       = layout_existing_values( @workflow )
-      = layout_submit_button
+      = layout_submit_button( @workflow )
