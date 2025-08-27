@@ -10,10 +10,14 @@ module ApplicationHelper
     end
   end
 
+  # Titleise method capitalises the first letter of each word, except for
+  # words with fewer than four letters, and certain conjunctions and prepositions.
+  # The first and last words are always capitalised unless they are
+  # conjunctions or prepositions.
+  # This is a simplified version of title case, not following all the rules of
+  # title case, but it is sufficient for our needs.
+  # ref: https://www.grammarly.com/blog/capitalization-in-the-titles/
   def titleise(orig) # rubocop:disable Metrics/MethodLength
-    # Any word with fewer than four letters should remain in lowercase
-    # “and”, “but”, “for”, “at,” “by”, “to”, and “from”, except if first or last
-    # https://www.grammarly.com/blog/capitalization-in-the-titles/
     not_to_cap = %w[either neither after before above below down from into near
                     onto over past upon with than that till when once where while]
     phrase = orig.dup
