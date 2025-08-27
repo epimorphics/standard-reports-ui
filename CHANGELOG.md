@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 2.2.0 - 2025-07
+
 - Update gem dependencies for compatibility and performance
 - Refactor string handling with a new helper method
 - Ensure consistent styling for disabled buttons
