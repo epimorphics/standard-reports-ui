@@ -2,10 +2,9 @@
 
 source 'https://rubygems.org'
 
-gem 'execjs'
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
+
 # Use Puma as the app server
 gem 'puma'
 
@@ -22,6 +21,8 @@ gem 'sass-rails'
 # end
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
+gem 'execjs'
+
 # gem 'therubyracer', platforms: :ruby
 gem 'libv8-node'
 
@@ -57,6 +58,18 @@ gem 'yajl-ruby', require: 'yajl'
 gem 'byebug', groups: %i[development test]
 gem 'dotenv', groups: %i[development test]
 
+group :development do
+  gem 'ruby-lsp'
+  gem 'solargraph'
+  # Original meta_request gem is broken. Using fork provided by rails_panel
+  # (https://github.com/dejan/rails_panel/issues/209#issuecomment-2621877079_)
+  gem 'meta_request', github: 'dejan/rails_panel', ref: 'meta_request-v0.8.5'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console'
+end
+
 group :development, :test do
   gem 'foreman'
   gem 'ostruct'
@@ -74,22 +87,14 @@ group :test do
   gem 'webmock'
 end
 
-group :development do
-  gem 'meta_request' # Devtools panel for Rails development
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console'
 
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-end
-
-# TODO: In production you want to set this to the gem from the epimorphics package repo
+# TODO: In production you want to set this to the gem from the epimorphics group package repository
 source 'https://rubygems.pkg.github.com/epimorphics' do
   gem 'json_rails_logger'
   gem 'lr_common_styles'
 end
 
-# TODO: While running the rails app locally for testing you can set gems to your local path
-# ! These "local" paths do not work with a docker image - use the repo instead
+# TODO: For gem development and testing, you can use the local path to the gem
+# ! These "local" paths do not work with a docker image - use the remote gem instead
 # gem 'json_rails_logger', path: '~/Epimorphics/shared/json-rails-logger/'
 # gem 'lr_common_styles', path: '~/Epimorphics/clients/land-registry/projects/lr_common_styles/'
