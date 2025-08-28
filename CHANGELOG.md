@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- Upgrades dependencies, including Rails, to address security issues
+- Improved environment configs for logging and error tracking
+- Updates tooling and lock files for smoother development
+- Clarified and reorganise comments and messaging across scripts
+- Adds documentation for automation and workflow setup
+- Commented out non-essential automation steps for clarity
+
+## 2.2.0 - 2025-07
+
 - Update gem dependencies for compatibility and performance
 - Refactor string handling with a new helper method
 - Ensure consistent styling for disabled buttons
