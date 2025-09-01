@@ -249,7 +249,7 @@ GEM
       railties (>= 4.0)
     net-http (0.6.0)
       uri
-    net-imap (0.5.9)
+    net-imap (0.5.10)
       date
       net-protocol
     net-pop (0.1.2)
@@ -479,8 +479,8 @@ GEM
       json
       lograge
       railties
-    lr_common_styles (2.2.2)
-      bootstrap-sass (~> 3.4)
+    lr_common_styles (2.3.0)
+      bootstrap-sass (~> 3.4.1)
       font-awesome-rails (~> 4.7.0)
       govuk_elements_rails (= 3.0.2)
       govuk_frontend_toolkit (~> 9.0)

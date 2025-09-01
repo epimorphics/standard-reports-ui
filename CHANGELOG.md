@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+## 2.2.1 - 2025-08
+
+- Updated LR Common Styles gem to continue to address security issues
 - Upgrades dependencies, including Rails, to address security issues
 - Improved environment configs for logging and error tracking
 - Updates tooling and lock files for smoother development
