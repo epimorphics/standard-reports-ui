@@ -2,6 +2,8 @@
 
 # Service object for interacting with remote service-manager API
 class ReportManager # rubocop:disable Metrics/ClassLength
+  include Log
+
   def initialize(config = nil)
     return unless config
 
@@ -20,21 +22,27 @@ class ReportManager # rubocop:disable Metrics/ClassLength
     latest_month_spec && latest_month_spec.split('-').second.to_i
   rescue StandardError => e
     msg = "Failed to retrieve latest month from #{url}latest-month-available"
-    Rails.logger.error { "#{msg}: #{e}" }
+    Sentry.capture_message(msg) if Rails.env.production?
+    Sentry.capture_exception(e) if Rails.env.production?
+    Log.error("#{msg}: #{e}")
   end
 
   def latest_year
     latest_month_spec && latest_month_spec.split('-').first.to_i
   rescue StandardError => e
     msg = "Failed to retrieve latest year from #{url}latest-month-available"
-    Rails.logger.error { "#{msg}: #{e}" }
+    Sentry.capture_message(msg) if Rails.env.production?
+    Sentry.capture_exception(e) if Rails.env.production?
+    Log.error("#{msg}: #{e}")
   end
 
   def latest_quarter
     latest_month && (latest_month / 3).to_i
   rescue StandardError => e
     msg = "Failed to retrieve latest quarter from #{url}latest-month-available"
-    Rails.logger.error { "#{msg}: #{e}" }
+    Sentry.capture_message(msg) if Rails.env.production?
+    Sentry.capture_exception(e) if Rails.env.production?
+    Log.error("#{msg}: #{e}")
   end
 
   def latest_month_spec

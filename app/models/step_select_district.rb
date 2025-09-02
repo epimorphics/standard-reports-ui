@@ -35,6 +35,4 @@ class StepSelectDistrict < StepSelectCountyOrDistrict
   def successor_step
     :select_aggregation_type
   end
-
-
 end

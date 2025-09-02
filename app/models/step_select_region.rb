@@ -30,7 +30,7 @@ class StepSelectRegion < StepSelectArea
 
   def validate_value(workflow)
     val = value(workflow)
-    NAMES.find { |n| n[1] == val } || validation_failure?(val)
+    NAMES.find { |n| n[1] == val } || validation_failure(val)
   end
 
   NAMES = [
@@ -48,8 +48,14 @@ class StepSelectRegion < StepSelectArea
 
   private
 
-  def validation_failure?(val)
-    set_flash("Sorry, #{val} is not a recognised region")
+  def validation_failure(val) # rubocop:disable Naming/PredicateMethod
+    if val.empty?
+      set_flash('Sorry, no region was selected')
+    else
+      # If the value is not recognised, we report it as an error
+      set_flash("Sorry, '#{val}' is not a recognised region")
+    end
+    # return false to indicate failure
     false
   end
 end

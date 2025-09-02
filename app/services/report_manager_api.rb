@@ -53,7 +53,7 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
                               end
       req.params.merge! options
     end
-  rescue Faraday::ConnectionFailed => e
+  rescue Faraday::TimeoutError, Faraday::ConnectionFailed => e
     record_failed_connection(http_url, e)
   end
 
@@ -69,8 +69,8 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
   # parsing fails
   def parse_json(json) # rubocop:disable Metrics/MethodLength
     result = nil
-
-    json_hash = parser.parse(StringIO.new(json)) do |json_chunk|
+    jsonified = json.is_a?(String) ? json : json.to_json
+    json_hash = parser.parse(jsonified) do |json_chunk|
       if result
         result = [result] unless result.is_a?(Array)
         result << json_chunk
@@ -80,6 +80,7 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
     end
 
     report_json_failure(json) unless result || json_hash
+
     result || json_hash
   end
 
@@ -93,21 +94,31 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
       req.params.merge!(options)
       req.body = json if json
     end
-  rescue Faraday::ConnectionFailed => e
+  rescue Faraday::TimeoutError, Faraday::ConnectionFailed => e
     record_failed_connection(http_url, e)
   end
 
-  def create_http_connection(http_url)
-    Faraday.new(url: http_url) do |faraday|
-      faraday.use Faraday::Request::UrlEncoded
-      faraday.use Faraday::Request::Retry
-      faraday.use FaradayMiddleware::FollowRedirects
+  def create_http_connection(http_url, auth = false)
+    retry_options = {
+      max: 2,
+      interval: 0.05,
+      interval_randomness: 0.5,
+      backoff_factor: 2,
+      exceptions: [Faraday::TimeoutError, Faraday::ConnectionFailed, Faraday::ResourceNotFound]
+    }
+
+    Faraday.new(url: http_url) do |config|
+      config.use Faraday::Request::UrlEncoded
+      config.use Faraday::FollowRedirects::Middleware
+
+      config.request :authorization, :basic, api_user, api_pw if auth
       # instrument the request to log the time it takes to complete
-      faraday.request :instrumentation, name: 'requests.api'
+      config.request :instrumentation, name: 'requests.api'
+      config.request :retry, retry_options
+
+      config.response :json
       # be sure to raise exceptions on 40x, 50x responses
-      faraday.response :raise_error
-      # setting the adapter must be the final step, otherwise get a warning from Faraday
-      faraday.adapter(:net_http)
+      config.response :raise_error
     end
   end
 
@@ -141,11 +152,11 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
 
   def report_json_failure(json)
     msg = "Failed to parse JSON: #{json.inspect}"
-    Sentry.capture_message(msg)
+    Sentry.capture_message(msg) if Rails.env.production?
     Log.error(msg)
   end
 
-  def record_api_error_response(http_url, method, response, start_time)
+  def record_api_error_response(http_url, method, response, start_time) # rubocop:disable Metrics/MethodLength
     end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC, :microsecond)
     ellapsed_time = (end_time - start_time) / 1000 # convert to milliseconds
     log_fields = { method: method, response_time: ellapsed_time, url: http_url }
@@ -155,6 +166,9 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
       message += response.body.to_json if response.body.present?
       log_fields[:status] = response.status
     end
+
+    Sentry.capture_message(message) if Rails.env.production?
+    Sentry.capture_exception(response) if Rails.env.production?
     Log.error(message, log_fields, 'error')
     instrumenter&.instrument('service_exception.api', response:, duration: ellapsed_time)
   end
@@ -172,7 +186,10 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
   end
 
   def record_failed_connection(http_url, exception)
-    Log.error("Failed to connect to API at #{http_url} due to: #{exception}", exception)
+    message = "Failed to connect to API at #{http_url} due to: #{exception}"
+    Sentry.capture_message(message) if Rails.env.production?
+    Sentry.capture_exception(exception) if Rails.env.production?
+    Log.error(message, exception)
     instrumenter&.instrument('connection_failure.api', exception:)
   end
 end

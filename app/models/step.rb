@@ -82,7 +82,7 @@ class Step
   # When traversing, we do nothing by default
   def workflow_update_hook(workflow); end
 
-  def validate_value(_workflow)
+  def validate_value(_workflow) # rubocop:disable Naming/PredicateMethod
     true
   end
 end

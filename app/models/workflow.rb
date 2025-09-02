@@ -52,7 +52,7 @@ class Workflow # rubocop:disable Metrics/ClassLength
     steps[name]
   end
 
-  def has_state?(name, value = nil) # rubocop:disable Naming/PredicateName
+  def has_state?(name, value = nil) # rubocop:disable Naming/PredicatePrefix
     sv = state(name)
     if value
       is_or_includes?(sv, value)
@@ -86,9 +86,9 @@ class Workflow # rubocop:disable Metrics/ClassLength
 
   def_delegator :params, :each, :each_state_key
 
-  def each_state_ignoring(ignore = nil, &block)
+  def each_state_ignoring(ignore = nil, &)
     params.each do |key, values|
-      each_state_value(key, values, &block) unless key == ignore
+      each_state_value(key, values, &) unless key == ignore
     end
   end
 
@@ -148,7 +148,7 @@ class Workflow # rubocop:disable Metrics/ClassLength
     initial_step.traverse(self)
   end
 
-  def is_or_includes?(value, value1) # rubocop:disable Naming/PredicateName
+  def is_or_includes?(value, value1) # rubocop:disable Naming/PredicatePrefix
     if value.is_a?(Array)
       value.include?(value1.to_s)
     else
