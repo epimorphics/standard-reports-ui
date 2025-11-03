@@ -41,9 +41,9 @@ gem 'modulejs-rails'
 
 # application dependencies
 gem 'faraday'
-gem 'faraday-encoding', '~> 0.0.6'
-gem 'faraday-follow_redirects', '~> 0.3.0'
-gem 'faraday-retry', '~> 2.0'
+gem 'faraday-encoding', '>= 0.0.6'
+gem 'faraday-follow_redirects', '>= 0.3.0'
+gem 'faraday-retry', '>= 2.0'
 
 gem 'get_process_mem'
 gem 'jquery-ui-rails'
