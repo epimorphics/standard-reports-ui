@@ -482,22 +482,22 @@ GEM
 GEM
   remote: https://rubygems.pkg.github.com/epimorphics/
   specs:
-    json_rails_logger (2.0.6)
+    json_rails_logger (2.2.0)
       json
       lograge
       railties
-    lr_common_styles (2.3.0)
+    lr_common_styles (2.3.1)
       bootstrap-sass (~> 3.4.1)
       font-awesome-rails (~> 4.7.0)
       govuk_elements_rails (= 3.0.2)
       govuk_frontend_toolkit (~> 9.0)
       govuk_template (~> 0.26.0)
-      haml-rails (~> 2.1)
+      haml-rails (~> 3.0)
       jquery-rails (~> 4.6)
       lodash-rails (~> 4.17)
       modernizr-rails (~> 2.7)
       modulejs-rails (~> 2.2.0)
-      rails (~> 8.0.0)
+      rails (~> 8.0)
       sass-rails (~> 6.0)
 
 PLATFORMS
