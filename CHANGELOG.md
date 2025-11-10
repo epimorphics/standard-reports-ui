@@ -7,10 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.2] - 2025-11
+
 ### Changed
 
+- Updated Ruby on Rails framework and related dependencies for improved security
+  and performance
+- Modernised dependency constraints with more flexible version ranges for
+  improved resolution
+- Updated HTTP libraries including Faraday to latest versions for better
+  compatibility
+- Upgraded private and organisation-specific dependencies to latest builds
 - Test logging adjusted to respect log level and reduce logs displayed unless
   debugging
+
+### Removed
+
+- Removed deprecated `config.active_support.to_time_preserves_timezone`
+  configuration for Rails 8.1+ compatibility
+
+### Security
+
+- Updated Rack and related dependencies to resolve security vulnerabilities
+  [#176](https://github.com/epimorphics/standard-reports-ui/issues/176)
+- Upgraded framework dependencies to address known security issues
+  [#176](https://github.com/epimorphics/standard-reports-ui/issues/176)
 
 ## [2.2.1] - 2025-08
 
