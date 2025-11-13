@@ -1,80 +1,146 @@
-# Standard Reports UI: change log
+# Changelog
 
-## Unreleased
+All notable changes to this project will be documented in this file.
 
-## 2.2.1 - 2025-08
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-- Updated LR Common Styles gem to continue to address security issues
-- Upgrades dependencies, including Rails, to address security issues
-- Improved environment configs for logging and error tracking
-- Updates tooling and lock files for smoother development
-- Clarified and reorganise comments and messaging across scripts
-- Adds documentation for automation and workflow setup
-- Commented out non-essential automation steps for clarity
+## [Unreleased]
 
-## 2.2.0 - 2025-07
+## [2.2.2] - 2025-11
 
-- Update gem dependencies for compatibility and performance
-- Refactor string handling with a new helper method
-- Ensure consistent styling for disabled buttons
-- Update methods for clearer naming and logic flow
-- Improve bundler command execution and error logging
+### Changed
 
-## 2.1.2 - 2025-07
+- Updated Ruby on Rails framework and related dependencies for improved security
+  and performance
+- Modernised dependency constraints with more flexible version ranges for
+  improved resolution
+- Updated HTTP libraries including Faraday to latest versions for better
+  compatibility
+- Upgraded private and organisation-specific dependencies to latest builds
+- Test logging adjusted to respect log level and reduce logs displayed unless
+  debugging
 
-- Updates to Ruby 3.4.4 and Alpine 3.22 in Docker setup
-- Introduces environment helper for enhanced UI context
-- Refines asset management in build processes
-- Upgrades styling components for consistency
-- Remove deprecated uglifier dependency
-- Add dotenv and byebug for dev/test environments
-- Selectively apply RuboCop rules with annotations
-- Bump `lr_common_styles` gem version for GA Tag updates
-- Add support for custom docker `RUN_VAR`s
+### Removed
 
-## 2.1.1 - 2025-06
+- Removed deprecated `config.active_support.to_time_preserves_timezone`
+  configuration for Rails 8.1+ compatibility
 
-- Hotfix: Ensuring current data contains the expected geographic boundaries
-- fix: rReplacing hard coded lists with external data files
-- refactor: Adding error handling for JSON loading
-- refactor: Refining naming conventions to adhere to coding standards
+### Security
 
-## 2.1.0 - 2025-05
+- Updated Rack and related dependencies to resolve security vulnerabilities
+  [#176](https://github.com/epimorphics/standard-reports-ui/issues/176)
+- Upgraded framework dependencies to address known security issues
+  [#176](https://github.com/epimorphics/standard-reports-ui/issues/176)
 
-- Implements structured logging using JSON format, improving readability and
-  integration with logging services.
-- Configures log level via environment variable.
-- Adds pre-commit and post-commit hooks for code quality checks and testing.
-- Introduces development environment configuration and Procfile for easier local
-  setup.
-- Reconfigures Sentry for better error tracking in development and production
-  environments.
-- Updates dependencies and adds new gems to improve application functionality.
-- Updates rubocop and adjusts helpers and models via rubocop.
+## [2.2.1] - 2025-08
 
-## 2.0.2 - 2024-12
+### Changed
 
-- (Jon) Myriad of tweaks to ensure variables either fail quietly via safe
-  navigation or are set to a default value to prevent errors in the application
-- (Jon) Updated the error template path to use `Rails.public_path` as well as
-  contain the `html` extension to ensure the correct template is rendered
-- (Jon) Improves error metrics reporting to ensure that logging always happens
-  with the appropriate severity depending on the exception status while reducing
-  the types of errors that can trigger a an error metric and therefore a
-  notification in slack
-  [GH-149](https://github.com/epimorphics/hmlr-linked-data/issues/149)
+- LR Common Styles gem updated to continue to address security issues
+- Dependencies upgraded, including Rails, to address security issues
+- Environment configs improved for logging and error tracking
+- Tooling and lock files updated for smoother development
+- Comments and messaging across scripts clarified and reorganised
 
-## 2.0.1 - 2024-12
+### Added
 
-- (Bogdan) Fixed a bug that was causing an internal application error in
-  `ReportManagerApi`
+- Documentation for automation and workflow setup
 
-## 2.0.0 - 2024-12
+### Removed
 
-- (Bogdan) Updated all gems by regenerating `Gemfile.lock`
-- (Bogdan) Upgraded alpine to `3.20`
-- (Bogdan) Upgraded rails to `7.2.2`
-- (Bogdan) Upgraded ruby to `3.3.5`
+- Non-essential automation steps for clarity
+
+## [2.2.0] - 2025-07
+
+### Changed
+
+- Gem dependencies updated for compatibility and performance
+- String handling refactored with a new helper method
+- Consistent styling ensured for disabled buttons
+- Methods updated for clearer naming and logic flow
+- Bundler command execution and error logging improved
+
+## [2.1.2] - 2025-07
+
+### Changed
+
+- Ruby updated to 3.4.4 and Alpine to 3.22 in Docker setup
+- Environment helper introduced for enhanced UI context
+- Asset management refined in build processes
+- Styling components upgraded for consistency
+- RuboCop rules selectively applied with annotations
+- `lr_common_styles` gem version bumped for GA Tag updates
+
+### Added
+
+- dotenv and byebug for dev/test environments
+- Support for custom docker `RUN_VAR`s
+
+### Removed
+
+- Deprecated uglifier dependency
+
+## [2.1.1] - 2025-06
+
+### Fixed
+
+- Current data ensured to contain the expected geographic boundaries
+- Hard coded lists replaced with external data files
+
+### Changed
+
+- Error handling added for JSON loading
+- Naming conventions refined to adhere to coding standards
+
+## [2.1.0] - 2025-05
+
+### Added
+
+- Structured logging implemented using JSON format, improving readability and
+  integration with logging services
+- Log level configuration added via environment variable
+- Pre-commit and post-commit hooks added for code quality checks and testing
+- Development environment configuration and Procfile introduced for easier local
+  setup
+- New gems added to improve application functionality
+
+### Changed
+
+- Sentry reconfigured for better error tracking in development and production
+  environments
+- Dependencies updated
+- Rubocop updated and helpers and models adjusted via rubocop
+
+## [2.0.2] - 2024-12
+
+### Changed
+
+- Variables ensured to either fail quietly via safe navigation or are set to a
+  default value to prevent errors in the application
+- Error template path updated to use `Rails.public_path` as well as contain the
+  `html` extension to ensure the correct template is rendered
+- Error metrics reporting improved to ensure that logging always happens with
+  the appropriate severity depending on the exception status while reducing the
+  types of errors that can trigger an error metric and therefore a notification
+  in slack [GH-149](https://github.com/epimorphics/hmlr-linked-data/issues/149)
+
+## [2.0.1] - 2024-12
+
+### Fixed
+
+- Bug fixed that was causing an internal application error in `ReportManagerApi`
+
+## [2.0.0] - 2024-12
+
+### Changed
+
+- All gems updated by regenerating `Gemfile.lock`
+  - Alpine upgraded to `3.20`
+  - Rails upgraded to `7.2.2`
+  - Ruby upgraded to `3.3.5`
+
+---
 
 ## 1.6.0 - 2024-10
 
