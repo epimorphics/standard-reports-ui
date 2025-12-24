@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Resolved open-ended gem versioning warnings by setting explicit minimum
+  versions for Faraday and its middleware dependencies.
+
 ## [2.2.2] - 2025-11
 
 ### Changed
