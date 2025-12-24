@@ -40,10 +40,13 @@ gem 'modernizr-rails'
 gem 'modulejs-rails'
 
 # application dependencies
-gem 'faraday'
-gem 'faraday-encoding', '>= 0.0.6'
-gem 'faraday-follow_redirects', '>= 0.3.0'
-gem 'faraday-retry', '>= 2.0'
+
+# Faraday v2 requires individual middlewares to be specified
+# Resolve open-ended gem versioning warnings by setting explicit version minimums
+gem 'faraday', '~> 2.13', '>= 2.13.0'
+gem 'faraday-encoding', '~> 0.0', '>= 0.0.6'
+gem 'faraday-follow_redirects', '~> 0.3', '>= 0.3.0'
+gem 'faraday-retry', '~> 2.0', '>= 2.0'
 
 gem 'get_process_mem'
 gem 'jquery-ui-rails'
