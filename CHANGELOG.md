@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Import feature file from HMLR Feature Tests to CuPIT.
+  - Uses Cucumber/Gherkin syntax.
+- Add spec file from dev branch for standard reports.
+  - Covers landing page access and report building.
+
 ## [2.2.2] - 2025-11
 
 ### Changed
