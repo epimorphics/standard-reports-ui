@@ -12,8 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require popper
 //= require bootstrap
 //= require lr_common_styles/application
+//
 //= require jquery-ui/widgets/autocomplete
 //= require leaflet
 //= require lodash
