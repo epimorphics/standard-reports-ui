@@ -6,8 +6,8 @@ document.addEventListener("DOMContentLoaded", function() {
     detail.addEventListener('toggle', function() {
       const isHidden = !detail.open;
       span.textContent = span.textContent.replace(
-        isHidden ? 'close' : 'view',
-        isHidden ? 'view' : 'close'
+        isHidden ? 'close the' : 'view an',
+        isHidden ? 'view an' : 'close the'
       );
     });
   });

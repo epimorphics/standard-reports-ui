@@ -82,3 +82,6 @@ tags
 
 # Ignore Standard Reports Manager configuration file download logs
 wget-log
+
+# Ignore local TODO files
+TODO.md
