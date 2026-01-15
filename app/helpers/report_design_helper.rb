@@ -136,7 +136,7 @@ module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
     year = Time.current.year - delta
     content_tag(:div, class: 'row') do
       concat(content_tag(:div, class: 'col-sm-12 col-md-1') do
-        content_tag(:h3, year.to_s, class: 'u-font-bold u-align-top')
+        content_tag(:h3, year.to_s, class: 'u-font-bold u-align-top fs-1')
       end)
       concat(content_tag(:div, class: 'col-sm-12 col-md-11') do
         concat(layout_all_year(step, year, workflow))
@@ -180,7 +180,7 @@ module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
 
   def prompted_row(main_block)
     capture do
-      content_tag(:div, class: 'col-sm-12 col-md-10') do
+      content_tag(:div, class: 'col-sm-12 col-md-11 px-3') do
         content_tag(:div, class: 'o-form-control') do
           main_block.call
         end
@@ -189,13 +189,13 @@ module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
   end
 
   def labelled_check_box_li(param_name, value, label, checked)
-    content_tag(:li, class: 'o-form-control--label-inline') do
+    content_tag(:li, class: 'o-form-control--item_inline') do
       labelled_check_box(param_name, value, label, checked)
     end
   end
 
   def labelled_check_box(param_name, value, label, checked)
-    content_tag(:label, class: 'o-form-control--label-inline') do
+    content_tag(:label, class: 'o-form-control--label_inline') do
       concat check_box_tag(
         "#{param_name}#{value}",
         value.to_s, checked,
@@ -228,7 +228,7 @@ module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
     link_to(
       'change&hellip;'.html_safe,
       workflow.params.merge(stop: step.param_name),
-      class: 'c-review-report--change-option copy-14',
+      class: 'c-review-report--change-option',
       'aria-label' => "change report option #{step.name}"
     )
   end
