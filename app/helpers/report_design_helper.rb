@@ -228,7 +228,7 @@ module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
     link_to(
       'change&hellip;'.html_safe,
       workflow.params.merge(stop: step.param_name),
-      class: 'c-review-report--change-option copy-14',
+      class: 'c-review-report--change-option',
       'aria-label' => "change report option #{step.name}"
     )
   end
