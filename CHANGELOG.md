@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Introduced Capybara feature test support with scenario DSL.
+  [#155](https://github.com/epimorphics/standard-reports-ui/issues/155)
+
+### Fixed
+
+- Corrected county selection validation to handle mismatched values.
+  [#155](https://github.com/epimorphics/standard-reports-ui/issues/155)
+
+### Changed
+
+- Refactored test dependencies for improved maintainability.
+
 ## [2.3.0] - 2026-01
 
 ### Added
@@ -30,6 +44,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Configured Sass compression in production for smaller bundles
 - Resolved open-ended gem versioning warnings by setting explicit minimum
   versions for Faraday and its middleware dependencies.
+
 ### Removed
 
 - Removed deprecated `sass-rails` gem and redundant dependencies
