@@ -59,11 +59,12 @@ group :development, :test do
 end
 
 group :test do
-  gem 'minitest-rails-capybara'
+  gem 'capybara'
+  gem 'minitest-rails', require: false
   gem 'minitest-reporters'
-  gem 'minitest-spec-rails'
-  gem 'minitest-vcr'
+  gem 'minitest-spec-rails', require: false
   gem 'mocha'
+  gem 'selenium-webdriver'
   gem 'vcr'
   gem 'webmock'
 end
