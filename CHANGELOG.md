@@ -7,30 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Added
-
-- Introduced Capybara feature test support with scenario DSL.
-  [#155](https://github.com/epimorphics/standard-reports-ui/issues/155)
-
-### Fixed
-
-- Corrected county selection validation to handle mismatched values.
-  [#155](https://github.com/epimorphics/standard-reports-ui/issues/155)
-
-### Changed
-
-- Refactored test dependencies for improved maintainability.
-
 ## [2.3.0] - 2026-01
 
 ### Added
 
+- Introduced Capybara feature test support with scenario DSL.
+  [#155](https://github.com/epimorphics/standard-reports-ui/issues/155)
 - Enabled Sass source maps for front-end debugging in development
 - Added Autoprefixer with source map generation for CSS debugging
 - Added root CSS variables for consistent styling
 
 ### Changed
 
+- Corrected county selection validation to handle mismatched values.
+  [#155](https://github.com/epimorphics/standard-reports-ui/issues/155)
 - Replaced `sass-rails` with `dartsass-sprockets` for Dart Sass compatibility
   [#182](https://github.com/epimorphics/standard-reports-ui/issues/182)
 - Updated `lr_common_styles` gem (includes Bootstrap 5)
@@ -44,6 +34,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Configured Sass compression in production for smaller bundles
 - Resolved open-ended gem versioning warnings by setting explicit minimum
   versions for Faraday and its middleware dependencies.
+
+### Fixed
+
+- Refactored test dependencies for improved maintainability.
+  [#155](https://github.com/epimorphics/standard-reports-ui/issues/155)
 
 ### Removed
 
