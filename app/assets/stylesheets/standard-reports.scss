@@ -1,4 +1,13 @@
-$grey-1: #6f777b;
+:root {
+  --srui-font-size-base: 1.0rem;
+  --srui-h3-size: 2.4rem; // 24px equivalent
+  --srui-button-padding-vertical: 0.5rem;
+  --srui-button-padding-horizontal: 1rem;
+  --srui-grey-1: #6f777b;
+  --srui-gutter-x: 1.5rem;
+}
+
+$grey-1: var(--srui-grey-1);
 
 :focus,
 a:focus,
@@ -13,7 +22,6 @@ input:focus {
 
 .form-control:focus {
   border: 0;
-  -webkit-box-shadow: none;
   box-shadow: none;
 }
 
@@ -28,29 +36,86 @@ ol.numbered {
 
 input[type=checkbox],
 input[type=radio] {
-  -webkit-transform: scale(1.5);
   transform: scale(1.5);
+}
+
+details {
+  .summary {
+    font-weight: 400;
+    font-size: medium;
+  }
+}
+
+// layout
+.o-container,
+#content {
+  padding-inline: 1.5rem;
+
+  @media (min-width: 768px) {
+    &.container {
+      width: 750px;
+    }
+  }
+
+  @media (min-width: 992px) {
+    &.container {
+      width: 960px;
+    }
+  }
+
+  h3.fs-1 {
+    font-size: var(--srui-h3-size) !important;
+  }
+}
+
+/* Form controls */
+
+.list-unstyled {
+  list-style-position: inside;
+
+  label {
+    padding-inline-start: 1.5rem;
+  }
+}
+
+%form-label {
+  font-weight: 700;
+  display: block;
 }
 
 .o-form-control {
   line-height: 3rem;
 
-  .o-form-control--input {
+  .list-inline {
+    @media(min-width: 576px) {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+
+  &--item_inline {
+    display: inline-block;
+    margin-inline-end: 2rem;
+    flex: 0 0 max-content;
+  }
+
+  &--input {
     margin-right: 0.8rem;
   }
 
-  .o-form-control--label {
-    display: block;
+  &--label {
+    @extend %form-label;
+
+    &_inline {
+      @extend %form-label;
+      display: inline-block;
+    }
+
+    input[type=text] {
+      width: 100%;
+    }
   }
 
-  .o-form-control--label-inline {
-    display: inline-block;
-  }
-
-  .o-form-control--label input[type=text] {
-    // margin-left: 0.8rem;
-    width: 100%;
-  }
 }
 
 /* components */
@@ -75,7 +140,7 @@ input[type=radio] {
   display: flex;
   align-items: center;
 
-  > * {
+  >* {
     margin-right: 1em;
   }
 }
@@ -99,19 +164,23 @@ input[type=radio] {
     margin-bottom: 1rem;
   }
 
-  details > .panel {
+  details>.panel {
     display: none;
-    -webkit-box-shadow: none;
     box-shadow: none;
   }
 
-  details[open] > .panel {
+  details[open]>.panel {
     display: block;
+
     &:has(picture) {
       overflow-x: auto;
       overflow-y: hidden;
       width: auto;
       max-width: 100%;
+    }
+
+    &:not(:has(picture)) {
+      padding-inline: unset;
     }
   }
 }
@@ -147,6 +216,13 @@ input[type=radio] {
   font-size: 90%
 }
 
+.ui-menu {
+  .ui-menu-item {
+    display: block;
+    font-size: calc(var(--srui-font-size-base) + 0.4rem);
+    white-space: nowrap;
+  }
+}
 
 .button--secondary,
 .button--secondary:visited,
@@ -154,7 +230,6 @@ input[type=radio] {
 .button--secondary:hover {
   color: #0b0c0c !important;
   background-color: #f3f2f1;
-  -webkit-box-shadow: 0 2px 0 #929191;
   box-shadow: 0 2px 0 #929191;
 }
 
@@ -163,19 +238,25 @@ input[type=radio] {
 .button[disabled="disabled"] {
   color: #6f777b !important;
   background-color: #f3f2f1;
-  -webkit-box-shadow: none;
   box-shadow: none;
-  &:not([type=submit]){
+
+  &:not([type=submit]) {
     &:hover {
       cursor: default;
       background-color: #f3f2f1;
     }
+
     &:focus,
     &:active {
       top: 0;
-      -webkit-box-shadow: none;
       box-shadow: none;
-      outline: none !important; /* prevent focus ring - overriding previous !important */
+      /* prevent focus ring - overriding previous !important */
+      outline: none !important;
     }
   }
+}
+
+// Migrated from application.scss - to be removed from there once standard-reports.scss is imported
+.text-link {
+  text-decoration: underline;
 }

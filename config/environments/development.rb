@@ -38,6 +38,8 @@ Rails.application.configure do
   # Don't print a log message every time an asset file is loaded
   config.assets.quiet = true
 
+  # Enable SASS source maps in development for easier debugging
+  config.sass.inline_source_maps = true
   # Tag rails logs with useful information
   config.log_tags = %i[subdomain request_id request_method]
   # When sync mode is true, all output is immediately flushed to the underlying
@@ -55,7 +57,7 @@ Rails.application.configure do
   config.relative_url_root = ENV.fetch('RAILS_RELATIVE_URL_ROOT', '/')
 
   # API location can be specified in the environment but defaults to the dev service
-  config.api_service_url = ENV.fetch('API_SERVICE_URL', 'http://localhost:8888')
+  config.api_service_url = ENV.fetch('API_SERVICE_URL', 'http://localhost:8081')
 
   # Automatically update js-routes file
   # when routes.rb is changed

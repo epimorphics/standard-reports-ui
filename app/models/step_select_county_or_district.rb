@@ -22,11 +22,16 @@ class StepSelectCountyOrDistrict < StepSelectArea
   def validate_value(workflow)
     input_text = value(workflow)
     normalized_value = validate(value(workflow))
-    unless normalized_value && (value(workflow) == normalized_value)
+
+    # If validation failed, return the failure message
+    return validation_failure(input_text) unless normalized_value
+
+    # Update state if needed
+    unless value(workflow) == normalized_value
       workflow.set_state(param_name, normalized_value)
     end
 
-    titleise(normalized_value) || validation_failure(input_text)
+    titleise(normalized_value)
   end
 
   def validation_failure(input_text) # rubocop:disable Naming/PredicateMethod

@@ -93,7 +93,7 @@ class WorkflowTest < ActiveSupport::TestCase
   it 'should correctly summarise county selections' do
     workflow = Workflow.new(areaType: 'county', area: 'DEVON')
 
-    _(workflow.summarise_selection(:area, 'DEVON')).must_match(/County.*is.*DEVON/)
+    _(workflow.summarise_selection(:area, 'DEVON')).must_match(/County.*is.*Devon/)
   end
 
   it 'should traverse to the first step with an empty state' do
