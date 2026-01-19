@@ -28,7 +28,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved Sentry initialisation with better environment control
 - Streamlined Makefile for improved development workflow
 - Configured Sass compression in production for smaller bundles
-
+- Resolved open-ended gem versioning warnings by setting explicit minimum
+  versions for Faraday and its middleware dependencies.
 ### Removed
 
 - Removed deprecated `sass-rails` gem and redundant dependencies
