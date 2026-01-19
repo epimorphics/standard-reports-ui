@@ -36,6 +36,11 @@ Rails.application.configure do
   # Asset digests allow you to set far-future HTTP expiration dates on all assets,
   # yet still be able to expire them through the digest params.
   config.assets.digest = true
+  # `config.sass.style` has been deprecated in favor of `config.assets.css_compressor`
+  # Set SASS output style to compressed for smaller file sizes
+  config.sass.style = :compressed
+  # SASS source maps are disabled in production for performance
+  config.sass.inline_source_maps = false
 
   # `config.assets.precompile` and `config.assets.version` have moved to
   # config/initializers/assets.rb
