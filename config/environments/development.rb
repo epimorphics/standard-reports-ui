@@ -57,7 +57,7 @@ Rails.application.configure do
   config.relative_url_root = ENV.fetch('RAILS_RELATIVE_URL_ROOT', '/')
 
   # API location can be specified in the environment but defaults to the dev service
-  config.api_service_url = ENV.fetch('API_SERVICE_URL', 'http://localhost:8888')
+  config.api_service_url = ENV.fetch('API_SERVICE_URL', 'http://localhost:8081')
 
   # Automatically update js-routes file
   # when routes.rb is changed
