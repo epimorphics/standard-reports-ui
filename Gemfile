@@ -23,9 +23,6 @@ gem 'dartsass-sprockets', '~> 3.2'
 
 gem 'haml-rails'
 
-gem 'rubocop'
-gem 'rubocop-rails'
-
 # Faraday v2 requires individual middlewares to be specified
 # Resolve open-ended gem versioning warnings by setting explicit version minimums
 gem 'faraday', '~> 2.13', '>= 2.13.0'
@@ -71,6 +68,12 @@ end
 
 group :development do
   gem 'htmlbeautifier'
+
+  gem 'rubocop', '~> 1.82', '>= 1.82.1', require: false
+  gem 'rubocop-capybara', '~> 2.22', '>= 2.22.1', require: false
+  gem 'rubocop-rails', '~> 2.34', '>= 2.34.3', require: false
+  gem 'rubocop-rails-omakase', '~> 1.1', '>= 1.1.0', require: false
+
   gem 'ruby-lsp'
   gem 'solargraph'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
