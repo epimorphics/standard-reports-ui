@@ -63,7 +63,7 @@ feature 'existing user selections are shown in state of input controls' do
   end
 
   scenario 'options page' do
-    visit report_design_path(report: 'avgPrice', areaType: 'county', area: 'DEVON', aggregate: 'district', period: ['ytd'], age: 'new', stop: 'age')
+    visit report_design_path(report: 'avgPrice', areaType: 'county', area: 'DEVON', aggregate: 'district', period: [ 'ytd' ], age: 'new', stop: 'age')
     _(page).must_have_css(".container input[name='age'][value=new][checked=checked]")
   end
 end

@@ -38,7 +38,7 @@ class ReportSpecificationTest < ActiveSupport::TestCase
       { m: 9,  q: '2015-Q3' },
       { m: 10, q: '2015-Q3' },
       { m: 11, q: '2015-Q3' },
-      { m: 12, q: '2015-Q4' }
+      { m: 12, q: '2015-Q4' },
     ]
 
     expectations.each do |expectation|

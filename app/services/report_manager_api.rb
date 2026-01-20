@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Encapsulates the HTTP API for the report manager
-class ReportManagerApi # rubocop:disable Metrics/ClassLength
+class ReportManagerApi
   include Log
 
   attr_reader :instrumenter
@@ -46,11 +46,7 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
 
     conn.get do |req|
       req.headers['X-Request-ID'] = Thread.current[:request_id] if Thread.current[:request_id]
-      req.headers['Accept'] = if (accept = options.delete(:accept))
-                                accept
-                              else
-                                'application/json'
-                              end
+      req.headers['Accept'] = options.delete(:accept) || 'application/json'
       req.params.merge! options
     end
   rescue Faraday::TimeoutError, Faraday::ConnectionFailed => e
@@ -67,12 +63,12 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
 
   # Parse the given JSON string into a data structure. Throws an exception if
   # parsing fails
-  def parse_json(json) # rubocop:disable Metrics/MethodLength
+  def parse_json(json)
     result = nil
     jsonified = json.is_a?(String) ? json : json.to_json
     json_hash = parser.parse(jsonified) do |json_chunk|
       if result
-        result = [result] unless result.is_a?(Array)
+        result = [ result ] unless Array(result)
         result << json_chunk
       else
         result = json_chunk
@@ -104,7 +100,7 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
       interval: 0.05,
       interval_randomness: 0.5,
       backoff_factor: 2,
-      exceptions: [Faraday::TimeoutError, Faraday::ConnectionFailed, Faraday::ResourceNotFound]
+      exceptions: [ Faraday::TimeoutError, Faraday::ConnectionFailed, Faraday::ResourceNotFound ],
     }
 
     Faraday.new(url: http_url) do |config|
@@ -122,7 +118,7 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
     end
   end
 
-  def set_connection_timeout(conn) # rubocop:disable Naming/AccessorMethodName
+  def set_connection_timeout(conn)
     conn.options[:timeout] = 600
     conn
   end
@@ -156,7 +152,7 @@ class ReportManagerApi # rubocop:disable Metrics/ClassLength
     Log.error(msg)
   end
 
-  def record_api_error_response(http_url, method, response, start_time) # rubocop:disable Metrics/MethodLength
+  def record_api_error_response(http_url, method, response, start_time)
     end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC, :microsecond)
     ellapsed_time = (end_time - start_time) / 1000 # convert to milliseconds
     log_fields = { method: method, response_time: ellapsed_time, url: http_url }

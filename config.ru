@@ -18,7 +18,7 @@ h.each do |name, value|
   msg = {
     ts: DateTime.now.utc.strftime('%FT%T.%3NZ'),
     level: 'INFO',
-    message: "Loaded '#{value}' as '#{name}' environment variable"
+    message: "Loaded '#{value}' as '#{name}' environment variable",
   }
   puts msg.to_json if name.match(/API_SERVICE_URL/)
 end

@@ -8,13 +8,13 @@ class StepSelectAreaType < Step
 
   def values_options(_workflow)
     [
-      ['Country', :country],
-      ['Region', :region],
-      ['County, Unitary Authority or Greater London', :county],
-      ['District or London Borough', :district],
-      ['Postcode area (e.g. &lsquo;GL&rsquo;)'.html_safe, :pcArea],
-      ['Postcode district (e.g. &lsquo;GL1&rsquo;)'.html_safe, :pcDistrict],
-      ['Postcode sector (e.g. &lsquo;GL1 2&rsquo;)'.html_safe, :pcSector]
+      [ 'Country', :country ],
+      [ 'Region', :region ],
+      [ 'County, Unitary Authority or Greater London', :county ],
+      [ 'District or London Borough', :district ],
+      [ 'Postcode area (e.g. &lsquo;GL&rsquo;)'.html_safe, :pcArea ],
+      [ 'Postcode district (e.g. &lsquo;GL1&rsquo;)'.html_safe, :pcDistrict ],
+      [ 'Postcode sector (e.g. &lsquo;GL1 2&rsquo;)'.html_safe, :pcSector ],
     ]
   end
 

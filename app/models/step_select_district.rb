@@ -13,7 +13,7 @@ class StepSelectDistrict < StepSelectCountyOrDistrict
   end
   alias subtype_label subtype
 
-  def names # rubocop:disable Metrics/MethodLength
+  def names
     read_data_file('data/district-names.txt')
   rescue Errno::ENOENT => e
     Rails.logger.error "District names file not found: #{e.message}"

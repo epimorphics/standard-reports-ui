@@ -77,7 +77,7 @@ class ReportManagerTest < ActiveSupport::TestCase
       report: 'avgPrice',
       areaType: 'region',
       aggregate: 'county',
-      period: [2018],
+      period: [ 2018 ],
       age: 'any'
     )
 
@@ -95,7 +95,7 @@ class ReportManagerTest < ActiveSupport::TestCase
       areaType: 'pcDistrict',
       area: '; select wombles from wimbledon',
       aggregate: 'county',
-      period: [2018],
+      period: [ 2018 ],
       age: 'any'
     )
 
@@ -113,7 +113,7 @@ class ReportManagerTest < ActiveSupport::TestCase
       areaType: 'pcArea',
       area: '; select wombles from wimbledon',
       aggregate: 'county',
-      period: [2018],
+      period: [ 2018 ],
       age: 'any'
     )
 
@@ -131,7 +131,7 @@ class ReportManagerTest < ActiveSupport::TestCase
       areaType: 'pcSector',
       area: '; select wombles from wimbledon',
       aggregate: 'county',
-      period: [2018],
+      period: [ 2018 ],
       age: 'any'
     )
 

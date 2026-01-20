@@ -28,7 +28,7 @@ class ReportSpecification
     end
   end
 
-  def latest_quarter(report_manager) # rubocop:disable Metrics/MethodLength
+  def latest_quarter(report_manager)
     case report_manager.latest_month
     when 1..2
       "#{report_manager.latest_year - 1}-Q4"

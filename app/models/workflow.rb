@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Model encapsulating the report-generation workflow
-class Workflow # rubocop:disable Metrics/ClassLength
+class Workflow
   extend Forwardable
 
   attr_reader :step_history
@@ -19,7 +19,7 @@ class Workflow # rubocop:disable Metrics/ClassLength
     StepSelectAggregationType,
     StepSelectDates,
     StepSelectOptions,
-    StepReviewReport
+    StepReviewReport,
   ].freeze
 
   STEP_SEQUENCE = STEP_CLASSES
@@ -52,7 +52,7 @@ class Workflow # rubocop:disable Metrics/ClassLength
     steps[name]
   end
 
-  def has_state?(name, value = nil) # rubocop:disable Naming/PredicatePrefix
+  def has_state?(name, value = nil)
     sv = state(name)
     if value
       is_or_includes?(sv, value)
@@ -116,12 +116,12 @@ class Workflow # rubocop:disable Metrics/ClassLength
     multi = values.is_a?(Array)
     param_name = multi ? "#{key}[]" : key.to_s
 
-    (multi ? values : [values]).each do |value|
+    (multi ? values : [ values ]).each do |value|
       block.yield(key, value, param_name)
     end
   end
 
-  def set_current_state(params) # rubocop:disable Naming/AccessorMethodName
+  def set_current_state(params)
     @state = {}
     params.each do |key, value|
       set_state(key, value)
@@ -137,7 +137,7 @@ class Workflow # rubocop:disable Metrics/ClassLength
   end
 
   def memoize_initial_step(step)
-    @step_history ||= [step] # rubocop:disable Naming/MemoizedInstanceVariableName
+    @step_history ||= [ step ]
   end
 
   def save_step(step)
@@ -148,7 +148,7 @@ class Workflow # rubocop:disable Metrics/ClassLength
     initial_step.traverse(self)
   end
 
-  def is_or_includes?(value, value1) # rubocop:disable Naming/PredicatePrefix
+  def is_or_includes?(value, value1)
     if value.is_a?(Array)
       value.include?(value1.to_s)
     else

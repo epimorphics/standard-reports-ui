@@ -56,7 +56,7 @@ class WorkflowTest < ActiveSupport::TestCase
     report_type_selected_workflow.each_state_ignoring(nil) do |s, v|
       acc << "#{s}--#{v}"
     end
-    _(acc).must_equal ['report--avgPrice']
+    _(acc).must_equal [ 'report--avgPrice' ]
   end
 
   it 'should support the iteration over states with multi-values' do

@@ -25,28 +25,28 @@ end
 module Minitest
   class Expectation
     # Delegate Capybara matchers to the target (page object)
-    def must_have_css(selector, **options)
-      ctx.assert target.has_css?(selector, **options),
+    def must_have_css(selector, **)
+      ctx.assert target.has_css?(selector, **),
                  "Expected page to have CSS '#{selector}'"
     end
 
-    def must_have_content(content, **options)
-      ctx.assert target.has_content?(content, **options),
+    def must_have_content(content, **)
+      ctx.assert target.has_content?(content, **),
                  "Expected page to have content '#{content}'"
     end
 
-    def must_have_selector(selector, **options)
-      ctx.assert target.has_selector?(selector, **options),
+    def must_have_selector(selector, **)
+      ctx.assert target.has_selector?(selector, **),
                  "Expected page to have selector '#{selector}'"
     end
 
-    def wont_have_css(selector, **options)
-      ctx.refute target.has_css?(selector, **options),
+    def wont_have_css(selector, **)
+      ctx.refute target.has_css?(selector, **),
                  "Expected page NOT to have CSS '#{selector}'"
     end
 
-    def wont_have_content(content, **options)
-      ctx.refute target.has_content?(content, **options),
+    def wont_have_content(content, **)
+      ctx.refute target.has_content?(content, **),
                  "Expected page NOT to have content '#{content}'"
     end
   end
@@ -67,7 +67,7 @@ class CapybaraFeatureTest < ActionDispatch::IntegrationTest
 end
 
 # Define feature and scenario as top-level methods for DSL syntax
-def feature(name, &block)
+def feature(name, &)
   klass = Class.new(CapybaraFeatureTest) do
     class << self
       attr_accessor :feature_name
@@ -75,9 +75,9 @@ def feature(name, &block)
   end
   klass.feature_name = name
   Object.const_set("Feature#{name.gsub(/\W+/, '_').camelize}Test", klass)
-  klass.class_eval(&block)
+  klass.class_eval(&)
 end
 
-def scenario(name, &block)
-  define_method("test_#{name.gsub(/\W+/, '_')}", &block)
+def scenario(name, &)
+  define_method("test_#{name.gsub(/\W+/, '_')}", &)
 end

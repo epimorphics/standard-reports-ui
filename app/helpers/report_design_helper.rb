@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # :nodoc:
-module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
+module ReportDesignHelper
   def workflow_step_form(workflow)
     step = workflow.current_step
 
@@ -51,7 +51,7 @@ module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
     end
   end
 
-  def toggle_button_option(step, value, radio, single_value) # rubocop:disable Metrics/MethodLength
+  def toggle_button_option(step, value, radio, single_value)
     active = value.active? || single_value
 
     content_tag(:div, class: 'o-form-control') do
@@ -219,7 +219,7 @@ module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
 
   def review_selection(workflow, step)
     content_tag(:li) do
-      concat step.summarise(workflow.state(step.param_name)).html_safe # rubocop:disable Rails/OutputSafety
+      concat step.summarise(workflow.state(step.param_name)).html_safe
       concat show_change_link(workflow, step)
     end
   end

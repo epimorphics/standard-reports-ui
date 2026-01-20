@@ -17,7 +17,7 @@ module ApplicationHelper
   # This is a simplified version of title case, not following all the rules of
   # title case, but it is sufficient for our needs.
   # ref: https://www.grammarly.com/blog/capitalization-in-the-titles/
-  def titleise(orig) # rubocop:disable Metrics/MethodLength
+  def titleise(orig)
     not_to_cap = %w[either neither after before above below down from into near
                     onto over past upon with than that till when once where while]
     phrase = orig.dup

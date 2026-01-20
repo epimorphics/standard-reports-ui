@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Service object for interacting with remote service-manager API
-class ReportManager # rubocop:disable Metrics/ClassLength
+class ReportManager
   include Log
 
   def initialize(config = nil)
@@ -91,14 +91,14 @@ class ReportManager # rubocop:disable Metrics/ClassLength
   #     a=1&b[]=2&b[]=3
   # becomes
   #     [{a: 1, b: 2}, {a: 1, b: 3}]
-  def create_params_sets(params) # rubocop:disable Metrics/MethodLength
-    product = [{}]
+  def create_params_sets(params)
+    product = [ {} ]
 
     params.each do |k, v|
       product_ = []
 
       product.each do |h|
-        (v.is_a?(Array) ? v : [v]).each do |vv|
+        (v.is_a?(Array) ? v : [ v ]).each do |vv|
           h_copy = h.dup
           h_copy[k] = vv
           product_ << h_copy
@@ -167,7 +167,7 @@ class ReportManager # rubocop:disable Metrics/ClassLength
     {
       pcSector: StepSelectPostcodeSector::VALIDATION,
       pcDistrict: StepSelectPostcodeDistrict::VALIDATION,
-      pcArea: StepSelectPostcodeArea::VALIDATION
+      pcArea: StepSelectPostcodeArea::VALIDATION,
     }[area_type]
   end
 

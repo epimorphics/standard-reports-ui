@@ -91,22 +91,22 @@ class StepSelectDates < Step
     [
       create_value('Year to date', :ytd, workflow),
       create_value('Latest quarter for which data is available', :latest_q, workflow),
-      create_value('Latest month for which data is available', :latest_m, workflow)
+      create_value('Latest month for which data is available', :latest_m, workflow),
     ]
   end
 
-  def summarise_value # rubocop:disable Metrics/MethodLength
+  def summarise_value
     proc { |state_value|
       s = case state_value.to_sym
-          when :ytd
+      when :ytd
             'year to date'
-          when :latest_q
+      when :latest_q
             'latest quarter for which data is available'
-          when :latest_m
+      when :latest_m
             'latest month for which data is available'
-          else
+      else
             state_value
-          end
+      end
       "<span class='c-review-report--summary-value'>#{s}</span>"
     }
   end

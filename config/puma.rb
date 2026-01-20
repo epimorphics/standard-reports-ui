@@ -53,6 +53,6 @@ log_formatter do |str|
   {
     ts: DateTime.now.utc.strftime('%FT%T.%3NZ'),
     level: 'INFO',
-    message: str
+    message: str,
   }.to_json
 end

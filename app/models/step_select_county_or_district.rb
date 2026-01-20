@@ -27,14 +27,12 @@ class StepSelectCountyOrDistrict < StepSelectArea
     return validation_failure(input_text) unless normalized_value
 
     # Update state if needed
-    unless value(workflow) == normalized_value
-      workflow.set_state(param_name, normalized_value)
-    end
+    workflow.set_state(param_name, normalized_value) unless value(workflow) == normalized_value
 
     titleise(normalized_value)
   end
 
-  def validation_failure(input_text) # rubocop:disable Naming/PredicateMethod
+  def validation_failure(input_text)
     if input_text.empty?
       set_flash("Sorry, no #{subtype_label} was selected")
     else

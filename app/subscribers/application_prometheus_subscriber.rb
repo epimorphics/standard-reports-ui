@@ -8,6 +8,6 @@ class ApplicationPrometheusSubscriber < ActiveSupport::Subscriber
     error = event.payload[:exception]
     Prometheus::Client.registry
                       .get(:internal_application_error)
-                      .increment(labels: { result: 'failure', message: "#{error[:type]}: #{error[:message]}", status: error[:status].to_i }) # rubocop:disable Layout/LineLength
+                      .increment(labels: { result: 'failure', message: "#{error[:type]}: #{error[:message]}", status: error[:status].to_i })
   end
 end

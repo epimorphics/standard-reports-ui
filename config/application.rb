@@ -38,7 +38,7 @@ module StandardReportsUi
     config.sass.quiet_deps = true
     # Silence @import deprecation warnings during migration to @use/@forward
     # See: https://sass-lang.com/d/import
-    config.sass.silence_deprecations = ['import']
+    config.sass.silence_deprecations = [ 'import' ]
     # Add services path to autoload paths
     config.autoload_paths << Rails.root.join('services')
   end
@@ -58,7 +58,7 @@ module Rails
         info = {
           ts: DateTime.now.utc.strftime('%FT%T.%3NZ'),
           level: 'INFO',
-          message: msg
+          message: msg,
         }
         say info.to_json
       end

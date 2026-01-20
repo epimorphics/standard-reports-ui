@@ -34,21 +34,21 @@ class StepSelectRegion < StepSelectArea
   end
 
   NAMES = [
-    ['East Anglia',     'EAST ANGLIA'],
-    ['East Midlands',   'EAST MIDLANDS'],
-    ['Greater London',  'GREATER LONDON'],
+    [ 'East Anglia',     'EAST ANGLIA' ],
+    [ 'East Midlands',   'EAST MIDLANDS' ],
+    [ 'Greater London',  'GREATER LONDON' ],
     %w[North NORTH],
-    ['North West',      'NORTH WEST'],
-    ['South East',      'SOUTH EAST'],
-    ['South West',      'SOUTH WEST'],
+    [ 'North West',      'NORTH WEST' ],
+    [ 'South East',      'SOUTH EAST' ],
+    [ 'South West',      'SOUTH WEST' ],
     %w[Wales WALES],
-    ['West Midlands', 'WEST MIDLANDS'],
-    ['Yorkshire And Humber', 'YORKS AND HUMBER']
+    [ 'West Midlands', 'WEST MIDLANDS' ],
+    [ 'Yorkshire And Humber', 'YORKS AND HUMBER' ],
   ].freeze
 
   private
 
-  def validation_failure(val) # rubocop:disable Naming/PredicateMethod
+  def validation_failure(val)
     if val.empty?
       set_flash('Sorry, no region was selected')
     else

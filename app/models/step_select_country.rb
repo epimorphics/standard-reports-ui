@@ -9,7 +9,7 @@ class StepSelectCountry < StepSelectArea
   end
 
   def values_options(_workflow)
-    [['England and Wales', ENGLAND_AND_WALES]]
+    [ [ 'England and Wales', ENGLAND_AND_WALES ] ]
   end
 
   def traverse(workflow)
@@ -36,7 +36,7 @@ class StepSelectCountry < StepSelectArea
 
   private
 
-  def report_validation_failure(workflow) # rubocop:disable Naming/PredicateMethod
+  def report_validation_failure(workflow)
     if value(workflow).empty?
       set_flash('Sorry, no country was selected')
     else

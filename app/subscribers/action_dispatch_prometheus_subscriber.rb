@@ -4,8 +4,7 @@
 class ActionDispatchPrometheusSubscriber < ActiveSupport::Subscriber
   attach_to :action_dispatch
 
-  # rubocop:disable Metrics/AbcSize
-  def process_middleware(_event)
+    def process_middleware(_event)
     mem = GetProcessMem.new
     Prometheus::Client.registry
                       .get(:memory_used_mb)
@@ -16,7 +15,7 @@ class ActionDispatchPrometheusSubscriber < ActiveSupport::Subscriber
                       .set(
                         Thread.list.select { |thread| thread.status == 'aborting' }.count,
                         labels: {
-                          status: 'aborting'
+                          status: 'aborting',
                         }
                       )
     # description: 'Thread is sleeping or waiting on I/O'
@@ -25,7 +24,7 @@ class ActionDispatchPrometheusSubscriber < ActiveSupport::Subscriber
                       .set(
                         Thread.list.select { |thread| thread.status == 'sleep' }.count,
                         labels: {
-                          status: 'sleep'
+                          status: 'sleep',
                         }
                       )
     # description: 'Thread is executing'
@@ -34,7 +33,7 @@ class ActionDispatchPrometheusSubscriber < ActiveSupport::Subscriber
                       .set(
                         Thread.list.select { |thread| thread.status == 'run' }.count,
                         labels: {
-                          status: 'run'
+                          status: 'run',
                         }
                       )
     # description: 'Thread is terminated normally'
@@ -43,7 +42,7 @@ class ActionDispatchPrometheusSubscriber < ActiveSupport::Subscriber
                       .set(
                         Thread.list.select { |thread| thread.status == false }.count,
                         labels: {
-                          status: 'false'
+                          status: 'false',
                         }
                       )
     # description: 'Thread is terminated with an exception'
@@ -52,7 +51,7 @@ class ActionDispatchPrometheusSubscriber < ActiveSupport::Subscriber
                       .set(
                         Thread.list.select { |thread| thread.status.nil? }.count,
                         labels: {
-                          status: 'nil'
+                          status: 'nil',
                         }
                       )
   end

@@ -31,7 +31,7 @@ class Step
     end
   end
 
-  def set_flash(message) # rubocop:disable Naming/AccessorMethodName
+  def set_flash(message)
     @flash = message
     self
   end
@@ -82,7 +82,7 @@ class Step
   # When traversing, we do nothing by default
   def workflow_update_hook(workflow); end
 
-  def validate_value(_workflow) # rubocop:disable Naming/PredicateMethod
+  def validate_value(_workflow)
     true
   end
 end

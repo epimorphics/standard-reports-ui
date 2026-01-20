@@ -37,7 +37,7 @@ feature 'show post code sector selector' do
   end
 
   scenario 'when stopping on an invalid value the step number is correct' do
-    visit report_design_path(report: :avgPrice, areaType: 'pcSector', area: '57', aggregate: 'none', period: ['ytd'], age: 'any')
+    visit report_design_path(report: :avgPrice, areaType: 'pcSector', area: '57', aggregate: 'none', period: [ 'ytd' ], age: 'any')
     _(page).must_have_content('Step 3 of 7')
   end
 end

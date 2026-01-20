@@ -7,8 +7,8 @@ class StepSelectReport < Step
   end
 
   def values_options(_workflow)
-    [['Average prices and volumes', :avgPrice],
-     ['Banded prices', :banded]]
+    [ [ 'Average prices and volumes', :avgPrice ],
+     [ 'Banded prices', :banded ] ]
   end
 
   def traverse(workflow)
