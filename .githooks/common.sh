@@ -15,20 +15,26 @@ init_branch_name() {
   BRANCH_NAME=$(git branch --show-current | grep -E "$listRE" | sed 's/* //')
 }
 
-# Check if hook should be skipped based on branch name, --no-verify, or --amend flags
+# Check if hook should be skipped based on branch, reflog action, or flags
 should_skip_hook() {
   # Skip on specific branches
   if echo "$BRANCH_NAME" | grep -qE '^(hotfix|rebase|prod(uction)?)$'; then
-    return 0  # true - should skip
+    return 0
   fi
 
-  # Check parent process for --no-verify or --amend flags
-  local ppid_cmd=$(ps -ocommand= -p $PPID 2>/dev/null || echo "")
+  # Skip if Git reflog indicates an amend (reliable for GUI flows)
+  if [ "${GIT_REFLOG_ACTION:-}" = "commit (amend)" ]; then
+    return 0
+  fi
+
+  # Fallback: check parent process for --no-verify or --amend flags
+  local ppid_cmd
+  ppid_cmd=$(ps -ocommand= -p $PPID 2>/dev/null || echo "")
   if [[ "$ppid_cmd" == *"--no-verify"* ]] || [[ "$ppid_cmd" == *"--amend"* ]]; then
-    return 0  # true - should skip
+    return 0
   fi
 
-  return 1  # false - should not skip
+  return 1
 }
 
 # Print colored status messages (respects NO_COLOR environment variable)
