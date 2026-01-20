@@ -27,11 +27,6 @@ CURRENT_TEST_FILES="$(git ls-files | grep -i -E '(_test\.rb)$')"
 RAILS_TEST_EXIT_CODE=0
 WORK_DONE=0
 
-if [ -z "$NEW_TEST_FILES" ]; then
-  print_error "There are currently no new tests found in \"$BRANCH_NAME\". 🤨"
-  print_error "Continuing without new tests... 😖"
-fi
-
 if [ -n "$NEW_TEST_FILES" ]; then
   #Count the number of new test files
   file_count=$(echo "$NEW_TEST_FILES" | wc -l)
@@ -55,13 +50,13 @@ if [ -n "$NEW_TEST_FILES" ]; then
     fi
   done
   WORK_DONE=1
-fi
-
-if [ -n "$CURRENT_TEST_FILES" ] && [ "$WORK_DONE" -eq 0 ]; then
-  print_info "Running all Rails Tests ..."
+elif [ -n "$CURRENT_TEST_FILES" ]; then
+  print_warning "No new tests found, running all Rails Tests ..."
   make test
   RAILS_TEST_EXIT_CODE=$?
-  WORK_DONE=2
+  WORK_DONE=1
+else
+  print_error "No tests found in \"$BRANCH_NAME\". 🤨"
 fi
 
 if [ ! "$RAILS_TEST_EXIT_CODE" -eq 0 ]; then
