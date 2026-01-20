@@ -57,6 +57,7 @@ elif [ -n "$CURRENT_TEST_FILES" ]; then
   WORK_DONE=1
 else
   print_error "No tests found in \"$BRANCH_NAME\". 🤨"
+  RAILS_TEST_EXIT_CODE=1
 fi
 
 if [ ! "$RAILS_TEST_EXIT_CODE" -eq 0 ]; then
@@ -65,12 +66,5 @@ if [ ! "$RAILS_TEST_EXIT_CODE" -eq 0 ]; then
   exit 1
 fi
 
-if [ "$WORK_DONE" -eq 1 ]; then
-  print_success "All tests are green, committing... 🎉"
-  exit 0
-fi
-
-if [ "$WORK_DONE" -eq 2 ]; then
-  print_error "Currently skipping broken tests found on \"$BRANCH_NAME\". 🤨"
-  exit 0
-fi
+print_success "All tests are green, committing... 🎉"
+exit 0
