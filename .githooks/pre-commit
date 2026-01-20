@@ -3,16 +3,16 @@
 # beware if you are in the habit of committing only partial modifications to a file:
 # THIS HOOK WILL ADD ALL MODIFICATIONS TO A FILE TO THE COMMIT IF ANY FILE WAS CHANGED BY LINTING
 
-list="issue spike task"
+# Source common hook utilities
+. "$(dirname "$0")/common.sh"
 
-listRE="^($(printf '%s\n' "$list" | tr ' ' '|'))/"
+# Initialize branch name
+init_branch_name
 
-BRANCH_NAME=$(git branch --show-current | grep -E "$listRE" | sed 's/* //')
+print_header "Checking \"$BRANCH_NAME\"..."
 
-printf '\n\033[0;105mChecking "%s"... \033[0m\n' "$BRANCH_NAME"
-
-if echo "$BRANCH_NAME" | grep -qE '^(rebase|production)$'; then
-	printf '\n\033[0;32mNo checks necessary on "%s", pushing now... 🎉\033[0m\n' "$BRANCH_NAME"
+if should_skip_hook; then
+	print_success "No checks necessary on \"$BRANCH_NAME\", pushing now... 🎉"
 	exit 0
 fi
 
@@ -25,9 +25,9 @@ RUBOCOP_EXIT_CODE=0
 WORK_DONE=0
 
 if [ -z "$RUBY_FILES" ]; then
-  printf '\n\033[0;31mThere are currently no updated files in "%s". 🤨\033[0m\n' "$BRANCH_NAME"
+  print_error "There are currently no updated files in \"$BRANCH_NAME\". 🤨"
 else
-  printf '\n\033[0;33mRunning Rubocop...\033[0m\n'
+  print_warning "Running Rubocop..."
   # Convert space-separated file list into positional parameters for safe argument passing
   set -- $RUBY_FILES
   # Execute RuboCop with auto-fix enabled on the staged files that have been set
@@ -42,7 +42,7 @@ POST_STATUS="$(git status | wc -l)"
 
 if [ ! $RUBOCOP_EXIT_CODE -eq 0 ]; then
   git reset HEAD
-  printf '\n\033[0;31mLinting has uncorrectable errors; please fix and restage your commit. 😖\033[0m\n'
+  print_error "Linting has uncorrectable errors; please fix and restage your commit. 😖"
   exit 1
 fi
 
@@ -51,7 +51,7 @@ if [ "$PRE_STATUS" != "$POST_STATUS" ]; then
 fi
 
 if [ ! $WORK_DONE -eq 0 ]; then
-  printf '\n\033[0;32mLinting completed successfully! 🎉\033[0m\n'
+  print_success "Linting completed successfully! 🎉"
 fi
 
 exit 0
