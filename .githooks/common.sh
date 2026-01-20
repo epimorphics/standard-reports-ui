@@ -17,10 +17,17 @@ init_branch_name() {
 
 # Check if hook should be skipped based on branch name, --no-verify, or --amend flags
 should_skip_hook() {
-  # Skip on specific branches, with --no-verify flag, or when amending
-  if echo "$BRANCH_NAME" | grep -qE '^(hotfix|rebase|prod(uction)?)$' || [[ $(ps -ocommand= -p $PPID) == *"--no-verify"* ]] || [[ $(ps -ocommand= -p $PPID) == *"--amend"* ]]; then
+  # Skip on specific branches
+  if echo "$BRANCH_NAME" | grep -qE '^(hotfix|rebase|prod(uction)?)$'; then
     return 0  # true - should skip
   fi
+
+  # Check parent process for --no-verify or --amend flags
+  local ppid_cmd=$(ps -ocommand= -p $PPID 2>/dev/null || echo "")
+  if [[ "$ppid_cmd" == *"--no-verify"* ]] || [[ "$ppid_cmd" == *"--amend"* ]]; then
+    return 0  # true - should skip
+  fi
+
   return 1  # false - should not skip
 }
 
