@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Upgraded ruby to `3.4.9` [#191](https://github.com/epimorphics/standard-reports-ui/issues/191)
 - Updated front page guidance notes [#192](https://github.com/epimorphics/standard-reports-ui/issues/192)
 
 ## [2.3.0] - 2026-01
