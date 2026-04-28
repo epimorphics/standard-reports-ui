@@ -38,7 +38,7 @@ ${GITHUB_TOKEN}:
 
 all: image ## Default target: build the Docker image
 
-assets: bundles compiled ## Compile assets for serving
+assets: bundles compiled ## Compile static assets for serving
 	@echo assets completed.
 
 auth: ${GITHUB_TOKEN} ${BUNDLE_CFG} ## Set up authentication for GitHub and Bundler
@@ -49,7 +49,6 @@ bundles: ## Install Ruby gems via Bundler
 	@${BUNDLE} install
 
 check: checks ## Alias for `checks` target
-	@echo "All checks passed."
 
 checks: lint test ## Run all checks: linting and tests
 	@echo "All checks passed."
@@ -78,8 +77,14 @@ help: ## Display this message
 	@echo "Available make targets:"
 	@grep -hE '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "%-20s %s\n", $$1, $$2}'
 	@echo ""
+	@echo ""
+ifdef AWS_PROFILE
 	@echo "Environment variables (optional: all variables have defaults):"
 	@make vars
+else
+	@echo "Warning: AWS_PROFILE environment variable is not set. AWS CLI commands may fail."
+	@echo "Re-run with AWS_PROFILE set to see all variables"
+endif
 
 image: auth ## Build the Docker image
 	@echo Building ${REPO}:${TAG} ...
@@ -147,7 +152,8 @@ update: ## Review and update dependencies interactively
 		yarn upgrade-interactive; \
 	fi
 	@echo "Running bundle outdated to check Ruby gems..."
-	@bundle outdated --only-explicit
+# Let bundler handle output; treat this as informational even if deps are outdated
+	@${BUNDLE} outdated --only-explicit || true
 
 vars: ## Display environment variables
 	@echo "Docker: ${REPO}:${TAG}"
