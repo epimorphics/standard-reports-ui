@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- Added CuPIT standard reports feature coverage using imported Gherkin scenarios
+- Added CuPIT standard reports spec coverage for landing and report workflows
+- Introduced shared Git hook utilities for pre-commit, post-commit, and pre-push
+- Introduced SimpleCov coverage reporting for the test suite
+- Added a `make coverage` target to display the latest coverage report
+
+### Changed
+
+- Consolidated Makefile phony declarations and improved developer workflow targets
+- Updated Bundler and RuboCop dependencies to current branch requirements
+- Removed RuboCop overrides and aligned the codebase with the active rule set
+- Removed the bundle binstub from source control
+
+### Fixed
+
+- Corrected Git hook skip and execution logic to prevent inconsistent runs
+
 ## [2.3.1] - 2026-04
 
 - Upgraded ruby to `3.4.9` [#191](https://github.com/epimorphics/standard-reports-ui/issues/191)
