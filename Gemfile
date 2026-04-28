@@ -62,6 +62,7 @@ group :test do
   gem 'minitest-spec-rails', require: false
   gem 'mocha'
   gem 'selenium-webdriver'
+  gem 'simplecov', require: false
   gem 'vcr'
   gem 'webmock'
 end
@@ -95,4 +96,3 @@ source 'https://rubygems.pkg.github.com/epimorphics' do
   gem 'json_rails_logger'
   gem 'lr_common_styles'
 end
-
