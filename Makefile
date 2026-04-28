@@ -1,4 +1,4 @@
-.PHONY:	assets auth check clean image lint publish realclean run tag test update vars
+.PHONY:	all assets auth bundles check checks clean compiled forceclean help image lint local name publish realclean rubocop run server start stop tag test update vars version
 
 ALPINE_VERSION?=3.22
 BUNDLER_VERSION?=$(shell tail -1 Gemfile.lock | tr -d ' ')
