@@ -65,6 +65,7 @@ group :test do
   gem 'minitest-spec-rails', require: false
   gem 'mocha'
   gem 'selenium-webdriver'
+  gem 'simplecov', require: false
   gem 'vcr'
   gem 'webmock'
 end
