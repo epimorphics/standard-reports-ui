@@ -7,6 +7,7 @@ AllCops:
     - app/models/locations_table.rb
     - bin/**/*
     - "node_modules/**/*"
+    - "vendor/**/*"
     - data/**/*
     - "Gemfile"
   NewCops: enable
