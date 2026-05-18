@@ -5,16 +5,10 @@ source 'https://rubygems.org'
 ruby file: '.ruby-version'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails'
+gem 'rails', '~> 8.1'
 
 # Use Puma as the app server
-gem 'puma'
-
-# See https://github.com/rails/execjs#readme for more supported runtimes
-gem 'execjs'
-
-# gem 'therubyracer', platforms: :ruby
-gem 'libv8-node'
+gem 'puma', '~> 7.0'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder'
@@ -24,9 +18,6 @@ gem 'autoprefixer-rails'
 gem 'dartsass-sprockets', '~> 3.2'
 
 gem 'haml-rails'
-
-gem 'rubocop'
-gem 'rubocop-rails'
 
 # Faraday v2 requires individual middlewares to be specified
 # Resolve open-ended gem versioning warnings by setting explicit version minimums
@@ -47,7 +38,7 @@ gem 'yajl-ruby', require: 'yajl'
 
 # Sentry uses stackprof for performance profiling, has to be loaded before Sentry
 gem 'stackprof'
-gem 'sentry-rails' # rubocop:disable Bundler/OrderedGems
+gem 'sentry-rails', '~> 6.0' # rubocop:disable Bundler/OrderedGems
 
 group :doc do
   gem 'sdoc', require: false
@@ -72,24 +63,12 @@ group :test do
 end
 
 group :development do
-  gem 'htmlbeautifier'
+  gem 'rubocop', '~> 1.0', require: false
+  gem 'rubocop-rails', '~> 2.0', require: false
   gem 'ruby-lsp'
   gem 'solargraph'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  # Devtools panel for Rails development - loading from the GitHub repo
-  # (https://github.com/dejan/rails_panel/issues/209#issuecomment-2621877079_)
-  gem 'meta_request', github: 'dejan/rails_panel', ref: 'meta_request-v0.8.5'
-
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console'
-  # TODO: While running the rails app locally for testing you can set gems to your local path
-  # ! These 'local' paths do not work with a docker image - use the repo instead
-  # gem 'json_rails_logger', path: '~/Epimorphics/shared/json-rails-logger'
-  # gem 'lr_common_styles', path: '~/Epimorphics/clients/land-registry/projects/lr_common_styles'
 end
 
-# TODO: In production you want to set this to the gem from the epimorphics group package repository
 source 'https://rubygems.pkg.github.com/epimorphics' do
   gem 'json_rails_logger'
   gem 'lr_common_styles'
