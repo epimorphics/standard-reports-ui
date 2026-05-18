@@ -10,7 +10,7 @@ Rails.application.reloader.to_prepare do
     # ! By default, events will be sent to Sentry in all environments.
     # ! If you don't want to send events in a specific environment,
     # ! you can unset the SENTRY_DSN [SENTRY_API_KEY] variable in that environment.
-    config.dsn = ENV['SENTRY_API_KEY']
+    config.dsn = ENV.fetch('SENTRY_API_KEY', nil)
     # ! Only report errors in these environments:
     config.enabled_environments = %w[production prod preprod dev]
     # ! Ignore exceptions that are not useful to us

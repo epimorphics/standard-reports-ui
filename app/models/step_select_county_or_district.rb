@@ -27,9 +27,7 @@ class StepSelectCountyOrDistrict < StepSelectArea
     return validation_failure(input_text) unless normalized_value
 
     # Update state if needed
-    unless value(workflow) == normalized_value
-      workflow.set_state(param_name, normalized_value)
-    end
+    workflow.set_state(param_name, normalized_value) unless value(workflow) == normalized_value
 
     titleise(normalized_value)
   end

@@ -1,6 +1,6 @@
 ARG RUBY_VERSION=3.4.9
-ARG ALPINE_VERSION=3.22
-ARG BUNDLER_VERSION=2.6.9
+ARG ALPINE_VERSION=3.23
+ARG BUNDLER_VERSION=4.0.11
 
 # Defines base image which builder and final stage use
 FROM ruby:$RUBY_VERSION-alpine$ALPINE_VERSION AS base
@@ -25,7 +25,7 @@ FROM base AS gems
 RUN apk add --update build-base yaml-dev && gem update --system
 
 COPY bin bin
-COPY Gemfile Gemfile.lock ./
+COPY .ruby-version Gemfile Gemfile.lock ./
 # .bundle/config contains the information required to access rubygems.pkg.github.com/epimorphics/
 COPY .bundle/config /root/.bundle/config
 RUN bundle config set --local without 'development test' \
@@ -41,7 +41,7 @@ WORKDIR ${DIR}
 COPY --from=gems --chown=app /usr/local/bundle /usr/local/bundle
 
 # Copy the rest of the application code
-COPY config.ru Gemfile Gemfile.lock Rakefile ./
+COPY .ruby-version config.ru Gemfile Gemfile.lock Rakefile ./
 COPY app app
 COPY bin bin
 COPY config config

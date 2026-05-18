@@ -5,6 +5,7 @@ AllCops:
   Exclude:
     - app/models/regions_table.rb
     - app/models/locations_table.rb
+    - bin/**/*
     - "node_modules/**/*"
     - data/**/*
     - "Gemfile"
@@ -15,8 +16,6 @@ Layout/LineLength:
   Max: 100
   AllowedPatterns: ['^(\s*#)']
   Exclude:
-    - bin/**/*
-    - db/**/*
     - config/**/*
     - test/**/*
 
