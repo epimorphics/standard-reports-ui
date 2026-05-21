@@ -33,7 +33,7 @@ test.describe('Geographical — county — steps 2–4', () => {
 
   test('step 3 — hovering over a highlighted area displays a location name', async ({ page }) => {
     await page.goto(urls.atStep2County)
-    await page.waitForFunction(() => typeof window.MapSearch !== 'undefined')
+    await page.waitForFunction(() => typeof (window as Window & { MapSearch?: unknown }).MapSearch !== 'undefined')
     const map = page.locator('#map')
     const box = await map.boundingBox()
     // eslint-disable-next-line playwright/no-conditional-in-test
@@ -44,14 +44,10 @@ test.describe('Geographical — county — steps 2–4', () => {
 
   test('step 3 — clicking a highlighted map area prefills the input field', async ({ page }) => {
     await page.goto(urls.atStep2County)
-    await page.waitForFunction(() => typeof window.MapSearch !== 'undefined')
-    const map = page.locator('#map')
-    const box = await map.boundingBox()
-    // eslint-disable-next-line playwright/no-conditional-in-test
-    if (!box) throw new Error('Map element has no bounding box')
-    await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2)
-    const value = await page.locator('input[name="area"]').inputValue()
-    expect(value.length).toBeGreaterThan(0)
+    await page.waitForFunction(() => typeof (window as Window & { MapSearch?: unknown }).MapSearch !== 'undefined')
+    await page.locator('.leaflet-interactive').first().waitFor()
+    await page.locator('.leaflet-interactive').first().click()
+    await expect(page.locator('input[name="area"]')).not.toHaveValue('')
   })
 
   test('step 4 — the user can see 5 options for location specification', async ({ page }) => {
