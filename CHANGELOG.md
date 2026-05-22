@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+## [2.3.2] - 2026-05
+
+### Added
+
+- Added Playwright E2E test suite for the report generator
+  [#202](https://github.com/epimorphics/standard-reports-ui/issues/202)
+
+### Changed
+
+- Pinned gem versions and removed unused dependencies
+  [#200](https://github.com/epimorphics/standard-reports-ui/issues/200)
+- Aligned GitHub Actions and linting config with sibling apps
+- Improved README with more detail on setup, tech stack, and updated release process
+- Removed dead code and unused githooks
+
+### Fixed
+
+- Fixed linting errors including vendor file exclusion and version file lint issue
+- Fixed E2E test reliability: wait for Leaflet features before interacting with map
+
 ## [2.3.1] - 2026-04
 
 - Upgraded ruby to `3.4.9` [#191](https://github.com/epimorphics/standard-reports-ui/issues/191)
