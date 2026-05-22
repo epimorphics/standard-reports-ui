@@ -33,7 +33,7 @@ test.describe('Geographical — county — steps 2–4', () => {
 
   test('step 3 — hovering over a highlighted area displays a location name', async ({ page }) => {
     await page.goto(urls.atStep2County)
-    await page.waitForFunction(() => typeof (window as Window & { MapSearch?: unknown }).MapSearch !== 'undefined')
+    await page.locator('.leaflet-interactive').first().waitFor()
     const map = page.locator('#map')
     const box = await map.boundingBox()
     // eslint-disable-next-line playwright/no-conditional-in-test
@@ -44,7 +44,6 @@ test.describe('Geographical — county — steps 2–4', () => {
 
   test('step 3 — clicking a highlighted map area prefills the input field', async ({ page }) => {
     await page.goto(urls.atStep2County)
-    await page.waitForFunction(() => typeof (window as Window & { MapSearch?: unknown }).MapSearch !== 'undefined')
     await page.locator('.leaflet-interactive').first().waitFor()
     await page.locator('.leaflet-interactive').first().click()
     await expect(page.locator('input[name="area"]')).not.toHaveValue('')

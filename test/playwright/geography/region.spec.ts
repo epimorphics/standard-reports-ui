@@ -32,8 +32,7 @@ test.describe('Geographical — region — steps 2–4', () => {
   test('step 3 — hovering over a highlighted map area displays the region name', async ({ page }) => {
     await page.goto(urls.atStep2Region)
     const map = page.locator('#map')
-    await expect(map).toBeVisible()
-    await page.waitForFunction(() => typeof (window as Window & { MapSearch?: unknown }).MapSearch !== 'undefined')
+    await page.locator('.leaflet-interactive').first().waitFor()
     const box = await map.boundingBox()
     // eslint-disable-next-line playwright/no-conditional-in-test
     if (!box) throw new Error('Map element has no bounding box')
@@ -43,7 +42,6 @@ test.describe('Geographical — region — steps 2–4', () => {
 
   test('step 3 — clicking a highlighted map area selects that option from the list', async ({ page }) => {
     await page.goto(urls.atStep2Region)
-    await page.waitForFunction(() => typeof (window as Window & { MapSearch?: unknown }).MapSearch !== 'undefined')
     await page.locator('.leaflet-interactive').first().waitFor()
     await page.locator('.leaflet-interactive').first().click()
     await expect(page.locator('input[name="area"]:checked')).toHaveCount(1)
