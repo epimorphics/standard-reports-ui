@@ -5,7 +5,7 @@ test.describe('Landing page', () => {
     await page.goto('')
   })
 
-  test.only('user can read description of report application', async ({ page }) => {
+  test('user can read description of report application', async ({ page }) => {
     await expect(page.locator('h1')).toContainText('Price Paid Data')
     await expect(page.locator('body')).toContainText('standard reports application')
   })
