@@ -26,6 +26,7 @@ on:
       - 'public/**'
       # Workflow itself
       - '.github/workflows/**'
+      - '!.github/workflows/e2e.yml'
   push:
     branches:
       - dev
@@ -51,6 +52,7 @@ on:
       - 'public/**'
       # Workflow itself
       - '.github/workflows/**'
+      - '!.github/workflows/e2e.yml'
 
 jobs:
   verify-code:
