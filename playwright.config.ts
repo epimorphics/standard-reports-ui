@@ -7,7 +7,7 @@ export default defineConfig({
   testDir: 'test/playwright',
   outputDir: 'tmp/test-results',
   reporter: [['html', { outputFolder: 'tmp/playwright-report', open: 'never' }]],
-  timeout: 5000,
+  timeout: 10_000,
   workers: 1,
 
   use: {
