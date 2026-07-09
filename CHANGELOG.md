@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## Added
+
+- Added log-lines to `ApiPrometheusSubscriber` on connection failure and service exception events [#208](https://github.com/epimorphics/standard-reports-ui/issues/208).
+- Added an `ApiPrometheusSubscriberTest` [#208](https://github.com/epimorphics/standard-reports-ui/issues/208).
+
 ## Changed
 
 - Updated `yarn` to `4.17.1`
