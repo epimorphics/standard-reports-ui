@@ -17,9 +17,8 @@
   = form_tag( @workflow.form_action, method: "get" ) do
     .row
       %fieldset.col-sm-12
-        %legend.visually-hidden Select a report type
         %ul.list-unstyled
-          %li{"aria-labelledby": "average-prices-report"}
+          %li{"aria-labelled-by": "average-prices-report"}
             .o-form-control
               %label.o-form-control--label
                 = radio_button_tag( step.form_param, step_values[0].value, step_values[0].active?, class: "o-form-control--input", required: true )
@@ -31,8 +30,8 @@
                   %div.panel
                     %picture
                       %source{ srcset: image_path( "average-prices-report-screenshot.png" ), media: "(min-width: 768px)" }
-                      %img{ src: image_path( "average-prices-report-screenshot.png" ), alt: "Example average prices report showing house prices and sales volumes by county." }
-          %li{"aria-labelledby": "banded-prices-report"}
+                      %img{ src: image_path( "average-prices-report-screenshot.png" ), alt: "Screenshot of example average prices report. Excel table showing 2015 house prices and sales volumes for East Anglia counties including Cambridgeshire and Norfolk." }
+          %li{"aria-labelled-by": "banded-prices-report"}
             .o-form-control
               %label.o-form-control--label
                 = radio_button_tag( step.form_param, step_values[1].value, step_values[1].active?, class: "o-form-control--input", required: true )
@@ -44,7 +43,7 @@
                   %div.panel
                     %picture
                       %source{ srcset: image_path( "banded-prices-report-screenshot.png" ), media: "(min-width: 768px)" }
-                      %img{ src: image_path( "banded-prices-report-screenshot.png" ), alt: "Example banded prices report showing sales volumes by price band and property type, by county." }
+                      %img{ src: image_path( "banded-prices-report-screenshot.png" ), alt: "Screenshot of example banded prices report. Excel table showing 2015 sales volumes by price band for different property types across East Anglia counties, including Cambridgeshire and Norfolk." }
 
       = layout_existing_values( @workflow )
       = layout_submit_button( @workflow )

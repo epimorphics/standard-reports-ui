@@ -2,13 +2,12 @@
 
 # :nodoc:
 module ReportDesignHelper # rubocop:disable Metrics/ModuleLength
-  def workflow_step_form(workflow, legend)
+  def workflow_step_form(workflow)
     step = workflow.current_step
 
     form_tag(workflow.form_action, method: 'get') do
       content_tag(:div, class: 'row') do
         concat(content_tag(:fieldset, class: 'col-sm-12 col-md-6') do
-          concat content_tag(:legend, legend, class: 'visually-hidden')
           concat layout_existing_values(workflow)
           concat layout_flash(step)
           concat layout_workflow_form(workflow, step)

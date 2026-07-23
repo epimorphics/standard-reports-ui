@@ -19,7 +19,6 @@
 
   = form_tag( @workflow.form_action, method: "get" ) do
     %fieldset
-      %legend.visually-hidden Which time period should the report cover?
       = layout_existing_values( @workflow )
 
       %h2.heading-small Latest available
