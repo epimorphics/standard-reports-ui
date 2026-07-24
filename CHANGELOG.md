@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Fixed invalid `aria-labelled-by` attributes on the report type selection page, corrected to `aria-labelledby` [#207](https://github.com/epimorphics/standard-reports-ui/issues/207).
+- Added missing `<legend>` elements to fieldsets across the report design workflow for screen reader accessibility.
+- Shortened overly long image alt text on the report type selection page.
+
 ## [2.3.3] - 2026-07-14
 
 ## Added
