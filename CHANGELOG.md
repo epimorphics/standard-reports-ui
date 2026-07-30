@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [2.3.4] - 2026-07-30
 
 ### Fixed
 
@@ -15,12 +15,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.3.3] - 2026-07-14
 
-## Added
+### Added
 
 - Added log-lines to `ApiPrometheusSubscriber` on connection failure and service exception events [#208](https://github.com/epimorphics/standard-reports-ui/issues/208).
 - Added an `ApiPrometheusSubscriberTest` [#208](https://github.com/epimorphics/standard-reports-ui/issues/208).
 
-## Changed
+### Changed
 
 - Updated `yarn` to `4.17.1`
 
