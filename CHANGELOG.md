@@ -13,6 +13,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   added a warning against concurrent deploys, and consolidated the README environment, credentials and
   observability documentation
   [frontend-backlog#114](https://github.com/epimorphics/frontend-backlog/issues/114).
+- The Docker image is built on Ruby 3.4.12 and Alpine 3.24, up from Ruby 3.4.9
+  and Alpine 3.23. The Alpine version is now set only in the `Dockerfile`; the
+  `Makefile` no longer overrides it.
+
+### Security
+
+- Updated Ruby gems to clear the open Dependabot alerts, keeping to minor and
+  patch versions: Rails 8.1.3 to 8.1.4 (Active Storage), `concurrent-ruby`
+  1.3.8, `crass` 1.0.8, `faraday` 2.15.1, `json` 2.21.2, `loofah` 2.25.2,
+  `mail` 2.9.1, `rails-html-sanitizer` 1.7.1, `rubyzip` 3.7.0,
+  `websocket-driver` 0.8.2 and `yard` 0.9.45.
+- Updated JavaScript dependencies used by the Playwright and ESLint tooling:
+  `undici` 6.29.1, `tar` 7.5.22 and `brace-expansion` 5.0.12.
 
 ## [2.3.4] - 2026-07-30
 
