@@ -1,6 +1,5 @@
 .PHONY: all auth help image name publish tag vars version
 
-ALPINE_VERSION?=3.23
 BUNDLER_VERSION?=$(shell tail -1 Gemfile.lock | tr -d ' ')
 RUBY_VERSION?=$(shell cat .ruby-version)
 
@@ -53,7 +52,6 @@ endif
 image: auth ## Build the Docker image
 	@echo Building ${REPO}:${TAG} ...
 	@docker build \
-		--build-arg ALPINE_VERSION=${ALPINE_VERSION} \
 		--build-arg RUBY_VERSION=${RUBY_VERSION} \
 		--build-arg BUNDLER_VERSION=${BUNDLER_VERSION} \
 		--build-arg RAILS_RELATIVE_URL_ROOT=${RAILS_RELATIVE_URL_ROOT} \
@@ -80,7 +78,6 @@ tag: ## Display the Docker image tag
 vars: ## Display build environment variables
 	@echo "Docker: ${REPO}:${TAG}"
 	@echo "ACCOUNT = ${ACCOUNT}"
-	@echo "ALPINE_VERSION = ${ALPINE_VERSION}"
 	@echo "AWS_REGION = ${AWS_REGION}"
 	@echo "BUNDLER_VERSION = ${BUNDLER_VERSION}"
 	@echo "COMMIT = ${COMMIT}"
